@@ -1,0 +1,30 @@
+import { NextRequest, NextResponse } from 'next/server';
+
+const BACKEND_URL = process.env.BACKEND_URL || 'http://127.0.0.1:8000';
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const limit = searchParams.get('limit') || '2000';
+
+    const response = await fetch(`${BACKEND_URL}/api/knowledge-graph?limit=${limit}`, {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      return NextResponse.json(
+        { error: `Backend error: ${response.status}`, detail: errorText },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: 'Failed to connect to backend', detail: error.message },
+      { status: 503 }
+    );
+  }
+}
