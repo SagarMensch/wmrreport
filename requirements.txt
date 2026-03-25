@@ -1,0 +1,30 @@
+# Bashira Intelligence - Requirements
+# Install with: pip install -r requirements.txt
+
+# Core
+fastapi>=0.115.0
+uvicorn>=0.34.0
+pydantic>=2.10.0
+python-dotenv>=1.0.0
+
+# Database
+pyodbc>=5.0.0
+psycopg>=3.2.0
+psycopg-pool>=0.4.0
+neo4j>=5.28.0
+
+# AI/ML
+dspy>=2.1.0
+sentence-transformers>=3.3.0
+rank-bm25>=0.2.2
+
+# Vector/Graph
+langgraph>=0.3.0
+langchain-core>=0.3.0
+
+# Utilities
+sqlparse>=0.5.0
+python-multipart>=0.0.20
+
+# Logging
+loguru>=0.7.0

@@ -1,0 +1,19 @@
+tableName,description,columnName,dataType
+WellMonitoringReport,Master well progress tracking table with 130 columns and 268 rows,pdo_well_id,int
+WellMonitoringReport,Master well progress tracking table,well_name_after_spud,nvarchar
+WellMonitoringReport,Master well progress tracking table,Cluster,nvarchar
+WellMonitoringReport,Master well progress tracking table,rig_no,nvarchar
+WellMonitoringReport,Master well progress tracking table,over_all_progress_percentages,float
+WellMonitoringReport,Master well progress tracking table,well_location,nvarchar
+SAP_DRILLING_SEQUENCE,Rig drilling schedule table with 6159 rows,Well_Name,nvarchar
+SAP_DRILLING_SEQUENCE,Rig drilling schedule,Field,nvarchar
+SAP_DRILLING_SEQUENCE,Rig drilling schedule,Opr_System_status,nvarchar
+SAP_DRILLING_SEQUENCE,Rig drilling schedule,Well_Function,nvarchar
+Revenue,Financial tracking table with 21566 rows,Well_ID,int
+Revenue,Financial tracking,Revenue_Current_Month_Actual,float
+Job_Progress_Report_GB,Weekly job progress with 439 rows,Well_ID,int
+Job_Progress_Report_GB,Weekly job progress,Week_1_Actual,float
+Job_Progress_Report_GB,Weekly job progress,Week_1_Plan,float
+WMR_Full,Well monitoring full with 18969 rows,pdo_well_id,int
+crews,Crew assignment table with 5758 rows,rig_code,nvarchar
+crews,Crew assignment,crew_uid,nvarchar
