@@ -1,0 +1,11 @@
+tableName,description
+WellMonitoringReport,Master well progress tracking - 268 rows, 130 columns
+SAP_DRILLING_SEQUENCE,Rig drilling schedule - 6159 rows
+Revenue,Financial data - 21566 rows
+Job_Progress_Report_GB,Weekly job progress - 439 rows
+WMR_Full,Full well monitoring - 18969 rows
+crews,Crew assignments - 5758 rows
+Employee,Personnel directory - 5554 rows
+ActivityTaskPlan,Task execution - 100000 rows
+task_daily,Daily tasks - 35394 rows
+PH_PRODUCTIVITY_WEEKLY_REPORT,Weekly productivity - 510 rows

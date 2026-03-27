@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  --color-maroon: #7A1A20;
+  --color-maroon-deep: #5C1218;
+  --color-maroon-glow: rgba(122, 26, 32, 0.15);
+  --color-gold: #B8962E;
+  --color-sand: #C9A96E;
+  --color-sand-dim: #8A7260;
+  --color-void: #0F0C0A;
+  --color-carbon: #181210;
+  --color-surface-2: #211914;
+  --color-border-accent: rgba(185, 150, 46, 0.14);
+  --color-border-strong: rgba(122, 26, 32, 0.30);
+  --color-text-primary: #EDE8DF;
+  --color-text-dim: #8A7B6E;
+  --color-text-arabic: #F0EAE0;
+  --color-online: #4E9E6A;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-void);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-latin-body {
+    font-family: 'Source Serif 4', Lora, serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  
+  .text-arabic-body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .text-latin-heading {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+
+  .text-arabic-heading {
+    font-family: 'Noto Naskh Arabic', Amiri, serif;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  .text-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  
+  .border-hairline {
+    border-color: var(--color-border-accent);
+  }
+
+  .mashrabiya-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20L0 20z' fill='%23B8962E' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+  }
+}
+
+/* Custom sleek scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #333333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #555555; }

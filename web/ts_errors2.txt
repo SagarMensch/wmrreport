@@ -1,0 +1,199 @@
+﻿.next/types/validator.ts(85,31): error TS2344: Type 'typeof import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/src/app/[locale]/layout")' does not satisfy the constraint 'LayoutConfig<"/[locale]">'.
+  Types of property 'default' are incompatible.
+    Type '({ children, params }: { children: ReactNode; params: { locale: string; }; }) => Promise<Element>' is not assignable to type 'ComponentType<LayoutProps<"/[locale]">> | ((props: LayoutProps<"/[locale]">) => void | ReactNode | Promise<ReactNode> | Promise<...>)'.
+      Type '({ children, params }: { children: ReactNode; params: { locale: string; }; }) => Promise<Element>' is not assignable to type 'FunctionComponent<LayoutProps<"/[locale]">>'.
+        Types of parameters '__0' and 'props' are incompatible.
+          Type 'LayoutProps<"/[locale]">' is not assignable to type '{ children: ReactNode; params: { locale: string; }; }'.
+            Types of property 'params' are incompatible.
+              Property 'locale' is missing in type 'Promise<{ locale: string; }>' but required in type '{ locale: string; }'.
+src/app/[locale]/dashboard/page.tsx(59,12): error TS2786: 'Globe' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/[locale]/dashboard/page.tsx(90,16): error TS2786: 'ArrowIcon' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/[locale]/dashboard/page.tsx(126,20): error TS2786: 'DrillCoreLoop' cannot be used as a JSX component.
+  Its type 'ComponentType<{}>' is not a valid JSX element type.
+    Type 'ComponentClass<{}, any>' is not assignable to type 'ElementType'.
+      Type 'ComponentClass<{}, any>' is not assignable to type 'new (props: any, deprecatedLegacyContext?: any) => Component<any, any, any>'.
+        Property 'refs' is missing in type 'Component<{}, any, any>' but required in type 'Component<any, any, any>'.
+src/app/[locale]/dashboard/page.tsx(170,22): error TS2786: 'ResultsChart' cannot be used as a JSX component.
+  Its type 'ComponentType<{}>' is not a valid JSX element type.
+    Type 'ComponentClass<{}, any>' is not assignable to type 'ElementType'.
+      Type 'ComponentClass<{}, any>' is not assignable to type 'new (props: any, deprecatedLegacyContext?: any) => Component<any, any, any>'.
+        Property 'refs' is missing in type 'Component<{}, any, any>' but required in type 'Component<any, any, any>'.
+src/app/[locale]/login/page.tsx(96,10): error TS2786: 'AssemblyLine' cannot be used as a JSX component.
+  Its type 'ComponentType<{}>' is not a valid JSX element type.
+    Type 'ComponentClass<{}, any>' is not assignable to type 'ElementType'.
+      Type 'ComponentClass<{}, any>' is not assignable to type 'new (props: any, deprecatedLegacyContext?: any) => Component<any, any, any>'.
+        Property 'refs' is missing in type 'Component<{}, any, any>' but required in type 'Component<any, any, any>'.
+src/app/[locale]/page.tsx(30,8): error TS2786: 'QuarrySimulation' cannot be used as a JSX component.
+  Its type 'ComponentType<{}>' is not a valid JSX element type.
+    Type 'ComponentClass<{}, any>' is not assignable to type 'ElementType'.
+      Type 'ComponentClass<{}, any>' is not assignable to type 'new (props: any, deprecatedLegacyContext?: any) => Component<any, any, any>'.
+        Property 'refs' is missing in type 'Component<{}, any, any>' but required in type 'Component<any, any, any>'.
+src/app/[locale]/page.tsx(77,10): error TS2786: 'Link' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<{ id?: string | undefined; target?: HTMLAttributeAnchorTarget | undefined; replace?: boolean | undefined; slot?: string | undefined; style?: CSSProperties | undefined; ... 292 more ...; href: string | UrlObject; }, "ref"> & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<{ id?: string | undefined; target?: HTMLAttributeAnchorTarget | undefined; replace?: boolean | undefined; slot?: string | undefined; style?: CSSProperties | undefined; ... 292 more ...; href: string | UrlObject; }, "ref"> & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/page.tsx(7,10): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/page.tsx(35,14): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/page.tsx(61,12): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/page.tsx(76,12): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/app/page.tsx(91,12): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "ref" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/components/AssemblyLine.tsx(50,5): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(51,7): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(52,7): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(53,5): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(72,5): error TS2339: Property 'group' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(74,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(75,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(76,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(77,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(79,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(80,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(81,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(82,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(84,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(85,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(86,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(87,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(88,7): error TS2339: Property 'pointLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(89,5): error TS2339: Property 'group' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(117,5): error TS2339: Property 'group' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(119,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(120,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(121,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(122,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(123,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(124,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(125,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(126,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(129,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(130,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(131,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(132,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(133,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(134,9): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(135,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(136,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(138,7): error TS2339: Property 'pointLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(139,5): error TS2339: Property 'group' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(173,5): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(174,7): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(175,7): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(176,5): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(183,7): error TS2339: Property 'ambientLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(184,7): error TS2339: Property 'directionalLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(187,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(188,9): error TS2339: Property 'planeGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(189,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/AssemblyLine.tsx(190,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(18,5): error TS2339: Property 'group' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(20,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(21,9): error TS2339: Property 'cylinderGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(22,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(23,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(25,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(26,9): error TS2339: Property 'cylinderGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(27,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(28,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(30,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(31,9): error TS2339: Property 'cylinderGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(32,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(33,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(35,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(36,9): error TS2339: Property 'cylinderGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(37,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(38,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(40,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(41,9): error TS2339: Property 'cylinderGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(42,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(43,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(45,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(46,9): error TS2339: Property 'cylinderGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(47,9): error TS2339: Property 'meshBasicMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(48,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(49,5): error TS2339: Property 'group' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(59,7): error TS2339: Property 'ambientLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/DrillCoreLoop.tsx(60,7): error TS2339: Property 'directionalLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(22,32): error TS2724: '"C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/three/build/three.module"' has no exported member named 'Line2'. Did you mean 'Line'?
+src/components/QuarrySimulation.tsx(50,6): error TS2786: 'Line' cannot be used as a JSX component.
+  Its type 'ForwardRefComponent<LineProps, Line2 | LineSegments2>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<LineProps & RefAttributes<Line2 | LineSegments2>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/components/QuarrySimulation.tsx(69,5): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(74,7): error TS2339: Property 'boxGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(75,7): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(80,5): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(88,7): error TS2339: Property 'ambientLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(89,7): error TS2339: Property 'directionalLight' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(92,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(93,9): error TS2339: Property 'planeGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(94,9): error TS2339: Property 'meshStandardMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(95,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(105,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(106,9): error TS2339: Property 'planeGeometry' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(107,9): error TS2339: Property 'meshBasicMaterial' does not exist on type 'JSX.IntrinsicElements'.
+src/components/QuarrySimulation.tsx(108,7): error TS2339: Property 'mesh' does not exist on type 'JSX.IntrinsicElements'.
+src/components/ResultsChart.tsx(23,6): error TS2786: 'ResponsiveContainer' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Props & RefAttributes<HTMLDivElement>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Props & RefAttributes<HTMLDivElement>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("C:/Users/ratho/Downloads/Bashira-Intelligence/web/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'bigint' is not assignable to type 'ReactNode'.
+src/components/ResultsChart.tsx(24,8): error TS2786: 'AreaChart' cannot be used as a JSX component.
+  Its type '<DataPointType = any>(props: CartesianChartProps<DataPointType> & { ref?: Ref<SVGSVGElement> | undefined; }) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not a valid JSX element type.
+    Type '<DataPointType = any>(props: CartesianChartProps<DataPointType> & { ref?: Ref<SVGSVGElement> | undefined; }) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+        Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+src/components/ResultsChart.tsx(25,10): error TS2786: 'XAxis' cannot be used as a JSX component.
+  Its type '<DataPointType = any, DataValueType = any>(props: Props<DataPointType, DataValueType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not a valid JSX element type.
+    Type '<DataPointType = any, DataValueType = any>(props: Props<DataPointType, DataValueType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+        Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+src/components/ResultsChart.tsx(32,10): error TS2786: 'YAxis' cannot be used as a JSX component.
+  Its type '<DataPointType = any, DataValueType = any>(props: Props<DataPointType, DataValueType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not a valid JSX element type.
+    Type '<DataPointType = any, DataValueType = any>(props: Props<DataPointType, DataValueType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+        Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+src/components/ResultsChart.tsx(50,10): error TS2786: 'Area' cannot be used as a JSX component.
+  Its type '<DataPointType = any, ValueAxisType = any>(props: Props<DataPointType, ValueAxisType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not a valid JSX element type.
+    Type '<DataPointType = any, ValueAxisType = any>(props: Props<DataPointType, ValueAxisType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+        Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+src/components/ResultsChart.tsx(58,10): error TS2786: 'Area' cannot be used as a JSX component.
+  Its type '<DataPointType = any, ValueAxisType = any>(props: Props<DataPointType, ValueAxisType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not a valid JSX element type.
+    Type '<DataPointType = any, ValueAxisType = any>(props: Props<DataPointType, ValueAxisType>) => ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+        Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+src/i18n.ts(3,33): error TS2345: Argument of type '({ locale }: GetRequestConfigParams) => Promise<{ messages: any; }>' is not assignable to parameter of type '(params: GetRequestConfigParams) => RequestConfig | Promise<RequestConfig>'.
+  Type 'Promise<{ messages: any; }>' is not assignable to type 'RequestConfig | Promise<RequestConfig>'.
+    Type 'Promise<{ messages: any; }>' is not assignable to type 'Promise<RequestConfig>'.
+      Type '{ messages: any; }' is not assignable to type 'RequestConfig'.
+        Property 'locale' is missing in type '{ messages: any; }' but required in type '{ locale: string; }'.

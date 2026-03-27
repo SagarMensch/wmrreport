@@ -1,0 +1,14 @@
+{
+  "Index": {
+    "status": "SYSTEM ONLINE",
+    "enter": "ENTER BASIR"
+  },
+  "Login": {
+    "title": "ACCESS VERIFICATION",
+    "emailLabel": "Email Address",
+    "emailParams": "user@altasnim.com",
+    "passwordLabel": "Password",
+    "passwordParams": "••••••••",
+    "submit": "Authenticate"
+  }
+}

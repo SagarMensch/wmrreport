@@ -1,0 +1,4739 @@
+[
+  {
+    "table": "ActivityTaskPlan",
+    "column": "row_id",
+    "data_type": "bigint",
+    "document": "Table: ActivityTaskPlan | Column: row_id | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "source_id",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: source_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "Data",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: Data | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "ancestor",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: ancestor | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "duration",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: duration | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "progress",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: progress | Data Type: nvarchar | Semantic Name: Activity Progress | Business Meaning: Progress percentage of this specific activity. | Usage: Activity tracking",
+    "semantic": {
+      "semantic_name": "Activity Progress",
+      "business_meaning": "Progress percentage of this specific activity.",
+      "usage": "Activity tracking"
+    }
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "crew_uid",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: crew_uid | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "crew_type",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: crew_type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "qty",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: qty | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "manhours",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: manhours | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "weightage",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: weightage | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "parent",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: parent | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "start_date",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: start_date | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "end_date",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: end_date | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "target_start",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: target_start | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "target_end",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: target_end | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "actual_start",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: actual_start | Data Type: datetime2 | Semantic Name: Actual Start | Business Meaning: Actual start date/time of the activity. | Usage: Schedule tracking",
+    "semantic": {
+      "semantic_name": "Actual Start",
+      "business_meaning": "Actual start date/time of the activity.",
+      "usage": "Schedule tracking"
+    }
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "actual_end",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: actual_end | Data Type: datetime2 | Semantic Name: Actual End | Business Meaning: Actual end date/time of the activity. | Usage: Completion tracking",
+    "semantic": {
+      "semantic_name": "Actual End",
+      "business_meaning": "Actual end date/time of the activity.",
+      "usage": "Completion tracking"
+    }
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "qtyactual",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: qtyactual | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "qtyforacst",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: qtyforacst | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "manhoursactual",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: manhoursactual | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "manhourforacst",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: manhourforacst | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "code",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "text",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: text | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "type",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "schedule_id",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: schedule_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "project_id",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: project_id | Data Type: nvarchar | Semantic Name: Project Identifier | Business Meaning: The project this activity belongs to. | Usage: Project filtering",
+    "semantic": {
+      "semantic_name": "Project Identifier",
+      "business_meaning": "The project this activity belongs to.",
+      "usage": "Project filtering"
+    }
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "task_assignee",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: task_assignee | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "supervisor_email",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: supervisor_email | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "attributes",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: attributes | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "remaining_duration",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: remaining_duration | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "Resume_Suspend",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: Resume_Suspend | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "data_nonprod",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: data_nonprod | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "created_at",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: created_at | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "updated_at",
+    "data_type": "datetime2",
+    "document": "Table: ActivityTaskPlan | Column: updated_at | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "Well_ID",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: Well_ID | Data Type: nvarchar | Semantic Name: Activity Well ID | Business Meaning: The well identifier for this activity/task. | Usage: Link activities to wells",
+    "semantic": {
+      "semantic_name": "Activity Well ID",
+      "business_meaning": "The well identifier for this activity/task.",
+      "usage": "Link activities to wells"
+    }
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "Parent_WBS",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: Parent_WBS | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ActivityTaskPlan",
+    "column": "Time_Stamp",
+    "data_type": "nvarchar",
+    "document": "Table: ActivityTaskPlan | Column: Time_Stamp | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "id",
+    "data_type": "decimal",
+    "document": "Table: company_employees | Column: id | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "UId",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: UId | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "Name",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: Name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "Status",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: Status | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "locationCode",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: locationCode | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "Email",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: Email | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "code",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "company_employees",
+    "column": "company",
+    "data_type": "nvarchar",
+    "document": "Table: company_employees | Column: company | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "crews",
+    "column": "ID",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: ID | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "crews",
+    "column": "Code",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: Code | Data Type: nvarchar | Semantic Name: Crew Code | Business Meaning: Unique identifier for the crew/team. | Usage: Identify crews | JOIN: WellMonitoringReport.rig_no = crews.rig_code",
+    "semantic": {
+      "semantic_name": "Crew Code",
+      "business_meaning": "Unique identifier for the crew/team.",
+      "usage": "Identify crews",
+      "critical_join": "WellMonitoringReport.rig_no = crews.rig_code"
+    }
+  },
+  {
+    "table": "crews",
+    "column": "Account",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: Account | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "crews",
+    "column": "Location",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: Location | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "crews",
+    "column": "CrewType",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: CrewType | Data Type: nvarchar | Semantic Name: Crew Type | Business Meaning: Type/classification of the crew. | Usage: Categorize crews",
+    "semantic": {
+      "semantic_name": "Crew Type",
+      "business_meaning": "Type/classification of the crew.",
+      "usage": "Categorize crews"
+    }
+  },
+  {
+    "table": "crews",
+    "column": "Supervisor",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: Supervisor | Data Type: nvarchar | Semantic Name: Crew Supervisor | Business Meaning: Name or ID of the crew supervisor. | Usage: Contact, reporting",
+    "semantic": {
+      "semantic_name": "Crew Supervisor",
+      "business_meaning": "Name or ID of the crew supervisor.",
+      "usage": "Contact, reporting"
+    }
+  },
+  {
+    "table": "crews",
+    "column": "Employees",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: Employees | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "crews",
+    "column": "Equipments",
+    "data_type": "nvarchar",
+    "document": "Table: crews | Column: Equipments | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "id",
+    "data_type": "int",
+    "document": "Table: Employee | Column: id | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "UId",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: UId | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Name",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: Name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Email",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: Email | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Status",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: Status | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Supervisor",
+    "data_type": "int",
+    "document": "Table: Employee | Column: Supervisor | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Account",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: Account | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "EmployeeType",
+    "data_type": "int",
+    "document": "Table: Employee | Column: EmployeeType | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Company",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: Company | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Manager",
+    "data_type": "int",
+    "document": "Table: Employee | Column: Manager | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "Employee",
+    "column": "Location",
+    "data_type": "nvarchar",
+    "document": "Table: Employee | Column: Location | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "Well_ID",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: Well_ID | Data Type: nvarchar | Semantic Name: Plan Snapshot Well ID | Business Meaning: The well identifier for planning snapshot. Links to WellMonitoringReport.pdo_well_id. | Usage: Join with WellMonitoringReport, planning data | Example: 10207, 10239 | JOIN: WellMonitoringReport.pdo_well_id = Job_Progress_PlanSnapshot.Well_ID",
+    "semantic": {
+      "semantic_name": "Plan Snapshot Well ID",
+      "business_meaning": "The well identifier for planning snapshot. Links to WellMonitoringReport.pdo_well_id.",
+      "usage": "Join with WellMonitoringReport, planning data",
+      "critical_join": "WellMonitoringReport.pdo_well_id = Job_Progress_PlanSnapshot.Well_ID",
+      "example": "10207, 10239"
+    }
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "project_id",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: project_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "Cum_Prior_Plan_frac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: Cum_Prior_Plan_frac | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "W1_Plan_frac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: W1_Plan_frac | Data Type: decimal | Semantic Name: Week 1 Plan Fraction | Business Meaning: Planned progress as fraction (decimal) for week 1. | Usage: Weekly planning fraction | Example: 0.01177941",
+    "semantic": {
+      "semantic_name": "Week 1 Plan Fraction",
+      "business_meaning": "Planned progress as fraction (decimal) for week 1.",
+      "usage": "Weekly planning fraction",
+      "example": "0.01177941"
+    }
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "W2_Plan_frac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: W2_Plan_frac | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "W3_Plan_frac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: W3_Plan_frac | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "W4_Plan_frac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: W4_Plan_frac | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "W5_Plan_frac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: W5_Plan_frac | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "CurrentMonthPlanFrac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: CurrentMonthPlanFrac | Data Type: decimal | Semantic Name: Monthly Plan Fraction | Business Meaning: Current month planned progress as fraction. | Usage: Monthly planning | Example: 0.73209502",
+    "semantic": {
+      "semantic_name": "Monthly Plan Fraction",
+      "business_meaning": "Current month planned progress as fraction.",
+      "usage": "Monthly planning",
+      "example": "0.73209502"
+    }
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "CumCurrentMonthPlanFrac",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: CumCurrentMonthPlanFrac | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "Latest_Target_End",
+    "data_type": "date",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: Latest_Target_End | Data Type: date | Semantic Name: Target End Date | Business Meaning: The latest target end date for the well. | Usage: Deadline tracking | Example: 2026-05-11",
+    "semantic": {
+      "semantic_name": "Target End Date",
+      "business_meaning": "The latest target end date for the well.",
+      "usage": "Deadline tracking",
+      "example": "2026-05-11"
+    }
+  },
+  {
+    "table": "Job_Progress_PlanSnapshot",
+    "column": "CreatedOn",
+    "data_type": "datetime",
+    "document": "Table: Job_Progress_PlanSnapshot | Column: CreatedOn | Data Type: datetime",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Sl.No",
+    "data_type": "bigint",
+    "document": "Table: Job_Progress_Report_GB | Column: Sl.No | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Category",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_Report_GB | Column: Category | Data Type: nvarchar | Semantic Name: Job Category | Business Meaning: Category of the job/work. | Usage: Categorize jobs | Example: Marmul SNLP, Marmul Conversion with Flowlin",
+    "semantic": {
+      "semantic_name": "Job Category",
+      "business_meaning": "Category of the job/work.",
+      "usage": "Categorize jobs",
+      "example": "Marmul SNLP, Marmul Conversion with Flowlin"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Well ID",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_Report_GB | Column: Well ID | Data Type: nvarchar | Semantic Name: Job Progress Well ID | Business Meaning: The well identifier in Job Progress report. Links to WellMonitoringReport.pdo_well_id. | Usage: Join with WellMonitoringReport | Example: 628, 729 | JOIN: WellMonitoringReport.pdo_well_id = Job_Progress_Report_GB.[Well ID]",
+    "semantic": {
+      "semantic_name": "Job Progress Well ID",
+      "business_meaning": "The well identifier in Job Progress report. Links to WellMonitoringReport.pdo_well_id.",
+      "usage": "Join with WellMonitoringReport",
+      "critical_join": "WellMonitoringReport.pdo_well_id = Job_Progress_Report_GB.[Well ID]",
+      "note": "Use brackets due to space in column name",
+      "example": "628, 729"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Well Name / Project Name",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_Report_GB | Column: Well Name / Project Name | Data Type: nvarchar | Semantic Name: Well or Project Name | Business Meaning: Human-readable name of the well or project (often NULL). | Usage: Display names (when available)",
+    "semantic": {
+      "semantic_name": "Well or Project Name",
+      "business_meaning": "Human-readable name of the well or project (often NULL).",
+      "usage": "Display names (when available)",
+      "note": "Frequently NULL in data"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "PO No",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_Report_GB | Column: PO No | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "WBS No",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_Report_GB | Column: WBS No | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum-Prior Month Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum-Prior Month Actual % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-1 Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-1 Plan % | Data Type: decimal | Semantic Name: Week 1 Planned Progress | Business Meaning: Planned progress target for week 1 (percentage). | Usage: Weekly planning, variance analysis | Example: 0.33, 13.70",
+    "semantic": {
+      "semantic_name": "Week 1 Planned Progress",
+      "business_meaning": "Planned progress target for week 1 (percentage).",
+      "usage": "Weekly planning, variance analysis",
+      "example": "0.33, 13.70"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-1 Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-1 Actual % | Data Type: decimal | Semantic Name: Week 1 Actual Progress | Business Meaning: Actual progress achieved in week 1 (percentage). | Usage: Weekly tracking, variance analysis | Example: 0.00, 14.17",
+    "semantic": {
+      "semantic_name": "Week 1 Actual Progress",
+      "business_meaning": "Actual progress achieved in week 1 (percentage).",
+      "usage": "Weekly tracking, variance analysis",
+      "example": "0.00, 14.17"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-2 Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-2 Plan % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-2 Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-2 Actual % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-3 Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-3 Plan % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-3 Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-3 Actual % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-4 Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-4 Plan % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-4 Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-4 Actual % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-5 Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-5 Plan % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Week-5 Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Week-5 Actual % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Current Month Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Current Month Plan % | Data Type: decimal | Semantic Name: Monthly Planned Progress | Business Meaning: Planned progress for the current month (percentage). | Usage: Monthly tracking | Example: 74.69",
+    "semantic": {
+      "semantic_name": "Monthly Planned Progress",
+      "business_meaning": "Planned progress for the current month (percentage).",
+      "usage": "Monthly tracking",
+      "example": "74.69"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Current Month Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Current Month Actual % | Data Type: decimal | Semantic Name: Monthly Actual Progress | Business Meaning: Actual progress achieved this month (percentage). | Usage: Monthly tracking | Example: 0.00, 17.79",
+    "semantic": {
+      "semantic_name": "Monthly Actual Progress",
+      "business_meaning": "Actual progress achieved this month (percentage).",
+      "usage": "Monthly tracking",
+      "example": "0.00, 17.79"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum-Current Month Plan %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum-Current Month Plan % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum-Current Month Actual %",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum-Current Month Actual % | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Target End",
+    "data_type": "date",
+    "document": "Table: Job_Progress_Report_GB | Column: Target End | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Purpose Value",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Purpose Value | Data Type: decimal | Semantic Name: Purpose/Monetary Value | Business Meaning: The monetary value or purpose value associated with the job. | Usage: Financial tracking, value analysis | Example: 5000.00, 17059.40",
+    "semantic": {
+      "semantic_name": "Purpose/Monetary Value",
+      "business_meaning": "The monetary value or purpose value associated with the job.",
+      "usage": "Financial tracking, value analysis",
+      "example": "5000.00, 17059.40"
+    }
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum-Prior Month Plan",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum-Prior Month Plan | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum-Prior Month Actual",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum-Prior Month Actual | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Current month Plan",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Current month Plan | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Current Month Actual",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Current Month Actual | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum - Current Month Plan",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum - Current Month Plan | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Cum - Current Month Actual",
+    "data_type": "decimal",
+    "document": "Table: Job_Progress_Report_GB | Column: Cum - Current Month Actual | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Job_Progress_Report_GB",
+    "column": "Remarks",
+    "data_type": "nvarchar",
+    "document": "Table: Job_Progress_Report_GB | Column: Remarks | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "S.No",
+    "data_type": "bigint",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: S.No | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Month",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Month | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Year",
+    "data_type": "int",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Year | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "MonthStart",
+    "data_type": "date",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: MonthStart | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "PA Name",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: PA Name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "PH Emp ID",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: PH Emp ID | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "PH Name",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: PH Name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "ATNM/Sub Contractor",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: ATNM/Sub Contractor | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Category",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Category | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Crew Type",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Crew Type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Crew Discipline",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Crew Discipline | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Crew Name",
+    "data_type": "nvarchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Crew Name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Average Productivity (%)",
+    "data_type": "decimal",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Average Productivity (%) | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W1_PI (CMR)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W1_PI (CMR) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W1_PI (T-Wise)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W1_PI (T-Wise) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W2_PI (CMR)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W2_PI (CMR) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W2_PI (T-Wise)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W2_PI (T-Wise) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W3_PI (CMR)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W3_PI (CMR) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W3_PI (T-Wise)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W3_PI (T-Wise) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W4_PI (CMR)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W4_PI (CMR) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W4_PI (T-Wise)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W4_PI (T-Wise) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W5_PI (CMR)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W5_PI (CMR) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "W5_PI (T-Wise)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: W5_PI (T-Wise) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Month PI (CMR)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Month PI (CMR) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "PH_PRODUCTIVITY_WEEKLY_REPORT",
+    "column": "Month PI (T-Wise)",
+    "data_type": "varchar",
+    "document": "Table: PH_PRODUCTIVITY_WEEKLY_REPORT | Column: Month PI (T-Wise) | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "ProjectIDs",
+    "column": "Code",
+    "data_type": "nvarchar",
+    "document": "Table: ProjectIDs | Column: Code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ProjectIDs",
+    "column": "column2",
+    "data_type": "nvarchar",
+    "document": "Table: ProjectIDs | Column: column2 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "ProjectIDs",
+    "column": "Number",
+    "data_type": "tinyint",
+    "document": "Table: ProjectIDs | Column: Number | Data Type: tinyint",
+    "semantic": {}
+  },
+  {
+    "table": "ProjectIDs",
+    "column": "ID",
+    "data_type": "nvarchar",
+    "document": "Table: ProjectIDs | Column: ID | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "id",
+    "data_type": "bigint",
+    "document": "Table: Revenue | Column: id | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "rigcode",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: rigcode | Data Type: nvarchar | Semantic Name: Rig Code | Business Meaning: CRITICAL: The identifier for the drilling rig. NOT a location! Use for filtering by rig names like NL0010, NF0010. This is NOT in well_location! | Usage: Filter by rig identifier, analyze rig performance. NEVER use well_location for this! | Example: NL0010, NF0010, ML0010, MS0010, MF0010, MCOF10, MCWF10, MROP10, MRWF10, NCOF10, NNSW10, NS0010 | CRITICAL: This is a key column! | WARNING: This is RIG CODE, not location. Do NOT search in well_location for NL0010! | Search Terms: rig NL0010, wells by rig, rig performance, NF0010",
+    "semantic": {
+      "semantic_name": "Rig Code",
+      "business_meaning": "CRITICAL: The identifier for the drilling rig. NOT a location! Use for filtering by rig names like NL0010, NF0010. This is NOT in well_location!",
+      "usage": "Filter by rig identifier, analyze rig performance. NEVER use well_location for this!",
+      "example": "NL0010, NF0010, ML0010, MS0010, MF0010, MCOF10, MCWF10, MROP10, MRWF10, NCOF10, NNSW10, NS0010",
+      "critical": true,
+      "warning": "This is RIG CODE, not location. Do NOT search in well_location for NL0010!",
+      "common_queries": [
+        "rig NL0010",
+        "wells by rig",
+        "rig performance",
+        "NF0010"
+      ]
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "well_id",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: well_id | Data Type: nvarchar | Semantic Name: Revenue Well ID | Business Meaning: The well identifier linking to WellMonitoringReport.pdo_well_id. This is the JOIN KEY for Revenue data. | Usage: Join with WellMonitoringReport, identify wells in revenue data | Example: 37230, 31339 | JOIN: WellMonitoringReport.pdo_well_id = Revenue.Well_ID",
+    "semantic": {
+      "semantic_name": "Revenue Well ID",
+      "business_meaning": "The well identifier linking to WellMonitoringReport.pdo_well_id. This is the JOIN KEY for Revenue data.",
+      "usage": "Join with WellMonitoringReport, identify wells in revenue data",
+      "critical_join": "WellMonitoringReport.pdo_well_id = Revenue.Well_ID",
+      "example": "37230, 31339"
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "code",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "pms",
+    "data_type": "decimal",
+    "document": "Table: Revenue | Column: pms | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "step_type",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: step_type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "planned_progress",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: planned_progress | Data Type: nvarchar | Semantic Name: Planned Progress | Business Meaning: The planned progress target. CRITICAL: This is NVARCHAR (text) type - must CAST to DECIMAL before comparison or SUM! | Usage: Compare with actual, calculate variance. MUST CAST to DECIMAL! | Example: '1', '0.93' (stored as text) | CRITICAL: This is a key column!",
+    "semantic": {
+      "semantic_name": "Planned Progress",
+      "business_meaning": "The planned progress target. CRITICAL: This is NVARCHAR (text) type - must CAST to DECIMAL before comparison or SUM!",
+      "usage": "Compare with actual, calculate variance. MUST CAST to DECIMAL!",
+      "data_type_warning": "NVARCHAR - requires TRY_CAST(planned_progress AS DECIMAL(10,2)) before use",
+      "critical": true,
+      "example": "'1', '0.93' (stored as text)"
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "plan_percent",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: plan_percent | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "acutal_progress",
+    "data_type": "decimal",
+    "document": "Table: Revenue | Column: acutal_progress | Data Type: decimal | Semantic Name: Actual Progress | Business Meaning: The actual progress achieved (note: column name is misspelled as 'acutal'). Decimal value representing completion. | Usage: Compare actual vs planned, track achievement | Example: 1.0000, 0.5",
+    "semantic": {
+      "semantic_name": "Actual Progress",
+      "business_meaning": "The actual progress achieved (note: column name is misspelled as 'acutal'). Decimal value representing completion.",
+      "usage": "Compare actual vs planned, track achievement",
+      "data_type_note": "This column is correctly spelled as decimal",
+      "example": "1.0000, 0.5"
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "act_percent",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: act_percent | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "total_purpose_value",
+    "data_type": "decimal",
+    "document": "Table: Revenue | Column: total_purpose_value | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "planned_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: planned_purpose_value | Data Type: nvarchar | Semantic Name: Planned Revenue/Purpose Value | Business Meaning: CRITICAL: The planned monetary target. This is NVARCHAR (text) - must CAST to DECIMAL before SUM! | Usage: Calculate planned revenue, achievement rates. MUST CAST before SUM! | Example: '5000', '0' (stored as text) | CRITICAL: This is a key column!",
+    "semantic": {
+      "semantic_name": "Planned Revenue/Purpose Value",
+      "business_meaning": "CRITICAL: The planned monetary target. This is NVARCHAR (text) - must CAST to DECIMAL before SUM!",
+      "usage": "Calculate planned revenue, achievement rates. MUST CAST before SUM!",
+      "data_type_warning": "NVARCHAR - requires TRY_CAST(planned_purpose_value AS DECIMAL(18,2)) before SUM",
+      "critical": true,
+      "example": "'5000', '0' (stored as text)"
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "actual_purpose_value",
+    "data_type": "decimal",
+    "document": "Table: Revenue | Column: actual_purpose_value | Data Type: decimal | Semantic Name: Actual Revenue/Purpose Value | Business Meaning: The actual monetary value or purpose value achieved. Decimal type. | Usage: Calculate actual revenue, achievement rates | Example: 5000.00, 0.00",
+    "semantic": {
+      "semantic_name": "Actual Revenue/Purpose Value",
+      "business_meaning": "The actual monetary value or purpose value achieved. Decimal type.",
+      "usage": "Calculate actual revenue, achievement rates",
+      "example": "5000.00, 0.00"
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "planned_progress_next_week",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: planned_progress_next_week | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "plan_percent_next_week",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: plan_percent_next_week | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "planned_purpose_value_next_week",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: planned_purpose_value_next_week | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "Revenue",
+    "column": "Title",
+    "data_type": "nvarchar",
+    "document": "Table: Revenue | Column: Title | Data Type: nvarchar | Semantic Name: Task/Activity Title | Business Meaning: The description/title of the revenue-generating activity or task. | Usage: Understand what activities generate revenue | Example: RDX, Wadi Crossing, Welding Jo",
+    "semantic": {
+      "semantic_name": "Task/Activity Title",
+      "business_meaning": "The description/title of the revenue-generating activity or task.",
+      "usage": "Understand what activities generate revenue",
+      "example": "RDX, Wadi Crossing, Welding Jo"
+    }
+  },
+  {
+    "table": "Revenue",
+    "column": "created_at",
+    "data_type": "datetime2",
+    "document": "Table: Revenue | Column: created_at | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Work_Center",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Work_Center | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Operation_Short",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Operation_Short | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Activity",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Activity | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Opr_System_status",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Opr_System_status | Data Type: nvarchar | Semantic Name: Operational Status | Business Meaning: The operational status in SAP system. | Usage: Track operational status | Example: REL (Released), CNF (Confirmed)",
+    "semantic": {
+      "semantic_name": "Operational Status",
+      "business_meaning": "The operational status in SAP system.",
+      "usage": "Track operational status",
+      "example": "REL (Released), CNF (Confirmed)"
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Earl_start_date",
+    "data_type": "date",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Earl_start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "EarliestEndDate",
+    "data_type": "date",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: EarliestEndDate | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Station_Code",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Station_Code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Normal_duration",
+    "data_type": "float",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Normal_duration | Data Type: float",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Norm_duratn_un",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Norm_duratn_un | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Well_Name",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Well_Name | Data Type: nvarchar | Semantic Name: SAP Well Name | Business Meaning: The well name as recorded in SAP system. | Usage: SAP integration, join with WellMonitoringReport.well_name_after_spud | Example: RKDS_2026_OP_LOC18, DMB-LSB-OP-3 | JOIN: WellMonitoringReport.well_name_after_spud = SAP_DRILLING_SEQUENCE.Well_Name",
+    "semantic": {
+      "semantic_name": "SAP Well Name",
+      "business_meaning": "The well name as recorded in SAP system.",
+      "usage": "SAP integration, join with WellMonitoringReport.well_name_after_spud",
+      "critical_join": "WellMonitoringReport.well_name_after_spud = SAP_DRILLING_SEQUENCE.Well_Name",
+      "example": "RKDS_2026_OP_LOC18, DMB-LSB-OP-3"
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Field",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Field | Data Type: nvarchar | Semantic Name: Oil Field Name | Business Meaning: The name of the oil field where the well is located. | Usage: Filter by field, regional analysis | Example: RAKID SOUTH, NIMR, FAHUD, DHULAIMA | Search Terms: field, which field, RAKID, NIMR",
+    "semantic": {
+      "semantic_name": "Oil Field Name",
+      "business_meaning": "The name of the oil field where the well is located.",
+      "usage": "Filter by field, regional analysis",
+      "example": "RAKID SOUTH, NIMR, FAHUD, DHULAIMA",
+      "common_queries": [
+        "field",
+        "which field",
+        "RAKID",
+        "NIMR"
+      ]
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Responsible_asset",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Responsible_asset | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Well_ID",
+    "data_type": "varchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Well_ID | Data Type: varchar | Semantic Name: SAP Well ID | Business Meaning: The well identifier in SAP system. Links to WellMonitoringReport.pdo_well_id. | Usage: Join with WellMonitoringReport, SAP integration | Example: 10207, 10239 | JOIN: WellMonitoringReport.pdo_well_id = SAP_DRILLING_SEQUENCE.Well_ID",
+    "semantic": {
+      "semantic_name": "SAP Well ID",
+      "business_meaning": "The well identifier in SAP system. Links to WellMonitoringReport.pdo_well_id.",
+      "usage": "Join with WellMonitoringReport, SAP integration",
+      "critical_join": "WellMonitoringReport.pdo_well_id = SAP_DRILLING_SEQUENCE.Well_ID",
+      "example": "10207, 10239"
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Well_Location",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Well_Location | Data Type: nvarchar | Semantic Name: SAP Well Location | Business Meaning: The location of the well in SAP system. | Usage: SAP location tracking | Example: RKDS_2026_OP_LOC18",
+    "semantic": {
+      "semantic_name": "SAP Well Location",
+      "business_meaning": "The location of the well in SAP system.",
+      "usage": "SAP location tracking",
+      "example": "RKDS_2026_OP_LOC18"
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Well_Function",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Well_Function | Data Type: nvarchar | Semantic Name: Well Function | Business Meaning: The purpose/type of well in terms of its function. | Usage: Categorize wells by function | Example: Oil Producer, Water Injector, Gas Producer | Search Terms: producer, injector, well purpose",
+    "semantic": {
+      "semantic_name": "Well Function",
+      "business_meaning": "The purpose/type of well in terms of its function.",
+      "usage": "Categorize wells by function",
+      "example": "Oil Producer, Water Injector, Gas Producer",
+      "common_queries": [
+        "producer",
+        "injector",
+        "well purpose"
+      ]
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Well_Category",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Well_Category | Data Type: nvarchar | Semantic Name: Well Category | Business Meaning: Classification category of the well. | Usage: Well classification | Example: Development, Exploration, Appraisal",
+    "semantic": {
+      "semantic_name": "Well Category",
+      "business_meaning": "Classification category of the well.",
+      "usage": "Well classification",
+      "example": "Development, Exploration, Appraisal"
+    }
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "PCAP_Category",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: PCAP_Category | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "Move_days",
+    "data_type": "tinyint",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: Move_days | Data Type: tinyint",
+    "semantic": {}
+  },
+  {
+    "table": "SAP_DRILLING_SEQUENCE",
+    "column": "PDO_Well_Type",
+    "data_type": "nvarchar",
+    "document": "Table: SAP_DRILLING_SEQUENCE | Column: PDO_Well_Type | Data Type: nvarchar | Semantic Name: PDO Well Type Code | Business Meaning: The PDO classification code for well type. | Usage: Well type identification | Example: NPS9723PCVH, NP9724WIVABH",
+    "semantic": {
+      "semantic_name": "PDO Well Type Code",
+      "business_meaning": "The PDO classification code for well type.",
+      "usage": "Well type identification",
+      "example": "NPS9723PCVH, NP9724WIVABH"
+    }
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "id",
+    "data_type": "int",
+    "document": "Table: schema_knowledge_base | Column: id | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "chunk_id",
+    "data_type": "nvarchar",
+    "document": "Table: schema_knowledge_base | Column: chunk_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "chunk_text",
+    "data_type": "nvarchar",
+    "document": "Table: schema_knowledge_base | Column: chunk_text | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "table_name",
+    "data_type": "nvarchar",
+    "document": "Table: schema_knowledge_base | Column: table_name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "chunk_type",
+    "data_type": "nvarchar",
+    "document": "Table: schema_knowledge_base | Column: chunk_type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "embedding",
+    "data_type": "varbinary",
+    "document": "Table: schema_knowledge_base | Column: embedding | Data Type: varbinary",
+    "semantic": {}
+  },
+  {
+    "table": "schema_knowledge_base",
+    "column": "created_at",
+    "data_type": "datetime2",
+    "document": "Table: schema_knowledge_base | Column: created_at | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "id",
+    "data_type": "bigint",
+    "document": "Table: task_daily | Column: id | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "ActionOn",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: ActionOn | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "task_code",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: task_code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "schedule_id",
+    "data_type": "bigint",
+    "document": "Table: task_daily | Column: schedule_id | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "project_id",
+    "data_type": "uniqueidentifier",
+    "document": "Table: task_daily | Column: project_id | Data Type: uniqueidentifier | Semantic Name: Project Identifier | Business Meaning: Project this task belongs to. | Usage: Project filtering",
+    "semantic": {
+      "semantic_name": "Project Identifier",
+      "business_meaning": "Project this task belongs to.",
+      "usage": "Project filtering"
+    }
+  },
+  {
+    "table": "task_daily",
+    "column": "required",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: required | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "planned",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: planned | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "duration",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: duration | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "remaining_duration",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: remaining_duration | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "progress",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: progress | Data Type: decimal | Semantic Name: Task Progress | Business Meaning: Completion progress of the task (decimal). | Usage: Progress tracking",
+    "semantic": {
+      "semantic_name": "Task Progress",
+      "business_meaning": "Completion progress of the task (decimal).",
+      "usage": "Progress tracking"
+    }
+  },
+  {
+    "table": "task_daily",
+    "column": "ready",
+    "data_type": "bit",
+    "document": "Table: task_daily | Column: ready | Data Type: bit",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "completed",
+    "data_type": "bit",
+    "document": "Table: task_daily | Column: completed | Data Type: bit",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "plan",
+    "data_type": "bit",
+    "document": "Table: task_daily | Column: plan | Data Type: bit",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "committed_start",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: committed_start | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "committed_end",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: committed_end | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "target_start",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: target_start | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "target_end",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: target_end | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "actual_start",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: actual_start | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "actual_end",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: actual_end | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "startDate",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: startDate | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "endDate",
+    "data_type": "date",
+    "document": "Table: task_daily | Column: endDate | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "crew_type",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: crew_type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "crew_code",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: crew_code | Data Type: nvarchar | Semantic Name: Crew Code | Business Meaning: Code of the crew assigned to this task. | Usage: Crew assignment tracking",
+    "semantic": {
+      "semantic_name": "Crew Code",
+      "business_meaning": "Code of the crew assigned to this task.",
+      "usage": "Crew assignment tracking"
+    }
+  },
+  {
+    "table": "task_daily",
+    "column": "planned_crew",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: planned_crew | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "well_id",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: well_id | Data Type: nvarchar | Semantic Name: Daily Task Well ID | Business Meaning: The well identifier for daily task tracking. | Usage: Link daily tasks to wells",
+    "semantic": {
+      "semantic_name": "Daily Task Well ID",
+      "business_meaning": "The well identifier for daily task tracking.",
+      "usage": "Link daily tasks to wells"
+    }
+  },
+  {
+    "table": "task_daily",
+    "column": "task_uom",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: task_uom | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "data_hours",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: data_hours | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "data_qty",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: data_qty | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "data_employees",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: data_employees | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "task_assignee",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: task_assignee | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "supervisor_email",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: supervisor_email | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "url",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: url | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "task_data",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: task_data | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_data",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: daily_data | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "created_at",
+    "data_type": "datetime2",
+    "document": "Table: task_daily | Column: created_at | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "updated_at",
+    "data_type": "datetime2",
+    "document": "Table: task_daily | Column: updated_at | Data Type: datetime2",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_ph_name",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: daily_ph_name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_equipment_ids",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: daily_equipment_ids | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_employee_ids",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: daily_employee_ids | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_actual_quantity",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: daily_actual_quantity | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_actual_hours",
+    "data_type": "decimal",
+    "document": "Table: task_daily | Column: daily_actual_hours | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "daily_completed",
+    "data_type": "bit",
+    "document": "Table: task_daily | Column: daily_completed | Data Type: bit",
+    "semantic": {}
+  },
+  {
+    "table": "task_daily",
+    "column": "time_stamp",
+    "data_type": "nvarchar",
+    "document": "Table: task_daily | Column: time_stamp | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Sr_No",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Sr_No | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "WBS_Code",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: WBS_Code | Data Type: nvarchar | Semantic Name: WBS Code | Business Meaning: Work Breakdown Structure code. | Usage: WBS identification",
+    "semantic": {
+      "semantic_name": "WBS Code",
+      "business_meaning": "Work Breakdown Structure code.",
+      "usage": "WBS identification"
+    }
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Project_Def",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Project_Def | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "WD_PRJ",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: WD_PRJ | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Plant_Code",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Plant_Code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Plant_Name",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Plant_Name | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Cluster",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Cluster | Data Type: nvarchar | Semantic Name: WBS Cluster | Business Meaning: Operational cluster in WBS tracking. | Usage: Cluster filtering",
+    "semantic": {
+      "semantic_name": "WBS Cluster",
+      "business_meaning": "Operational cluster in WBS tracking.",
+      "usage": "Cluster filtering"
+    }
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Well_ID_Project_PO",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Well_ID_Project_PO | Data Type: nvarchar | Semantic Name: WBS Well/Project ID | Business Meaning: Well or project identifier in WBS. | Usage: WBS linking",
+    "semantic": {
+      "semantic_name": "WBS Well/Project ID",
+      "business_meaning": "Well or project identifier in WBS.",
+      "usage": "WBS linking"
+    }
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Activity_code",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Activity_code | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Activity",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Activity | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Category",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Category | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Sr_No_2",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Sr_No_2 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "LMPS",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: LMPS | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Duplicate_check",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Duplicate_check | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WBS_Master_Tracker_",
+    "column": "Last_Updated_on",
+    "data_type": "nvarchar",
+    "document": "Table: WBS_Master_Tracker_ | Column: Last_Updated_on | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "sl_no",
+    "data_type": "bigint",
+    "document": "Table: WellMonitoringReport | Column: sl_no | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "sl_no_raw",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: sl_no_raw | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "rig_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: rig_no | Data Type: nvarchar | Semantic Name: Rig Number | Business Meaning: The identifier of the drilling rig assigned to this well. Links to crews table via rig_code. | Usage: Filter by rig, track rig performance, join with crews | Example: SWER101, SWER149, SWERIG99 | Search Terms: rig performance, which rig, rig assignment",
+    "semantic": {
+      "semantic_name": "Rig Number",
+      "business_meaning": "The identifier of the drilling rig assigned to this well. Links to crews table via rig_code.",
+      "usage": "Filter by rig, track rig performance, join with crews",
+      "example": "SWER101, SWER149, SWERIG99",
+      "common_queries": [
+        "rig performance",
+        "which rig",
+        "rig assignment"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "well_location",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: well_location | Data Type: nvarchar | Semantic Name: Physical Well Location | Business Meaning: The geographic location identifier where the well is located. Contains detailed location codes like AL BURJ_26_MC_OP2. NOT for rig codes! | Usage: Filter by specific locations, show location details. NOT for rig filtering. | Example: AL BURJ_26_MC_OP2, NIMRG_2205240004_AP2, AMIN_3946610_OP23 | WARNING: Do NOT use for rig codes like NL0010 - those are in Revenue.rigcode | Search Terms: location, where is well",
+    "semantic": {
+      "semantic_name": "Physical Well Location",
+      "business_meaning": "The geographic location identifier where the well is located. Contains detailed location codes like AL BURJ_26_MC_OP2. NOT for rig codes!",
+      "usage": "Filter by specific locations, show location details. NOT for rig filtering.",
+      "example": "AL BURJ_26_MC_OP2, NIMRG_2205240004_AP2, AMIN_3946610_OP23",
+      "warning": "Do NOT use for rig codes like NL0010 - those are in Revenue.rigcode",
+      "common_queries": [
+        "location",
+        "where is well"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "well_name_after_spud",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: well_name_after_spud | Data Type: nvarchar | Semantic Name: Official Well Name | Business Meaning: The formal name assigned to the well after spudding (drilling begins). Used for display and SAP linking. | Usage: Display well names, join with SAP_DRILLING_SEQUENCE.Well_Name | Example: AL BURJ-280, AMIN-580, NIMR-1693 | Search Terms: show wells, well name, display well",
+    "semantic": {
+      "semantic_name": "Official Well Name",
+      "business_meaning": "The formal name assigned to the well after spudding (drilling begins). Used for display and SAP linking.",
+      "usage": "Display well names, join with SAP_DRILLING_SEQUENCE.Well_Name",
+      "example": "AL BURJ-280, AMIN-580, NIMR-1693",
+      "common_queries": [
+        "show wells",
+        "well name",
+        "display well"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "pdo_well_id",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: pdo_well_id | Data Type: nvarchar | Semantic Name: PDO Well Identifier | Business Meaning: The unique Petroleum Development Oman assigned identifier for each well. This is the PRIMARY JOIN KEY for linking well data across Revenue, SAP_DRILLING_SEQUENCE, Job_Progress tables. | Usage: Use for counting unique wells (COUNT DISTINCT), joining tables, identifying specific wells. | Example: 34422, 31339, 37797 | CRITICAL: This is a key column! | Search Terms: count wells, well details, join with revenue, well id",
+    "semantic": {
+      "semantic_name": "PDO Well Identifier",
+      "business_meaning": "The unique Petroleum Development Oman assigned identifier for each well. This is the PRIMARY JOIN KEY for linking well data across Revenue, SAP_DRILLING_SEQUENCE, Job_Progress tables.",
+      "usage": "Use for counting unique wells (COUNT DISTINCT), joining tables, identifying specific wells.",
+      "example": "34422, 31339, 37797",
+      "common_queries": [
+        "count wells",
+        "well details",
+        "join with revenue",
+        "well id"
+      ],
+      "critical": true
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "well_type",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: well_type | Data Type: nvarchar | Semantic Name: Well Type | Business Meaning: The classification of well based on its purpose and equipment. | Usage: Categorize wells by type for analysis | Example: ESP (Electric Submersible Pump), PCP (Progressive Cavity Pump), OP (Oil Producer), WI (Water Injector) | Search Terms: well type, ESP wells, producer",
+    "semantic": {
+      "semantic_name": "Well Type",
+      "business_meaning": "The classification of well based on its purpose and equipment.",
+      "usage": "Categorize wells by type for analysis",
+      "example": "ESP (Electric Submersible Pump), PCP (Progressive Cavity Pump), OP (Oil Producer), WI (Water Injector)",
+      "common_queries": [
+        "well type",
+        "ESP wells",
+        "producer"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "northing",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: northing | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "easting",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: easting | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "locationdd",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: locationdd | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flow_linedl",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: flow_linedl | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "location_po_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: location_po_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "location_po_recvd_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: location_po_recvd_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "location_-_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: location_-_purpose_value | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "last_week_exp.rig_on_location_sap_data",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: last_week_exp.rig_on_location_sap_data | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "latest_exp.rig_on_location_sap_data",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: latest_exp.rig_on_location_sap_data | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "exp.rig_off_location_sap_data",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: exp.rig_off_location_sap_data | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "date_-_material_po_placed",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: date_-_material_po_placed | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "date_-_material_available_at_site",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: date_-_material_available_at_site | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "scr_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: scr_no | Data Type: nvarchar | Semantic Name: Sequence Change Request Number | Business Meaning: Document number for Sequence Change Request (SCR) - tracks schedule changes. | Usage: Track schedule changes, SCR management | Search Terms: SCR, schedule change, sequence",
+    "semantic": {
+      "semantic_name": "Sequence Change Request Number",
+      "business_meaning": "Document number for Sequence Change Request (SCR) - tracks schedule changes.",
+      "usage": "Track schedule changes, SCR management",
+      "common_queries": [
+        "SCR",
+        "schedule change",
+        "sequence"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "scr_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: scr_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "moc_raised",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: moc_raised | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "moc_approved",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: moc_approved | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "buffer_status",
+    "data_type": "varchar",
+    "document": "Table: WellMonitoringReport | Column: buffer_status | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_pegged_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_pegged_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "last_week_cum_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: last_week_cum_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "cum_progress_for_this_week",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: cum_progress_for_this_week | Data Type: decimal | Semantic Name: Weekly Cumulative Progress | Business Meaning: The cumulative drilling progress achieved this week (decimal 0-1). | Usage: Weekly progress tracking | Example: 0.58, 0.35, 1.0",
+    "semantic": {
+      "semantic_name": "Weekly Cumulative Progress",
+      "business_meaning": "The cumulative drilling progress achieved this week (decimal 0-1).",
+      "usage": "Weekly progress tracking",
+      "example": "0.58, 0.35, 1.0"
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_start_date | Data Type: date | Semantic Name: Actual Start Date | Business Meaning: The actual date when work began on the well. | Usage: Schedule tracking, duration calculation | Search Terms: start date, when started",
+    "semantic": {
+      "semantic_name": "Actual Start Date",
+      "business_meaning": "The actual date when work began on the well.",
+      "usage": "Schedule tracking, duration calculation",
+      "common_queries": [
+        "start date",
+        "when started"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "installation_of_esp_pcp_surface_cable_by_vendors",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: installation_of_esp_pcp_surface_cable_by_vendors | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_finish_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_finish_date | Data Type: date | Semantic Name: Completion Date | Business Meaning: The actual date when well work was completed. | Usage: Completion tracking, deadline analysis | Search Terms: finish date, completion, when done",
+    "semantic": {
+      "semantic_name": "Completion Date",
+      "business_meaning": "The actual date when well work was completed.",
+      "usage": "Completion tracking, deadline analysis",
+      "common_queries": [
+        "finish date",
+        "completion",
+        "when done"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flaf_issue_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: flaf_issue_date | Data Type: date | Semantic Name: FLAF Issue Date | Business Meaning: Date when the First Line Acceptable Form (FLAF) was issued - key milestone. | Usage: Track key milestone, readiness dates | Search Terms: FLAF, milestone, ready",
+    "semantic": {
+      "semantic_name": "FLAF Issue Date",
+      "business_meaning": "Date when the First Line Acceptable Form (FLAF) was issued - key milestone.",
+      "usage": "Track key milestone, readiness dates",
+      "common_queries": [
+        "FLAF",
+        "milestone",
+        "ready"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ramz_id",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: ramz_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ramz_id_received_date_same_day_as_flaf_issue_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: ramz_id_received_date_same_day_as_flaf_issue_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "date_of_site_survey_report_issuance",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: date_of_site_survey_report_issuance | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "well_engineer_to_add_location_name_in_edm",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: well_engineer_to_add_location_name_in_edm | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "pt_to_request_for_esp_preliminary_design_through_ald",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: pt_to_request_for_esp_preliminary_design_through_ald | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_date_pcp_esp_vendor_delivered_the_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_date_pcp_esp_vendor_delivered_the_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_installation_date_by_vendor_of_esp/pcp_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_installation_date_by_vendor_of_esp/pcp_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flow_line_po_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: flow_line_po_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "f_l_po_recd._date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: f_l_po_recd._date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flowline_-_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: flowline_-_purpose_value | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "station_name_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: station_name_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "physical_tie_in_port_number",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: physical_tie_in_port_number | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "date_of_tie_in_port_readiness",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: date_of_tie_in_port_readiness | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "physical_tie_in_port_available_when_flaf_issued",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: physical_tie_in_port_available_when_flaf_issued | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "engineering_actual_start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: engineering_actual_start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "engineering_actual_finish_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: engineering_actual_finish_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "fl_dia",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: fl_dia | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "fl_length_meter",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: fl_length_meter | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "const._actual_start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: const._actual_start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flowline_construction_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: flowline_construction_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ohl_length_meter",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: ohl_length_meter | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ohl_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: ohl_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ohl_completion_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: ohl_completion_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "z6_data_submitted_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: z6_data_submitted_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "sap_notification_received_date_z6_2_days_before_eng._completion",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: sap_notification_received_date_z6_2_days_before_eng._completion | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_rig_on_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_rig_on_date | Data Type: date | Semantic Name: Rig Arrival Date | Business Meaning: The actual date when the drilling rig was moved onto the well location. | Usage: Track rig schedule, calculate rig days | Search Terms: rig on, when did rig arrive",
+    "semantic": {
+      "semantic_name": "Rig Arrival Date",
+      "business_meaning": "The actual date when the drilling rig was moved onto the well location.",
+      "usage": "Track rig schedule, calculate rig days",
+      "common_queries": [
+        "rig on",
+        "when did rig arrive"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_rig_off_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_rig_off_date | Data Type: date | Semantic Name: Rig Departure Date | Business Meaning: The actual date when the drilling rig moved off the well location. | Usage: Track rig completion, calculate rig duration | Search Terms: rig off, when did rig leave",
+    "semantic": {
+      "semantic_name": "Rig Departure Date",
+      "business_meaning": "The actual date when the drilling rig moved off the well location.",
+      "usage": "Track rig completion, calculate rig duration",
+      "common_queries": [
+        "rig off",
+        "when did rig leave"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "wlctf_acceptanceapproval_from_production",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: wlctf_acceptanceapproval_from_production | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_hoist_fbu_rsr_on_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_hoist_fbu_rsr_on_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_hoist_fbu_rsr_off_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_hoist_fbu_rsr_off_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "wellpad_handover-2_from_hoist_fbu_rsr_off_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: wellpad_handover-2_from_hoist_fbu_rsr_off_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "completion_type_rig_fbu_or_rsr_hoist",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: completion_type_rig_fbu_or_rsr_hoist | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_eng._completion_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_eng._completion_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_comm._start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_comm._start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "engg_kpi_after_rig-off_days",
+    "data_type": "int",
+    "document": "Table: WellMonitoringReport | Column: engg_kpi_after_rig-off_days | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "data_error",
+    "data_type": "varchar",
+    "document": "Table: WellMonitoringReport | Column: data_error | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "reason_if_kpi_not_met",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: reason_if_kpi_not_met | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "remark_status_area_of_attention_issues_",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: remark_status_area_of_attention_issues_ | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm. | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flow_line_test_pack_completion_doc._submission_date_to_qs_dept.",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: flow_line_test_pack_completion_doc._submission_date_to_qs_dept. | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flow_line_test_pack_completion_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: flow_line_test_pack_completion_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "over_all_progress_percentages",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: over_all_progress_percentages | Data Type: decimal | Semantic Name: Overall Well Progress | Business Meaning: The cumulative completion percentage of the well project (0-1 decimal scale). Multiply by 100 for percentage. | Usage: Track overall project completion, calculate completion rates | Example: 0.63 = 63% complete, 1.0 = 100% complete | Search Terms: progress, completion, how far along",
+    "semantic": {
+      "semantic_name": "Overall Well Progress",
+      "business_meaning": "The cumulative completion percentage of the well project (0-1 decimal scale). Multiply by 100 for percentage.",
+      "usage": "Track overall project completion, calculate completion rates",
+      "example": "0.63 = 63% complete, 1.0 = 100% complete",
+      "common_queries": [
+        "progress",
+        "completion",
+        "how far along"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ssfd_wells",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: ssfd_wells | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ipm",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: ipm | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "access_road_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: access_road_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "earth_work_60",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: earth_work_60 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "cellar_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: cellar_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "beam_pump_base_esp_pcp_foundation_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: beam_pump_base_esp_pcp_foundation_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "earthing_1",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: earthing_1 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "septic_tank_1",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: septic_tank_1 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "water_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: water_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "waste_water_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: waste_water_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "hdpe_liner_instalat_4",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: hdpe_liner_instalat_4 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_loc._preparation_10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_loc._preparation_10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "site_survey_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: site_survey_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "survey_report_issue_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: survey_report_issue_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "design_sta_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: design_sta_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "design_completed_issue_for_ta2_5_40",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: design_completed_issue_for_ta2_5_40 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "approved_by_15",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: approved_by_15 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "afc_3_30",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: afc_3_30 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_engg._10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_engg._10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "piping_mech_50",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: piping_mech_50 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "elect_30",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: elect_30 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "instr_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: instr_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_material_10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_material_10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "cold_b_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: cold_b_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "sleeper_pre_cast_ins_15",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: sleeper_pre_cast_ins_15 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: cs_pipe_welding_ndt_10_rt_for_op_100_for_60 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "pe_fussion_pull_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: pe_fussion_pull_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "final_hydro_t_3",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: final_hydro_t_3 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_const._10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_const._10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "pole_hole_drill_40",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: pole_hole_drill_40 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "pole_erect_40",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: pole_erect_40 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "conductor_string_18",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: conductor_string_18 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "ohl_ti_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: ohl_ti_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_ohl_progr_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_ohl_progr_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "mechani_60",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: mechani_60 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "electri_15",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: electri_15 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "instrumentat_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: instrumentat_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_comm_mi_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_comm_mi_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "overall_comm_progress_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport | Column: overall_comm_progress_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "location_preparation_status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: location_preparation_status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flow_line_const._status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: flow_line_const._status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flow_line_commi._status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: flow_line_commi._status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "well_year_white_space",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: well_year_white_space | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "reasons_for_year_2018",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: reasons_for_year_2018 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "column7",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: column7 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "digital_wmr_import_remarks",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: digital_wmr_import_remarks | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "project_id",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: project_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "Week_Number",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport | Column: Week_Number | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "Cluster",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport | Column: Cluster | Data Type: nvarchar | Semantic Name: Operational Cluster | Business Meaning: The operational area/cluster the well belongs to. Major clusters are Nimr and Marmul. | Usage: Filter by cluster for regional analysis | Example: Nimr, Marmul | Search Terms: cluster, Nimr wells, Marmul wells, area",
+    "semantic": {
+      "semantic_name": "Operational Cluster",
+      "business_meaning": "The operational area/cluster the well belongs to. Major clusters are Nimr and Marmul.",
+      "usage": "Filter by cluster for regional analysis",
+      "example": "Nimr, Marmul",
+      "common_queries": [
+        "cluster",
+        "Nimr wells",
+        "Marmul wells",
+        "area"
+      ]
+    }
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "sl_no",
+    "data_type": "bigint",
+    "document": "Table: WellMonitoringReport_Latest | Column: sl_no | Data Type: bigint",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "sl_no_raw",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: sl_no_raw | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "rig_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: rig_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "well_location",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: well_location | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "well_name_after_spud",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: well_name_after_spud | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "pdo_well_id",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: pdo_well_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "well_type",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: well_type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "northing",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: northing | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "easting",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: easting | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "locationdd",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: locationdd | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flow_linedl",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: flow_linedl | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "location_po_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: location_po_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "location_po_recvd_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: location_po_recvd_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "location_-_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: location_-_purpose_value | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "last_week_exp.rig_on_location_sap_data",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: last_week_exp.rig_on_location_sap_data | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "latest_exp.rig_on_location_sap_data",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: latest_exp.rig_on_location_sap_data | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "exp.rig_off_location_sap_data",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: exp.rig_off_location_sap_data | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "date_-_material_po_placed",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: date_-_material_po_placed | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "date_-_material_available_at_site",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: date_-_material_available_at_site | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "scr_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: scr_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "scr_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: scr_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "moc_raised",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: moc_raised | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "moc_approved",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: moc_approved | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "buffer_status",
+    "data_type": "varchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: buffer_status | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_pegged_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_pegged_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "last_week_cum_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: last_week_cum_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "cum_progress_for_this_week",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: cum_progress_for_this_week | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "installation_of_esp_pcp_surface_cable_by_vendors",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: installation_of_esp_pcp_surface_cable_by_vendors | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_finish_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_finish_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flaf_issue_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: flaf_issue_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ramz_id",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: ramz_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ramz_id_received_date_same_day_as_flaf_issue_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: ramz_id_received_date_same_day_as_flaf_issue_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "date_of_site_survey_report_issuance",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: date_of_site_survey_report_issuance | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "well_engineer_to_add_location_name_in_edm",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: well_engineer_to_add_location_name_in_edm | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "pt_to_request_for_esp_preliminary_design_through_ald",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: pt_to_request_for_esp_preliminary_design_through_ald | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_date_pcp_esp_vendor_delivered_the_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_date_pcp_esp_vendor_delivered_the_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_installation_date_by_vendor_of_esp/pcp_skid",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_installation_date_by_vendor_of_esp/pcp_skid | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flow_line_po_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: flow_line_po_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "f_l_po_recd._date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: f_l_po_recd._date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flowline_-_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: flowline_-_purpose_value | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "station_name_no",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: station_name_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "physical_tie_in_port_number",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: physical_tie_in_port_number | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "date_of_tie_in_port_readiness",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: date_of_tie_in_port_readiness | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "physical_tie_in_port_available_when_flaf_issued",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: physical_tie_in_port_available_when_flaf_issued | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "engineering_actual_start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: engineering_actual_start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "engineering_actual_finish_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: engineering_actual_finish_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "fl_dia",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: fl_dia | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "fl_length_meter",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: fl_length_meter | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "const._actual_start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: const._actual_start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flowline_construction_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: flowline_construction_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ohl_length_meter",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: ohl_length_meter | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ohl_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: ohl_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ohl_completion_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: ohl_completion_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "z6_data_submitted_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: z6_data_submitted_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "sap_notification_received_date_z6_2_days_before_eng._completion",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: sap_notification_received_date_z6_2_days_before_eng._completion | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_rig_on_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_rig_on_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_rig_off_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_rig_off_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "wlctf_acceptanceapproval_from_production",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: wlctf_acceptanceapproval_from_production | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_hoist_fbu_rsr_on_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_hoist_fbu_rsr_on_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_hoist_fbu_rsr_off_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_hoist_fbu_rsr_off_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "wellpad_handover-2_from_hoist_fbu_rsr_off_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: wellpad_handover-2_from_hoist_fbu_rsr_off_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "completion_type_rig_fbu_or_rsr_hoist",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: completion_type_rig_fbu_or_rsr_hoist | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_eng._completion_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_eng._completion_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_comm._start_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_comm._start_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "engg_kpi_after_rig-off_days",
+    "data_type": "int",
+    "document": "Table: WellMonitoringReport_Latest | Column: engg_kpi_after_rig-off_days | Data Type: int",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "data_error",
+    "data_type": "varchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: data_error | Data Type: varchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "reason_if_kpi_not_met",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: reason_if_kpi_not_met | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "remark_status_area_of_attention_issues_",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: remark_status_area_of_attention_issues_ | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm. | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flow_line_test_pack_completion_doc._submission_date_to_qs_dept.",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: flow_line_test_pack_completion_doc._submission_date_to_qs_dept. | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flow_line_test_pack_completion_progress",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: flow_line_test_pack_completion_progress | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "over_all_progress_percentages",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: over_all_progress_percentages | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ssfd_wells",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: ssfd_wells | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ipm",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: ipm | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "access_road_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: access_road_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "earth_work_60",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: earth_work_60 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "cellar_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: cellar_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "beam_pump_base_esp_pcp_foundation_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: beam_pump_base_esp_pcp_foundation_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "earthing_1",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: earthing_1 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "septic_tank_1",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: septic_tank_1 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "water_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: water_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "waste_water_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: waste_water_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "hdpe_liner_instalat_4",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: hdpe_liner_instalat_4 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_loc._preparation_10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_loc._preparation_10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "site_survey_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: site_survey_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "survey_report_issue_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: survey_report_issue_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "design_sta_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: design_sta_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "design_completed_issue_for_ta2_5_40",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: design_completed_issue_for_ta2_5_40 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "approved_by_15",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: approved_by_15 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "afc_3_30",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: afc_3_30 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_engg._10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_engg._10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "piping_mech_50",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: piping_mech_50 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "elect_30",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: elect_30 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "instr_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: instr_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_material_10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_material_10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "cold_b_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: cold_b_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "sleeper_pre_cast_ins_15",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: sleeper_pre_cast_ins_15 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: cs_pipe_welding_ndt_10_rt_for_op_100_for_60 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "pe_fussion_pull_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: pe_fussion_pull_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "final_hydro_t_3",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: final_hydro_t_3 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_const._10_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_const._10_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "pole_hole_drill_40",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: pole_hole_drill_40 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "pole_erect_40",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: pole_erect_40 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "conductor_string_18",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: conductor_string_18 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "ohl_ti_2",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: ohl_ti_2 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_ohl_progr_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_ohl_progr_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "mechani_60",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: mechani_60 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "electri_15",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: electri_15 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "instrumentat_20",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: instrumentat_20 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_comm_mi_5",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_comm_mi_5 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "overall_comm_progress_100",
+    "data_type": "decimal",
+    "document": "Table: WellMonitoringReport_Latest | Column: overall_comm_progress_100 | Data Type: decimal",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "location_preparation_status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: location_preparation_status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flow_line_const._status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: flow_line_const._status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "flow_line_commi._status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: flow_line_commi._status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "well_year_white_space",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: well_year_white_space | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "reasons_for_year_2018",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: reasons_for_year_2018 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "column7",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: column7 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "digital_wmr_import_remarks",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: digital_wmr_import_remarks | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "project_id",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: project_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "Week_Number",
+    "data_type": "date",
+    "document": "Table: WellMonitoringReport_Latest | Column: Week_Number | Data Type: date",
+    "semantic": {}
+  },
+  {
+    "table": "WellMonitoringReport_Latest",
+    "column": "Cluster",
+    "data_type": "nvarchar",
+    "document": "Table: WellMonitoringReport_Latest | Column: Cluster | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "sl_no",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: sl_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "rig_no",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: rig_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "well_location",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: well_location | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "well_name_after_spud",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: well_name_after_spud | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "pdo_well_id",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: pdo_well_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "well_type",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: well_type | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "northing",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: northing | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "easting",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: easting | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "locationdd",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: locationdd | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flow_linedl",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flow_linedl | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "location_po_no",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: location_po_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "location_po_recvd_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: location_po_recvd_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "location_-_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: location_-_purpose_value | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "last_week_exp.rig_on_location_sap_data",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: last_week_exp.rig_on_location_sap_data | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "latest_exp.rig_on_location_sap_data",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: latest_exp.rig_on_location_sap_data | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "exp.rig_off_location_sap_data",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: exp.rig_off_location_sap_data | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "date_-_material_po_placed",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: date_-_material_po_placed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "date_-_material_available_at_site",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: date_-_material_available_at_site | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "scr_no",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: scr_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "scr_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: scr_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "moc_raised",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: moc_raised | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "moc_approved",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: moc_approved | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "buffer_status",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: buffer_status | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_pegged_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_pegged_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "last_week_cum_progress",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: last_week_cum_progress | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "cum_progress_for_this_week",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: cum_progress_for_this_week | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_start_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_start_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "installation_of_esp_pcp_surface_cable_by_vendors",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: installation_of_esp_pcp_surface_cable_by_vendors | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_finish_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_finish_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flaf_issue_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flaf_issue_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ramz_id",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ramz_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ramz_id_received_date_same_day_as_flaf_issue_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ramz_id_received_date_same_day_as_flaf_issue_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "date_of_site_survey_report_issuance",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: date_of_site_survey_report_issuance | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "well_engineer_to_add_location_name_in_edm",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: well_engineer_to_add_location_name_in_edm | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "pt_to_request_for_esp_preliminary_design_through_ald",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: pt_to_request_for_esp_preliminary_design_through_ald | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_date_pcp_esp_vendor_delivered_the_skid",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_date_pcp_esp_vendor_delivered_the_skid | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_installation_date_by_vendor_of_esp/pcp_skid",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_installation_date_by_vendor_of_esp/pcp_skid | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flow_line_po_no",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flow_line_po_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "f_l_po_recd._date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: f_l_po_recd._date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flowline_-_purpose_value",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flowline_-_purpose_value | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "station_name_no",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: station_name_no | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "physical_tie_in_port_number",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: physical_tie_in_port_number | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "date_of_tie_in_port_readiness",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: date_of_tie_in_port_readiness | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "physical_tie_in_port_available_when_flaf_issued",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: physical_tie_in_port_available_when_flaf_issued | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "engineering_actual_start_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: engineering_actual_start_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "engineering_actual_finish_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: engineering_actual_finish_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "progress",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: progress | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "fl_dia",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: fl_dia | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "fl_length_meter",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: fl_length_meter | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "const._actual_start_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: const._actual_start_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flowline_construction_progress",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flowline_construction_progress | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ohl_length_meter",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ohl_length_meter | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ohl_progress",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ohl_progress | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ohl_completion_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ohl_completion_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "z6_data_submitted_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: z6_data_submitted_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "sap_notification_received_date_z6_2_days_before_eng._completion",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: sap_notification_received_date_z6_2_days_before_eng._completion | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_rig_on_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_rig_on_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_rig_off_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_rig_off_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "wlctf_acceptanceapproval_from_production",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: wlctf_acceptanceapproval_from_production | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_hoist_fbu_rsr_on_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_hoist_fbu_rsr_on_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_hoist_fbu_rsr_off_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_hoist_fbu_rsr_off_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "wellpad_handover-2_from_hoist_fbu_rsr_off_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: wellpad_handover-2_from_hoist_fbu_rsr_off_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "completion_type_rig_fbu_or_rsr_hoist",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: completion_type_rig_fbu_or_rsr_hoist | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_eng._completion_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_eng._completion_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_comm._start_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_comm._start_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "engg_kpi_after_rig-off_days",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: engg_kpi_after_rig-off_days | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "data_error",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: data_error | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "reason_if_kpi_not_met",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: reason_if_kpi_not_met | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "remark_status_area_of_attention_issues_",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: remark_status_area_of_attention_issues_ | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm. | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flow_line_test_pack_completion_doc._submission_date_to_qs_dept.",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flow_line_test_pack_completion_doc._submission_date_to_qs_dept. | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flow_line_test_pack_completion_progress",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flow_line_test_pack_completion_progress | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "over_all_progress_percentages",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: over_all_progress_percentages | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ssfd_wells",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ssfd_wells | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ipm",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ipm | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "access_road_5",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: access_road_5 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "earth_work_60",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: earth_work_60 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "cellar_20",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: cellar_20 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "beam_pump_base_esp_pcp_foundation_5",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: beam_pump_base_esp_pcp_foundation_5 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "earthing_1",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: earthing_1 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "septic_tank_1",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: septic_tank_1 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "water_2",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: water_2 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "waste_water_2",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: waste_water_2 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "hdpe_liner_instalat_4",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: hdpe_liner_instalat_4 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_loc._preparation_10_100",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_loc._preparation_10_100 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "site_survey_5",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: site_survey_5 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "survey_report_issue_5",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: survey_report_issue_5 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "design_sta_5",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: design_sta_5 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "design_completed_issue_for_ta2_5_40",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: design_completed_issue_for_ta2_5_40 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "approved_by_15",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: approved_by_15 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "afc_3_30",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: afc_3_30 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_engg._10_100",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_engg._10_100 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "piping_mech_50",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: piping_mech_50 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "elect_30",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: elect_30 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "instr_20",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: instr_20 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_material_10_100",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_material_10_100 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "cold_b_2",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: cold_b_2 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "sleeper_pre_cast_ins_15",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: sleeper_pre_cast_ins_15 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: cs_pipe_welding_ndt_10_rt_for_op_100_for_60 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "pe_fussion_pull_20",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: pe_fussion_pull_20 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "final_hydro_t_3",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: final_hydro_t_3 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_const._10_100",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_const._10_100 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "pole_hole_drill_40",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: pole_hole_drill_40 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "pole_erect_40",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: pole_erect_40 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "conductor_string_18",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: conductor_string_18 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "ohl_ti_2",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: ohl_ti_2 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_ohl_progr_100",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_ohl_progr_100 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "mechani_60",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: mechani_60 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "electri_15",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: electri_15 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "instrumentat_20",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: instrumentat_20 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_comm_mi_5",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_comm_mi_5 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "overall_comm_progress_100",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: overall_comm_progress_100 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "location_preparation_status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: location_preparation_status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flow_line_const._status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flow_line_const._status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "flow_line_commi._status_in_progress_completed",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: flow_line_commi._status_in_progress_completed | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "well_year_white_space",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: well_year_white_space | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "reasons_for_year_2018",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: reasons_for_year_2018 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "column7",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: column7 | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "digital_wmr_import_remarks",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: digital_wmr_import_remarks | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "project_id",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: project_id | Data Type: nvarchar",
+    "semantic": {}
+  },
+  {
+    "table": "WMR_Full",
+    "column": "Week_Number",
+    "data_type": "nvarchar",
+    "document": "Table: WMR_Full | Column: Week_Number | Data Type: nvarchar",
+    "semantic": {}
+  }
+]
