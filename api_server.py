@@ -14,7 +14,7 @@ Designed for three frontend tabs:
   Tab 3: Knowledge Graph (Neo4j graph visualization)
 
 Start with:  python api_server.py
-Swagger docs: http://localhost:8000/docs
+Swagger docs: http://localhost:8005/docs
 """
 
 import time
@@ -548,8 +548,8 @@ if __name__ == "__main__":
     print("    GET  /predict/portfolio — Portfolio risk summary")
     print("    GET  /predict/model-info — Model health status")
     print()
-    print("  Swagger: http://localhost:8000/docs")
+    print("  Swagger: http://localhost:8005/docs")
     print("=" * 60)
     print()
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8005)

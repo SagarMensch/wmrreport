@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND_URL = "http://localhost:8000";
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8005";
 
 // GET /api/forecast?action=wells | portfolio | well&id=XXXXX
 export async function GET(req: NextRequest) {
