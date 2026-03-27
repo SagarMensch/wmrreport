@@ -3,10 +3,19 @@ __pycache__
 *.pyc
 env/
 venv/
+ml_venv/
 .env
 *.log
 node_modules/
 .next/
 web/.next/
 .DS_Store
+*.tmp
+*.db
+prediction_data/
+data_diagnostic.json
+test_*.txt
+_cols.txt
+columns.csv.tmp
+requirements.tmp.txt
 

@@ -1,9 +1,10 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 'use client';
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useLoginStore } from '@/store/useLoginStore';
+import WebGLGuard from './WebGLGuard';
 
 // ─── Shared Material Palette (matches landing bg warmth) ─────────────────────
 const MAT_IRON = new THREE.MeshStandardMaterial({ color: '#1C1208', roughness: 0.65, metalness: 0.80 });
@@ -456,18 +457,20 @@ function Scene() {
 export default function RefineryScene() {
   return (
     <div className="absolute inset-0 w-full h-full -z-10" style={{ background: '#09050F' }}>
-      <Canvas
-        camera={{ position: [0, 8, 28], fov: 48 }}
-        frameloop="always"
-        shadows={{ type: THREE.PCFSoftShadowMap }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, logarithmicDepthBuffer: true }}
-      >
-        <color attach="background" args={['#09050F']} />
-        {/* Same fog settings as the landing page bg */}
-        <fogExp2 attach="fog" args={['#3A1808', 0.018]} />
-        <Scene />
-      </Canvas>
+      <WebGLGuard>
+        <Canvas
+          camera={{ position: [0, 8, 28], fov: 48 }}
+          frameloop="always"
+          shadows={{ type: THREE.PCFSoftShadowMap }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true, logarithmicDepthBuffer: true }}
+        >
+          <color attach="background" args={['#09050F']} />
+          {/* Same fog settings as the landing page bg */}
+          <fogExp2 attach="fog" args={['#3A1808', 0.018]} />
+          <Scene />
+        </Canvas>
+      </WebGLGuard>
     </div>
   );
 }

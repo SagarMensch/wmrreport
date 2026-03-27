@@ -7,9 +7,12 @@ integrating 2D/3D visualizations and drill-downs.
 """
 
 import operator
+import re
 import logging
 from typing import TypedDict, Annotated, Sequence, Any, Optional
 from dataclasses import asdict
+
+import dspy
 
 from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langgraph.graph import StateGraph, END
@@ -29,6 +32,45 @@ from database.neo4j_client import neo4j_client
 from database.sql_client import sql_client
 
 log = logging.getLogger("bashira.graph_agent")
+
+# ── DSPy Signature for Context Resolution ───────────────────────────────
+
+class ContextResolverSignature(dspy.Signature):
+    """You are a context-resolution assistant for a database query system.
+    
+    Given the conversation history and the user's latest message, determine
+    if the latest message is a vague follow-up that needs context.
+    
+    If the latest message is vague (e.g., "yes give me these details", "show me that",
+    "what about it", "tell me more"), rewrite it as a FULLY SELF-CONTAINED question
+    that preserves all entities, table names, and column references from the conversation.
+    
+    If the latest message is ALREADY a clear, specific question, return it UNCHANGED.
+    
+    RULES:
+    1. NEVER add information that wasn't in the conversation.
+    2. PRESERVE all specific entity names, cluster names, well IDs exactly as mentioned.
+    3. The rewritten question must be answerable by a SQL database query.
+    4. Keep the rewritten question concise and direct.
+    """
+    
+    conversation_history = dspy.InputField(
+        desc="The last few messages in the conversation, formatted as 'Role: content'"
+    )
+    latest_message = dspy.InputField(
+        desc="The user's latest message that may need context resolution"
+    )
+    resolved_question = dspy.OutputField(
+        desc="The fully self-contained question. If the original was already clear, return it unchanged."
+    )
+
+
+# Vague follow-up patterns that trigger rewriting
+_VAGUE_PATTERNS = re.compile(
+    r'\b(yes|yeah|ok|okay|sure|these|this|that|those|it|them|details|more|above|same|previous|show me|give me|tell me)\b',
+    re.IGNORECASE
+)
+
 
 class AgentState(TypedDict):
     """The state passed between graph nodes."""
@@ -62,6 +104,7 @@ class AgentState(TypedDict):
     chart_config: dict
     requires_followup: bool
     followup_prompt: str
+    response_type: str
 
 
 class BashiraGraphAgent:
@@ -77,23 +120,40 @@ class BashiraGraphAgent:
         self.validator_agent = ValidatorAgent(self.sql_agent)
         self.chart_agent = ChartAgent()
         
+        # Context resolver (lightweight DSPy call)
+        self._context_resolver = dspy.Predict(ContextResolverSignature)
+        
         # Build the Graph
         self.workflow = StateGraph(AgentState)
         
         # Add Nodes
+        self.workflow.add_node("resolve_context", self.resolve_context)
         self.workflow.add_node("extract_intent", self.extract_intent)
         self.workflow.add_node("retrieve_schema", self.retrieve_schema)
         self.workflow.add_node("generate_sql", self.generate_sql)
+        self.workflow.add_node("clarification_node", self.clarification_node)
         self.workflow.add_node("execute_sql", self.execute_sql)
         self.workflow.add_node("analyze_data", self.analyze_data)
         self.workflow.add_node("conversational_followup", self.conversational_followup)
         self.workflow.add_node("generate_chart", self.generate_chart)
         
-        # Add Edges
-        self.workflow.set_entry_point("extract_intent")
+        # Add Edges — resolve_context runs FIRST
+        self.workflow.set_entry_point("resolve_context")
+        self.workflow.add_edge("resolve_context", "extract_intent")
         self.workflow.add_edge("extract_intent", "retrieve_schema")
         self.workflow.add_edge("retrieve_schema", "generate_sql")
-        self.workflow.add_edge("generate_sql", "execute_sql")
+        
+        # Conditional Edge after SQL Generation (Confidence Gate)
+        self.workflow.add_conditional_edges(
+            "generate_sql",
+            self.route_after_sql,
+            {
+                "execute": "execute_sql",
+                "clarify": "clarification_node",
+                "error": END
+            }
+        )
+        self.workflow.add_edge("clarification_node", END)
         self.workflow.add_edge("execute_sql", "analyze_data")
         
         # Conditional Edge after Data Analysis
@@ -115,6 +175,94 @@ class BashiraGraphAgent:
         return self.workflow.compile(checkpointer=checkpointer)
 
     # ── Nodes ────────────────────────────────────────────────────────────
+
+    def resolve_context(self, state: AgentState) -> dict:
+        """Rewrite vague follow-ups into self-contained questions.
+        
+        SAFE DESIGN:
+        - Only activates for SHORT messages (< 12 words) that contain vague references
+        - Specific questions pass through UNTOUCHED
+        - If rewrite fails, falls back to original question
+        """
+        messages = state["messages"]
+        latest = messages[-1].content.strip()
+        
+        # Safety check 1: Only 1 message in history → nothing to resolve, skip
+        if len(messages) <= 1:
+            log.info("--- CONTEXT: Single message, skipping resolution ---")
+            return {"reasoning_steps": [{"step": "CONTEXT", "status": "success", "detail": "Direct question — no history needed."}]}
+        
+        # Safety check 2: Long specific question → already clear, skip
+        word_count = len(latest.split())
+        if word_count > 12:
+            log.info(f"--- CONTEXT: Specific question ({word_count} words), passing through ---")
+            return {"reasoning_steps": [{"step": "CONTEXT", "status": "success", "detail": f"Clear question ({word_count} words) — no rewrite needed."}]}
+        
+        # Safety check 3: Does it contain vague references?
+        if not _VAGUE_PATTERNS.search(latest):
+            log.info(f"--- CONTEXT: No vague patterns detected, passing through ---")
+            return {"reasoning_steps": [{"step": "CONTEXT", "status": "success", "detail": "No vague references — no rewrite needed."}]}
+        
+        # Build conversation summary from last 10 messages
+        log.info(f"--- CONTEXT: Vague follow-up detected, resolving... ---")
+        history_lines = []
+        for msg in messages[-10:]:
+            role = "User" if isinstance(msg, HumanMessage) else "Assistant"
+            # Truncate long AI responses to save tokens
+            content = msg.content[:300] if role == "Assistant" else msg.content
+            history_lines.append(f"{role}: {content}")
+        
+        history_text = "\n".join(history_lines)
+        
+        try:
+            result = self._context_resolver(
+                conversation_history=history_text,
+                latest_message=latest
+            )
+            resolved = result.resolved_question.strip()
+            
+            # Safety check 4: If resolved question is empty or identical, keep original
+            if not resolved or resolved.lower() == latest.lower():
+                log.info(f"   → No rewrite needed")
+                return {"reasoning_steps": [{"step": "CONTEXT", "status": "success", "detail": "Question was already clear."}]}
+            
+            log.info(f"   → Resolved: '{latest}' → '{resolved}'")
+            
+            # Replace the last message with the resolved version
+            return {
+                "messages": [HumanMessage(content=resolved)],
+                "reasoning_steps": [{
+                    "step": "CONTEXT",
+                    "status": "success",
+                    "detail": f"Resolved vague follow-up: '{latest}' → '{resolved}'"
+                }]
+            }
+        except Exception as e:
+            # FALLBACK: If rewrite fails, use original question — zero impact on accuracy
+            log.warning(f"   ! Context resolution failed: {e}. Using original question.")
+            return {"reasoning_steps": [{"step": "CONTEXT", "status": "warning", "detail": f"Resolution failed, using original: {e}"}]}
+
+    def route_after_sql(self, state: AgentState) -> str:
+        """Route to execution or clarification based on confidence."""
+        if state.get("sql_confidence", 0) < 0.95:
+            return "clarify"
+        return "execute"
+
+    def clarification_node(self, state: AgentState) -> dict:
+        """Handle low-confidence queries conversationally."""
+        log.info("--- GRAPH STEP: CLARIFICATION ---")
+        reasoning = state.get("sql_reasoning", "I'm missing a few details needed to generate this chart.")
+        clarification_msg = f"I'm not fully confident I know what metrics to pull for this.\n\n*(Thought process: {reasoning})*\n\nCould you clarify your request?"
+        
+        return {
+            "response_type": "clarification",
+            "messages": [AIMessage(content=clarification_msg)],
+            "reasoning_steps": [{
+                "step": "CLARIFICATION",
+                "status": "warning",
+                "detail": f"Confidence was {state.get('sql_confidence', 0):.2f}. Asked user for clarification."
+            }]
+        }
 
     def extract_intent(self, state: AgentState) -> dict:
         """Extract entities and infer column hits."""
@@ -185,12 +333,88 @@ class BashiraGraphAgent:
         """Generate Read-Only SQL using DSPy."""
         log.info("--- GRAPH STEP: GENERATE SQL ---")
         question = state["messages"][-1].content
+        
+        # Always include ALL critical columns in schema context - VMB + AppMasterDB
+        critical_columns = """
+
+CRITICAL COLUMNS - ALWAYS USE THESE (do not say INSUFFICIENT_SCHEMA):
+=============================================================================
+TABLE: WellMonitoringReport
+  - Column 'well_name_after_spud' (nvarchar): Official well name after spud
+  - Column 'pdo_well_id' (nvarchar): Unique PDO well ID - use for counting wells
+  - Column 'rig_no' (nvarchar): Drilling rig identifier (e.g., NL0010, NF0010)
+  - Column 'well_location' (nvarchar): Geographic location code
+  - Column 'Cluster' (nvarchar): Operational cluster - 'Nimr' or 'Marmul'
+  - Column 'well_type' (nvarchar): Well type (ESP, OP, WI, PCP)
+  - Column 'buffer_status' (nvarchar): CRITICAL WELL STATUS - values: 'drilled', 'ROL', 'Buffer1', 'Buffer2', 'Error', NULL
+    * 'ROL' = Rig On Location - well is actively being drilled (HIGH RISK/CRITICAL)
+    * 'drilled' = completed
+    * 'Buffer1', 'Buffer2' = waiting in queue
+    * When user asks "CRITICAL risk wells" -> use: buffer_status = 'ROL'
+  - Column 'ohl_progress' (decimal): OHL completion progress (0-100)
+  - Column 'over_all_progress_percentages' (decimal): Overall progress 0-1 scale, multiply by 100 for %
+  - Column 'moc_raised' (nvarchar): MOC raised status - only use when user asks about MOC explicitly!
+  - Column 'moc_approved' (nvarchar): MOC approved status - only use when user asks about MOC explicitly!
+  
+  # VMB Date Columns (for KPI calculations):
+  - Column 'flaf_issue_date' (date): Date FLAF was issued (NOT IFC!)
+  - Column 'actual_rig_on_date' (date): Date rig arrived (Spud date) - USE for spud-related queries
+  - Column 'actual_rig_off_date' (date): Date rig departed
+  - Column 'actual_start_date' (date): Generic work start date (different from rig_on_date!)
+  - Column '[actual_comm._start_date]' (date): IFC date - Initial For Construction / commissioning START
+  - Column 'actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date' (date): Commissioning finish
+  - Column 'actual_eng_completion_date' (date): Engineering completion date
+  - Column 'wellpad_handover_2_from_hoist_fbu_rsr_off_date' (date): Wellpad handover date
+  - Column 'flowline_construction_progress' (decimal): Flowline completion - 0-1 SCALE (0.5 = 50%, NOT 50!)
+  - Column '[latest_exp.rig_on_location_sap_data] (date): TENTATIVE rig-on date from SAP (use brackets!)
+  - Column 'location_pegged_date' (date): Date location was pegged
+
+  # CRITICAL DATE LOGIC:
+  - Spud = actual_rig_on_date (rig arrival)
+  - IFC = [actual_comm._start_date] (commissioning start - NOT flaf_issue_date!)
+
+TABLE: Job_Progress_Report_GB
+  - Column '[Well ID]' (nvarchar): Well ID with brackets! Join to WellMonitoringReport.pdo_well_id
+  - Column '[Well Name / Project Name]' (nvarchar): Well or project name
+  - Column '[Week-1 Plan %]' (decimal): Week 1 planned progress
+  - Column '[Week-1 Actual %]' (decimal): Week 1 actual progress
+  - Column '[Week-2 Plan %]', '[Week-2 Actual %]'
+  - Column '[Week-3 Plan %]', '[Week-3 Actual %]'
+  - Column '[Week-4 Plan %]', '[Week-4 Actual %]'
+  - Column '[Week-5 Plan %]', '[Week-5 Actual %]'
+  - Column '[Current Month Plan %]' (decimal): Total month planned
+  - Column '[Current Month Actual %]' (decimal): Total month actual
+  - Column '[Purpose Value]' (decimal): Monetary purpose value
+
+TABLE: Revenue
+  - Column 'Well_ID' (nvarchar): Join to WellMonitoringReport.pdo_well_id
+  - Column 'rigcode' (nvarchar): RIG CODE - use for NL0010, NF0010 filtering (NOT well_location!)
+  - Column 'planned_purpose_value' (nvarchar): Planned value - CAST to DECIMAL before SUM!
+  - Column 'actual_purpose_value' (nvarchar): Actual value - CAST to DECIMAL before SUM!
+
+TABLE: PH_Productivity
+  - Column '[PH Name]' (nvarchar): QHSE Supervisor name
+  - Column '[Avg_Productivity_Pct]' (decimal): Productivity = (QtyPerHour/Norms)*100
+
+TABLE: vw_JOB_COST
+  - Column '[Well ID]' (nvarchar): Well identifier
+  - Column '[Project]' (nvarchar): Rig code from Revenue.rigcode
+  - Column '[crew code]' (nvarchar): Crew identifier
+=============================================================================
+"""
+        
+        schema_context = state.get("schema_context", "")
+        # Always add critical columns (append to ensure they're available)
+        schema_context = schema_context + critical_columns
+        
         try:
             sql_result = self.sql_agent(
-                neo4j_schema_context=state.get("schema_context", ""),
+                neo4j_schema_context=schema_context,
                 user_question=question,
                 query_type=state["intent_data"].get("query_type", "general"),
             )
+            
+            log.info(f"   Generated SQL: {sql_result.sql_query[:200]}")
             
             return {
                 "current_sql": sql_result.sql_query,
@@ -367,6 +591,7 @@ class BashiraGraphAgent:
         message = f"{state['followup_prompt']}\\n\\n{list_str}"
         
         return {
+            "response_type": "text",
             "messages": [AIMessage(content=message)],
             "reasoning_steps": [{
                 "step": "FOLLOWUP",
@@ -395,6 +620,7 @@ class BashiraGraphAgent:
             # The chart agent will figure this out based on row_count and columns.
             
             return {
+                "response_type": "chart",
                 "chart_config": asdict(chart_config),
                 "reasoning_steps": [{
                     "step": "CHART",

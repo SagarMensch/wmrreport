@@ -1,0 +1,443 @@
+{
+  "views": {
+    "Job_Progress_Report_GB": {
+      "name": "Job_Progress_Report_GB",
+      "database": "AppMasterDB",
+      "purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+      "source_tables": [
+        "dbo.WMR",
+        "dbo.WMR_TaskPlan_csv_imported",
+        "dbo.Job_Progress_PlanSnapshot",
+        "dbo.task_daily",
+        "dbo.ProjectIDs",
+        "dbo.data_table_sched_jsons",
+        "dbo.WBS_Master_Tracker_"
+      ],
+      "key_columns": {
+        "Well ID": {
+          "type": "nvarchar",
+          "derived_from": "WMR_TaskPlan_csv_imported.New_Well_ID",
+          "logic": "LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), tp.New_Well_ID)))"
+        },
+        "Well Name / Project Name": {
+          "type": "nvarchar",
+          "derived_from": "WMR.well_name_after_spud",
+          "logic": "MAX(well_name_after_spud) GROUP BY pdo_well_id"
+        },
+        "Category": {
+          "type": "nvarchar",
+          "derived_from": "ProjectIDs.column2",
+          "logic": "JOIN on project_id"
+        },
+        "PO No": {
+          "type": "nvarchar",
+          "logic": "IF category contains flowline/cwf/rwf THEN flow_line_po_no ELSE location_po_no"
+        },
+        "WBS No": {
+          "type": "nvarchar",
+          "logic": "OUTER APPLY WBS_Master_Tracker_ with category matching"
+        },
+        "Cum-Prior Month Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "prior actual fraction * 100"
+        },
+        "Week-1 Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "W1_Plan_frac * 100, NULL if no plan"
+        },
+        "Week-1 Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "W1_Act_frac * 100"
+        },
+        "Week-2 Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "W2_Plan_frac * 100"
+        },
+        "Week-2 Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "W2_Act_frac * 100"
+        },
+        "Week-3 Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "W3_Plan_frac * 100"
+        },
+        "Week-3 Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "W3_Act_frac * 100"
+        },
+        "Week-4 Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "W4_Plan_frac * 100"
+        },
+        "Week-4 Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "W4_Act_frac * 100"
+        },
+        "Week-5 Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "W5_Plan_frac * 100"
+        },
+        "Week-5 Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "W5_Act_frac * 100"
+        },
+        "Current Month Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "SUM(W1-W5_Plan_frac) * 100, capped at 1.0"
+        },
+        "Current Month Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "SUM(W1-W5_Act_frac) * 100, capped at 1.0"
+        },
+        "Cum-Current Month Plan %": {
+          "type": "decimal(18,2)",
+          "logic": "CumCurrentMonthPlanFrac * 100"
+        },
+        "Cum-Current Month Actual %": {
+          "type": "decimal(18,2)",
+          "logic": "SUM(CumPrior + W1-W5) * 100, capped at 1.0"
+        },
+        "Purpose Value": {
+          "type": "decimal(28,2)",
+          "logic": "SUM(schedule purpose_value) from SchedAgg"
+        },
+        "Cum-Prior Month Plan": {
+          "type": "decimal(28,2)",
+          "logic": "PurposeValue * Cum_Prior_Plan_frac"
+        },
+        "Cum-Prior Month Actual": {
+          "type": "decimal(28,2)",
+          "logic": "PurposeValue * Cum_Prior_Act_frac"
+        },
+        "Current month Plan": {
+          "type": "decimal(28,2)",
+          "logic": "PurposeValue * CurrentMonthPlanFrac"
+        },
+        "Current Month Actual": {
+          "type": "decimal(28,2)",
+          "logic": "PurposeValue * SUM(W1-W5_Act_frac)"
+        },
+        "Target End": {
+          "type": "date",
+          "logic": "COALESCE(snapshot, max from Base)"
+        }
+      },
+      "business_logic": {
+        "weightage_normalization": "If contains '%', remove and divide by 100. If > 1.0, divide by 100. If <= 1.0, use as-is",
+        "progress_normalization": "Same as weightage - normalize to 0-1 fraction",
+        "week_buckets": "W1=day1-7, W2=day8-14, W3=day15-21, W4=day22-28, W5=day29+",
+        "actual_calculation_part1": "If actual_start AND actual_end exist AND valid: daily_frac = (progress_frac * weight_frac) / days",
+        "actual_calculation_part2": "Fallback to task_daily when no valid date range: qty/qty_total * weight_frac",
+        "plan_source": "From Job_Progress_PlanSnapshot table - weekly fractions",
+        "cluster_derivation": "Source='NC-WD'\u2192nimr, Source='MC-WD'\u2192marmul from data_table_sched_jsons",
+        "project_code_parsing": "Extract from filename: SCHED-XXXX-RIG \u2192 XXXX"
+      },
+      "joins": {
+        "ProjectIDs": "pid.ID = a.project_id",
+        "WMR": "wmr1.WellID = a.Well_ID",
+        "WBS_Master_Tracker_": "WBS_Code where Category matches column2",
+        "SchedAgg": "Well_ID_norm, Cluster, ProjCodeClean matching"
+      },
+      "sql_patterns": {
+        "weight_frac": "CASE WHEN weightage LIKE '%' THEN REPLACE/100 WHEN weightage > 1 THEN weightage/100 ELSE weightage END",
+        "week_bucket": "CASE WHEN day BETWEEN 1 AND 7 THEN 'W1' WHEN 8-14 THEN 'W2' etc",
+        "cap_at_1": "CASE WHEN sum > 1 THEN 1.0 ELSE sum END",
+        "well_id_extract": "LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), New_Well_ID)))"
+      }
+    },
+    "vw_JobProgress": {
+      "name": "vw_JobProgress",
+      "database": "AppMasterDB",
+      "purpose": "Alternative job progress - simpler, monthly focus with category from ProjectIDs",
+      "source_tables": [
+        "dbo.ActivityTaskPlan",
+        "dbo.ProjectIDs",
+        "dbo.WMR"
+      ],
+      "key_columns": {
+        "Category": {
+          "type": "nvarchar",
+          "logic": "ProjectIDs.column2"
+        },
+        "Well ID / Project ID": {
+          "type": "int",
+          "logic": "Extract from code after '-'"
+        },
+        "Week-1 Plan %": {
+          "type": "decimal(10,2)",
+          "logic": "SUM(weightage) WHERE target_start day 1-7"
+        },
+        "Week-1 Actual %": {
+          "type": "decimal(10,2)",
+          "logic": "SUM(weightage * progress_ratio) WHERE actual_start day 1-7"
+        }
+      },
+      "business_logic": {
+        "well_id_from_code": "RIGHT(code, LEN(code) - CHARINDEX('-', code))",
+        "week_definition": "Week1=1-7, Week2=8-14, Week3=15-21, Week4=22-28, Week5=29+",
+        "progress_ratio": "1 or 100\u21921.0, 0.10\u21920.10, 10\u21920.10"
+      }
+    },
+    "vw_JOB_COST": {
+      "name": "vw_JOB_COST",
+      "database": "AppMasterDB",
+      "purpose": "Job cost - planned vs actual resources (employees, equipment)",
+      "source_tables": [
+        "dbo.task_daily",
+        "dbo.Revenue",
+        "dbo.crews",
+        "dbo.Employee",
+        "dbo.company_employees",
+        "dbo.EmployeeType",
+        "dbo.Equipment",
+        "dbo.EquipmentType",
+        "dbo.ActivityMasterMapping"
+      ],
+      "key_columns": {
+        "Project": {
+          "type": "nvarchar",
+          "logic": "Revenue.rigcode - the rig identifier"
+        },
+        "Well ID": {
+          "type": "nvarchar",
+          "logic": "task_daily.well_id"
+        },
+        "Activity ID": {
+          "type": "nvarchar",
+          "logic": "LEFT(task_code, 8) - first 8 characters"
+        },
+        "crew code": {
+          "type": "nvarchar",
+          "logic": "task_daily.crew_code \u2192 crews.Code"
+        },
+        "Plan Employee Name": {
+          "type": "nvarchar",
+          "logic": "FROM crews.Employees JSON \u2192 Employee table"
+        },
+        "Actual Employee Name": {
+          "type": "nvarchar",
+          "logic": "FROM task_daily.employee_ids_text JSON \u2192 Employee"
+        },
+        "Effective Work Hours": {
+          "type": "decimal",
+          "logic": "JSON_VALUE(daily_data, '$.actual_hours')"
+        }
+      },
+      "business_logic": {
+        "activity_extraction": "LEFT(LTRIM(RTRIM(task_code)), 8)",
+        "crew_json_explode": "OPENJSON(c.Employees) to get employee IDs",
+        "resource_pairing": "Full outer join Planned vs Actual on: well_id + ActionOn + ActivityID + resource_type + PGCode + rn",
+        "project_prefix": "M\u2192MML, N\u2192NIM from first letter of rigcode"
+      },
+      "joins": {
+        "Revenue": "task_daily.well_id = Revenue.well_id AND Revenue.ActivityID = task_daily.ActivityID",
+        "crews": "crews.Code = task_daily.crew_code",
+        "Employee": "Employee.id = company_employees.id"
+      }
+    },
+    "PH_Productivity": {
+      "name": "PH_Productivity",
+      "database": "AppMasterDB",
+      "purpose": "Productivity tracking - QHSE Supervisor and Crew performance",
+      "source_tables": [
+        "dbo.task_daily",
+        "dbo.Employee",
+        "dbo.ActivityCodesNorms",
+        "dbo.CrewType"
+      ],
+      "key_columns": {
+        "Year": {
+          "type": "int",
+          "logic": "YEAR from ActionOn"
+        },
+        "Month": {
+          "type": "int",
+          "logic": "MONTH from ActionOn"
+        },
+        "PA Name": {
+          "type": "nvarchar",
+          "logic": "LEFT(task_assignee, CHARINDEX('.', task_assignee)-1)"
+        },
+        "PH Name": {
+          "type": "nvarchar",
+          "logic": "Employee.Email = supervisor_email \u2192 Employee.Name"
+        },
+        "PH Emp ID": {
+          "type": "nvarchar",
+          "logic": "Employee.UId"
+        },
+        "Crew Name": {
+          "type": "nvarchar",
+          "logic": "CrewType.Description WHERE Code = REPLACE(crew_type, '-', '')"
+        },
+        "Avg_Productivity_Pct": {
+          "type": "decimal",
+          "logic": "(SUM(data_qty)/SUM(data_hours)) / Norms * 100"
+        },
+        "W1_PI_T_Wise": {
+          "type": "decimal",
+          "logic": "Week 1 Productivity Index T-Wise"
+        },
+        "W1_PI_CMR": {
+          "type": "decimal",
+          "logic": "Week 1 Productivity Index CMR"
+        }
+      },
+      "business_logic": {
+        "productivity_formula": "Productivity% = (QtyPerHour / Norms) * 100",
+        "ph_lookup": "supervisor_email \u2192 Employee.Email \u2192 Employee.Name",
+        "pa_lookup": "task_assignee email before @",
+        "crew_lookup": "crew_type compared with CrewType.Code"
+      }
+    },
+    "WellMonitoringReport": {
+      "name": "WellMonitoringReport",
+      "database": "AppMasterDB",
+      "purpose": "Complete well monitoring - MOC, dates, progress, SAP data",
+      "source_tables": [
+        "dbo.WMR",
+        "dbo.WMR_TaskPlan_csv_imported",
+        "dbo.DesignTrackerCSVImport",
+        "dbo.SAP_DRILLING_SEQUENCE",
+        "dbo.Revenue",
+        "dbo.crews"
+      ],
+      "key_columns": {
+        "pdo_well_id": {
+          "type": "nvarchar",
+          "logic": "PRIMARY KEY - unique well identifier"
+        },
+        "Cluster": {
+          "type": "nvarchar",
+          "logic": "nimr or marmul"
+        },
+        "rig_no": {
+          "type": "nvarchar",
+          "logic": "Drilling rig → crews.Code"
+        },
+        "moc_raised": {
+          "type": "nvarchar",
+          "logic": "YES or Yes"
+        },
+        "moc_approved": {
+          "type": "nvarchar",
+          "logic": "YES or Yes"
+        },
+        "over_all_progress_percentages": {
+          "type": "decimal",
+          "logic": "0-1 scale, multiply by 100 for %"
+        }
+      },
+      "vmb_logic_columns": {
+        "date_of_tie_in_port_readiness": {
+          "type": "date",
+          "logic": "Date tie-in port became ready",
+          "kpi": "Project Tie in port readiness",
+          "formula": "actual_rig_on_date - date_of_tie_in_port_readiness",
+          "target": ">140 days = green, <140 days = red"
+        },
+        "location_pegged_date": {
+          "type": "date",
+          "logic": "Date location was pegged",
+          "kpi": "Location Pegged to Spud",
+          "formula": "actual_rig_on_date - location_pegged_date",
+          "target": ">140 days = green, <140 days = red"
+        },
+        "scr_date": {
+          "type": "date",
+          "logic": "Site Change Request date",
+          "kpi": "Stable Rig Sequence",
+          "formula": "actual_rig_on_date - scr_date",
+          "target": ">90 days = green, <90 days = red"
+        },
+        "flaf_issue_date": {
+          "type": "date",
+          "logic": "Date FLAF was issued",
+          "kpi": "FLAF to Spud",
+          "formula": "actual_rig_on_date - flaf_issue_date",
+          "target": ">90 days = green, <90 days = red"
+        },
+        "date_of_site_survey_report_issuance": {
+          "type": "date",
+          "logic": "Date site survey report was issued",
+          "kpi": "Survey Report from FLAF",
+          "formula": "date_of_site_survey_report_issuance - flaf_issue_date",
+          "target": "<15 days = green, >15 days = red"
+        },
+        "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date": {
+          "type": "date",
+          "logic": "Commissioning finish date",
+          "kpi": "Overall Commissioning Duration",
+          "formula": "ABS(actual_rig_off_date - actual_comm_finish_date)",
+          "target": "<5 days (Rig/FBU/RSR), <15 days (Hoist)"
+        }
+      },
+      "business_logic": {
+        "target_week": "Latest week minus 1 (second most recent)",
+        "taskplan_parsing": "fn_WMR_ParseProgress, fn_WMR_ParseDate",
+        "moc_values": "Use IN ('YES', 'Yes', 'yes') - NOT 'Raised'"
+      }
+    },
+        "Cluster": {
+          "type": "nvarchar",
+          "logic": "nimr or marmul"
+        },
+        "rig_no": {
+          "type": "nvarchar",
+          "logic": "Drilling rig \u2192 crews.Code"
+        },
+        "moc_raised": {
+          "type": "nvarchar",
+          "logic": "YES or Yes"
+        },
+        "moc_approved": {
+          "type": "nvarchar",
+          "logic": "YES or Yes"
+        },
+        "over_all_progress_percentages": {
+          "type": "decimal",
+          "logic": "0-1 scale, multiply by 100 for %"
+        }
+      },
+      "business_logic": {
+        "target_week": "Latest week minus 1 (second most recent)",
+        "taskplan_parsing": "fn_WMR_ParseProgress, fn_WMR_ParseDate",
+        "moc_values": "Use IN ('YES', 'Yes', 'yes') - NOT 'Raised'"
+      }
+    },
+    "Daily_Plan_Report": {
+      "name": "Daily_Plan_Report",
+      "database": "AppMasterDB",
+      "purpose": "Daily work planning - well, PA, PH, PO, activities",
+      "key_columns": {
+        "Well ID": "Well identifier",
+        "PA Name": "Permit Applicant name",
+        "PH Name": "QHSE Supervisor name",
+        "PO No": "Purchase Order",
+        "Activities": "Activity Description (fixed from original ACTIVITIES bug)"
+      }
+    }
+  },
+  "sql_patterns": {
+    "week_bucket_plan": "CASE WHEN DATEPART(DAY, target_start) BETWEEN 1 AND 7 THEN 'W1' WHEN 8-14 THEN 'W2' WHEN 15-21 THEN 'W3' WHEN 22-28 THEN 'W4' ELSE 'W5' END",
+    "week_bucket_actual": "Same as plan but using actual_start",
+    "weightage_normalize": "CASE WHEN weightage LIKE '%%' THEN REPLACE(weightage,'%','')/100.0 WHEN weightage > 1.0 THEN weightage/100.0 ELSE weightage END",
+    "cap_at_one": "CASE WHEN SUM > 1.0 THEN 1.0 ELSE SUM END",
+    "well_id_extract": "TRY_CONVERT(int, LTRIM(RTRIM(RIGHT(code, LEN(code) - CHARINDEX('-', code)))))",
+    "rigcode_filter": "Revenue.rigcode IN ('NL0010','NF0010','ML0010','MS0010','MF0010','MCOF10','MCWF10','MROP10','MRWF10','NCOF10','NNSW10','NS0010')",
+    "moc_filter": "moc_raised IN ('YES','Yes','yes') AND moc_approved NOT IN ('YES','Yes','yes')"
+  },
+  "semantic_mappings": {
+    "progress": "over_all_progress_percentages or Week-1 Actual %",
+    "plan": "Week-1 Plan % or Current Month Plan %",
+    "actual": "Week-1 Actual % or Current Month Actual %",
+    "well": "Well ID or pdo_well_id",
+    "rig": "rig_no or Revenue.rigcode",
+    "cluster": "Cluster = 'Nimr' or 'Marmul'",
+    "moc": "moc_raised, moc_approved",
+    "productivity": "Avg_Productivity_Pct",
+    "category": "ProjectIDs.column2 or Category",
+    "purpose_value": "Purpose Value or actual_purpose_value",
+    "week": "Week-1, Week-2, Week-3, Week-4, Week-5"
+  }
+}

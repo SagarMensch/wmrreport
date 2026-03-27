@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PREDICT_INTERNAL_URL = "http://localhost:8001";
+const PREDICT_INTERNAL_URL = "http://localhost:8000";
 
 export async function POST(req: NextRequest) {
   try {

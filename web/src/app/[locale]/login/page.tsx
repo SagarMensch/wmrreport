@@ -5,10 +5,9 @@ import { useRouter } from '@/i18n/routing';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLoginStore } from '@/store/useLoginStore';
 
-// ── THE INSTITUTIONAL VAULT PORTAL ──────────────────────────────────────────
-// A multi-million dollar terminal does not use "rusty pipe" 3D graphics.
-// It uses absolute, severe containment. Pure black workspace. Flawless symmetry.
-// A singular, undeniable entry point.
+// ── BLACKSTONE PREMIUM AUTHENTICATION TERMINAL ─────────────────────────────
+// Solid, institutional, premium. Clean navy background with subtle texture.
+// White cards with soft shadows. Clear typography hierarchy.
 
 const VALID_USER = 'admin';
 const VALID_PASS = 'admin123';
@@ -29,11 +28,9 @@ export default function LoginPage() {
     setIsAuthenticating(true);
     setFormState('submit');
 
-    // Brutally efficient loading state (1.5s visual hold for tension/power)
     setTimeout(() => {
       if (email === VALID_USER && password === VALID_PASS) {
         setFormState('success');
-        // Flash green verification sequence then transport to Dashboard
         setTimeout(() => router.push('/dashboard'), 800);
       } else {
         setIsAuthenticating(false);
@@ -51,120 +48,140 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative w-full h-screen bg-[#000000] overflow-hidden flex flex-col items-center justify-center selection:bg-[#8AB4F8] selection:text-[#000000]">
-      
-      {/* ── IMMENSE BACKGROUND DEPTH ── */}
-      {/* Absolute monolithic darkness with a single radial gradient focusing the user */}
-      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.03)_0%,rgba(0,0,0,1)_80%)]" />
+    <div 
+      className="relative w-full h-screen overflow-hidden flex flex-col items-center justify-center selection:bg-[#E87722] selection:text-[#FFFFFF]"
+      style={{ 
+        background: 'linear-gradient(180deg, #0A1628 0%, #0D1B2A 100%)',
+        fontFamily: '"Figtree", sans-serif'
+      }}
+    >
+      {/* ── Subtle Texture ── */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
 
-      {/* ── THE SECURITY TERMINAL ── */}
+      {/* ── Radial Focus ── */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(232,119,34,0.05)_0%,transparent_50%)]" />
+
+      {/* ── THE SECURITY TERMINAL CARD ── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="z-10 flex flex-col items-center w-full max-w-[420px] px-8"
+        className="z-10 flex flex-col items-center w-full max-w-[440px] px-8"
       >
-        {/* Core Identity Mark (Logo & Signature) */}
-        <div className="flex flex-col items-center gap-8 mb-16">
-          <img 
-            src="https://i.postimg.cc/yY7PfFWk/1631309767639-1-removebg-preview.png" 
-            alt="Al Tasnim Group"
-            className="h-20 md:h-28 w-auto opacity-100 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-          />
-          <span 
-            className="text-[#F5F5F5] text-4xl font-light"
-            style={{ fontFamily: '"Noto Naskh Arabic", sans-serif', letterSpacing: '0.05em' }}
-          >
-            التحقق من الوصول
-          </span>
-        </div>
-
-        {/* The Exacting Data Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-10">
-          
-          {/* Identity Vector */}
-          <div className="flex flex-col gap-2 relative group">
-            <label
-              className="text-[9px] uppercase tracking-[0.3em] text-[#F5F5F5]/40"
-              style={{ fontFamily: '"Figtree", sans-serif', fontWeight: 600 }}
-            >
-              System Identity
-            </label>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onFocus={() => setFormState(email ? 'email-typing' : 'email-focused')}
-              onKeyDown={() => setFormState('email-typing')}
-              onBlur={handleBlur}
-              placeholder="admin"
-              disabled={isAuthenticating}
-              className="w-full bg-transparent outline-none border-b border-[#333333] py-2 text-[#F5F5F5] placeholder:text-[#F5F5F5]/20 focus:border-[#8AB4F8] transition-colors text-sm disabled:opacity-50"
-              style={{ fontFamily: '"Figtree", sans-serif' }}
+        {/* Login Card */}
+        <div 
+          className="w-full bg-[#FFFFFF] rounded-xl p-10"
+          style={{ boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)' }}
+        >
+          {/* Logo & Title */}
+          <div className="flex flex-col items-center gap-6 mb-10">
+            <img 
+              src="https://i.postimg.cc/yY7PfFWk/1631309767639-1-removebg-preview.png" 
+              alt="Al Tasnim Group"
+              className="h-16 md:h-20 w-auto object-contain"
+              style={{ filter: 'brightness(1.1)' }}
             />
-          </div>
-
-          {/* Cryptographic Key */}
-          <div className="flex flex-col gap-2 relative group">
-            <label
-              className="text-[9px] uppercase tracking-[0.3em] text-[#F5F5F5]/40"
-              style={{ fontFamily: '"Figtree", sans-serif', fontWeight: 600 }}
-            >
-              Cryptographic Key
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onFocus={() => setFormState(password ? 'password-typing' : 'password-focused')}
-              onKeyDown={() => setFormState('password-typing')}
-              onBlur={handleBlur}
-              placeholder="••••••••"
-              disabled={isAuthenticating}
-              className="w-full bg-transparent outline-none border-b border-[#333333] py-2 text-[#8AB4F8] placeholder:text-[#F5F5F5]/20 focus:border-[#8AB4F8] transition-colors text-lg tracking-[0.3em] font-mono disabled:opacity-50"
-            />
-          </div>
-
-          {/* Error State */}
-          <AnimatePresence mode="wait">
-            {error && (
-              <motion.div
-                initial={{ opacity: 0, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="text-[#E02424] text-[9px] uppercase tracking-[0.2em] font-medium"
-                style={{ fontFamily: '"Figtree", sans-serif' }}
+            <div className="text-center">
+              <span 
+                className="text-[#1A1A1A] text-3xl font-normal block"
+                style={{ fontFamily: '"Noto Naskh Arabic", serif', letterSpacing: '0.05em' }}
               >
-                {error}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                التحقق من الوصول
+              </span>
+              <span className="text-[10px] text-[#6B6B6B] uppercase tracking-[0.2em] font-medium mt-2 block">
+                Secure Authentication
+              </span>
+            </div>
+          </div>
 
-          {/* Submission Execution */}
-          <motion.div className="mt-8 overflow-hidden relative" whileTap={{ scale: 0.98 }}>
-            <button
-              type="submit"
-              disabled={isAuthenticating || !email || !password}
-              className="w-full border border-[#FFFFFF] bg-transparent text-[#FFFFFF] py-4 uppercase tracking-[0.5em] text-[10px] font-medium transition-all hover:bg-[#FFFFFF] hover:text-[#000000] disabled:border-[#333333] disabled:text-[#333333] disabled:hover:bg-transparent"
-              style={{ fontFamily: '"Figtree", sans-serif' }}
-            >
-              {isAuthenticating ? 'Executing Protocol...' : 'Authenticate'}
-            </button>
+          {/* The Form */}
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
             
-            {/* Loading line overlay */}
-            <AnimatePresence>
-              {isAuthenticating && (
-                <motion.div 
-                  initial={{ x: "-100%" }}
-                  animate={{ x: "100%" }}
-                  transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
-                  className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FFFFFF]"
-                />
+            {/* Identity Input */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] uppercase tracking-[0.2em] text-[#6B6B6B] font-semibold">
+                System Identity
+              </label>
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setFormState(email ? 'email-typing' : 'email-focused')}
+                onKeyDown={() => setFormState('email-typing')}
+                onBlur={handleBlur}
+                placeholder="admin"
+                disabled={isAuthenticating}
+                className="w-full bg-[#F8F6F3] outline-none border border-[#E5E0D8] rounded-lg px-4 py-3 text-[#1A1A1A] placeholder:text-[#9A9A9A] focus:border-[#1A1A1A] transition-colors text-[14px] disabled:opacity-50"
+              />
+            </div>
+
+            {/* Password Input */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] uppercase tracking-[0.2em] text-[#6B6B6B] font-semibold">
+                Cryptographic Key
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setFormState(password ? 'password-typing' : 'password-focused')}
+                onKeyDown={() => setFormState('password-typing')}
+                onBlur={handleBlur}
+                placeholder="••••••••"
+                disabled={isAuthenticating}
+                className="w-full bg-[#F8F6F3] outline-none border border-[#E5E0D8] rounded-lg px-4 py-3 text-[#1A1A1A] placeholder:text-[#9A9A9A] focus:border-[#1A1A1A] transition-colors text-[14px] tracking-[0.2em] disabled:opacity-50"
+              />
+            </div>
+
+            {/* Error State */}
+            <AnimatePresence mode="wait">
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="text-[#DC2626] text-[10px] uppercase tracking-[0.15em] font-semibold text-center py-2"
+                >
+                  {error}
+                </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
-          
-        </form>
+
+            {/* Submit Button */}
+            <motion.div className="mt-6 overflow-hidden relative" whileTap={{ scale: 0.98 }}>
+              <button
+                type="submit"
+                disabled={isAuthenticating || !email || !password}
+                className="w-full border-2 border-[#1A1A1A] bg-[#1A1A1A] text-[#FFFFFF] py-3.5 rounded-lg uppercase tracking-[0.3em] text-[10px] font-semibold transition-all hover:bg-[#333333] hover:border-[#333333] disabled:opacity-40 disabled:hover:bg-[#1A1A1A]"
+              >
+                {isAuthenticating ? 'Executing Protocol...' : 'Authenticate'}
+              </button>
+              
+              {/* Loading animation */}
+              <AnimatePresence>
+                {isAuthenticating && (
+                  <motion.div 
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "100%" }}
+                    transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
+                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E87722]"
+                  />
+                )}
+              </AnimatePresence>
+            </motion.div>
+            
+          </form>
+        </div>
+
+        {/* Footer Info */}
+        <div className="mt-8 text-center">
+          <span className="text-[9px] text-[#B0B0B0] uppercase tracking-[0.3em]">Al Tasnim Petroleum Operations</span>
+        </div>
       </motion.div>
 
     </div>

@@ -129,26 +129,28 @@ export default function IntelligenceMatrix() {
   };
 
   return (
-    <div className="relative w-full h-full bg-[#000000] overflow-hidden flex flex-col font-sans">
+    <div className="relative w-full h-full bg-[#0A0A0A] overflow-hidden flex flex-col" style={{ fontFamily: '"Figtree", sans-serif' }}>
 
       {/* ── METADATA OVERLAY ── */}
-      <div className="absolute top-8 left-8 z-20 pointer-events-none flex flex-col gap-2">
-        <h2 className="text-[#E2E2E2] text-sm font-semibold tracking-wide" style={{ fontFamily: '"Figtree", sans-serif' }}>
-          SequelOntology
-        </h2>
+      <div className="absolute top-8 left-8 z-20 pointer-events-none">
+        <div className="bg-white/70 backdrop-blur-md rounded-xl p-5" style={{ border: '1px solid rgba(255,255,255,0.2)' }}>
+          <h2 className="text-[#FFFFFF] text-base font-semibold tracking-wide mb-4">
+            SequelOntology
+          </h2>
 
-        {data?.stats && (
-          <div className="mt-4 flex gap-8 border-t border-[#222222] pt-4">
-            <div className="flex flex-col">
-              <span className="text-[#555555] text-[8px] uppercase tracking-widest font-mono">Active Nodes</span>
-              <span className="text-[#F5F5F5] font-mono text-sm">{data.stats.total_nodes}</span>
+          {data?.stats && (
+            <div className="flex gap-10">
+              <div className="flex flex-col">
+                <span className="text-white/60 text-[9px] uppercase tracking-widest font-semibold mb-1">Active Nodes</span>
+                <span className="text-[#FFFFFF] font-bold text-2xl">{data.stats.total_nodes}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white/60 text-[9px] uppercase tracking-widest font-semibold mb-1">Relational Edges</span>
+                <span className="text-[#E87722] font-bold text-2xl">{data.stats.total_edges}</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="text-[#555555] text-[8px] uppercase tracking-widest font-mono">Relational Edges</span>
-              <span className="text-[#8AB4F8] font-mono text-sm">{data.stats.total_edges}</span>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {/* ── TOOLTIP HUD ── */}
@@ -158,23 +160,24 @@ export default function IntelligenceMatrix() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="absolute bottom-8 right-8 z-20 p-6 bg-[#050505]/90 border border-[#222222] backdrop-blur-md min-w-[300px] pointer-events-none shadow-2xl"
+            className="absolute bottom-8 right-8 z-20 p-6 bg-white/90 backdrop-blur-md rounded-xl min-w-[320px] pointer-events-none"
+            style={{ border: '1px solid rgba(255,255,255,0.2)' }}
           >
-            <div className="flex items-center gap-3 mb-4 border-b border-[#222222] pb-3">
-               <span className="w-2 h-2 rounded-full" style={{ backgroundColor: getNodeColor(hoverNode) }} />
-               <h3 className="text-[#F5F5F5] text-xs uppercase tracking-widest font-bold font-mono">
+            <div className="flex items-center gap-3 mb-4 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.15)' }}>
+               <span className="w-3.5 h-3.5 rounded-full shadow-sm" style={{ backgroundColor: getNodeColor(hoverNode) }} />
+               <h3 className="text-[#1A1A1A] text-[11px] uppercase tracking-widest font-semibold">
                  {hoverNode.labels?.[0] || 'Unknown Node'}
                </h3>
             </div>
-            <div className="flex flex-col gap-2 text-[10px] font-mono text-[#A0A0A0]">
-               <div className="flex justify-between">
-                 <span className="text-[#555555]">Identity:</span>
-                 <span className="text-[#8AB4F8] text-right">{hoverNode.name || 'UNNAMED'}</span>
+            <div className="flex flex-col gap-2.5 text-[12px] text-[#1A1A1A]">
+               <div className="flex justify-between items-center">
+                 <span className="text-[#6B6B6B] font-medium">Identity</span>
+                 <span className="text-[#E87722] font-semibold text-right">{hoverNode.name || 'UNNAMED'}</span>
                </div>
                {(hoverNode.tableName || hoverNode.dataType) && (
-                  <div className="flex justify-between mt-2 pt-2 border-t border-[#111111]">
-                    <span className="text-[#555555]">Schema Ref:</span>
-                    <span>{hoverNode.tableName || ''} {hoverNode.dataType ? `(${hoverNode.dataType})` : ''}</span>
+                  <div className="flex justify-between items-center pt-2" style={{ borderTop: '1px solid rgba(0,0,0,0.06)' }}>
+                    <span className="text-[#6B6B6B] font-medium">Schema Ref</span>
+                    <span className="text-[#1A1A1A] font-semibold">{hoverNode.tableName || ''} {hoverNode.dataType ? `(${hoverNode.dataType})` : ''}</span>
                   </div>
                )}
             </div>
@@ -185,19 +188,19 @@ export default function IntelligenceMatrix() {
       {/* ── WEBGL RENDER WINDOW ── */}
       <div className="absolute inset-0 z-10">
         {loading ? (
-          <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full flex items-center justify-center bg-[#0A0A0A]">
             <div className="flex flex-col items-center gap-6">
-              <div className="w-16 h-16 border-t-2 border-[#8AB4F8] border-l-2 border-transparent rounded-full animate-spin" />
-              <span className="text-[#8AB4F8] text-[9px] uppercase tracking-[0.4em] font-mono animate-pulse">
+              <div className="w-14 h-14 border-2 border-[#2A2A2A] border-t-2 border-t-[#E87722] rounded-full animate-spin" />
+              <span className="text-[#FFFFFF] text-[10px] uppercase tracking-[0.3em] font-medium">
                 Establishing Matrix Uplink...
               </span>
             </div>
           </div>
         ) : error ? (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="bg-[#110505] border border-[#E53935]/30 p-8 text-center max-w-sm">
-              <span className="text-[#E53935] text-2xl mb-4 block">⚠</span>
-              <p className="text-[#E53935] text-[10px] uppercase tracking-widest font-mono leading-relaxed">
+          <div className="w-full h-full flex items-center justify-center bg-[#0A0A0A]">
+            <div className="bg-[#FFFFFF] rounded-lg p-8 text-center max-w-sm shadow-2xl" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
+              <span className="text-[#DC2626] text-3xl mb-4 block">⚠</span>
+              <p className="text-[#DC2626] text-[11px] uppercase tracking-widest font-semibold leading-relaxed">
                 Uplink Severed: {error}
               </p>
             </div>

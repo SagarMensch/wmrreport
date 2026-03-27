@@ -3,6 +3,7 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import WebGLGuard from './WebGLGuard';
 
 // 1. Complex Lattice Structure (Procedural Cross-Bracing)
 function LatticePillar({ position, height = 20 }) {
@@ -123,10 +124,12 @@ function Scene({ activeQuery }) {
 export default function OilPlantSimulation({ activeQuery }) {
     return (
         <div className="absolute inset-0 -z-20 bg-[#0F0C0A]">
-            <Canvas camera={{ position: [0, 35, 90], fov: 38 }} shadows>
-                <fogExp2 attach="fog" args={['#180C08', 0.004]} />
-                <Scene activeQuery={activeQuery} />
-            </Canvas>
+            <WebGLGuard>
+                <Canvas camera={{ position: [0, 35, 90], fov: 38 }} shadows>
+                    <fogExp2 attach="fog" args={['#180C08', 0.004]} />
+                    <Scene activeQuery={activeQuery} />
+                </Canvas>
+            </WebGLGuard>
         </div>
     );
 }

@@ -1,0 +1,90 @@
+{
+  "source": "VMB_Logics (1) (2).xlsx",
+  "description": "Well Monitoring Report (WMR) Business Logic Formulas",
+  "formulas": [
+    {
+      "sr_no": 14,
+      "column_name": "Project Tie in port readiness (140 days before spud date)",
+      "logic": "Days between Tie-in readiness date and Rig On date",
+      "columns_from_wmr": {
+        "AW": "date of tie in port readiness",
+        "BL": "actual rig on date"
+      },
+      "formula": "If both exist: (WMR[BL] - WMR[AW])",
+      "condition": "Below 140 = red, Above 140 = green",
+      "sql_example": "DATEDIFF(DAY, date_of_tie_in_port_readiness, actual_rig_on_date)"
+    },
+    {
+      "sr_no": 16,
+      "column_name": "Location Pegged (Actual Pegged to SPUD /Tentative Rig on date) Target above 140 days",
+      "logic": "Days between rig on date and pegged/target date",
+      "columns_from_wmr": {
+        "BL": "actual rig on date",
+        "BY": "Location Pegged date"
+      },
+      "formula": "If both exist: (WMR[BY] - WMR[BL])",
+      "condition": "Below 140 = red, Above 140 = green",
+      "sql_example": "DATEDIFF(DAY, location_pegged_date, actual_rig_on_date)"
+    },
+    {
+      "sr_no": 17,
+      "column_name": "Stable Rig Sequence (Actual Rig on date to SCR Date) Target above 90 days",
+      "logic": "Days between Rig On date and SCR date",
+      "columns_from_wmr": {
+        "BL": "actual rig on date",
+        "U": "scr date"
+      },
+      "formula": "If both exist: (WMR[BL] - WMR[U])",
+      "condition": "Below 90 = red, Above 90 = green",
+      "sql_example": "DATEDIFF(DAY, scr_date, actual_rig_on_date)"
+    },
+    {
+      "sr_no": 19,
+      "column_name": "FLAF issued (FLAF to SPUD /Tentative Rig On date) Target above 90 days",
+      "logic": "Days between FLAF issue date and Rig On date",
+      "columns_from_wmr": {
+        "AH": "flaf issue date",
+        "BL": "actual rig on date"
+      },
+      "formula": "If both exist: (WMR[BL] - WMR[AH])",
+      "condition": "Below 90 = red, Above 90 = green",
+      "sql_example": "DATEDIFF(DAY, flaf_issue_date, actual_rig_on_date)"
+    },
+    {
+      "sr_no": 20,
+      "column_name": "Issue of Survey report With in 15 days from FLAF",
+      "logic": "Days between FLAF issue date and site survey report issuance date",
+      "columns_from_wmr": {
+        "AH": "flaf issue date",
+        "AK": "date of site survey report issuance"
+      },
+      "formula": "If both exist: (WMR[AH] - WMR[AK])",
+      "condition": "Below 15 = green, Above 15 = red",
+      "sql_example": "DATEDIFF(DAY, flaf_issue_date, date_of_site_survey_report_issuance)"
+    },
+    {
+      "sr_no": 33,
+      "column_name": "Overall Commissioning Duration (after Rig Off)- Target 5 days With (Rig/FBU/RSR) completion and 15 days with Hoist completion",
+      "logic": "Days between Rig Off date and commissioning finish date",
+      "columns_from_wmr": {
+        "BM": "actual rig off date",
+        "BU": "actual comm finish date with in 2 days from actual engg completion date"
+      },
+      "formula": "If both exist: ABS(WMR[BM] - WMR[BU])",
+      "condition": "Target: <5 days (Rig/FBU/RSR), <15 days (Hoist)",
+      "sql_example": "DATEDIFF(DAY, actual_rig_off_date, actual_comm_finish_date)"
+    }
+  ],
+  "column_mappings": {
+    "actual_rig_on_date": "Date rig arrived at well location (Spud)",
+    "actual_rig_off_date": "Date rig departed from well location",
+    "date_of_tie_in_port_readiness": "Date tie-in port became ready",
+    "location_pegged_date": "Date location was pegged",
+    "scr_date": "Site Change Request date",
+    "flaf_issue_date": "Date FLAF was issued",
+    "date_of_site_survey_report_issuance": "Date site survey report was issued",
+    "actual_eng_completion_date": "Engineering completion date",
+    "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date": "Commissioning finish date",
+    "wellpad_handover_2_from_hoist_fbu_rsr_off_date": "Wellpad handover date"
+  }
+}

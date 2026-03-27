@@ -33,7 +33,7 @@ from retrieval.bm25_index import ColumnBM25Index
 from database.neo4j_client import neo4j_client
 from database.sql_client import sql_client
 
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.checkpoint.memory import MemorySaver
 from contextlib import contextmanager
 
@@ -71,6 +71,7 @@ class PipelineResult:
     # SQL
     sql_query: str = ""
     is_safe: bool = False
+    response_type: str = "chart"
 
     # Chart
     chart_type: str = "data_table"
@@ -173,19 +174,8 @@ class PipelineOrchestrator:
         log.info("=" * 60)
 
     def _store_chat_history(self, session_id: str, question: str, sql_query: str, result_summary: str) -> None:
-        """Store chat history in Supabase for memory."""
-        if not self._use_supabase:
-            return
-        try:
-            with self._pool.connection() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        "INSERT INTO chat_history (question, created_at) VALUES (%s, NOW())",
-                        (f"{question} | SQL: {sql_query[:200]} | Result: {result_summary[:100]}",)
-                    )
-                    conn.commit()
-        except Exception as e:
-            log.warning(f"Failed to store chat history: {e}")
+        """Deprecated: Frontend now handles storing conversation threads."""
+        pass
 
     def _get_session_context(self, session_id: str) -> dict:
         """Get context from previous queries in session for smarter drill-downs."""
@@ -215,9 +205,10 @@ class PipelineOrchestrator:
         if hasattr(self, '_pool') and self._pool:
             self._pool.close()
 
-    def process(self, question: str, session_id: str = "default_session") -> PipelineResult:
+    def process(self, question: str, session_id: str = "default_session", chat_history: list = None) -> PipelineResult:
         """
         Execute the LangGraph pipeline: question → SQL → results → chart.
+        chat_history: list of {"role": "user"|"assistant", "content": "..."} from frontend
         """
         start = time.perf_counter()
         
@@ -229,9 +220,24 @@ class PipelineOrchestrator:
             
             config = {"configurable": {"thread_id": session_id}}
             
-            # Send the new message to the state graph
+            # Build message list: inject prior chat history + new question
+            prior_messages = []
+            if chat_history:
+                # Only inject last 10 messages for efficiency
+                for msg in chat_history[-10:]:
+                    if msg.get("role") == "user":
+                        prior_messages.append(HumanMessage(content=msg["content"]))
+                    elif msg.get("role") == "assistant":
+                        # Truncate long AI responses to save tokens
+                        prior_messages.append(AIMessage(content=msg["content"][:400]))
+                log.info(f"   Injected {len(prior_messages)} history messages for context")
+            
+            # Add the new question
+            prior_messages.append(HumanMessage(content=question))
+            
+            # Send the messages to the state graph
             inputs = {
-                "messages": [HumanMessage(content=question)],
+                "messages": prior_messages,
                 "session_context": session_context  # For smarter drill-downs
             }
             
@@ -250,6 +256,7 @@ class PipelineOrchestrator:
             drill_downs = chart_config.get("drill_downs", []) if chart_config else []
             reasoning_steps = final_state.get("reasoning_steps", [])
             execution_error = final_state.get("execution_error")
+            response_type = final_state.get("response_type", "chart")
             
             # If followup is requested, the answer is the last AI message
             if final_state.get("requires_followup"):
@@ -265,6 +272,7 @@ class PipelineOrchestrator:
                 question=question,
                 sql_query=sql_query,
                 is_safe=True,
+                response_type=response_type,
                 chart_type=chart_type,
                 chart_config=chart_config,
                 columns=columns,

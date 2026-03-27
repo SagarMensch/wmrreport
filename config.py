@@ -40,7 +40,7 @@ class Settings:
     SARVAM_API_KEY: str = os.environ.get("SARVAM_API_KEY", "")
 
     # Mistral LLM (replacement for Groq when rate limited)
-    MISTRAL_API_KEY: str = "SFi0NsPkMMDwdi0fIsExbxPSG4BBnDFh"
+    MISTRAL_API_KEY: str = "63UJcnnWqxq7RIxLcWucvKPCSgR9WLVy"
     MISTRAL_MODEL: str = "mistral-large-latest"
 
     # SQL Server (Production Local)

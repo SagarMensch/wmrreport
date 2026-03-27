@@ -65,14 +65,12 @@ export default function VoiceChatInput({ onSendQuery, isLoading }: VoiceChatInpu
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex relative w-full items-end bg-[#1E1E1E] border border-[#333333] hover:border-[#555555] focus-within:border-[#888888] rounded-3xl shadow-lg px-6 py-4 transition-all duration-300 overflow-hidden group">
-      {/* Light sweep on focus */}
-      <div className="absolute inset-0 translate-x-[-100%] group-focus-within:animate-[shimmer_2s_ease-in-out] bg-gradient-to-r from-transparent via-[#8AB4F8]/5 to-transparent pointer-events-none" />
+    <form onSubmit={handleSubmit} className="flex relative w-full items-end bg-[#FFFFFF] rounded-full px-6 py-4 transition-all duration-300 overflow-hidden group" style={{ fontFamily: '"Figtree", sans-serif', boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)' }}>
 
       <button 
         type="button" 
         onClick={toggleRecording} 
-        className={`mr-4 mb-0.5 transition-colors relative z-10 ${isRecording ? 'text-[#E53935] animate-pulse drop-shadow-[0_0_8px_rgba(229,57,53,0.6)]' : 'text-[#888888] hover:text-[#E2E2E2]'}`}
+        className={`mr-4 mb-0.5 transition-colors relative z-10 ${isRecording ? 'text-[#DC2626] animate-pulse' : 'text-[#6B6B6B] hover:text-[#1A1A1A]'}`}
         disabled={isLoading}
       >
         {isRecording ? <Square size={22} /> : <Mic size={22} strokeWidth={1.5} />}
@@ -93,13 +91,12 @@ export default function VoiceChatInput({ onSendQuery, isLoading }: VoiceChatInpu
         }}
         rows={1}
         placeholder={isRecording ? 'Listening...' : 'Commence inquiry...'}
-        className="flex-1 bg-transparent outline-none text-[#F5EBE1] placeholder:text-[#F5EBE1]/30 w-full text-[14px] relative z-10 font-light resize-none overflow-hidden min-h-[22px] max-h-[150px] py-0.5"
-        style={{ fontFamily: '"Figtree", sans-serif' }}
+        className="flex-1 bg-transparent outline-none text-[#1A1A1A] placeholder:text-[#9A9A9A] w-full text-[15px] relative z-10 font-medium resize-none overflow-hidden min-h-[22px] max-h-[150px] py-0.5"
         disabled={isLoading}
       />
 
-      <button type="submit" className="text-[#888888] hover:text-[#E2E2E2] ms-6 mb-0.5 disabled:opacity-30 transition-colors relative z-10" disabled={isLoading || isRecording || !query.trim()}>
-        <ArrowRight size={26} strokeWidth={1.5} />
+      <button type="submit" className="text-[#6B6B6B] hover:text-[#1A1A1A] ms-6 mb-0.5 disabled:opacity-30 transition-colors relative z-10" disabled={isLoading || isRecording || !query.trim()}>
+        <ArrowRight size={24} strokeWidth={1.5} />
       </button>
     </form>
   );

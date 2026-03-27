@@ -1,8 +1,9 @@
 'use client';
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Text, Float, Stars, Environment } from '@react-three/drei';
+import { Text, Float } from '@react-three/drei';
 import { motion } from 'framer-motion';
+import WebGLGuard from './WebGLGuard';
 
 interface ThreeKPIProps {
   value: string | number;
@@ -48,23 +49,21 @@ function FloatingNumber({ value, label }: { value: string, label: string }) {
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+    <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
       <group ref={textRef}>
         <Text
           position={[0, 0.5, 0]}
           fontSize={Math.max(fontSize, 0.8)}
-          color="#8AB4F8"
+          color="#1A1A1A"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.02}
-          outlineColor="#1967D2"
         >
           {formatted}
         </Text>
         <Text
           position={[0, -1.2, 0]}
           fontSize={0.4}
-          color="#E2E2E2"
+          color="#6B6B6B"
           anchorX="center"
           anchorY="middle"
           letterSpacing={0.2}
@@ -111,21 +110,19 @@ export default function ThreeKPI({ value, label, unit, theme = 'dark', mode }: T
     );
   }
 
-  // Pure 3D Mode
+  // Pure 3D Mode - Clean white background
   return (
-    <div className="w-full h-full min-h-[400px] relative bg-black rounded-xl overflow-hidden">
-      <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-        <color attach="background" args={['#050505']} />
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} intensity={1.5} angle={0.2} penumbra={1} color="#8AB4F8" />
-        <spotLight position={[-10, -10, -10]} intensity={0.5} color="#1967D2" />
-        
-        <Environment preset="city" />
-        {/* Adds a dynamic tech-noir feel */}
-        <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
-        
-        <FloatingNumber value={String(value)} label={label || 'Result'} />
-      </Canvas>
+    <div className="w-full h-full min-h-[400px] relative rounded-xl overflow-hidden" style={{ background: '#FFFFFF', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+      <WebGLGuard>
+        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
+          <color attach="background" args={['#FFFFFF']} />
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+          <directionalLight position={[-10, -10, -10]} intensity={0.3} color="#ffffff" />
+          
+          <FloatingNumber value={String(value)} label={label || 'Result'} />
+        </Canvas>
+      </WebGLGuard>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer SFi0NsPkMMDwdi0fIsExbxPSG4BBnDFh`,
+        'Authorization': `Bearer 63UJcnnWqxq7RIxLcWucvKPCSgR9WLVy`,
       },
       body: JSON.stringify({
         model: 'mistral-small-latest',

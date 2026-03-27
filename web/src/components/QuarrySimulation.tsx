@@ -1,9 +1,10 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 'use client';
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Line } from '@react-three/drei';
 import * as THREE from 'three';
+import WebGLGuard from './WebGLGuard';
 
 const HORIZON_PLANE = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
 
@@ -385,18 +386,19 @@ function Scene() {
 export default function QuarrySimulation() {
   return (
     <div className="absolute inset-0 w-full h-full -z-10" style={{ background: '#09050F' }}>
-      <Canvas
-        camera={{ position: [0, 22, 55], fov: 42 }}
-        frameloop="always"
-        shadows={{ type: THREE.PCFSoftShadowMap }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, logarithmicDepthBuffer: true }}
-      >
-        <color attach="background" args={['#09050F']} />
-        {/* Thinner, warmer fog so distant rigs read clearly against the sky */}
-        <fogExp2 attach="fog" args={['#3A1808', 0.0035]} />
-        <Scene />
-      </Canvas>
+      <WebGLGuard>
+        <Canvas
+          camera={{ position: [0, 22, 55], fov: 42 }}
+          frameloop="always"
+          shadows={{ type: THREE.PCFSoftShadowMap }}
+          dpr={[1, 1.5]}
+          gl={{ antialias: true, logarithmicDepthBuffer: true }}
+        >
+          <color attach="background" args={['#09050F']} />
+          <fogExp2 attach="fog" args={['#3A1808', 0.0035]} />
+          <Scene />
+        </Canvas>
+      </WebGLGuard>
     </div>
   );
 }

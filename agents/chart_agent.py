@@ -106,47 +106,65 @@ class ChartConfig:
 # ── DSPy Signature ───────────────────────────────────────────────────────
 
 class ChartSignature(dspy.Signature):
-    """You are a Bloomberg Terminal-level data visualization expert.
-    Recommend the most impactful, analytically rich visualization.
-    
-    Available chart types:
-    - bar: comparing categories (wells by cluster, rigs)
-    - line: time series, trends, weekly/monthly progress
-    - horizontal_bar: rankings, sorted comparisons
-    - grouped_bar: comparing multiple metrics (plan vs actual, target vs achieved)
-    - scatter: two-variable correlation
-    - area: cumulative trends, stacked comparisons
-    - donut: proportional distribution (< 8 categories)
-    - stacked_bar: multi-dimensional comparison
-    - heatmap: matrix data, cross-tabulation
-    - gauge: single KPI with target
-    - treemap: hierarchical data (cluster > well > task)
-    - funnel: pipeline/stage progression
-    - waterfall: incremental changes (budget, progress)
-    - radar: multi-metric comparison across entities
-    - kpi_card: single key metric with trend indicator
-    - data_table: raw data exploration, many columns
-    - 3d_bar: premium 3D volumetric bars for rankings/comparisons
-    - 3d_scatter: premium 3D spatial visualization
-    - glass_kpi: premium glass-effect KPI display
-    
-    For plan vs actual comparisons, ALWAYS use grouped_bar.
-    For rankings and single-metric comparisons, prefer 3d_bar for premium visuals.
-    Think: "What would a Bloomberg terminal show?"
+    """You are a Palantir Foundry / Bloomberg Terminal-level data visualization expert 
+    working for an oil & gas well monitoring company. You MUST analyze column names 
+    and data shape to recommend the most analytically impactful visualization.
+
+    CRITICAL COLUMN TYPE RULES:
+    - Columns ending in _id, _uid, _no (e.g., pdo_well_id, scr_no, crew_uid): 
+      → These are IDENTIFIERS, never suitable for numeric axes
+    - Columns like well_name, cluster, well_type, rig_no, contractor, status:
+      → These are CATEGORICAL labels for axis labeling
+    - Columns with progress, pct, percent, completion:
+      → These are PERCENTAGES (0-1 scale or 0-100 scale)
+    - Columns with count, total, sum, avg, revenue, cost, budget:
+      → These are NUMERIC VALUES suitable for bar heights/values
+    - Columns with date, time, week, month, year:
+      → These are TIME DIMENSIONS for line/area charts
+
+    CHART SELECTION RULES:
+    1. Single row + single value column → glass_kpi
+    2. Single row + multiple value columns (e.g., planned vs actual) → bar (transposed)
+    3. Count by category (e.g., wells per cluster) → donut (≤8 items) or horizontal_bar
+    4. Rankings, top/bottom → horizontal_bar
+    5. Time series → area or line
+    6. Plan vs Actual comparisons → grouped_bar
+    7. Progress/completion data → horizontal_bar with progress coloring
+    8. Many rows (>50) or many columns (>5) → data_table
+    9. ALL text columns with NO numeric values → data_table (ALWAYS)
+    10. Distribution/proportion → donut
+
+    EXAMPLES:
+    - "Compare nimr cluster planned vs actual" → columns: cluster_name, well_count, 
+      total_planned_value, total_actual_value → chart_type: bar (1 row = transposed bar)
+    - "How many wells in each cluster?" → columns: Cluster, well_count 
+      → chart_type: donut (count by category)
+    - "Which wells have zero progress?" → columns: pdo_well_id, well_name, Cluster 
+      → chart_type: data_table (all text, no numeric)
+    - "Show rig progress comparison" → columns: rig_no, avg_progress 
+      → chart_type: horizontal_bar
+    - "What is the average progress?" → columns: avg_progress (1 row, 1 value) 
+      → chart_type: glass_kpi
+    - "Show weekly progress trend" → columns: week, avg_progress 
+      → chart_type: area
+
+    NEVER put pdo_well_id, scr_no, or any _id column on a numeric axis.
+    ALWAYS default to data_table if unsure — bad chart is worse than good table.
     """
 
     user_question = dspy.InputField()
     sql_query = dspy.InputField()
-    result_columns = dspy.InputField(desc="Comma-separated column names from result.")
+    result_columns = dspy.InputField(desc="Comma-separated column names from SQL result.")
     row_count = dspy.InputField()
 
     chart_type = dspy.OutputField(
         desc="One of: bar, line, horizontal_bar, grouped_bar, scatter, area, donut, "
              "stacked_bar, heatmap, gauge, treemap, funnel, waterfall, "
-             "radar, kpi_card, data_table, 3d_scatter, 3d_bar, 3d_kpi, glass_kpi"
+             "radar, kpi_card, data_table, 3d_scatter, 3d_bar, 3d_kpi, glass_kpi. "
+             "If ALL columns are text/identifiers with NO numeric values, MUST return data_table."
     )
-    x_axis = dspy.OutputField(desc="Column for X/category axis.")
-    y_axis = dspy.OutputField(desc="Column for Y/value axis.")
+    x_axis = dspy.OutputField(desc="Column for X/category axis. Must be a categorical/label column, NEVER an _id column.")
+    y_axis = dspy.OutputField(desc="Column for Y/value axis. Must be a numeric value column like count, total, progress.")
     title = dspy.OutputField(desc="Professional chart title (max 8 words).")
     color_scheme = dspy.OutputField(
         desc="One of: bloomberg_dark, palantir, aurora, neon. "
@@ -219,15 +237,16 @@ class ChartAgent(dspy.Module):
             user_question, sql_query, result_columns, chart_type
         )
 
-        # ── Detect KPI scenarios (Mandatory for Bloomberg V-Studio vibe) ──
+        # ── Detect KPI scenarios — ONLY for truly single-value results ──
         kpi_value = ""
         kpi_unit = ""
         
-        # If it's a count query or single value, OR if no rows (0 hits), show as 3D KPI
-        if row_count <= 1 and (len(result_columns) <= 2 or not result_columns):
+        # Only force glass_kpi for genuinely single-value results (1-2 columns)
+        # Multi-metric rows (e.g., planned vs actual with 5 columns) should NOT be KPI
+        if row_count <= 1 and len(result_columns) <= 2:
             chart_type = "glass_kpi"
             if row_count == 1 and result_columns:
-                kpi_value = "DATA" # Placeholder, frontend will extract from rows[0][0]
+                kpi_value = "DATA"
             elif row_count == 0:
                 kpi_value = "0"
             kpi_unit = self._guess_unit(result_columns)
@@ -394,6 +413,29 @@ class ChartAgent(dspy.Module):
         is_many_categories = row_count > 15
         has_time = any('week' in c or 'month' in c or 'date' in c or 'time' in c for c in cols_lower)
         
+        # ID/text column patterns — these are NOT chartable on numeric axes
+        id_patterns = {'pdo_well_id', 'well_id', 'id', 'uid', 'crew_uid', 'well_location',
+                       'project_id', 'employee_id', 'scr_no'}
+        name_patterns = {'well_name', 'project_name', 'ph_name', 'crew_name', 'name',
+                         'description', 'cluster', 'well_type', 'category', 'rig_no',
+                         'well_name_after_spud', 'contractor', 'operator', 'status',
+                         'risk_tier', 'well_status'}
+        
+        # Detect if there are ANY numeric-axis-worthy columns
+        has_numeric = any(
+            c not in id_patterns and c not in name_patterns
+            and not c.endswith('_id') and not c.endswith('_uid')
+            and ('count' in c or 'total' in c or 'progress' in c or 'pct' in c
+                 or 'percent' in c or 'score' in c or 'avg' in c or 'sum' in c
+                 or 'revenue' in c or 'cost' in c or 'budget' in c or 'days' in c
+                 or 'duration' in c or 'weeks' in c or 'number' in c or 'amount' in c)
+            for c in cols_lower
+        )
+        
+        # ═══ CRITICAL: If ALL columns are text/identifiers, ALWAYS table ═══
+        if not has_numeric and not has_count and not has_progress:
+            return "data_table"
+        
         # === INTELLIGENT SELECTION ===
         
         # Single metric/card → sleek 3D KPI
@@ -401,7 +443,6 @@ class ChartAgent(dspy.Module):
             return "glass_kpi"
         
         # "How many X in each Y" (count by category) → Treemap or Donut
-        # This shows PROPORTION beautifully - like Palantir
         if has_count and row_count >= 3:
             return "treemap" if row_count > 8 else "donut"
         
@@ -409,11 +450,11 @@ class ChartAgent(dspy.Module):
         if any(kw in q for kw in ['rank', 'top', 'bottom', 'best', 'worst', 'highest', 'lowest']):
             return "horizontal_bar"
         
-        # Time series → 3D Surface or Area
+        # Time series → Area
         if has_time or any(kw in q for kw in ['trend', 'over time', 'weekly', 'monthly', 'timeline']):
             return "area"
         
-        # Progress/percentage data → Radial gauge or 3D bars
+        # Progress/percentage data → 3D bars for visual impact
         if has_progress:
             return "gauge" if row_count <= 5 else "3d_bar"
         
@@ -421,9 +462,9 @@ class ChartAgent(dspy.Module):
         if has_plan_actual or any(kw in q for kw in ['compare', 'vs', 'versus', 'actual', 'plan']):
             return "grouped_bar"
         
-        # Many categories → Treemap (shows hierarchy beautifully)
+        # Many categories → Data table (better than illegible chart)
         if is_many_categories:
-            return "treemap"
+            return "data_table" if row_count > 50 else "horizontal_bar"
         
         # Distribution → Donut/Pie
         if any(kw in q for kw in ['distribution', 'proportion', 'share', 'breakdown']):
@@ -433,33 +474,12 @@ class ChartAgent(dspy.Module):
         if any(kw in q for kw in ['correlation', 'relationship', 'vs']):
             return "scatter"
         
-        # Default: Clean data table (better than bad chart)
+        # Default: Clean data table for large datasets, bar for small
         if row_count > 50 or len(columns) > 5:
             return "data_table"
         
-        # Fallback: 3D bars for any other case
-        return "3d_bar"
-        if any(kw in q for kw in ['distribution', 'proportion', 'breakdown', 'share']):
-            return "donut" if row_count <= 8 else "treemap"
-
-        # Comparison → 3D bar
-        if any(kw in q for kw in ['compare', 'comparison', 'vs', 'versus']):
-            return "3d_bar"
-
-        # Correlation → 3D scatter
-        if any(kw in q for kw in ['correlation', 'relationship']):
-            return "3d_bar"
-
-        # Progress → always 3D bar for visual impact
-        if any(kw in q for kw in ['progress', 'completion', 'status']):
-            return "3d_bar"
-
-        # Multi-column → data table only for very large datasets
-        if len(columns) > 6 or row_count > 50:
-            return "data_table"
-
-        # DEFAULT: Always 3D bar for maximum visual impact (Power BI style)
-        return "3d_bar"
+        # Fallback: horizontal_bar is the most universally readable chart
+        return "horizontal_bar"
 
     @staticmethod
     def _humanize(col_name: str) -> str:

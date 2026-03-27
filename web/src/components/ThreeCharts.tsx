@@ -1,45 +1,9 @@
 'use client';
-import React, { useRef, useMemo, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Text, Instance, Instances, Float, Environment, ContactShadows, Sparkles } from '@react-three/drei';
+import React, { useRef, useState, useMemo } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Text, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
-
-// Static particles - no animation
-function Particles({ count = 50 }) {
-  const ref = useRef<THREE.Points>(null);
-  
-  const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const col = new Float32Array(count * 3);
-    const colorPalette = [
-      new THREE.Color('#333333'),
-      new THREE.Color('#444444'),
-      new THREE.Color('#222222'),
-    ];
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 30;
-      pos[i * 3 + 1] = Math.random() * 15;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 30;
-      
-      const c = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-      col[i * 3] = c.r;
-      col[i * 3 + 1] = c.g;
-      col[i * 3 + 2] = c.b;
-    }
-    return [pos, col];
-  }, [count]);
-
-  // NO animation - completely static
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-        <bufferAttribute attach="attributes-color" args={[colors, 3]} />
-      </bufferGeometry>
-      <pointsMaterial size={0.05} vertexColors transparent opacity={0.3} sizeAttenuation />
-    </points>
-  );
-}
+import WebGLGuard from './WebGLGuard';
 
 interface ThreeChartsProps {
   chartType: string;
@@ -49,23 +13,22 @@ interface ThreeChartsProps {
 
 function formatColumnName(name: string): string {
   return name
+    .replace(/[\[\]]/g, '')
     .replace(/_/g, ' ')
     .replace(/\b\w/g, l => l.toUpperCase());
 }
 
-// Blackstone/Blackrock style - professional, sophisticated, dark theme
-const COLORS = ['#1E3A5F', '#2E5077', '#3D6B99', '#4A90C2', '#C9A227', '#8B7355', '#2C3E50', '#34495E'];
-
-// Blackstone aesthetic - dark navy, charcoal, subtle gold
-const METALLIC_COLORS = [
-  '#0D1B2A', '#1B263B', '#243B53', '#1E3A5F', '#C9A227', '#8B7355'
+// Solid dark premium palette — Blackstone/Hermes
+const BAR_COLORS = [
+  '#1A1A1A', '#E87722', '#2563EB', '#16A34A', '#7C3AED',
+  '#0D9488', '#DC2626', '#B8860B', '#4A4A4A', '#6366F1',
 ];
 
-// A helper to normalize data for 3D mapping
-function normalizeData(rows: any[][], colIdx: number): number[] {
-  const vals = rows.map(r => parseFloat(r[colIdx]) || 0);
-  const max = Math.max(...vals, 1);
-  return vals.map(v => v / max);
+function getProgressColor(pct: number): string {
+  if (pct >= 80) return '#16A34A';
+  if (pct >= 50) return '#B8860B';
+  if (pct >= 20) return '#E87722';
+  return '#DC2626';
 }
 
 function BarChart3D({ rows, columns }: { rows: any[][]; columns: string[] }) {
@@ -74,68 +37,79 @@ function BarChart3D({ rows, columns }: { rows: any[][]; columns: string[] }) {
 
   const formattedColumns = columns.map(formatColumnName);
 
-  const hasNumericData = columns.length >= 2;
-  const normY = hasNumericData ? normalizeData(rows, 1) : rows.map(() => 0.8);
-  const normZ = columns.length >= 3 ? normalizeData(rows, 2) : rows.map(() => 0.5);
+  // Smart data analysis: columns[0] = label, columns[1] = value
+  const hasValue = columns.length >= 2;
+  
+  // Get max value for normalization
+  const values = useMemo(() => {
+    if (!hasValue) return rows.map(() => 1);
+    return rows.map(r => {
+      const n = parseFloat(r[1]);
+      return isNaN(n) ? 0 : n;
+    });
+  }, [rows, hasValue]);
+
+  const maxVal = Math.max(...values, 1);
 
   const numRows = rows.length;
-  const spread = Math.max(10, numRows * 0.8);
-  
-  // NO auto-rotation - static chart, user can manually rotate with mouse
+  const spread = Math.max(10, numRows * 1.2);
+
+  // Detect if values are percentages (for color coding)
+  const isPercentage = columns[1] && /progress|pct|percent|completion/i.test(columns[1]);
 
   return (
     <group ref={groupRef} position={[0, -2, 0]}>
-      {/* Enhanced base grid with glow */}
-      <gridHelper args={[spread * 1.5, Math.ceil(spread * 1.5), 0x444444, 0x222222]} position={[0, -0.01, 0]} />
+      {/* Clean grid */}
+      <gridHelper args={[spread * 1.5, Math.ceil(spread * 1.5), 0xE5E5E5, 0xE5E5E5]} position={[0, -0.01, 0]} />
       
-      {/* Reflective ground plane */}
+      {/* Ground plane */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
         <planeGeometry args={[spread * 2, spread * 2]} />
-        <meshStandardMaterial color="#0a0a0f" metalness={0.9} roughness={0.1} transparent opacity={0.6} />
+        <meshStandardMaterial color="#F5F5F5" metalness={0} roughness={0.9} />
       </mesh>
 
       {rows.map((row, i) => {
-        const xPos = (i - numRows / 2) * 1.5;
-        const h = Math.max(0.1, normY[i] * 8);
-        const zPos = columns.length >= 3 ? (normZ[i] - 0.5) * 5 : 0;
+        const xPos = (i - numRows / 2) * 1.8;
+        const normalizedHeight = maxVal > 0 ? (values[i] / maxVal) * 8 : 0.1;
+        const h = Math.max(0.1, normalizedHeight);
         
         const isHovered = hovered === i;
-        const color = isHovered ? '#FFFFFF' : COLORS[i % COLORS.length];
-        const glowIntensity = isHovered ? 0.8 : 0.15;
         
-        const displayValue = hasNumericData && row[1] !== undefined ? `${row[1]}` : '';
-        const labelValue = row[0] !== undefined ? formatColumnName(String(row[0])) : `Item ${i + 1}`;
+        // Smart color: progress-based if percentage, else palette
+        let color: string;
+        if (isHovered) {
+          color = '#E87722';
+        } else if (isPercentage) {
+          color = getProgressColor(values[i]);
+        } else {
+          color = BAR_COLORS[i % BAR_COLORS.length];
+        }
+        
+        // Label = first column (always the label)
+        const labelValue = String(row[0] ?? `Item ${i + 1}`);
+        const displayLabel = labelValue.length > 15 ? labelValue.substring(0, 12) + '...' : labelValue;
+        
+        // Value display
+        const displayValue = hasValue ? `${values[i]}${isPercentage ? '%' : ''}` : '';
 
         return (
-          <group key={i} position={[xPos, h / 2, zPos]}>
-            {/* Glow effect */}
-            <mesh>
-              <boxGeometry args={[1.2, h + 0.1, 1.2]} />
-              <meshBasicMaterial color={color} transparent opacity={0.15} />
-            </mesh>
-            
+          <group key={i} position={[xPos, h / 2, 0]}>
             {/* Main bar */}
             <mesh 
               onPointerOver={(e) => { e.stopPropagation(); setHover(i); }}
               onPointerOut={() => setHover(null)}
             >
-              <boxGeometry args={[1, h, 1]} />
-              <meshStandardMaterial 
-                color={color} 
-                metalness={0.6} 
-                roughness={0.15} 
-                emissive={color}
-                emissiveIntensity={glowIntensity}
-              />
-            </mesh>
-
-            {/* Top cap with gradient */}
-            <mesh position={[0, h / 2 + 0.05, 0]}>
-              <boxGeometry args={[1.05, 0.1, 1.05]} />
-              <meshStandardMaterial color={color} metalness={0.8} roughness={0.1} emissive={color} emissiveIntensity={0.3} />
+              <boxGeometry args={[1.2, h, 1.2]} />
+              <meshStandardMaterial color={color} metalness={0.15} roughness={0.4} />
             </mesh>
             
-            {/* Floating label above bar */}
+            {/* Top cap */}
+            <mesh position={[0, h / 2 + 0.02, 0]}>
+              <boxGeometry args={[1.22, 0.04, 1.22]} />
+              <meshStandardMaterial color={color} metalness={0.2} roughness={0.3} />
+            </mesh>
+            
+            {/* Value above bar */}
             <Text
               position={[0, (h / 2) + 0.6, 0]}
               fontSize={0.35}
@@ -144,33 +118,37 @@ function BarChart3D({ rows, columns }: { rows: any[][]; columns: string[] }) {
               anchorY="middle"
               outlineWidth={0.015}
               outlineColor="#000000"
+              font={undefined}
             >
               {displayValue}
             </Text>
             
-            {/* Label below */}
+            {/* Label below bar */}
             <Text
-              position={[0, -0.5, 0]}
-              fontSize={0.3}
-              color="#9AA0A6"
+              position={[0, -(h / 2) - 0.5, 0]}
+              fontSize={0.25}
+              color="#6B6B6B"
               anchorX="center"
               anchorY="middle"
-              maxWidth={1.2}
+              maxWidth={1.6}
+              font={undefined}
             >
-              {labelValue}
+              {displayLabel}
             </Text>
             
+            {/* Hover tooltip */}
             {isHovered && (
               <Text
-                position={[0, (h / 2) + 1.2, 0]}
-                fontSize={0.4}
+                position={[0, (h / 2) + 1.4, 0]}
+                fontSize={0.3}
                 color="#FFFFFF"
                 anchorX="center"
                 anchorY="middle"
-                outlineWidth={0.02}
+                outlineWidth={0.025}
                 outlineColor="#000000"
+                font={undefined}
               >
-                {displayValue ? `${labelValue}: ${displayValue}` : labelValue}
+                {`${labelValue}: ${displayValue}`}
               </Text>
             )}
           </group>
@@ -184,55 +162,58 @@ function BarChart3D({ rows, columns }: { rows: any[][]; columns: string[] }) {
 export default function ThreeCharts({ chartType, columns, rows }: ThreeChartsProps) {
   const formattedColumns = columns.map(formatColumnName);
   
+  // If no data or not suitable, show message
+  if (!rows.length || !columns.length) {
+    return (
+      <div className="w-full h-full min-h-[500px] flex items-center justify-center" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5' }}>
+        <div className="text-center">
+          <div className="text-[20px] mb-2" style={{ color: '#A0A0A0' }}>∅</div>
+          <div className="text-[12px] font-medium" style={{ color: '#6B6B6B', fontFamily: '"Figtree", sans-serif' }}>No data for 3D visualization</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full h-full min-h-[500px] relative bg-[#050505] rounded-xl overflow-hidden border border-[#333333]">
-      <Canvas 
-        camera={{ position: [0, 10, 18], fov: 40 }}
-        gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
-        dpr={[1, 2]}
-      >
-        <color attach="background" args={['#030308']} />
-        <fog attach="fog" args={['#030308', 12, 45]} />
-        
-        {/* Advanced lighting setup */}
-        <ambientLight intensity={0.15} />
-        <directionalLight position={[15, 25, 15]} intensity={1.0} color="#ffffff" castShadow />
-        <pointLight position={[-15, 8, -15]} intensity={2} color="#00D4FF" distance={40} />
-        {/* Professional lighting - subtle, no flashy colors */}
-        <pointLight position={[15, 8, 15]} intensity={0.8} color="#C9A227" distance={40} />
-        <pointLight position={[0, -5, 0]} intensity={0.3} color="#4A90C2" distance={30} />
-        
-        {/* Minimal ambient sparkles - Blackstone style */}
-        <Sparkles count={30} scale={20} size={1} speed={0.1} color="#C9A227" opacity={0.15} />
-        
-        {/* Background particles */}
-        <Particles count={200} />
-        
-        {/* Static chart - user can manually rotate with OrbitControls */}
-        <BarChart3D rows={rows} columns={columns} />
-        
-        {/* Contact shadows for grounding */}
-        <ContactShadows position={[0, -3, 0]} opacity={0.4} scale={30} blur={2.5} far={15} color="#000000" />
-        
-        <OrbitControls 
-          enableDamping 
-          dampingFactor={0.03} 
-          autoRotate={false}
-          autoRotateSpeed={0.5}
-          minPolarAngle={Math.PI / 6}
-          maxPolarAngle={Math.PI / 2 - 0.05}
-          minDistance={8}
-          maxDistance={35}
-        />
-      </Canvas>
+    <div className="w-full h-full min-h-[500px] relative bg-[#FFFFFF] rounded-xl overflow-hidden" style={{ border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+      <WebGLGuard>
+        <Canvas 
+          camera={{ position: [0, 10, 18], fov: 40 }}
+          gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
+          dpr={[1, 2]}
+        >
+          <color attach="background" args={['#FFFFFF']} />
+          
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[15, 25, 15]} intensity={1.2} color="#ffffff" castShadow />
+          <directionalLight position={[-15, 15, -15]} intensity={0.5} color="#ffffff" />
+          
+          <BarChart3D rows={rows} columns={columns} />
+          
+          <ContactShadows position={[0, -3, 0]} opacity={0.15} scale={30} blur={2.5} far={15} color="#000000" />
+          
+          <OrbitControls 
+            enableDamping 
+            dampingFactor={0.03} 
+            autoRotate={false}
+            autoRotateSpeed={0.5}
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 2 - 0.05}
+            minDistance={8}
+            maxDistance={35}
+          />
+        </Canvas>
+      </WebGLGuard>
       
-      {/* Blackstone-style HUD - clean, minimal, sophisticated */}
+      {/* HUD */}
       <div className="absolute top-4 left-4 pointer-events-none">
-        <div className="text-[#C9A227] text-[10px] font-mono tracking-wider uppercase">BASHIRA ANALYTICS</div>
-        <div className="text-[#8B9DAF] text-[9px] font-mono mt-1">{formattedColumns[0] || 'Analysis'}</div>
+        <div className="text-[#1A1A1A] text-[10px] font-semibold tracking-wider uppercase" style={{ fontFamily: '"Figtree", sans-serif' }}>BASIR ANALYTICS</div>
+        <div className="text-[#6B6B6B] text-[9px] mt-1" style={{ fontFamily: '"Figtree", sans-serif' }}>
+          {formattedColumns[1] || formattedColumns[0] || 'Analysis'} — {rows.length} items
+        </div>
       </div>
       <div className="absolute bottom-4 right-4 pointer-events-none">
-         <div className="text-[#4A5568] text-[8px] font-mono uppercase tracking-widest">3D VIEW - DRAG TO ROTATE</div>
+         <div className="text-[#A0A0A0] text-[8px] font-medium uppercase tracking-widest" style={{ fontFamily: '"Figtree", sans-serif' }}>3D View · Drag to Rotate</div>
       </div>
     </div>
   );

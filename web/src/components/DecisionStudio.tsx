@@ -19,20 +19,23 @@ const Plot = dynamic(
 );
 
 // ═══════════════════════════════════════════════════════════════════════════
-// CURATED PALETTE — warm-leaning, visible on dark, not garish
+// HERMES / BLACKSTONE DESIGN SYSTEM
+// Solid. Concrete. No gradients. No 3D. Photography-grade precision.
+// Off-white canvas, solid black type, orange accent used SPARINGLY.
 // ═══════════════════════════════════════════════════════════════════════════
 const C = {
-  bg: '#040404', surface: '#0A0A0A', card: '#111111', cardHover: '#161616',
-  border: '#242424', borderHi: '#383838',
-  t1: '#FFFFFF', t2: '#A3A3A3', t3: '#737373', t4: '#525252',
-  blue: '#2563EB', red: '#DC2626', gold: '#D97706',
-  green: '#059669', violet: '#7C3AED', teal: '#0F766E',
+  bg: '#FAFAFA', surface: '#FFFFFF', card: '#FFFFFF', cardHover: '#F5F5F5',
+  border: '#E5E5E5', borderHi: '#D4D4D4',
+  t1: '#0A0A0A', t2: '#525252', t3: '#737373', t4: '#A3A3A3',
+  orange: '#E87722', blue: '#2563EB',
+  red: '#DC2626', gold: '#92702A',
+  green: '#16A34A', violet: '#7C3AED', teal: '#0D9488',
 };
 
 const TIERS: Record<string, { c: string; l: string }> = {
   CRITICAL: { c: C.red, l: 'Critical' },
-  HIGH_RISK: { c: C.gold, l: 'High Risk' },
-  WATCH: { c: '#CCAA30', l: 'Watch' },
+  HIGH_RISK: { c: C.orange, l: 'High Risk' },
+  WATCH: { c: C.gold, l: 'Watch' },
   HEALTHY: { c: C.green, l: 'Healthy' },
 };
 
@@ -96,14 +99,14 @@ function Info({ term, ctx, children }: { term: string; ctx?: string; children: R
       onMouseLeave={() => { clearTimeout(to.current); setShow(false); }}
     >
       {children}
-      <span className="ml-1 inline-flex items-center justify-center w-3.5 h-3.5 rounded-full text-[7px] font-bold cursor-help" style={{ background: C.border, color: C.t3 }}>?</span>
+      <span className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full text-[8px] font-bold cursor-help" style={{ background: '#F0F0F0', color: '#6B6B6B' }}>?</span>
       <AnimatePresence>
         {show && (
           <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
-            className="absolute z-50 top-full left-0 mt-2 w-72 p-4" style={{ background: '#1C1C2C', border: `1px solid ${C.borderHi}`, borderRadius: '8px' }}>
-            <div className="absolute bottom-full left-6 w-2 h-2 rotate-45 mb-[-5px]" style={{ background: '#1C1C2C', borderTop: `1px solid ${C.borderHi}`, borderLeft: `1px solid ${C.borderHi}` }} />
-            <div className="text-[10px] font-mono uppercase tracking-wider mb-2" style={{ color: C.blue }}>{term}</div>
-            {ld ? <span className="text-[11px]" style={{ color: C.t3 }}>Reasoning...</span> : <p className="text-[12px] leading-relaxed" style={{ color: '#D4D4E0' }}>{text}</p>}
+            className="absolute z-50 top-full left-0 mt-2 w-72 p-5 rounded-lg shadow-xl" style={{ background: '#FFFFFF', border: '1px solid rgba(0,0,0,0.08)' }}>
+            <div className="absolute bottom-full left-6 w-2.5 h-2.5 rotate-45 mb-[-5px]" style={{ background: '#FFFFFF', borderTop: '1px solid rgba(0,0,0,0.08)', borderLeft: '1px solid rgba(0,0,0,0.08)' }} />
+            <div className="text-[10px] font-semibold uppercase tracking-wider mb-2" style={{ color: '#E87722' }}>{term}</div>
+            {ld ? <span className="text-[12px] font-medium" style={{ color: '#6B6B6B' }}>Reasoning...</span> : <p className="text-[13px] leading-relaxed font-medium" style={{ color: '#1A1A1A' }}>{text}</p>}
           </motion.div>
         )}
       </AnimatePresence>
@@ -130,10 +133,10 @@ function meshBar(idx: number, height: number, color: string, label: string, bw =
 }
 
 const scene3D = (xt: string, yt: string, zt: string) => ({
-  xaxis: { title: { text: xt, font: { size: 9, color: C.t3 } }, gridcolor: C.border, zerolinecolor: C.border, backgroundcolor: 'rgba(0,0,0,0)' },
-  yaxis: { title: { text: yt, font: { size: 9, color: C.t3 } }, gridcolor: C.border, zerolinecolor: C.border, backgroundcolor: 'rgba(0,0,0,0)' },
-  zaxis: { title: { text: zt, font: { size: 9, color: C.t3 } }, gridcolor: C.border, zerolinecolor: C.border, backgroundcolor: 'rgba(0,0,0,0)' },
-  bgcolor: 'rgba(0,0,0,0)',
+  xaxis: { title: { text: xt, font: { size: 9, color: C.t3 } }, gridcolor: C.border, zerolinecolor: C.border, backgroundcolor: 'rgba(10,22,40,0)' },
+  yaxis: { title: { text: yt, font: { size: 9, color: C.t3 } }, gridcolor: C.border, zerolinecolor: C.border, backgroundcolor: 'rgba(10,22,40,0)' },
+  zaxis: { title: { text: zt, font: { size: 9, color: C.t3 } }, gridcolor: C.border, zerolinecolor: C.border, backgroundcolor: 'rgba(10,22,40,0)' },
+  bgcolor: 'rgba(10,22,40,0)',
 });
 const pCfg = { displayModeBar: false, responsive: true };
 const pLay = { paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)', font: { family: 'monospace', color: C.t2, size: 10 }, showlegend: false };
@@ -208,10 +211,13 @@ export default function DecisionStudio() {
   const pd = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(b => ({ range: `${b}%`, count: wells.filter(w => w.current_progress_pct >= b && w.current_progress_pct < b + 10).length }));
 
   if (ld) return (
-    <div className="w-full h-full flex items-center justify-center" style={{ background: C.bg }}>
+    <div className="w-full h-full flex items-center justify-center" style={{ background: '#FFFFFF', fontFamily: '"Figtree", sans-serif' }}>
       <div className="flex flex-col items-center gap-6">
-        <div className="relative w-14 h-14"><div className="absolute inset-0 border rounded-full" style={{ borderColor: C.border }} /><div className="absolute inset-0 border-t-2 rounded-full animate-spin" style={{ borderColor: C.blue }} /></div>
-        <div className="text-[11px] font-mono tracking-[0.4em] uppercase" style={{ color: C.t3 }}>Loading...</div>
+        <div className="relative w-12 h-12">
+          <div className="absolute inset-0 border-2 rounded-full" style={{ borderColor: '#F0F0F0' }} />
+          <div className="absolute inset-0 border-2 border-t-[#1A1A1A] rounded-full animate-spin" />
+        </div>
+        <div className="text-[11px] font-semibold tracking-[0.2em] uppercase" style={{ color: '#6B6B6B' }}>Loading...</div>
       </div>
     </div>
   );
@@ -221,102 +227,181 @@ export default function DecisionStudio() {
 
   // === 3D PLOTLY DATA ===
   const meshBars3D = rigP.map((r, i) => meshBar(i, r.progress, barCol(r.progress), r.rig));
-  const featBars3D = feat.map((ft, i) => meshBar(i, ft.importance * 1000, [C.blue, C.violet, C.teal, C.green, C.gold, C.red][i % 6], ft.feature, 0.3, 0.3));
+  const featBars3D = feat.map((ft, i) => meshBar(i, ft.importance * 1000, [C.orange, C.violet, C.green, C.gold, C.teal, C.red][i % 6], ft.feature, 0.3, 0.3));
 
   const scatter3D = {
     data: [{ type: 'scatter3d' as const, mode: 'markers' as const,
       x: rigP.map(r => r.progress), y: rigP.map(r => r.count), z: rigP.map((_, i) => (i + 1) * 8),
       text: rigP.map(r => `${r.rig}\n${r.progress}% avg\n${r.count} wells`),
-      marker: { size: rigP.map(r => Math.max(r.count * 1.5, 4)), color: rigP.map(r => r.progress),
-        colorscale: [[0, C.red], [0.4, C.gold], [1, C.green]], opacity: 0.9, line: { width: 0.5, color: 'rgba(255,255,255,0.2)' } },
+      marker: { size: rigP.map(r => Math.max(r.count * 1.5, 4)), color: C.orange, opacity: 0.9 },
     }],
     layout: { ...pLay, height: 310, scene: { ...scene3D('Progress %', 'Wells', 'Index'), camera: { eye: { x: 1.5, y: 1.5, z: 0.7 } } }, margin: { l: 0, r: 0, t: 10, b: 0 } },
   };
 
   const surface3D = {
     data: [{ type: 'surface' as const, z: [pd.map(p => p.count), pd.map(p => p.count * 0.65), pd.map(p => p.count * 0.3)],
-      colorscale: [[0, '#1a1a40'], [0.3, C.violet], [0.6, C.blue], [1, C.teal]], showscale: false,
-      contours: { z: { show: true, usecolormap: true, highlightcolor: '#fff', project: { z: true } } },
+      color: C.orange, showscale: false,
+      contours: { z: { show: true, usecolormap: false, highlightcolor: '#FFFFFF', project: { z: true } } },
     }],
     layout: { ...pLay, height: 310, scene: { ...scene3D('Bucket', 'Layer', 'Count'), camera: { eye: { x: 1.6, y: 1.3, z: 0.6 } } }, margin: { l: 0, r: 0, t: 10, b: 0 } },
   };
 
+  // Hermes Bespoke Icons - Each uniquely tailored, hand-crafted feel
+  // Like custom engravings on luxury goods - no two are the same language
+  
+  const IconPortfolio = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Oil Derrick - solid dark */}
+      <path d="M12 1L6.5 9H17.5L12 1Z" fill="#1A1A1A"/>
+      <path d="M12 1L6.5 9H12V1Z" fill="#2A2A2A"/>
+      <path d="M7.5 9L12 23L16.5 9H7.5Z" fill="#1A1A1A"/>
+      <path d="M7.5 9L12 23V9H7.5Z" fill="#333333"/>
+      <rect x="6" y="8.5" width="12" height="1.5" rx="0.5" fill="#0A0A0A"/>
+      <rect x="9" y="13" width="6" height="1" rx="0.3" fill="#0A0A0A" opacity="0.6"/>
+      <rect x="10" y="17" width="4" height="1" rx="0.3" fill="#0A0A0A" opacity="0.4"/>
+    </svg>
+  );
+
+  const IconCritical = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Lightning Bolt - solid dark */}
+      <path d="M13 2L4.5 14H11L8.5 22L19.5 10H13L15 2H13Z" fill="#1A1A1A"/>
+      <path d="M13 2L4.5 14H11L13 2Z" fill="#2A2A2A"/>
+      <path d="M11 14L8.5 22L19.5 10H13L11 14Z" fill="#0A0A0A"/>
+    </svg>
+  );
+
+  const IconAtRisk = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Hourglass - solid dark */}
+      <rect x="5" y="1" width="14" height="2.5" rx="0.8" fill="#0A0A0A"/>
+      <rect x="5" y="20.5" width="14" height="2.5" rx="0.8" fill="#0A0A0A"/>
+      <path d="M7 3.5V7L12 12L17 7V3.5H7Z" fill="#1A1A1A"/>
+      <path d="M7 3.5V7L12 12V3.5H7Z" fill="#2A2A2A"/>
+      <path d="M7 20.5V17L12 12L17 17V20.5H7Z" fill="#1A1A1A"/>
+      <path d="M12 12L17 17V20.5H12V12Z" fill="#333333"/>
+      <circle cx="12" cy="17" r="1.5" fill="#444444"/>
+    </svg>
+  );
+
+  const IconAccuracy = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Target / Crosshair - solid dark */}
+      <circle cx="12" cy="12" r="10" fill="#1A1A1A"/>
+      <circle cx="12" cy="12" r="7" fill="#2A2A2A"/>
+      <circle cx="12" cy="12" r="4" fill="#1A1A1A"/>
+      <circle cx="12" cy="12" r="1.8" fill="#444444"/>
+      <rect x="11.25" y="1" width="1.5" height="4" rx="0.5" fill="#0A0A0A"/>
+      <rect x="11.25" y="19" width="1.5" height="4" rx="0.5" fill="#0A0A0A"/>
+      <rect x="1" y="11.25" width="4" height="1.5" rx="0.5" fill="#0A0A0A"/>
+      <rect x="19" y="11.25" width="4" height="1.5" rx="0.5" fill="#0A0A0A"/>
+    </svg>
+  );
+
+  const IconCIndex = () => (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* 3D Pulse / Heartbeat line - solid dark */}
+      <rect x="1" y="10.5" width="5" height="3" rx="1" fill="#1A1A1A"/>
+      <rect x="18" y="10.5" width="5" height="3" rx="1" fill="#1A1A1A"/>
+      <path d="M6 12L8.5 12L10 5L12.5 19L15 8L16.5 12L18 12" stroke="#1A1A1A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M6 12L8.5 12L10 5L12.5 19L15 8L16.5 12L18 12" stroke="#333333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+
   return (
-    <div className="w-full h-full overflow-y-auto relative" style={{ background: C.bg }}>
+    <div className="w-full h-full overflow-y-auto relative" style={{ background: '#FFFFFF', fontFamily: '"Figtree", sans-serif' }}>
       <AnimatePresence>
         {showStudio && <SequelForecastStudio onClose={() => setShowStudio(false)} />}
       </AnimatePresence>
       <AnimatePresence>
         {lb && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.93)' }}
+            className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: 'rgba(0,0,0,0.85)' }}
             onClick={() => setLb(null)}>
             <button onClick={() => setLb(null)} className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-[18px] z-[101]"
-              style={{ color: C.t1, background: C.card, border: `1px solid ${C.borderHi}`, borderRadius: '6px' }}>✕</button>
+              style={{ color: '#FFFFFF', background: '#1A1A1A', borderRadius: '4px' }}>✕</button>
             <motion.img initial={{ scale: 0.92 }} animate={{ scale: 1 }} exit={{ scale: 0.92 }}
-              src={lb} alt="Chart" className="max-w-[90vw] max-h-[85vh] object-contain" style={{ background: '#FAFAFA', borderRadius: '8px' }}
+              src={lb} alt="Chart" className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              style={{ background: '#FFFFFF' }}
               onClick={e => e.stopPropagation()} />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="max-w-[1400px] mx-auto px-8 py-6">
+      <div className="max-w-[1400px] mx-auto px-10 py-8">
         {/* HEADER */}
-        <motion.div {...f(0)} className="flex items-center justify-between mb-8">
+        <motion.div {...f(0)} className="flex items-center justify-between mb-10">
           <div>
-            <h1 className="text-[22px] font-semibold tracking-tight" style={{ color: C.t1 }}>Decision Studio</h1>
-            <p className="text-[11px] mt-1 font-mono" style={{ color: C.t3 }}>{total} Wells · Predictive Intelligence · R² {((met?.r2 || 0) * 100).toFixed(1)}%</p>
+            <h1 className="text-[28px] font-semibold tracking-tight" style={{ color: '#1A1A1A' }}>Decision Studio</h1>
+            <p className="text-[13px] mt-1 font-medium" style={{ color: '#6B6B6B' }}>{total} Wells · Predictive Intelligence · R² {((met?.r2 || 0) * 100).toFixed(1)}%</p>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={() => setShowStudio(true)} className="px-5 py-2 text-[10px] font-bold tracking-[0.15em] transition-colors uppercase flex items-center gap-2"
-              style={{ background: '#111111', color: C.t1, border: `1px solid ${C.border}` }}
-              onMouseEnter={e => e.currentTarget.style.background = '#222222'}
-              onMouseLeave={e => e.currentTarget.style.background = '#111111'}
+            <button onClick={() => setShowStudio(true)} className="px-6 py-2.5 text-[10px] font-semibold tracking-[0.2em] transition-all uppercase rounded-md"
+              style={{ background: '#E87722', color: '#FFFFFF' }}
+              onMouseEnter={e => e.currentTarget.style.background = '#D76B1A'}
+              onMouseLeave={e => e.currentTarget.style.background = '#E87722'}
             >
               SEQUELFORECAST
             </button>
-            <div className="flex" style={{ border: `1px solid ${C.border}`, borderRadius: '6px', overflow: 'hidden' }}>
-              <button onClick={() => setIs3D(false)} className="px-4 py-2 text-[11px] font-mono font-medium transition-all"
-                style={{ background: !is3D ? C.blue : C.card, color: !is3D ? '#fff' : C.t3 }}>2D</button>
-              <button onClick={() => setIs3D(true)} className="px-4 py-2 text-[11px] font-mono font-medium transition-all"
-                style={{ background: is3D ? C.blue : C.card, color: is3D ? '#fff' : C.t3 }}>3D</button>
+            <div className="flex rounded-md overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.15)' }}>
+              <button onClick={() => setIs3D(false)} className="px-4 py-2 text-[11px] font-semibold transition-all"
+                style={{ background: !is3D ? '#1A1A1A' : '#FFFFFF', color: !is3D ? '#FFFFFF' : '#1A1A1A' }}>2D</button>
+              <button onClick={() => setIs3D(true)} className="px-4 py-2 text-[11px] font-semibold transition-all"
+                style={{ background: is3D ? '#1A1A1A' : '#FFFFFF', color: is3D ? '#FFFFFF' : '#1A1A1A' }}>3D</button>
             </div>
-            {tier && <button onClick={() => setTier(null)} className="px-4 py-2 text-[10px] font-mono tracking-wider uppercase"
-              style={{ border: `1px solid ${C.borderHi}`, color: C.t2, background: C.card, borderRadius: '6px' }}>✕ Clear {TIERS[tier]?.l}</button>}
+            {tier && <button onClick={() => setTier(null)} className="px-4 py-2 text-[10px] font-semibold tracking-wider uppercase rounded-md"
+              style={{ border: '1px solid rgba(0,0,0,0.15)', color: '#1A1A1A', background: '#FFFFFF' }}>✕ Clear {TIERS[tier]?.l}</button>}
           </div>
         </motion.div>
 
-        {/* KPIs */}
-        <div className="grid grid-cols-5 gap-3 mb-6">
+        {/* KPIs - Premium Cards with Tailored Icons */}
+        <div className="grid grid-cols-5 gap-4 mb-8">
           {[
-            { l: 'Portfolio', v: total, d: 0, s: '', sub: 'Total wells', c: C.blue, ic: '◉' },
-            { l: 'Critical', v: crit, d: 0, s: '', sub: 'Immediate action', c: C.red, ic: '▲' },
-            { l: 'At Risk', v: hiR, d: 0, s: '', sub: 'Below target', c: C.gold, ic: '◆' },
-            { l: 'Accuracy', v: (met?.r2 || 0) * 100, d: 1, s: '%', sub: 'R² 4-week lead', c: C.green, ic: '●' },
-            { l: 'C-Index', v: 0.993, d: 3, s: '', sub: 'Survival model', c: C.violet, ic: '■' },
+            { l: 'Portfolio', v: total, d: 0, s: '', sub: 'Total wells', c: '#2563EB', bg: '#EFF6FF', Icon: IconPortfolio },
+            { l: 'Critical', v: crit, d: 0, s: '', sub: 'Immediate action', c: '#DC2626', bg: '#FEF2F2', Icon: IconCritical },
+            { l: 'At Risk', v: hiR, d: 0, s: '', sub: 'Below target', c: '#D97706', bg: '#FFFBEB', Icon: IconAtRisk },
+            { l: 'Accuracy', v: (met?.r2 || 0) * 100, d: 1, s: '%', sub: 'R² 4-week lead', c: '#16A34A', bg: '#F0FDF4', Icon: IconAccuracy },
+            { l: 'C-Index', v: 0.993, d: 3, s: '', sub: 'Survival model', c: '#7C3AED', bg: '#F5F3FF', Icon: IconCIndex },
           ].map((k, i) => (
-            <motion.div key={k.l} {...f(i + 1)} className="p-5 transition-all duration-200 cursor-default"
-              style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = k.c; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = C.border; }}>
-              <div className="flex items-center gap-2 mb-3">
-                <span style={{ color: k.c }}>{k.ic}</span>
-                <span className="text-[9px] font-mono tracking-[0.15em] uppercase" style={{ color: C.t3 }}>
+            <motion.div 
+              key={k.l} 
+              {...f(i + 1)} 
+              className="p-5 transition-all duration-200 cursor-default"
+              style={{ 
+                background: '#FFFFFF', 
+                borderRadius: '12px',
+                border: '1px solid #E5E5E5',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+              }}
+              onMouseEnter={e => { 
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)'; 
+              }}
+              onMouseLeave={e => { 
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'; 
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 flex items-center justify-center">
+                  <k.Icon />
+                </div>
+                <span className="text-[11px] font-semibold tracking-[0.05em] uppercase" style={{ color: '#6B6B6B' }}>
                   <Info term={k.l} ctx={k.sub}>{k.l}</Info>
                 </span>
               </div>
-              <div className="text-[28px] font-semibold tabular-nums" style={{ color: k.c }}><CountUp to={k.v} d={k.d} s={k.s} /></div>
-              <div className="text-[9px] mt-2 font-mono" style={{ color: C.t4 }}>{k.sub}</div>
+              <div className="text-[28px] font-bold tabular-nums leading-none mb-1.5" style={{ color: '#1A1A1A' }}>
+                <CountUp to={k.v} d={k.d} s={k.s} />
+              </div>
+              <div className="text-[11px]" style={{ color: '#9A9A9A' }}>{k.sub}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* ROW 2 */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        {/* ROW 2 - Charts */}
+        <div className="grid grid-cols-3 gap-4 mb-6">
           {/* Risk */}
-          <motion.div {...f(6)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-1" style={{ color: C.t3 }}><Info term="Risk Distribution">Risk Distribution</Info></div>
-            <div className="text-[9px] font-mono mb-3" style={{ color: C.t4 }}>Click segment to filter</div>
+          <motion.div {...f(6)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-1" style={{ color: '#6B6B6B' }}><Info term="Risk Distribution">Risk Distribution</Info></div>
+            <div className="text-[11px] font-medium mb-4" style={{ color: '#9A9A9A' }}>Click segment to filter</div>
             {is3D ? (
               <Plot data={[{ type: 'pie' as const, labels: riskD.map(d => TIERS[d.name]?.l || d.name), values: riskD.map(d => d.value),
                 marker: { colors: riskD.map(d => TIERS[d.name]?.c || C.t4) }, hole: 0.4, pull: riskD.map(d => tier === d.name ? 0.1 : 0.03),
@@ -346,31 +431,30 @@ export default function DecisionStudio() {
           </motion.div>
 
           {/* Progress */}
-          <motion.div {...f(7)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-4" style={{ color: C.t3 }}><Info term="Progress Distribution">Progress Distribution</Info></div>
+          <motion.div {...f(7)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-4" style={{ color: '#6B6B6B' }}><Info term="Progress Distribution">Progress Distribution</Info></div>
             {is3D ? <Plot {...surface3D} config={pCfg} style={{ width: '100%' }} /> : (
               <ResponsiveContainer width="100%" height={280}>
                 <AreaChart data={pd} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
-                  <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor={C.blue} stopOpacity={0.35} /><stop offset="95%" stopColor={C.blue} stopOpacity={0.02} /></linearGradient></defs>
                   <CartesianGrid strokeDasharray="3 3" stroke={C.border} /><XAxis dataKey="range" tick={{ fill: C.t3, fontSize: 9, fontFamily: 'monospace' }} axisLine={{ stroke: C.border }} />
                   <YAxis tick={{ fill: C.t3, fontSize: 9, fontFamily: 'monospace' }} axisLine={false} />
                   <Tooltip contentStyle={{ background: C.card, border: `1px solid ${C.borderHi}`, fontSize: '11px', fontFamily: 'monospace', borderRadius: '6px' }} />
-                  <Area type="monotone" dataKey="count" stroke={C.blue} strokeWidth={2} fill="url(#pg)" />
+                  <Area type="monotone" dataKey="count" stroke={C.orange} strokeWidth={2} fill={C.orange} fillOpacity={0.15} />
                 </AreaChart>
               </ResponsiveContainer>
             )}
           </motion.div>
 
           {/* Rig 3D Scatter / Radar */}
-          <motion.div {...f(8)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-4" style={{ color: C.t3 }}>
+          <motion.div {...f(8)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-4" style={{ color: '#6B6B6B' }}>
               <Info term="Rig Profile">{is3D ? 'Rig 3D Scatter' : 'Rig Capability Radar'}</Info>
             </div>
             {is3D ? <Plot {...scatter3D} config={pCfg} style={{ width: '100%' }} /> : (
               <ResponsiveContainer width="100%" height={280}>
                 <RadarChart data={radar}><PolarGrid stroke={C.border} /><PolarAngleAxis dataKey="rig" tick={{ fill: C.t3, fontSize: 8, fontFamily: 'monospace' }} />
                   <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 100]} />
-                  <Radar name="Progress" dataKey="progress" stroke={C.blue} fill={C.blue} fillOpacity={0.2} strokeWidth={2} />
+                  <Radar name="Progress" dataKey="progress" stroke={C.orange} fill={C.orange} fillOpacity={0.2} strokeWidth={2} />
                   <Radar name="Efficiency" dataKey="eff" stroke={C.green} fill={C.green} fillOpacity={0.1} strokeWidth={2} />
                 </RadarChart>
               </ResponsiveContainer>
@@ -379,8 +463,8 @@ export default function DecisionStudio() {
         </div>
 
         {/* RIG FLEET */}
-        <motion.div {...f(9)} className="mb-6 p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-          <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-4" style={{ color: C.t3 }}><Info term="Rig Fleet Performance">Rig Fleet Performance</Info></div>
+        <motion.div {...f(9)} className="mb-6 p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+          <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-4" style={{ color: '#6B6B6B' }}><Info term="Rig Fleet Performance">Rig Fleet Performance</Info></div>
           {is3D ? (
             <Plot data={meshBars3D as any} layout={{ ...pLay, height: 350,
               scene: { ...scene3D('Rig', 'Depth', 'Progress %'), camera: { eye: { x: 1.8, y: 1.2, z: 0.8 } },
@@ -402,12 +486,12 @@ export default function DecisionStudio() {
         </motion.div>
 
         {/* WELLS TABLE */}
-        <motion.div {...f(10)} className="mb-6" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-          <div className="p-5 pb-3">
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase" style={{ color: C.t3 }}>
+        <motion.div {...f(10)} className="mb-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+          <div className="p-6 pb-3">
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase" style={{ color: '#6B6B6B' }}>
               Priority Wells {tier && <span style={{ color: TIERS[tier]?.c }}> — {TIERS[tier]?.l}</span>}
             </div>
-            <div className="text-[9px] font-mono mt-1" style={{ color: C.t4 }}>{sw.length} entities · Click to expand</div>
+            <div className="text-[11px] font-medium mt-1" style={{ color: '#9A9A9A' }}>{sw.length} entities · Click to expand</div>
           </div>
           <div className="overflow-x-auto max-h-[420px] overflow-y-auto">
             <table className="w-full text-left border-collapse">
@@ -435,7 +519,7 @@ export default function DecisionStudio() {
                       {col.tooltip && showRiskInfo && (
                         <div className="absolute z-50 mt-2 w-72 p-3 border"
                           style={{ 
-                            background: '#0a0a0a', 
+                            background: '#FFFFFF', 
                             borderColor: C.border,
                           }}
                           onMouseEnter={() => setShowRiskInfo(true)}
@@ -503,10 +587,10 @@ export default function DecisionStudio() {
         </motion.div>
 
         {/* ML INTELLIGENCE */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <motion.div {...f(12)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-1" style={{ color: C.t3 }}><Info term="Feature Importance">Predictive Drivers</Info></div>
-            <div className="text-[9px] font-mono mb-4" style={{ color: C.t4 }}>AutoGluon permutation importance</div>
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <motion.div {...f(12)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-1" style={{ color: '#6B6B6B' }}><Info term="Feature Importance">Predictive Drivers</Info></div>
+            <div className="text-[11px] font-medium mb-4" style={{ color: '#9A9A9A' }}>AutoGluon permutation importance</div>
             {is3D ? (
               <Plot data={featBars3D as any} layout={{ ...pLay, height: 340,
                 scene: { ...scene3D('Feature', 'Depth', 'Importance'), camera: { eye: { x: 1.6, y: 1.4, z: 0.8 } },
@@ -520,27 +604,27 @@ export default function DecisionStudio() {
                   <XAxis type="number" tick={{ fill: C.t3, fontSize: 9, fontFamily: 'monospace' }} axisLine={{ stroke: C.border }} />
                   <YAxis type="category" dataKey="feature" tick={{ fill: C.t2, fontSize: 8, fontFamily: 'monospace' }} axisLine={false} width={120} />
                   <Tooltip contentStyle={{ background: C.card, border: `1px solid ${C.borderHi}`, fontSize: '11px', fontFamily: 'monospace', borderRadius: '6px' }} />
-                  <Bar dataKey="importance" fill={C.blue} radius={[0, 4, 4, 0]} />
+                  <Bar dataKey="importance" fill={C.orange} radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             )}
           </motion.div>
 
-          <motion.div {...f(13)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-1" style={{ color: C.t3 }}><Info term="SHAP Beeswarm">SHAP Analysis</Info></div>
-            <div className="text-[9px] font-mono mb-4" style={{ color: C.t4 }}>Variable impact direction</div>
+          <motion.div {...f(13)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-1" style={{ color: '#6B6B6B' }}><Info term="SHAP Beeswarm">SHAP Analysis</Info></div>
+            <div className="text-[11px] font-medium mb-4" style={{ color: '#9A9A9A' }}>Variable impact direction</div>
             <div className="overflow-hidden cursor-pointer rounded-lg" style={{ background: '#FAFAFA' }} onClick={() => setLb('/wmr_results/shap_beeswarm.png')}>
               <img src="/wmr_results/shap_beeswarm.png" alt="SHAP" className="w-full h-auto max-h-[300px] object-contain hover:opacity-90 transition-opacity" /></div>
           </motion.div>
         </div>
 
         {/* SURVIVAL */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
+        <div className="grid grid-cols-2 gap-4 mb-6">
           {[{ src: 'survival_kaplan_meier', t: 'Kaplan-Meier Curve', l: 'Completion Probability', d: 'Survival by rig tier', i: 14 },
             { src: 'completion_forecast', t: 'Completion Forecast', l: 'Timeline Forecast', d: '80% confidence intervals', i: 15 }].map(ch => (
-            <motion.div key={ch.src} {...f(ch.i)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-              <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-1" style={{ color: C.t3 }}><Info term={ch.t}>{ch.l}</Info></div>
-              <div className="text-[9px] font-mono mb-4" style={{ color: C.t4 }}>{ch.d}</div>
+            <motion.div key={ch.src} {...f(ch.i)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+              <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-1" style={{ color: '#6B6B6B' }}><Info term={ch.t}>{ch.l}</Info></div>
+              <div className="text-[11px] font-medium mb-4" style={{ color: '#9A9A9A' }}>{ch.d}</div>
               <div className="overflow-hidden cursor-pointer rounded-lg" style={{ background: '#FAFAFA' }} onClick={() => setLb(`/wmr_results/${ch.src}.png`)}>
                 <img src={`/wmr_results/${ch.src}.png`} alt={ch.l} className="w-full h-auto hover:opacity-90 transition-opacity" /></div>
             </motion.div>
@@ -548,30 +632,30 @@ export default function DecisionStudio() {
         </div>
 
         {/* MODEL DIAG */}
-        <div className="grid grid-cols-2 gap-3 mb-6">
-          <motion.div {...f(16)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-1" style={{ color: C.t3 }}><Info term="Model Diagnostics">Model Accuracy</Info></div>
-            <div className="flex gap-6 my-3">
-              {met && [{ l: 'RMSE', v: met.rmse.toFixed(4), c: C.blue }, { l: 'MAE', v: met.mae.toFixed(4), c: C.teal }, { l: 'R²', v: met.r2.toFixed(4), c: C.green }, { l: 'MAPE', v: `${met.mape_valid.toFixed(1)}%`, c: C.violet }].map(m => (
-                <div key={m.l}><div className="text-[8px] font-mono tracking-widest uppercase" style={{ color: C.t4 }}><Info term={m.l}>{m.l}</Info></div>
-                  <div className="text-[15px] font-semibold font-mono mt-0.5 tabular-nums" style={{ color: m.c }}>{m.v}</div></div>))}
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <motion.div {...f(16)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-1" style={{ color: '#6B6B6B' }}><Info term="Model Diagnostics">Model Accuracy</Info></div>
+            <div className="flex gap-8 my-4">
+              {met && [{ l: 'RMSE', v: met.rmse.toFixed(4), c: '#E87722' }, { l: 'MAE', v: met.mae.toFixed(4), c: '#0D9488' }, { l: 'R²', v: met.r2.toFixed(4), c: '#16A34A' }, { l: 'MAPE', v: `${met.mape_valid.toFixed(1)}%`, c: '#7C3AED' }].map(m => (
+                <div key={m.l}><div className="text-[9px] font-semibold tracking-widest uppercase" style={{ color: '#9A9A9A' }}><Info term={m.l}>{m.l}</Info></div>
+                  <div className="text-[18px] font-semibold mt-1 tabular-nums" style={{ color: m.c }}>{m.v}</div></div>))}
             </div>
             <div className="overflow-hidden cursor-pointer rounded-lg" style={{ background: '#FAFAFA' }} onClick={() => setLb('/wmr_results/ag_diagnostics.png')}>
               <img src="/wmr_results/ag_diagnostics.png" alt="Diag" className="w-full h-auto hover:opacity-90 transition-opacity" /></div>
           </motion.div>
 
-          <motion.div {...f(17)} className="p-5" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: '8px' }}>
-            <div className="text-[9px] font-mono tracking-[0.15em] uppercase mb-1" style={{ color: C.t3 }}><Info term="Cox Proportional Hazards">Completion Drivers</Info></div>
-            <div className="text-[9px] font-mono mb-4" style={{ color: C.t4 }}>Factors accelerating or delaying completion</div>
+          <motion.div {...f(17)} className="p-6" style={{ background: '#FFFFFF', borderRadius: '12px', border: '1px solid #E5E5E5', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+            <div className="text-[10px] font-semibold tracking-[0.08em] uppercase mb-1" style={{ color: '#6B6B6B' }}><Info term="Cox Proportional Hazards">Completion Drivers</Info></div>
+            <div className="text-[11px] font-medium mb-4" style={{ color: '#9A9A9A' }}>Factors accelerating or delaying completion</div>
             <div className="overflow-hidden cursor-pointer rounded-lg" style={{ background: '#FAFAFA' }} onClick={() => setLb('/wmr_results/survival_cox_hazard.png')}>
               <img src="/wmr_results/survival_cox_hazard.png" alt="Cox" className="w-full h-auto hover:opacity-90 transition-opacity" /></div>
           </motion.div>
         </div>
 
-        <div className="py-6 flex items-center gap-4">
-          <div className="h-px flex-1" style={{ background: C.border }} />
-          <span className="text-[8px] font-mono tracking-[0.2em] uppercase" style={{ color: C.t4 }}>SequelForecast Engine · Institutional Intelligence</span>
-          <div className="h-px flex-1" style={{ background: C.border }} />
+        <div className="py-8 flex items-center gap-4">
+          <div className="h-px flex-1" style={{ background: 'rgba(0,0,0,0.08)' }} />
+          <span className="text-[9px] font-semibold tracking-[0.2em] uppercase" style={{ color: '#9A9A9A' }}>SequelForecast Engine · Institutional Intelligence</span>
+          <div className="h-px flex-1" style={{ background: 'rgba(0,0,0,0.08)' }} />
         </div>
       </div>
     </div>

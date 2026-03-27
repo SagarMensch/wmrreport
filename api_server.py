@@ -56,6 +56,7 @@ def get_orchestrator():
 class QueryRequest(BaseModel):
     question: str
     session_id: Optional[str] = None
+    chat_history: Optional[list[dict]] = None
 
 
 class DrillDownRequest(BaseModel):
@@ -106,6 +107,7 @@ class ReasoningStep(BaseModel):
 
 class QueryResponse(BaseModel):
     question: str
+    response_type: str = "chart"  # text, chart, clarification
     sql_query: str = ""
     is_safe: bool = False
 
@@ -204,6 +206,39 @@ try:
 except Exception as e:
     log.error(f"Failed to mount predictive analytics module: {e}")
 
+# Mount Forecast Engine (Predictive Studio)
+_forecast_engine = None
+def get_forecast_engine():
+    global _forecast_engine
+    if _forecast_engine is None:
+        from forecast_engine import ForecastEngine
+        _forecast_engine = ForecastEngine()
+        log.info("✓ Forecast Engine loaded (Predictive Studio)")
+    return _forecast_engine
+
+@app.get("/api/forecast/wells")
+def forecast_well_list():
+    """List all wells with summary for the Predictive Studio selector."""
+    engine = get_forecast_engine()
+    wells = engine.get_well_list()
+    portfolio = engine.get_portfolio_summary()
+    return {"status": "success", "wells": wells, "portfolio": portfolio}
+
+@app.get("/api/forecast/well/{well_id}")
+def forecast_well_detail(well_id: str):
+    """Deep-dive for a single well: history, Gantt, milestones, forecast, risk."""
+    engine = get_forecast_engine()
+    detail = engine.get_well_detail(well_id)
+    if not detail.get("current_state"):
+        raise HTTPException(status_code=404, detail=f"Well '{well_id}' not found")
+    return {"status": "success", "data": detail}
+
+@app.get("/api/forecast/portfolio")
+def forecast_portfolio():
+    """Portfolio-level summary for the Predictive Studio dashboard."""
+    engine = get_forecast_engine()
+    return {"status": "success", "data": engine.get_portfolio_summary()}
+
 
 
 # ── Endpoints ────────────────────────────────────────────────────────────
@@ -220,7 +255,7 @@ def query_endpoint(req: QueryRequest):
 
     try:
         session_id = req.session_id if req.session_id else "default_session"
-        result = orchestrator.process(req.question, session_id=session_id)
+        result = orchestrator.process(req.question, session_id=session_id, chat_history=req.chat_history or [])
     except Exception as e:
         log.exception("Pipeline error")
         raise HTTPException(status_code=500, detail=str(e))
@@ -255,6 +290,7 @@ def query_endpoint(req: QueryRequest):
 
     return QueryResponse(
         question=result.question,
+        response_type=getattr(result, "response_type", "chart"),
         sql_query=result.sql_query,
         is_safe=result.is_safe,
         chart_type=result.chart_type,
@@ -493,8 +529,8 @@ if __name__ == "__main__":
     import uvicorn
     print()
     print("=" * 60)
-    print("  🧠 BASHIRA INTELLIGENCE — API Server v2.0")
-    print("  📊 Bloomberg-level Decision Engine")
+    print("  BASHIRA INTELLIGENCE - API Server v2.0")
+    print("  Bloomberg-level Decision Engine")
     print("=" * 60)
     print()
     print("  Endpoints:")
@@ -503,6 +539,14 @@ if __name__ == "__main__":
     print("    GET  /api/knowledge-graph — Neo4j graph data")
     print("    GET  /api/schema       — Database schema")
     print("    GET  /api/health       — System health")
+    print()
+    print("  Predictive Analytics (ML):")
+    print("    POST /predict/single   — Real-time well forecast")
+    print("    POST /predict/refresh  — Nightly batch evaluation")
+    print("    POST /predict/full     — GPU retrain trigger")
+    print("    GET  /predict/anomalies — Anomaly feed")
+    print("    GET  /predict/portfolio — Portfolio risk summary")
+    print("    GET  /predict/model-info — Model health status")
     print()
     print("  Swagger: http://localhost:8000/docs")
     print("=" * 60)

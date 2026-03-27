@@ -1,9 +1,10 @@
-﻿// @ts-nocheck
+// @ts-nocheck
 'use client';
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
+import WebGLGuard from './WebGLGuard';
 
 function GeologicalCore() {
   const coreRef = useRef<THREE.Group>(null);
@@ -84,20 +85,18 @@ function GeologicalCore() {
 
 export function DrillCoreSimulation() {
   return (
-    <Canvas
-      camera={{ position: [0, 0, 5.5], fov: 45 }}
-      // Made the canvas larger so the detail is visible
-      className="!w-48 !h-48 m-auto"
-      frameloop="always"
-    >
-      {/* High-intensity lighting to expose the PBR textures */}
-      <ambientLight color="#F5E8D5" intensity={2} />
-      <directionalLight position={[5, 5, 5]} intensity={6} color="#FFFFFF" />
-      {/* Fill light */}
-      <hemisphereLight skyColor="#F5E8D5" groundColor="#0F0C0A" intensity={1} />
-
-      <GeologicalCore />
-    </Canvas>
+    <WebGLGuard>
+      <Canvas
+        camera={{ position: [0, 0, 5.5], fov: 45 }}
+        className="!w-48 !h-48 m-auto"
+        frameloop="always"
+      >
+        <ambientLight color="#F5E8D5" intensity={2} />
+        <directionalLight position={[5, 5, 5]} intensity={6} color="#FFFFFF" />
+        <hemisphereLight skyColor="#F5E8D5" groundColor="#0F0C0A" intensity={1} />
+        <GeologicalCore />
+      </Canvas>
+    </WebGLGuard>
   );
 }
 

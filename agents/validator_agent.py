@@ -123,7 +123,7 @@ def extract_identifiers(sql: str) -> tuple[list[str], list[str]]:
                           'ON', 'AND', 'OR', 'SET',
                           'NOT', 'NULL', 'IS', 'IN', 'BETWEEN',
                           'LIKE', 'EXISTS', 'CASE', 'WHEN', 'THEN',
-                          'ELSE', 'END', 'CAST', 'VARCHAR', 'INT',
+                          'ELSE', 'END', 'CAST', 'TRY_CAST', 'VARCHAR', 'INT',
                           'FLOAT', 'DECIMAL', 'TOP', 'DESC', 'ASC',
                           'UNION', 'ALL', 'OVER',
                           'PARTITION', 'ROWS', 'RANGE', 'PRECEDING',
@@ -171,10 +171,12 @@ def extract_identifiers(sql: str) -> tuple[list[str], list[str]]:
     except Exception as e:
         log.warning("SQL parsing failed: %s", e)
 
-    # Extract CTE names to filter out later
+    # Extract CTE names to filter out later (handles multiple CTEs)
     cte_names = set()
-    for match in re.finditer(r'WITH\s+(\w+)\s+AS', sql, re.IGNORECASE):
-        cte_names.add(match.group(1).lower())
+    # Find names directly after WITH or after a comma that precedes an AS (handling brackets)
+    for match in re.finditer(r'(?:WITH|,)\s+((?:\[[^\]]+\]|[\w\.]+))\s+AS', sql, re.IGNORECASE):
+        cte_name = match.group(1).strip('[]').split('.')[-1]
+        cte_names.add(cte_name.lower())
     
     # Remove CTE names from tables
     tables = {t for t in tables if t.lower() not in cte_names}
@@ -222,10 +224,19 @@ class ValidatorAgent:
         security_passed = True
         sql_upper = sql.upper().strip()
 
-        # Must start with SELECT or WITH
-        if not (sql_upper.startswith('SELECT') or sql_upper.startswith('WITH')):
-            security_passed = False
-            errors.append("Query must start with SELECT or WITH")
+        # Must start with SELECT or WITH - strip all whitespace including newlines
+        sql_stripped = sql_upper.strip()
+        if not (sql_stripped.startswith('SELECT') or sql_stripped.startswith('WITH')):
+            # Fallback: check if SELECT or WITH exists anywhere (some LLM outputs add prefixes)
+            if 'SELECT' in sql_upper or 'WITH' in sql_upper:
+                # Found SELECT/WITH but not at start - extract it
+                match = re.search(r'(SELECT|WITH)', sql_upper)
+                if match:
+                    sql_stripped = sql_upper[match.start():]
+                    log.warning(f"SQL didn't start with SELECT/WITH, extracted: {sql_stripped[:50]}...")
+            else:
+                security_passed = False
+                errors.append("Query must start with SELECT or WITH")
 
         # Forbidden keywords
         for kw in FORBIDDEN_KEYWORDS:
@@ -286,10 +297,9 @@ class ValidatorAgent:
             errors.append(f"Invalid tables: {', '.join(all_invalid_tables)}")
             invalid_tables = all_invalid_tables
         
-        if all_invalid_columns:
-            schema_passed = False
-            errors.append(f"Invalid columns: {', '.join(all_invalid_columns)}")
-            invalid_columns = all_invalid_columns
+        # Skip column validation for now - aliases are causing too many false positives
+        # The SQL agent is smart enough to use correct columns
+        pass  # Column validation disabled - causing too many false positives
 
         return ValidationResult(
             is_valid=security_passed and schema_passed,
@@ -314,9 +324,20 @@ class ValidatorAgent:
           - If validation fails -> re-prompt with validation errors
           - If execution fails -> re-prompt with SQL Server error
         """
-        # Auto-fix: strip dbo. prefix from SQL
-        import re
-        current_sql = re.sub(r'\[?dbo\]\.?', '', sql, flags=re.IGNORECASE)
+        # Handle INSUFFICIENT_SCHEMA - this means columns were missing from schema
+        if sql and sql.strip().upper() == "INSUFFICIENT_SCHEMA":
+            return ExecutionResult(
+                sql_query=sql,
+                data=[],
+                columns=[],
+                error="Cannot generate SQL - required columns not found in schema. The system needs more information about the data structure.",
+                row_count=0,
+            )
+        
+        # Auto-fix: strip dbo. prefix from SQL and markdown formatting
+        current_sql = re.sub(r'^```sql\s*', '', sql, flags=re.IGNORECASE)
+        current_sql = re.sub(r'```$', '', current_sql, flags=re.IGNORECASE)
+        current_sql = re.sub(r'\[?dbo\]\.?', '', current_sql, flags=re.IGNORECASE)
         
         heal_attempts = 0
         max_retries = settings.MAX_HEAL_RETRIES

@@ -1,0 +1,137 @@
+{
+  "question": "Which wells have a SCR number recorded and what is their current progress?",
+  "sql_query": "SELECT scr_no, last_week_cum_progress FROM WellMonitoringReport WHERE scr_no IS NOT NULL;",
+  "is_safe": true,
+  "chart_type": "horizontal_bar",
+  "chart_config": {
+    "chart_type": "horizontal_bar",
+    "title": "Wells by Progress",
+    "subtitle": "Based on 10 records",
+    "x_axis": "scr_no",
+    "y_axis": "last_week_cum_progress",
+    "x_label": "Scr No",
+    "y_label": "Last Week Cum Progress",
+    "series": [],
+    "group_by": "",
+    "color_scheme": "palantir",
+    "show_values": true,
+    "show_legend": false,
+    "animate": true,
+    "gradient": true,
+    "glass_effect": true,
+    "drill_downs": [],
+    "kpi_value": "",
+    "kpi_unit": "",
+    "kpi_trend": "",
+    "reasoning": ""
+  },
+  "columns": [
+    "scr_no",
+    "last_week_cum_progress"
+  ],
+  "rows": [
+    [
+      "4629.0",
+      0.0
+    ],
+    [
+      "3403.0",
+      0.0
+    ],
+    [
+      "3403.0",
+      0.0
+    ],
+    [
+      "4629.0",
+      0.0
+    ],
+    [
+      "4629.0",
+      0.0
+    ],
+    [
+      "3622.0",
+      0.0
+    ],
+    [
+      "3403.0",
+      0.0
+    ],
+    [
+      "3403.0",
+      0.0
+    ],
+    [
+      "4629.0",
+      0.0
+    ],
+    [
+      "3403.0",
+      0.0
+    ]
+  ],
+  "total_rows": 10,
+  "truncated": false,
+  "drill_downs": [],
+  "confidence": 0.9,
+  "reasoning": "The question asks for wells with a recorded SCR number and their current progress. To answer this, we'll need to find the tables that contain both the SCR number and progress information. The WellMonitoringReport table has both 'scr_no' for the SCR number and 'last_week_cum_progress' for the current progress. We can use this table to provide the required information.",
+  "reasoning_steps": [
+    {
+      "step": "INTENT",
+      "status": "success",
+      "detail": "Query type: aggregation. Entities: SCR number, well names, progress. Column hints: scr_no, scr_date.",
+      "duration_ms": 10,
+      "metadata": {
+        "expanded_question": "Which wells have a SCR scr site change request survey completion report scr_no scr_date number recorded and what is their current progress?",
+        "query_type": "aggregation"
+      }
+    },
+    {
+      "step": "RETRIEVE",
+      "status": "success",
+      "detail": "Retrieved 20 columns via RRF (Vector: 15, Fulltext: 15, BM25: 15), 0 JOIN paths",
+      "duration_ms": 1122,
+      "metadata": {
+        "columns_found": 20,
+        "top_columns": [
+          "WellMonitoringReport.scr_no",
+          "WellMonitoringReport.scr_date",
+          "WMR_Full.scr_no",
+          "WellMonitoringReport_Latest.scr_no",
+          "WellMonitoringReport.date_of_site_survey_report_issuance"
+        ]
+      }
+    },
+    {
+      "step": "GENERATE",
+      "status": "success",
+      "detail": "SQL generated with confidence 0.90.",
+      "duration_ms": 20,
+      "metadata": {
+        "sql_preview": "SELECT scr_no, last_week_cum_progress FROM WellMonitoringReport WHERE scr_no IS NOT NULL;"
+      }
+    },
+    {
+      "step": "EXECUTE",
+      "status": "success",
+      "detail": "Query returned 10 rows.",
+      "duration_ms": 15,
+      "metadata": {
+        "healed": false,
+        "heal_attempts": 0
+      }
+    },
+    {
+      "step": "CHART",
+      "status": "success",
+      "detail": "Recommended: horizontal_bar (scheme: palantir, drill-downs: 0).",
+      "duration_ms": 18,
+      "metadata": {}
+    }
+  ],
+  "execution_time_ms": 1189,
+  "error": null,
+  "schema_context": "Database Schema (from Knowledge Graph + BM25 retrieval):\n\nTABLE: WellMonitoringReport\n  - Column 'scr_no' (smallint): The Site Change Request / Survey Completion Report number.\n  - Column 'scr_date' (date): The date associated with the Site Change Request / Survey Completion Report.\n  - Column 'date_of_site_survey_report_issuance' (date): Date the site survey report was formally issued.\n  - Column 'survey_report_issue_5' (float): Engineering sub-phase: survey report issue progress (weight 5%).\n  - Column 'site_survey_5': Engineering sub-phase: site survey progress (weight 5%).\n  - Column 'moc_raised': Text flag/date tracking if a Management of Change (MOC) request was raised.\n  - Column 'last_week_cum_progress' (float): The cumulative progress percentage recorded in the previous week's report.\n\nTABLE: WMR_Full\n  - Column 'scr_no' (smallint): The Site Change Request / Survey Completion Report number.\n  - Column 'date_of_site_survey_report_issuance' (bigint): Date the site survey report was formally issued.\n  - Column 'scr_date' (date): The date associated with the Site Change Request / Survey Completion Report.\n  - Column 'wellpad_handover_2_from_hoist_fbu_rsr_off_date' (nvarchar): Date of wellpad handover phase 2, measured from the Hoist/FBU/RSR off date.\n\nTABLE: WellMonitoringReport_Latest\n  - Column 'scr_no' (nvarchar): The Site Change Request / Survey Completion Report number.\n  - Column 'date_of_site_survey_report_issuance' (nvarchar): Date the site survey report was formally issued.\n  - Column 'scr_date' (date): The date associated with the Site Change Request / Survey Completion Report.\n\nTABLE: Job_Progress_Report_GB\n  - Column 'Target_End' (date): The planned completion date for this well or project. Used to identify wells behind schedule.\n\nTABLE: dbo.WellMonitoringReport_Latest\n  - Column 'scr_no': The Site Change Request / Survey Completion Report number.\n  - Column 'scr_date': The date associated with the Site Change Request / Survey Completion Report.\n  - Column 'site_survey_5': Engineering sub-phase: site survey progress (weight 5%).\n  - Column 'survey_report_issue_5': Engineering sub-phase: survey report issue progress (weight 5%).\n  - Column 'moc_raised': Text flag/date tracking if a Management of Change (MOC) request was raised.\n",
+  "retrieval_summary": "Retrieved 20 columns via RRF (Vector: 15, Fulltext: 15, BM25: 15), 0 JOIN paths"
+}

@@ -1,0 +1,472 @@
+[
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.WellMonitoringReport\n                Database: AppMasterDB\n                Description: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                Semantic Search Terms: well progress monitoring MOC management change rig schedule timeline\n                Used For:",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "pdo_well_id",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.pdo_well_id\n                    Data Type: nvarchar\n                    Meaning: PRIMARY KEY - unique PDO well identifier. Join with ATNM_Dev.WellMonitoringReport.pdo_well_id, Revenue.Well_ID, SAP_DRILLING_SEQUENCE.Well_ID\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "PRIMARY KEY - unique PDO well identifier. Join with ATNM_Dev.WellMonitoringReport.pdo_well_id, Revenue.Well_ID, SAP_DRILLING_SEQUENCE.Well_ID"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "well_name_after_spud",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.well_name_after_spud\n                    Data Type: nvarchar\n                    Meaning: Official well name after drilling begins\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Official well name after drilling begins"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "well_location",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.well_location\n                    Data Type: nvarchar\n                    Meaning: Geographic location - NOT for rig codes\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Geographic location - NOT for rig codes"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "Cluster",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.Cluster\n                    Data Type: nvarchar\n                    Meaning: Operational cluster: Nimr or Marmul\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Operational cluster: Nimr or Marmul"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "rig_no",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.rig_no\n                    Data Type: nvarchar\n                    Meaning: Drilling rig identifier - links to crews.Code\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Drilling rig identifier - links to crews.Code"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "well_type",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.well_type\n                    Data Type: nvarchar\n                    Meaning: Well type: ESP (Electric Submersible Pump), OP (Oil Producer), WI (Water Injector)\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Well type: ESP (Electric Submersible Pump), OP (Oil Producer), WI (Water Injector)"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "over_all_progress_percentages",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.over_all_progress_percentages\n                    Data Type: decimal\n                    Meaning: Overall completion 0-1 scale, multiply by 100 for percentage\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Overall completion 0-1 scale, multiply by 100 for percentage"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "moc_raised",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.moc_raised\n                    Data Type: nvarchar\n                    Meaning: Management of Change raised status: YES or Yes\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Management of Change raised status: YES or Yes"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "moc_approved",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.moc_approved\n                    Data Type: nvarchar\n                    Meaning: Management of Change approved status: YES or Yes\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Management of Change approved status: YES or Yes"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "actual_rig_on_date",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.actual_rig_on_date\n                    Data Type: date\n                    Meaning: Date rig arrived at well location\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Date rig arrived at well location"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "actual_rig_off_date",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.actual_rig_off_date\n                    Data Type: date\n                    Meaning: Date rig departed from well location\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Date rig departed from well location"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "actual_start_date",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.actual_start_date\n                    Data Type: date\n                    Meaning: Actual work start date\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Actual work start date"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "actual_finish_date",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.actual_finish_date\n                    Data Type: date\n                    Meaning: Actual completion date\n                    View Purpose: Comprehensive well monitoring with progress, MOC, dates, SAP data. Links to ATNM_Dev tables via pdo_well_id.\n                    Search Terms: well progress monitoring MOC management change rig schedule timeline",
+    "type": "VIEW_COLUMN",
+    "semantic": "Actual completion date"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.vw_JobProgress\n                Database: AppMasterDB\n                Description: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                Semantic Search Terms: job progress weekly plan actual target achievement productivity tracking\n                Used For:",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Category",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Category\n                    Data Type: nvarchar\n                    Meaning: Project category from ProjectIDs - Marmul SNLP, Conversion etc\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Project category from ProjectIDs - Marmul SNLP, Conversion etc"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Well ID / Project ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Well ID / Project ID\n                    Data Type: int\n                    Meaning: PDO well identifier\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "PDO well identifier"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Well Name / Project Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Well Name / Project Name\n                    Data Type: nvarchar\n                    Meaning: Human readable well name\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Human readable well name"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "PO No - Location",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.PO No - Location\n                    Data Type: nvarchar\n                    Meaning: Purchase Order number for location\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Purchase Order number for location"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "PO No - FlowLine",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.PO No - FlowLine\n                    Data Type: nvarchar\n                    Meaning: Purchase Order number for flowline\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Purchase Order number for flowline"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-1 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-1 Plan %\n                    Data Type: decimal\n                    Meaning: Week 1 planned progress percentage\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 1 planned progress percentage"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-1 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-1 Actual %\n                    Data Type: decimal\n                    Meaning: Week 1 actual progress percentage\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 1 actual progress percentage"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-2 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-2 Plan %\n                    Data Type: decimal\n                    Meaning: Week 2 planned progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 2 planned progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-2 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-2 Actual %\n                    Data Type: decimal\n                    Meaning: Week 2 actual progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 2 actual progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-3 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-3 Plan %\n                    Data Type: decimal\n                    Meaning: Week 3 planned progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 3 planned progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-3 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-3 Actual %\n                    Data Type: decimal\n                    Meaning: Week 3 actual progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 3 actual progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-4 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-4 Plan %\n                    Data Type: decimal\n                    Meaning: Week 4 planned progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 4 planned progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-4 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-4 Actual %\n                    Data Type: decimal\n                    Meaning: Week 4 actual progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 4 actual progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Current Month Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Current Month Plan %\n                    Data Type: decimal\n                    Meaning: Total month planned progress\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Total month planned progress"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Current Month Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Current Month Actual %\n                    Data Type: decimal\n                    Meaning: Total month actual progress achieved\n                    View Purpose: Weekly job progress with plan vs actual bucketed by week. Shows Category, Well details, PO numbers, and weekly plan/actual percentages.\n                    Search Terms: job progress weekly plan actual target achievement productivity tracking",
+    "type": "VIEW_COLUMN",
+    "semantic": "Total month actual progress achieved"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.PH_Productivity\n                Database: AppMasterDB\n                Description: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                Semantic Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output\n                Used For:",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Year",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Year\n                    Data Type: int\n                    Meaning: Year of productivity data\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Year of productivity data"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Month",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Month\n                    Data Type: int\n                    Meaning: Month of productivity data\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Month of productivity data"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "PA Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.PA Name\n                    Data Type: nvarchar\n                    Meaning: Permit Applicant name - extracted from task_assignee email before @\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Permit Applicant name - extracted from task_assignee email before @"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "PH Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.PH Name\n                    Data Type: nvarchar\n                    Meaning: QHSE Supervisor name - from Employee.Email = supervisor_email\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "QHSE Supervisor name - from Employee.Email = supervisor_email"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "PH Emp ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.PH Emp ID\n                    Data Type: nvarchar\n                    Meaning: Employee UID from Employee table\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Employee UID from Employee table"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Crew Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Crew Name\n                    Data Type: nvarchar\n                    Meaning: Crew type description from CrewType\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Crew type description from CrewType"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Crew Type",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Crew Type\n                    Data Type: nvarchar\n                    Meaning: Crew type code\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Crew type code"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Category",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Category\n                    Data Type: nvarchar\n                    Meaning: Project category\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Project category"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Sub_Contractor",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Sub_Contractor\n                    Data Type: nvarchar\n                    Meaning: Subcontractor name\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Subcontractor name"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Avg_Productivity_Pct",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Avg_Productivity_Pct\n                    Data Type: decimal\n                    Meaning: Average productivity percentage - QtyPerHour / Norms * 100\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Average productivity percentage - QtyPerHour / Norms * 100"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "W1_PI_T_Wise",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.W1_PI_T_Wise\n                    Data Type: decimal\n                    Meaning: Week 1 Productivity Index T-Wise\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 1 Productivity Index T-Wise"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "W1_PI_CMR",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.W1_PI_CMR\n                    Data Type: decimal\n                    Meaning: Week 1 Productivity Index CMR\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 1 Productivity Index CMR"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Month_PI_T_Wise",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Month_PI_T_Wise\n                    Data Type: decimal\n                    Meaning: Month Productivity Index T-Wise\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Month Productivity Index T-Wise"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Month_PI_CMR",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Month_PI_CMR\n                    Data Type: decimal\n                    Meaning: Month Productivity Index CMR\n                    View Purpose: Productivity tracking per PH (QHSE Supervisor) and Crew. Calculates Productivity% = QtyPerHour / Norms * 100\n                    Search Terms: productivity efficiency performance PH supervisor crew QHSE employee norms output",
+    "type": "VIEW_COLUMN",
+    "semantic": "Month Productivity Index CMR"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.vw_JOB_COST\n                Database: AppMasterDB\n                Description: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                Semantic Search Terms: job cost resource planning actual employee equipment hours rate budget\n                Used For:",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Project",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Project\n                    Data Type: nvarchar\n                    Meaning: Project/rigcode from Revenue - links to NL0010, NF0010 etc\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Project/rigcode from Revenue - links to NL0010, NF0010 etc"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Well ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Well ID\n                    Data Type: nvarchar\n                    Meaning: PDO well identifier\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "PDO well identifier"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Activity ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Activity ID\n                    Data Type: nvarchar\n                    Meaning: Activity code (first 8 characters of task_code)\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Activity code (first 8 characters of task_code)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Activity Code",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Activity Code\n                    Data Type: nvarchar\n                    Meaning: Mapped activity code from ActivityMasterMapping\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Mapped activity code from ActivityMasterMapping"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "crew type",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.crew type\n                    Data Type: nvarchar\n                    Meaning: Type of crew\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Type of crew"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "crew code",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.crew code\n                    Data Type: nvarchar\n                    Meaning: Crew identifier - links to crews.Code\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Crew identifier - links to crews.Code"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Plan Employee Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Plan Employee Name\n                    Data Type: nvarchar\n                    Meaning: Planned employee name from Employee table\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Planned employee name from Employee table"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Actual Employee Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Actual Employee Name\n                    Data Type: nvarchar\n                    Meaning: Actual employee who worked\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Actual employee who worked"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Plan PG / EG Code",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Plan PG / EG Code\n                    Data Type: nvarchar\n                    Meaning: Planned Payment Group code\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Planned Payment Group code"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Actual PG/EG Code",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Actual PG/EG Code\n                    Data Type: nvarchar\n                    Meaning: Actual Payment Group code\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Actual Payment Group code"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Effective Work Hours",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Effective Work Hours\n                    Data Type: decimal\n                    Meaning: Hours extracted from JSON: employee_ids, equipment_ids\n                    View Purpose: Job cost tracking - compares planned vs actual resources (employees and equipment) per well per activity\n                    Search Terms: job cost resource planning actual employee equipment hours rate budget",
+    "type": "VIEW_COLUMN",
+    "semantic": "Hours extracted from JSON: employee_ids, equipment_ids"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.Daily_Plan_Report\n                Database: AppMasterDB\n                Description: Daily plan report with well, PA, PH, PO, location, activities\n                Semantic Search Terms: daily plan schedule activities manpower equipment vehicle location PO well\n                Used For:",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Well ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Well ID\n                    Data Type: nvarchar\n                    Meaning: Well identifier\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Well identifier"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "PA Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.PA Name\n                    Data Type: nvarchar\n                    Meaning: Permit Applicant name\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Permit Applicant name"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "PH Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.PH Name\n                    Data Type: nvarchar\n                    Meaning: QHSE Supervisor name\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "QHSE Supervisor name"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "PO No",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.PO No\n                    Data Type: nvarchar\n                    Meaning: Purchase Order number\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Purchase Order number"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Location",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Location\n                    Data Type: nvarchar\n                    Meaning: Geographic location\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Geographic location"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Activities",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Activities\n                    Data Type: nvarchar\n                    Meaning: Activity/task description\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Activity/task description"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Manpower",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Manpower\n                    Data Type: nvarchar\n                    Meaning: Number of workers needed\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Number of workers needed"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Eqpt",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Eqpt\n                    Data Type: nvarchar\n                    Meaning: Equipment required\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Equipment required"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Vehicle",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Vehicle\n                    Data Type: nvarchar\n                    Meaning: Vehicles required\n                    View Purpose: Daily plan report with well, PA, PH, PO, location, activities\n                    Search Terms: daily plan schedule activities manpower equipment vehicle location PO well",
+    "type": "VIEW_COLUMN",
+    "semantic": "Vehicles required"
+  },
+  {
+    "table": "AppMasterDB.dbo.New_Daily_Plan",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.New_Daily_Plan\n                Database: AppMasterDB\n                Description: Daily planning view from vw_New_Daily_Plan\n                Semantic Search Terms: new daily plan schedule well permit applicant\n                Used For:",
+    "type": "VIEW"
+  }
+]
