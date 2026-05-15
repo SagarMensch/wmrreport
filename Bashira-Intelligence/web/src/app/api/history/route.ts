@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Pool } from "pg";
 
 const connectionString =
-  "postgresql://postgres.uqboetjuyfxevzxnwors:PFil9KG4JhwvDtRn@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres";
+  "postgresql://neondb_owner:npg_NkUoV0R6IgDY@ep-lingering-dawn-apl8j3xh-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require";
 
 const pool = new Pool({
   connectionString,
