@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decision Studio ML Methodology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #101010;
+        --muted: #5f5f5f;
+        --line: #e6e6e6;
+        --panel: #fafafa;
+        --blue: #0f62fe;
+        --green: #00c805;
+        --yellow: #f1c21b;
+        --red: #da1e28;
+      }
+
+      * {
+        box-sizing: border-box;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Figtree", sans-serif;
+        line-height: 1.62;
+      }
+
+      body {
+        padding: 48px 32px 96px;
+      }
+
+      .page {
+        max-width: 1140px;
+        margin: 0 auto;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        line-height: 1.15;
+        color: var(--ink);
+      }
+
+      h1 {
+        font-size: 44px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        margin-top: 40px;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        margin-top: 28px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      h4 {
+        margin-top: 20px;
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      p {
+        margin: 12px 0 0;
+        font-size: 15px;
+        color: var(--ink);
+      }
+
+      .hero {
+        padding: 28px 30px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, #ffffff 0%, #fcfcfc 100%);
+      }
+
+      .eyebrow {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 16px;
+      }
+
+      .subhead {
+        margin-top: 16px;
+        max-width: 920px;
+        font-size: 17px;
+        color: var(--muted);
+      }
+
+      .meta-grid,
+      .summary-grid,
+      .card-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .meta-grid {
+        margin-top: 24px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .summary-grid {
+        margin-top: 20px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .card-grid {
+        margin-top: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metric,
+      .card,
+      .callout,
+      .formula,
+      .table-wrap {
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .metric {
+        padding: 18px 18px 16px;
+      }
+
+      .metric .label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--muted);
+      }
+
+      .metric .value {
+        margin-top: 10px;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .metric .note {
+        margin-top: 8px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .card {
+        padding: 20px 22px;
+      }
+
+      .callout {
+        margin-top: 16px;
+        padding: 18px 20px;
+        border-left: 6px solid var(--blue);
+        background: #f8fbff;
+      }
+
+      .callout.warn {
+        border-left-color: var(--yellow);
+        background: #fffcf0;
+      }
+
+      .callout.good {
+        border-left-color: var(--green);
+        background: #f6fff8;
+      }
+
+      .formula {
+        margin-top: 14px;
+        padding: 14px 16px;
+        background: #fbfbfb;
+      }
+
+      code,
+      pre {
+        font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+      }
+
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #161616;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 0 20px;
+        padding: 0;
+      }
+
+      li {
+        margin: 8px 0;
+        font-size: 15px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .table-wrap {
+        margin-top: 14px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+        text-align: left;
+        font-size: 14px;
+      }
+
+      th {
+        background: #f4f4f4;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      .toc {
+        margin-top: 22px;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+      }
+
+      .toc a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      .toc a:hover {
+        text-decoration: underline;
+      }
+
+      .chip {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 8px 8px 0 0;
+        background: #f3f3f3;
+        color: var(--ink);
+      }
+
+      .chip.blue {
+        background: #edf4ff;
+        color: var(--blue);
+      }
+
+      .chip.green {
+        background: #ebfff0;
+        color: #00852f;
+      }
+
+      .chip.yellow {
+        background: #fff8d8;
+        color: #8a6500;
+      }
+
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .section-rule {
+        margin-top: 36px;
+        border-top: 1px solid var(--line);
+      }
+
+      .appendix-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .mono-list {
+        font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 900px) {
+        body {
+          padding: 24px 18px 72px;
+        }
+
+        .meta-grid,
+        .summary-grid,
+        .card-grid,
+        .appendix-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="eyebrow">Decision Studio Methodology</div>
+        <h1>Decision Studio: full machine learning logic, risk drivers, and metric calculations</h1>
+        <p class="subhead">
+          This document explains, in detail, how every meaningful machine learning output in the current
+          Decision Studio tab is produced. It is written from the live pipeline and live output package, not
+          from an old notebook or UI placeholder.
+        </p>
+
+        <div class="meta-grid">
+          <div class="metric">
+            <div class="label">Best model package</div>
+            <div class="value" style="color: var(--blue)">Ensemble</div>
+            <div class="note">DecisionStudio_Ensemble_CatBoost_XGBoost</div>
+          </div>
+          <div class="metric">
+            <div class="label">Historical training rows</div>
+            <div class="value">14,626</div>
+            <div class="note">Deduped well-week rows</div>
+          </div>
+          <div class="metric">
+            <div class="label">Historical unique wells</div>
+            <div class="value">381</div>
+            <div class="note">Canonical key: pdo_well_id</div>
+          </div>
+          <div class="metric">
+            <div class="label">Current scored wells</div>
+            <div class="value">268</div>
+            <div class="note">Current portfolio in the live tab</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px">
+          <span class="chip blue">White background</span>
+          <span class="chip blue">Black text</span>
+          <span class="chip blue">IBM blue accent</span>
+          <span class="chip green">Robinhood green accent</span>
+          <span class="chip yellow">Solid yellow accent</span>
+          <span class="chip">Figtree typography</span>
+          <span class="chip">No page breaks</span>
+        </div>
+      </header>
+
+      <div class="toc">
+        <strong>Contents</strong>
+        <ol>
+          <li><a href="#scope">Scope of Decision Studio</a></li>
+          <li><a href="#data">Input data and row grain</a></li>
+          <li><a href="#features">Feature engineering</a></li>
+          <li><a href="#targets">Target engineering</a></li>
+          <li><a href="#training">Training and validation design</a></li>
+          <li><a href="#ensemble">Ensemble models and weights</a></li>
+          <li><a href="#risk">Risk score, risk drivers, and tiering</a></li>
+          <li><a href="#completion">Completion dates, intervals, and survival analysis</a></li>
+          <li><a href="#explainability">Feature importance, SHAP, and completion drivers</a></li>
+          <li><a href="#ui">How each panel in the Decision Studio tab is calculated</a></li>
+          <li><a href="#current">Current live package numbers</a></li>
+          <li><a href="#appendix">Appendix: exact feature list</a></li>
+        </ol>
+      </div>
+
+      <section id="scope">
+        <h2>1. Scope of Decision Studio</h2>
+        <p>
+          Decision Studio is a predictive operations cockpit built on a live exported package. It is not one single
+          model. It is a bundle of three related machine learning tasks plus survival analysis and explainability:
+        </p>
+        <ol>
+          <li>Predicting future progress four weeks ahead.</li>
+          <li>Predicting weeks remaining to completion.</li>
+          <li>Predicting the probability of missing the target date.</li>
+          <li>Estimating time-to-completion behavior with survival analysis.</li>
+          <li>Explaining the learned behavior through weighted feature importance and SHAP outputs.</li>
+        </ol>
+
+        <div class="callout">
+          <strong>Important distinction.</strong>
+          Decision Studio contains both model outputs and UI-derived summaries. For example, the risk score is a real
+          model output. The progress distribution chart is a summary built from current scored wells. The rig radar
+          view uses live rig aggregates and some synthetic presentation transforms for readability.
+        </div>
+      </section>
+
+      <section id="data" class="section-rule">
+        <h2>2. Input data and row grain</h2>
+        <p>The training script loads five CSV inputs:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Input file</th>
+                <th>Role in the pipeline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wmr_full.csv</code></td>
+                <td>Historical well monitoring history used to train the time-based models.</td>
+              </tr>
+              <tr>
+                <td><code>wmr_latest.csv</code></td>
+                <td>Current portfolio snapshot used for final scoring and the live UI package.</td>
+              </tr>
+              <tr>
+                <td><code>plan_snapshot.csv</code></td>
+                <td>Near-term plan fractions and target-end information.</td>
+              </tr>
+              <tr>
+                <td><code>job_progress_report_gb.csv</code></td>
+                <td>Project and current-month execution gap information.</td>
+              </tr>
+              <tr>
+                <td><code>sap_drilling_sequence.csv</code></td>
+                <td>Rig move and drilling-sequence context.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>2.1 Canonical well identifier</h3>
+        <p>
+          The canonical well key is <code>pdo_well_id</code>. This matters because a major earlier problem in Decision Studio
+          was incorrect well counting and training on a reduced or distorted portfolio when the unique identifier was wrong.
+        </p>
+
+        <h3>2.2 Historical row grain</h3>
+        <p>
+          Historical training is based on well-week style snapshots. The pipeline explicitly deduplicates historical data by:
+        </p>
+        <div class="formula">
+<pre>dedupe key = (pdo_well_id, snapshot_date)</pre>
+        </div>
+        <p>
+          If multiple rows exist for the same well and snapshot, the pipeline keeps the row with the strongest completeness
+          and the strongest progress information.
+        </p>
+
+        <h3>2.3 Current scoring row grain</h3>
+        <p>
+          Current scoring is one row per current well in <code>wmr_latest.csv</code>, enriched with lag features from history and
+          joined plan, report, and SAP signals.
+        </p>
+      </section>
+
+      <section id="features" class="section-rule">
+        <h2>3. Feature engineering</h2>
+        <p>
+          The feature set combines live status, lags, phase progress, plan pressure, target pressure, and categorical
+          operating context. The model candidate set contains 51 features: 44 numeric and 7 categorical.
+        </p>
+
+        <h3>3.1 Time-lag and momentum features</h3>
+        <div class="formula">
+<pre>progress_lag1        = prior snapshot progress
+progress_lag2        = two snapshots back
+progress_lag4        = four snapshots back
+progress_rolling3w   = rolling 3-snapshot mean
+progress_velocity    = progress_t - progress_lag1
+progress_accel       = progress_velocity - (progress_lag1 - progress_lag2)
+remaining_to_complete = 1 - over_all_progress_percentages</pre>
+        </div>
+
+        <h3>3.2 Plan-pressure features</h3>
+        <div class="formula">
+<pre>plan_5w_total  = W1 + W2 + W3 + W4 + W5 plan fractions
+plan_curve_gap = over_all_progress_percentages - plan_cumcurrentmonthplanfrac</pre>
+        </div>
+        <p>
+          This lets the model see both near-term planned workload and how far the actual progress line sits above or below
+          the plan curve.
+        </p>
+
+        <h3>3.3 Target-pressure features</h3>
+        <div class="formula">
+<pre>days_to_target      = expected_target_date - snapshot_date
+overdue_target_days = max(-days_to_target, 0)
+is_overdue_target   = 1 if days_to_target &lt; 0 else 0</pre>
+        </div>
+
+        <h3>3.4 Stall features</h3>
+        <div class="formula">
+<pre>stall_1w_flag = 1 if abs(progress_velocity) &lt; 0.005 else 0
+stall_4w_flag = 1 if abs(overall_progress - progress_lag4) &lt; 0.01 else 0</pre>
+        </div>
+
+        <h3>3.5 Phase-balance features</h3>
+        <p>
+          The pipeline uses phase columns such as location preparation, engineering, construction, commissioning, flowline,
+          and OHL progress to build higher-order consistency signals:
+        </p>
+        <div class="formula">
+<pre>phase_mean_progress   = mean(phase columns)
+phase_min_progress    = min(phase columns)
+phase_max_progress    = max(phase columns)
+phase_std_progress    = std(phase columns)
+phase_alignment_gap   = overall_progress - phase_mean_progress</pre>
+        </div>
+
+        <div class="callout good">
+          <strong>Current strongest learned progress drivers.</strong><br />
+          1. <code>phase_alignment_gap</code> - 30.37%<br />
+          2. <code>over_all_progress_percentages</code> - 24.30%<br />
+          3. <code>remaining_to_complete</code> - 19.72%<br />
+          4. <code>progress_rolling3w</code> - 7.45%
+        </div>
+      </section>
+
+      <section id="targets" class="section-rule">
+        <h2>4. Target engineering</h2>
+        <p>
+          This is one of the most important parts of the pipeline. The models are not trained on arbitrary labels. Each
+          target is created from forward-looking observed history.
+        </p>
+
+        <h3>4.1 Future progress target</h3>
+        <div class="formula">
+<pre>future_progress_4w = over_all_progress_percentages shifted -4 snapshots within each pdo_well_id</pre>
+        </div>
+        <p>
+          This is the target behind the main progress model. It answers: given what we know at snapshot <em>t</em>, what
+          progress level will we observe roughly four weekly snapshots later?
+        </p>
+
+        <h3>4.2 Completion event and observed completion date</h3>
+        <div class="formula">
+<pre>is_complete = (over_all_progress_percentages &gt;= 0.95) OR (actual_finish_date exists)
+
+observed_completion_date =
+  first future snapshot date where is_complete becomes true</pre>
+        </div>
+
+        <h3>4.3 Weeks remaining actual</h3>
+        <div class="formula">
+<pre>weeks_remaining_actual = (observed_completion_date - snapshot_date) / 7</pre>
+        </div>
+        <p>
+          This becomes the target for the completion-timing ensemble.
+        </p>
+
+        <h3>4.4 Miss-target observed</h3>
+        <div class="formula">
+<pre>eligible rows = expected_target_date is known
+                AND expected_target_date &lt;= latest snapshot in history
+
+completion_or_censor = observed_completion_date if complete
+                       else max historical snapshot date
+
+miss_target_observed = 1 if completion_or_censor &gt; expected_target_date else 0</pre>
+        </div>
+        <p>
+          This is the target for the risk classifier. It is not a hand-built score. It is an observed historical label
+          saying whether the well ended up missing target or not.
+        </p>
+      </section>
+
+      <section id="training" class="section-rule">
+        <h2>5. Training and validation design</h2>
+        <h3>5.1 Time-based validation</h3>
+        <p>
+          The pipeline does not use random row shuffling. It performs a time split on snapshot dates:
+        </p>
+        <div class="formula">
+<pre>sorted unique snapshot dates
+split index = max(1, int(number_of_dates * 0.8))
+train rows  = snapshot_date &lt; cutoff
+valid rows  = snapshot_date &gt;= cutoff</pre>
+        </div>
+        <p>
+          This is a much more defensible choice than in-sample evaluation because it tests the models on later time
+          periods than those used for fitting.
+        </p>
+
+        <h3>5.2 Missing-value handling</h3>
+        <ul>
+          <li>Numeric features are converted with numeric coercion and filled with the training-frame median.</li>
+          <li>Categorical features are converted to string and missing values become <code>Unknown</code>.</li>
+        </ul>
+
+        <h3>5.3 GPU fallback logic</h3>
+        <p>
+          The Kaggle version tries GPU first for CatBoost and XGBoost. If GPU fails, it falls back to CPU. The current
+          live package was successfully produced with GPU-backed training members.
+        </p>
+      </section>
+
+      <section id="ensemble" class="section-rule">
+        <h2>6. Ensemble models and weights</h2>
+        <p>
+          Decision Studio uses separate ensembles for progress, completion timing, and risk.
+        </p>
+
+        <h3>6.1 Progress ensemble</h3>
+        <p>Target: <code>future_progress_4w</code></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Backend</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>CatBoostRegressor_seed42</td><td>GPU</td><td>0.3327</td></tr>
+              <tr><td>CatBoostRegressor_seed84</td><td>GPU</td><td>0.3329</td></tr>
+              <tr><td>XGBoostRegressor</td><td>GPU</td><td>0.3344</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          For regression ensembles, member weights are derived from inverse validation error:
+        </p>
+        <div class="formula">
+<pre>weight_i = (1 / score_i) / sum(1 / score_j)
+where score_i = validation RMSE of member i</pre>
+        </div>
+
+        <h3>6.2 Weeks-to-completion ensemble</h3>
+        <p>Target: <code>weeks_remaining_actual</code></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Backend</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>CatBoostWeeks_seed42</td><td>GPU</td><td>0.3185</td></tr>
+              <tr><td>CatBoostWeeks_seed84</td><td>GPU</td><td>0.2947</td></tr>
+              <tr><td>XGBoostWeeks</td><td>GPU</td><td>0.3868</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>6.3 Risk ensemble</h3>
+        <p>Target: <code>miss_target_observed</code></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Backend</th>
+                <th>Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>CatBoostClassifier_seed42</td><td>GPU</td><td>0.5029</td></tr>
+              <tr><td>CatBoostClassifier_seed84</td><td>GPU</td><td>0.4971</td></tr>
+              <tr><td>XGBoostClassifier</td><td>GPU</td><td>0.0000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          For classification ensembles, member weights are normalized from validation AUC:
+        </p>
+        <div class="formula">
+<pre>weight_i = shifted_auc_i / sum(shifted_auc_j)</pre>
+        </div>
+      </section>
+
+      <section id="risk" class="section-rule">
+        <h2>7. Risk score, risk drivers, and tiering</h2>
+
+        <h3>7.1 Raw risk probability</h3>
+        <p>
+          Each risk model outputs the probability that a well will miss target. The ensemble first forms a weighted
+          average of raw classifier probabilities.
+        </p>
+
+        <h3>7.2 Platt calibration</h3>
+        <p>
+          The raw risk probabilities are not used directly. They are calibrated with logistic regression applied to the
+          logits of the raw ensemble output:
+        </p>
+        <div class="formula">
+<pre>clipped_p = clip(raw_probability, 1e-6, 1 - 1e-6)
+logit_p   = log(clipped_p / (1 - clipped_p))
+Platt calibration = LogisticRegression(logit_p, miss_target_observed)</pre>
+        </div>
+        <p>
+          This improves the probability scale so that the risk score behaves like a more usable calibrated probability.
+        </p>
+
+        <h3>7.3 Final risk score</h3>
+        <div class="formula">
+<pre>risk_probability = calibrated_probability * 100
+risk_score       = risk_probability
+risk_tier        = thresholded(risk_score)</pre>
+        </div>
+
+        <div class="callout good">
+          <strong>Key point.</strong>
+          In the current pipeline, <code>risk_score</code> is not a separate handcrafted score. It is exactly the calibrated
+          miss-target probability scaled to 0-100.
+        </div>
+
+        <h3>7.4 Tier thresholds</h3>
+        <p>
+          The thresholds are not hardcoded. They are derived from the distribution of calibrated validation
+          probabilities.
+        </p>
+        <div class="formula">
+<pre>if enough unique values:
+  run KMeans with 4 clusters on validation probabilities * 100
+  sort the 4 cluster centers
+  threshold = midpoint between neighboring centers
+else:
+  use empirical quantiles: 50%, 75%, 90%</pre>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tier boundary</th>
+                <th>Current threshold</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Watch starts at</td><td>27.43</td></tr>
+              <tr><td>High risk starts at</td><td>65.20</td></tr>
+              <tr><td>Critical starts at</td><td>88.71</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>7.5 What “risk drivers” means in this tab</h3>
+        <p>
+          The Decision Studio tab contains three different ideas that are easy to mix together:
+        </p>
+        <ol>
+          <li><strong>Risk score</strong>: calibrated probability of missing target.</li>
+          <li><strong>Predictive drivers</strong>: weighted feature importance from the progress ensemble.</li>
+          <li><strong>Risk SHAP drivers</strong>: signed SHAP effects from the CatBoost risk model, exported to <code>shap_risk_drivers.png</code>.</li>
+        </ol>
+        <p>
+          So “risk driver” can mean different things depending on which panel is being discussed. The portfolio-facing
+          rank chart in the main tab is still the progress-model feature ranking, not the risk-classifier SHAP chart.
+        </p>
+      </section>
+
+      <section id="completion" class="section-rule">
+        <h2>8. Completion dates, intervals, and survival analysis</h2>
+
+        <h3>8.1 Weeks remaining prediction</h3>
+        <p>
+          The weeks ensemble predicts <code>weeks_remaining_predicted</code> for each current well.
+        </p>
+
+        <h3>8.2 Completion dates</h3>
+        <div class="formula">
+<pre>predicted_completion_date = snapshot_date + round(weeks_remaining_predicted * 7 days)
+
+completion_date_early =
+  snapshot_date + round(max(weeks_remaining_predicted + residual_q10, 0) * 7 days)
+
+completion_date_late =
+  snapshot_date + round(max(weeks_remaining_predicted + residual_q90, 0) * 7 days)</pre>
+        </div>
+        <p>
+          The early and late dates come from the 10th and 90th quantiles of validation residuals in the
+          weeks-to-completion model. In practice, this is what produces the timing interval shown in the forecast chart.
+        </p>
+
+        <h3>8.3 Survival model</h3>
+        <p>
+          The pipeline also fits a Cox proportional hazards model on one row per well. This is separate from the weeks
+          ensemble. Its purpose is ranking and completion-timing behavior analysis, not replacing the point estimate.
+        </p>
+
+        <h4>Survival training row construction</h4>
+        <div class="formula">
+<pre>start_date = first historical snapshot for a well
+end_date   = observed completion date if complete, else last observed snapshot
+duration_weeks = max((end_date - start_date)/7, 0.1)
+event_observed = 1 if completed, else 0</pre>
+        </div>
+
+        <h4>Cox feature selection and stabilization</h4>
+        <p>
+          The survival block prunes features with too little variance or extreme collinearity, then retries Cox fitting
+          with stronger penalization if needed. This was added specifically so the live package would converge
+          reliably.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Current retained Cox covariates</th>
+                <th>Current value in live package</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Retained features</td><td>days_to_target, engg_kpi_after_rig_off_days, over_all_progress_percentages, plan_curve_gap, overall_loc_preparation_10_100, overall_const_10_100</td></tr>
+              <tr><td>Cox penalizer</td><td>0.12</td></tr>
+              <tr><td>C-index</td><td>0.8665</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>Survival predictions file</h4>
+        <p>
+          The pipeline exports <code>survival_predictions.csv</code> with completion and incompletion probabilities at
+          weeks 4, 8, 12, 16, 20, 24, and 26 for current wells:
+        </p>
+        <div class="formula">
+<pre>incomplete_prob_wK = S(K)
+completion_prob_wK = 1 - S(K)</pre>
+        </div>
+      </section>
+
+      <section id="explainability" class="section-rule">
+        <h2>9. Feature importance, SHAP, and completion drivers</h2>
+
+        <h3>9.1 Weighted ensemble feature importance</h3>
+        <p>
+          The main feature-importance ranking is not permutation importance. It is a weighted average of model-native
+          feature importances across the progress ensemble:
+        </p>
+        <div class="formula">
+<pre>for each progress ensemble member:
+  raw_importance = model-native importance
+  normalized_importance = raw_importance / sum(raw_importance)
+  weighted_component = normalized_importance * member_weight
+
+final_importance(feature) = sum(weighted_component across members)
+normalize final_importance to sum to 1</pre>
+        </div>
+
+        <h3>9.2 SHAP for the progress model</h3>
+        <p>
+          The live package exports <code>shap_beeswarm.png</code> and <code>shap_importance.png</code> from the first CatBoost member
+          in the progress ensemble, using a sampled validation frame of up to 400 rows.
+        </p>
+
+        <h3>9.3 SHAP for the risk model</h3>
+        <p>
+          The live package exports <code>shap_risk_drivers.png</code> from the first CatBoost member in the risk ensemble.
+          This is the signed average SHAP direction chart for the miss-target classifier.
+        </p>
+
+        <h3>9.4 Cox completion-driver chart</h3>
+        <p>
+          The completion-driver chart in the tab is the Cox hazard-ratio output from the survival model. It is not SHAP.
+          It answers which covariates are associated with faster or slower completion in the survival formulation.
+        </p>
+      </section>
+
+      <section id="ui" class="section-rule">
+        <h2>10. How each panel in the Decision Studio tab is calculated</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <h3>KPI cards</h3>
+            <p><strong>Portfolio</strong> = row count of <code>risk_scores.csv</code>.</p>
+            <p><strong>Critical / At Risk / Watch / Healthy</strong> = counts grouped by <code>risk_tier</code>.</p>
+          </div>
+
+          <div class="card">
+            <h3>Risk Distribution</h3>
+            <p>
+              Donut or 3D tier pillars built from grouped counts of <code>risk_tier</code> in <code>risk_scores.csv</code>.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Progress Distribution</h3>
+            <p>
+              Uses current well progress percentages and buckets them into 10-point bands:
+              0-10, 10-20, ..., 90-100.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Rig Capability Radar</h3>
+            <p>
+              Built from live rig aggregates. For each rig, the UI computes:
+            </p>
+            <div class="formula">
+<pre>progress = average current progress across wells on the rig
+load     = min(well_count * 4, 100)
+eff      = min(progress * 1.2, 100)</pre>
+            </div>
+            <p class="small">This is a presentation summary, not a separately trained ML model.</p>
+          </div>
+
+          <div class="card">
+            <h3>Rig Fleet Performance</h3>
+            <p>
+              Grouped by <code>rig_no</code> from live scored rows:
+            </p>
+            <div class="formula">
+<pre>avg_progress = mean(over_all_progress_percentages)
+wells        = nunique(pdo_well_id)
+mean_risk    = mean(risk_score)</pre>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Well table</h3>
+            <p>
+              Comes from <code>priority_wells_final.csv</code>, sorted by:
+            </p>
+            <div class="formula">
+<pre>sort by risk_score desc,
+        weeks_remaining_predicted desc,
+        current_progress_pct asc</pre>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Predictive Drivers</h3>
+            <p>
+              Uses <code>feature_importance.csv</code>. In 2D it is a horizontal bar chart; in 3D it is the same ranking
+              rendered as 3D prism bars.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Driver Distribution</h3>
+            <p>
+              Uses <code>shap_beeswarm.png</code> from the progress model.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Completion Probability</h3>
+            <p>
+              Uses <code>survival_kaplan_meier.png</code>. This is Kaplan-Meier probability of wells still being incomplete
+              over time, grouped by rig-tier cohorts.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Timeline Forecast</h3>
+            <p>
+              Uses <code>completion_forecast.png</code>. It takes the earliest 20 predicted completion rows and shows:
+            </p>
+            <div class="formula">
+<pre>horizontal line = early to late completion window
+red point       = median completion estimate
+vertical zero   = reference snapshot date</pre>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Model Accuracy</h3>
+            <p>
+              Uses <code>ag_metrics.json</code> and <code>training_manifest.json</code>. These values are not manually typed in the
+              UI. They are loaded from the live generated package.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Completion Drivers</h3>
+            <p>
+              Uses <code>survival_cox_hazard.png</code>. This is the Cox hazard-ratio chart from the survival block,
+              not a generic curve and not a copied image from an older package.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="current" class="section-rule">
+        <h2>11. Current live package numbers</h2>
+
+        <div class="summary-grid">
+          <div class="metric">
+            <div class="label">R2</div>
+            <div class="value" style="color: var(--green)">0.9476</div>
+            <div class="note">Progress ensemble validation</div>
+          </div>
+          <div class="metric">
+            <div class="label">RMSE</div>
+            <div class="value" style="color: var(--blue)">0.0835</div>
+            <div class="note">4-week progress target</div>
+          </div>
+          <div class="metric">
+            <div class="label">MAE</div>
+            <div class="value">0.0389</div>
+            <div class="note">Average absolute progress error</div>
+          </div>
+          <div class="metric">
+            <div class="label">MAPE</div>
+            <div class="value" style="color: var(--yellow)">20.21%</div>
+            <div class="note">Guarded percentage error</div>
+          </div>
+          <div class="metric">
+            <div class="label">AUC</div>
+            <div class="value" style="color: var(--blue)">0.9990</div>
+            <div class="note">Risk classifier discrimination</div>
+          </div>
+          <div class="metric">
+            <div class="label">Brier</div>
+            <div class="value">0.0029</div>
+            <div class="note">Risk probability calibration error</div>
+          </div>
+          <div class="metric">
+            <div class="label">C-index</div>
+            <div class="value" style="color: var(--green)">0.8665</div>
+            <div class="note">Survival ordering quality</div>
+          </div>
+          <div class="metric">
+            <div class="label">Risk tier split</div>
+            <div class="value">133 / 37 / 63 / 35</div>
+            <div class="note">Critical / High risk / Watch / Healthy</div>
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <strong>Interpretation caution.</strong>
+          The current risk model separates the portfolio strongly and now produces realistic tier counts, but some of the
+          top-end probabilities still saturate near the upper limit. That means the tiering is usable, while the last
+          decimal places of the top probabilities should not be over-interpreted as perfect calibration.
+        </div>
+      </section>
+
+      <section id="appendix" class="section-rule">
+        <h2>12. Appendix: exact feature list used by the ensemble</h2>
+        <p>
+          These are the candidate features defined in the current trainer. Only features present in the exported data are
+          included at run time.
+        </p>
+
+        <div class="appendix-grid">
+          <div class="card">
+            <h3>Numeric features</h3>
+            <div class="mono-list">
+              over_all_progress_percentages<br />
+              progress_lag1<br />
+              progress_lag2<br />
+              progress_lag4<br />
+              progress_rolling3w<br />
+              progress_velocity<br />
+              progress_accel<br />
+              remaining_to_complete<br />
+              access_road_5<br />
+              earth_work_60<br />
+              cellar_20<br />
+              beam_pump_base_esp_pcp_foundation_5<br />
+              water_2<br />
+              pe_fussion_pull_20<br />
+              overall_loc_preparation_10_100<br />
+              overall_engg_10_100<br />
+              overall_const_10_100<br />
+              overall_comm_progress_100<br />
+              flowline_construction_progress<br />
+              ohl_progress<br />
+              overall_ohl_progr_100<br />
+              engg_kpi_after_rig_off_days<br />
+              report_current_month_gap<br />
+              sap_move_days_max<br />
+              sap_move_days_mean<br />
+              sap_rig_load<br />
+              plan_w1_plan_frac<br />
+              plan_w2_plan_frac<br />
+              plan_w3_plan_frac<br />
+              plan_w4_plan_frac<br />
+              plan_w5_plan_frac<br />
+              plan_5w_total<br />
+              plan_cumcurrentmonthplanfrac<br />
+              plan_curve_gap<br />
+              days_to_target<br />
+              overdue_target_days<br />
+              is_overdue_target<br />
+              stall_1w_flag<br />
+              stall_4w_flag<br />
+              phase_mean_progress<br />
+              phase_min_progress<br />
+              phase_max_progress<br />
+              phase_std_progress<br />
+              phase_alignment_gap
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Categorical features</h3>
+            <div class="mono-list">
+              rig_no<br />
+              well_type<br />
+              buffer_status<br />
+              sap_field<br />
+              sap_work_center<br />
+              sap_pdo_well_type<br />
+              project_name
+            </div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Final reading guidance.</strong>
+          If someone challenges Decision Studio, answer in this order:
+        </div>
+        <ol>
+          <li>The package is trained on deduped historical well snapshots keyed by <code>pdo_well_id</code>.</li>
+          <li>The main risk score is calibrated miss-target probability times 100.</li>
+          <li>The tier thresholds are learned from validation probability structure, not hardcoded.</li>
+          <li>The forecast dates come from the completion ensemble plus residual quantile bands.</li>
+          <li>The explainability outputs come from weighted feature importance, SHAP, and a separate Cox survival model.</li>
+        </ol>
+      </section>
+    </div>
+  </body>
+</html>

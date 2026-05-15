@@ -1,0 +1,96 @@
+{
+  "generated_files": [
+    "ag_metrics.json",
+    "risk_scores.csv",
+    "feature_importance.csv",
+    "priority_wells_final.csv",
+    "training_manifest.json",
+    "ag_leaderboard.csv",
+    "survival_predictions.csv",
+    "ag_diagnostics.png",
+    "feature_importance.png",
+    "completion_forecast.png",
+    "rig_performance.png",
+    "shap_beeswarm.png",
+    "shap_importance.png",
+    "shap_risk_drivers.png",
+    "survival_kaplan_meier.png",
+    "survival_cox_hazard.png"
+  ],
+  "training_rows": 14626,
+  "deduped_well_week_rows": 14626,
+  "unique_wells": 381,
+  "tier_thresholds": {
+    "watch": 27.425921944579542,
+    "high_risk": 65.20468637017349,
+    "critical": 88.7142146072132
+  },
+  "risk_metrics": {
+    "auc": 0.9990288433524327,
+    "brier": 0.0029059004598988862
+  },
+  "survival_metrics": {
+    "c_index": 0.8664754972243668,
+    "cox_features_used": [
+      "days_to_target",
+      "engg_kpi_after_rig_off_days",
+      "over_all_progress_percentages",
+      "plan_curve_gap",
+      "overall_loc_preparation_10_100",
+      "overall_const_10_100"
+    ],
+    "cox_penalizer": 0.12
+  },
+  "best_model": "DecisionStudio_Ensemble_CatBoost_XGBoost",
+  "progress_ensemble_members": [
+    {
+      "name": "CatBoostRegressor_seed42",
+      "backend": "GPU",
+      "weight": 0.3326884655770948
+    },
+    {
+      "name": "CatBoostRegressor_seed84",
+      "backend": "GPU",
+      "weight": 0.33286518858595177
+    },
+    {
+      "name": "XGBoostRegressor",
+      "backend": "GPU",
+      "weight": 0.3344463458369535
+    }
+  ],
+  "weeks_ensemble_members": [
+    {
+      "name": "CatBoostWeeks_seed42",
+      "backend": "GPU",
+      "weight": 0.31853988408346084
+    },
+    {
+      "name": "CatBoostWeeks_seed84",
+      "backend": "GPU",
+      "weight": 0.2946521147501815
+    },
+    {
+      "name": "XGBoostWeeks",
+      "backend": "GPU",
+      "weight": 0.3868080011663578
+    }
+  ],
+  "risk_ensemble_members": [
+    {
+      "name": "CatBoostClassifier_seed42",
+      "backend": "GPU",
+      "weight": 0.5029009552264903
+    },
+    {
+      "name": "CatBoostClassifier_seed84",
+      "backend": "GPU",
+      "weight": 0.49708351457704414
+    },
+    {
+      "name": "XGBoostClassifier",
+      "backend": "GPU",
+      "weight": 1.5530196465612325e-05
+    }
+  ]
+}

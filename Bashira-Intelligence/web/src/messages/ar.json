@@ -1,0 +1,14 @@
+{
+  "Index": {
+    "status": "النظام يعمل",
+    "enter": "ادخل بصير"
+  },
+  "Login": {
+    "title": "التحقق من الوصول",
+    "emailLabel": "البريد الإلكتروني",
+    "emailParams": "user@altasnim.com",
+    "passwordLabel": "كلمة المرور",
+    "passwordParams": "••••••••",
+    "submit": "دخول"
+  }
+}

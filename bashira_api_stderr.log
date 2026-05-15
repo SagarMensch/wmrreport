@@ -1,0 +1,108 @@
+23:00:45 [bashira.anomaly] INFO: Anomaly tracker using SQL Server tables [dbo].[bashira_anomalies] and [dbo].[bashira_well_state]
+23:00:45 [bashira.api] INFO: \u2713 Predictive Analytics Sub-Router Mounted Successfully
+INFO:     Started server process [29888]
+INFO:     Waiting for application startup.
+23:00:46 [bashira.api] INFO: \U0001f680 Starting Bashira Intelligence API...
+23:01:13 [bashira.sql_agent] INFO: \u2713 Loaded 36 client training examples (total: 117)
+23:01:13 [bashira.orchestrator] INFO: ============================================================
+23:01:13 [bashira.orchestrator] INFO: Initializing Bashira Intelligence Pipeline
+23:01:13 [bashira.orchestrator] INFO: ============================================================
+23:01:13 [bashira.orchestrator] INFO: OK: DSPy configured with Mistral (mistral-large-latest)
+23:01:15 [bashira.neo4j] INFO: \u2713 Connected to Neo4j Aura (neo4j+s://4ba6a45a.databases.neo4j.io)
+23:01:15 [bashira.sql] INFO: \u2713 Connected to SQL Server ((localdb)\MSSQLLocalDB/AppMasterDB)
+23:01:15 [bashira.sql] INFO:    Schema loaded: 20 tables, 420 unique columns
+23:01:15 [bashira.bm25] INFO: Building BM25 index from C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\columns_atnm_dev.csv ...
+23:01:16 [bashira.bm25] INFO:    \u2713 BM25 index built: 626 documents
+23:01:16 [bashira.orchestrator] INFO: Initializing Graph Agent...
+23:01:16 [bashira.sql_agent] INFO: Injecting 117 training examples into SQL Agent (Manual Few-Shot)
+23:01:16 [bashira.sql_agent] INFO:    \u2713 Demos injected
+23:01:16 [bashira.orchestrator] INFO: Connecting to Supabase PostGres Checkpointer...
+23:01:17 [bashira.orchestrator] INFO: OK: Supabase Checkpointer Ready.
+23:01:17 [bashira.orchestrator] INFO: OK: Graph Agent initialized
+23:01:17 [bashira.orchestrator] INFO: ============================================================
+23:01:17 [bashira.api] INFO: \u2713 Pipeline ready
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8005 (Press CTRL+C to quit)
+23:01:17 [bashira.stan] INFO: [STAN] Added Git POSIX tools to PATH: C:\Program Files\Git\usr\bin
+23:01:17 [bashira.stan] INFO: [STAN] Added Git POSIX tools to PATH: C:\Program Files\Git\bin
+23:01:17 [bashira.stan] INFO: [STAN] Added MinGW toolchain to PATH: C:\Users\sagar\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin
+23:01:18 [bashira.causal] WARNING: Job_Progress_PlanSnapshot is missing locally; deriving plan snapshot features from Job_Progress_Report_GB
+23:01:19 [bashira.stan] INFO: [STAN] CmdStan already installed
+23:01:28 [bashira.api] INFO: \u2713 Causal Command workspace warmed
+23:01:28 [bashira.stan] INFO: [STAN] Compiling model: C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\stan_models\causal_effects.stan
+23:01:29 [bashira.stan] INFO: [STAN] \u2713 Model compiled successfully
+23:01:30 [cmdstanpy] INFO: CmdStan start processing
+23:01:30 [cmdstanpy] INFO: Chain [1] start processing
+23:01:30 [cmdstanpy] INFO: Chain [2] start processing
+23:01:30 [cmdstanpy] INFO: Chain [3] start processing
+23:01:30 [cmdstanpy] INFO: Chain [4] start processing
+23:01:41 [bashira.anomaly] INFO: Anomaly tracker using SQL Server tables [dbo].[bashira_anomalies] and [dbo].[bashira_well_state]
+23:01:42 [forecast_engine] INFO: [FE] Loaded history: 18969 rows, 381 wells
+23:01:42 [forecast_engine] INFO: [FE] Loaded latest: 268 wells
+23:01:42 [forecast_engine] INFO: [FE] Loaded job progress: 439 rows
+23:01:42 [forecast_engine] INFO: [FE] Refreshed latest snapshot from live SQL: 268 wells
+23:01:42 [forecast_engine] INFO: [FE] Refreshed job progress from live SQL: 439 rows
+23:01:42 [bashira.api] INFO: \u2713 Forecast Engine loaded (Predictive Studio)
+23:02:02 [cmdstanpy] INFO: Chain [4] done processing
+23:02:05 [cmdstanpy] INFO: Chain [1] done processing
+23:02:06 [cmdstanpy] INFO: Chain [2] done processing
+23:02:08 [cmdstanpy] INFO: Chain [3] done processing
+23:02:09 [cmdstanpy] WARNING: Non-fatal error during sampling:
+Exception: student_t_lpdf: Scale parameter is 0, but must be positive finite! (in 'causal_effects.stan', line 117, column 2 to column 31)
+Consider re-running with show_console=True if the above output is unclear!
+23:02:39 [cmdstanpy] WARNING: Some chains may have failed to converge.
+	Chain 1 had 400 iterations at max treedepth (80.0%)
+	Chain 2 had 401 iterations at max treedepth (80.2%)
+	Chain 3 had 498 iterations at max treedepth (99.6%)
+	Chain 4 had 295 iterations at max treedepth (59.0%)
+	Use the "diagnose()" method on the CmdStanMCMC object to see further information.
+23:02:40 [bashira.stan] ERROR: Stan MCMC failed, falling to Laplace approximation
+Traceback (most recent call last):
+  File "C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\ml_venv\Lib\site-packages\cmdstanpy\utils\command.py", line 43, in do_command
+    proc = subprocess.Popen(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\sagar\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "C:\Users\sagar\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1538, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\causal_stan_service.py", line 169, in build_payload
+    payload = self._run_cmdstan_payload(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\causal_stan_service.py", line 461, in _run_cmdstan_payload
+    diagnostics = fit.diagnose()
+                  ^^^^^^^^^^^^^^
+  File "C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\ml_venv\Lib\site-packages\cmdstanpy\stanfit\mcmc.py", line 584, in diagnose
+    do_command(cmd=cmd, fd_out=result)
+  File "C:\Users\sagar\Downloads\Bashira-Intelligence (2)\Bashira-Intelligence\ml_venv\Lib\site-packages\cmdstanpy\utils\command.py", line 80, in do_command
+    raise RuntimeError(msg) from e
+RuntimeError: Command: ['C:\\Users\\sagar\\.cmdstan\\cmdstan-2.38.0\\bin\\diagnose.exe', 'C:\\Users\\sagar\\AppData\\Local\\Temp\\tmp_1abscjk\\causal_effects-20260405230130_1.csv', 'C:\\Users\\sagar\\AppData\\Local\\Temp\\tmp_1abscjk\\causal_effects-20260405230130_2.csv', 'C:\\Users\\sagar\\AppData\\Local\\Temp\\tmp_1abscjk\\causal_effects-20260405230130_3.csv', 'C:\\Users\\sagar\\AppData\\Local\\Temp\\tmp_1abscjk\\causal_effects-20260405230130_4.csv']
+failed with error [WinError 2] The system cannot find the file specified
+
+23:02:44 [bashira.causal] INFO: Bayesian layer: ok via laplace_approximation_empirical_bayes with 10 drivers and 33 counterfactual groups
+23:29:14 [neo4j.io] ERROR: [#DC63]  _: <CONNECTION> error: Failed to read from defunct connection ResolvedIPv4Address(('34.126.161.242', 7687)) (ResolvedIPv4Address(('34.126.161.242', 7687))): OSError('No data')
+23:29:14 [neo4j.pool] ERROR: Unable to retrieve routing information
+23:29:14 [bashira.orchestrator] ERROR: Knowledge graph fetch failed: Unable to retrieve routing information
+23:29:14 [forecast_engine] INFO: [FE] Refreshed latest snapshot from live SQL: 268 wells
+23:29:15 [neo4j.io] ERROR: [#DC64]  _: <CONNECTION> error: Failed to read from defunct connection IPv4Address(('p-mt-2a41353b6b9a-4-0037.production-orch-0695.neo4j.io', 7687)) (ResolvedIPv4Address(('34.126.161.242', 7687))): OSError('No data')
+23:29:15 [bashira.orchestrator] ERROR: Knowledge graph fetch failed: Failed to read from defunct connection IPv4Address(('p-mt-2a41353b6b9a-4-0037.production-orch-0695.neo4j.io', 7687)) (ResolvedIPv4Address(('34.126.161.242', 7687)))
+23:29:20 [predict_service] INFO: [INIT] Loading ML engine from: C:\Users\sagar\Downloads\Bashira-Intelligence (2)\wmr_results (1)
+23:29:20 [feature_engine] WARNING: [AG] autogluon.tabular not installed. Install with: pip install autogluon.tabular
+23:29:23 [feature_engine] INFO: [FE] Loaded training data: (7660, 59)
+23:29:25 [feature_engine] INFO: [FE] Training stats loaded: 58 features
+23:29:25 [feature_engine] WARNING: [RSF] scikit-survival not installed. Install with: pip install scikit-survival
+23:29:25 [feature_engine] INFO: [FI] Loaded 55 feature importances
+23:29:25 [feature_engine] INFO: [ML ENGINE] Initialization complete
+23:29:25 [predict_service] INFO: [INIT] ML engine ready: {'autogluon_loaded': False, 'rsf_loaded': False, 'feature_count': 58, 'target': 'target_lead_4w', 'forecast_horizon_weeks': 4}
+23:31:29 [forecast_engine] INFO: [FE] Refreshed job progress from live SQL: 439 rows
+23:31:29 [forecast_engine] INFO: [FE] Refreshed job progress from live SQL: 439 rows
+forrtl: error (200): program aborting due to window-CLOSE event
+Image              PC                Routine            Line        Source             
+KERNELBASE.dll     00007FFEA4F4A3CD  Unknown               Unknown  Unknown
+KERNEL32.DLL       00007FFEA758E8D7  Unknown               Unknown  Unknown
+ntdll.dll          00007FFEA82EC3FC  Unknown               Unknown  Unknown

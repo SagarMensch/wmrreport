@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bashira Intelligence Master Demo Dossier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7f8fa;
+        --panel: #ffffff;
+        --panel-soft: #fbfcfe;
+        --ink: #111111;
+        --muted: #56606e;
+        --line: #dde3ea;
+        --blue: #0f62fe;
+        --green: #00c805;
+        --yellow: #f1c21b;
+        --red: #b42318;
+        --navy: #111827;
+        --shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top right, rgba(15, 98, 254, 0.08), transparent 24%),
+          radial-gradient(circle at bottom left, rgba(0, 200, 5, 0.05), transparent 18%),
+          var(--bg);
+        color: var(--ink);
+        font-family: "Figtree", "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .page {
+        max-width: 1260px;
+        margin: 0 auto;
+        padding: 36px 28px 80px;
+      }
+
+      .hero,
+      .toc,
+      .card,
+      .callout,
+      .formula,
+      .table-wrap,
+      .section {
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 34px 36px 30px;
+        background:
+          linear-gradient(140deg, rgba(15, 98, 254, 0.07), transparent 28%),
+          linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(15, 98, 254, 0.15);
+        background: rgba(15, 98, 254, 0.07);
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        line-height: 1.12;
+      }
+
+      h1 {
+        margin-top: 18px;
+        font-size: 50px;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      h2 {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.035em;
+      }
+
+      h3 {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      h4 {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 12px 0 0;
+        font-size: 15px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 0 20px;
+        padding: 0;
+      }
+
+      li + li {
+        margin-top: 8px;
+      }
+
+      .subhead {
+        max-width: 980px;
+        margin-top: 16px;
+        font-size: 18px;
+        color: var(--muted);
+      }
+
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .metric-grid,
+      .table-grid,
+      .appendix-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1.3fr 0.7fr;
+        margin-top: 28px;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 24px;
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .card,
+      .section,
+      .callout,
+      .formula,
+      .table-wrap,
+      .toc {
+        padding: 22px 24px;
+      }
+
+      .metric {
+        padding: 18px 18px 16px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+      }
+
+      .metric .label,
+      .mini-label,
+      .table-caption {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #7a8593;
+      }
+
+      .metric .value {
+        margin-top: 10px;
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .metric .note {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .metric.blue .value,
+      .text-blue {
+        color: var(--blue);
+      }
+
+      .metric.green .value,
+      .text-green {
+        color: var(--green);
+      }
+
+      .metric.yellow .value,
+      .text-yellow {
+        color: #b58100;
+      }
+
+      .metric.red .value,
+      .text-red {
+        color: var(--red);
+      }
+
+      .section {
+        margin-top: 24px;
+      }
+
+      .section > p:first-of-type,
+      .section > .lead {
+        color: var(--muted);
+      }
+
+      .toc {
+        position: sticky;
+        top: 18px;
+      }
+
+      .toc h3 {
+        margin-bottom: 10px;
+      }
+
+      .toc a {
+        display: block;
+        padding: 8px 0;
+        font-size: 14px;
+        color: var(--ink);
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", Consolas, monospace;
+      }
+
+      .tag-row,
+      .tag-cluster {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--panel-soft);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .tag.blue {
+        color: var(--blue);
+        border-color: rgba(15, 98, 254, 0.28);
+        background: rgba(15, 98, 254, 0.08);
+      }
+
+      .tag.green {
+        color: #137333;
+        border-color: rgba(0, 200, 5, 0.24);
+        background: rgba(0, 200, 5, 0.08);
+      }
+
+      .tag.yellow {
+        color: #8a6500;
+        border-color: rgba(241, 194, 27, 0.32);
+        background: rgba(241, 194, 27, 0.14);
+      }
+
+      .tag.red {
+        color: var(--red);
+        border-color: rgba(180, 35, 24, 0.24);
+        background: rgba(180, 35, 24, 0.08);
+      }
+
+      .callout {
+        background:
+          linear-gradient(180deg, rgba(17, 24, 39, 0.98) 0%, rgba(17, 24, 39, 0.96) 100%);
+        color: #f8fafc;
+      }
+
+      .callout p,
+      .callout li {
+        color: rgba(248, 250, 252, 0.9);
+      }
+
+      .formula {
+        background: linear-gradient(180deg, #fbfdff 0%, #f5f8ff 100%);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 14px;
+        font-size: 14px;
+      }
+
+      th,
+      td {
+        padding: 12px 10px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+        text-align: left;
+      }
+
+      th {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #7a8593;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .pill.blue {
+        background: rgba(15, 98, 254, 0.1);
+        color: var(--blue);
+      }
+
+      .pill.green {
+        background: rgba(0, 200, 5, 0.1);
+        color: #137333;
+      }
+
+      .pill.yellow {
+        background: rgba(241, 194, 27, 0.16);
+        color: #8a6500;
+      }
+
+      .pill.red {
+        background: rgba(180, 35, 24, 0.1);
+        color: var(--red);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .button.primary {
+        background: var(--navy);
+        border-color: var(--navy);
+        color: #ffffff;
+      }
+
+      .print-note {
+        margin-top: 10px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .divider {
+        height: 1px;
+        margin: 18px 0;
+        background: var(--line);
+      }
+
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .footnote {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #7a8593;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-grid,
+        .grid-2,
+        .grid-3,
+        .grid-4,
+        .metric-grid,
+        .appendix-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .toc {
+          position: static;
+        }
+      }
+
+      @media print {
+        body {
+          background: #ffffff;
+        }
+
+        .page {
+          max-width: none;
+          padding: 0;
+        }
+
+        .actions,
+        .print-note {
+          display: none;
+        }
+
+        .hero,
+        .toc,
+        .card,
+        .callout,
+        .formula,
+        .table-wrap,
+        .section,
+        .metric {
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" id="top">
+        <div class="eyebrow">Bashira Intelligence | Master Demo Dossier</div>
+        <h1>Institutional operating system for field execution, delay intelligence, and intervention command</h1>
+        <p class="subhead">
+          This document is the master internal brief for demo preparation. It explains what the
+          product already does in the local offline environment, how the logic is calculated,
+          which operating surfaces exist, what the risk and alert engines are actually measuring,
+          and why the platform is structurally stronger than the typical proof-of-concept dashboard
+          that only visualizes status instead of running a real operational command model.
+        </p>
+        <div class="actions">
+          <button class="button primary" onclick="window.print()">Print / Save PDF</button>
+          <a class="button" href="#toc">Jump to contents</a>
+        </div>
+        <div class="print-note">
+          Observed demo state in the local offline AppMasterDB clone on April 6, 2026.
+        </div>
+        <div class="metric-grid">
+          <div class="metric blue">
+            <div class="label">Live schema</div>
+            <div class="value">20</div>
+            <div class="note">Tables in the local SQL Server clone</div>
+          </div>
+          <div class="metric blue">
+            <div class="label">Column universe</div>
+            <div class="value">420</div>
+            <div class="note">Unique columns available to retrieval and SQL generation</div>
+          </div>
+          <div class="metric green">
+            <div class="label">Latest well snapshot</div>
+            <div class="value">268</div>
+            <div class="note">Current well set loaded from local SQL</div>
+          </div>
+          <div class="metric yellow">
+            <div class="label">Job progress rows</div>
+            <div class="value">439</div>
+            <div class="note">Execution detail rows available for plan and stage logic</div>
+          </div>
+          <div class="metric red">
+            <div class="label">Smart alerts</div>
+            <div class="value">18</div>
+            <div class="note">Ranked intervention candidates in the current portfolio</div>
+          </div>
+          <div class="metric red">
+            <div class="label">Integrity exceptions</div>
+            <div class="value">30</div>
+            <div class="note">Open TD-02 hits from the local operational sample</div>
+          </div>
+          <div class="metric blue">
+            <div class="label">Rig fleet</div>
+            <div class="value">15</div>
+            <div class="note">Rig entities exposed in the current rig operations surface</div>
+          </div>
+          <div class="metric green">
+            <div class="label">Operating posture</div>
+            <div class="value">Local</div>
+            <div class="note">Offline clone with SQL, BM25, Neo4j, and CPU ML active</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="hero-grid" style="margin-top: 24px" id="toc">
+        <aside class="toc">
+          <h3>Contents</h3>
+          <a href="#thesis">1. Executive thesis</a>
+          <a href="#state">2. Demo-state inventory</a>
+          <a href="#architecture">3. Platform architecture</a>
+          <a href="#surfaces">4. Product surfaces</a>
+          <a href="#risk">5. Risk and forecast logic</a>
+          <a href="#ops">6. Command and operations logic</a>
+          <a href="#causal">7. Causal and counterfactual layer</a>
+          <a href="#integrity">8. Data integrity engine</a>
+          <a href="#apis">9. API and service matrix</a>
+          <a href="#positioning">10. Positioning versus typical POC dashboards</a>
+          <a href="#demo">11. Demo narrative and talking points</a>
+          <a href="#appendix">12. Appendix</a>
+        </aside>
+
+        <section class="callout">
+          <h3>Core positioning</h3>
+          <p>
+            Bashira Intelligence is not just a BI layer. It is an execution intelligence
+            operating system with three stacked advantages: retrieval depth, operational ML,
+            and intervention-oriented user surfaces. The product does not stop at describing
+            what happened. It attempts to answer four progressively harder questions:
+          </p>
+          <ol>
+            <li>What is happening right now across wells, rigs, stages, and projects?</li>
+            <li>Where is risk accumulating and why?</li>
+            <li>What action should be taken next, by whom, and with what expected effect?</li>
+            <li>What would likely happen under a counterfactual change in the operating plan?</li>
+          </ol>
+          <p>
+            That stack is what separates a true operating platform from a dashboard that only
+            decorates the data.
+          </p>
+        </section>
+      </div>
+
+      <section class="section" id="thesis">
+        <h2>1. Executive thesis</h2>
+        <p class="lead">
+          Bashira Intelligence is designed to look and behave like institutional software, but
+          its real advantage is under the surface. The platform combines live SQL access,
+          schema-aware retrieval, a knowledge graph, an explainable SQL agent, forecasting,
+          CPU-based portfolio risk, causal analysis, integrity controls, and multiple command
+          surfaces that convert model output into operational decisions.
+        </p>
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="card">
+            <h3>What the product already proves</h3>
+            <ul>
+              <li>It can run on the local offline SQL Server clone without the client VPN.</li>
+              <li>It can survive schema mismatch using local-fallback logic instead of failing closed.</li>
+              <li>It exposes well-level, rig-level, stage-level, and portfolio-level intelligence.</li>
+              <li>It has both descriptive and prescriptive surfaces: forecast, alerts, playbooks, causal actions.</li>
+              <li>It has operational governance, not just analytics, through the integrity engine and data dictionary.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>What this means in a client evaluation</h3>
+            <ul>
+              <li>The product can be positioned as an operating system, not a point dashboard.</li>
+              <li>The ML is tied to real workflow objects: wells, rigs, delays, stages, exceptions, and directives.</li>
+              <li>The UI can present both premium executive polish and technical depth for scrutiny.</li>
+              <li>Every strong demo moment can be backed by a logic narrative rather than visual theater alone.</li>
+              <li>Compared with a typical POC, Bashira has more explainability, more fallback resilience, and more operational breadth.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="state">
+        <h2>2. Demo-state inventory</h2>
+        <p>
+          The current demo environment is a local operating clone, not the original client SSMS
+          environment on VPN. That distinction matters because it shapes what is live, what is
+          reconstructed, and what is transparently approximated. The product currently runs on
+          a local AppMasterDB instance that has been loaded from exported files and auxiliary CSV
+          assets.
+        </p>
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">Observed operating state on April 6, 2026</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Observed state</th>
+                <th>Implication for demo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SQL Server</td>
+                <td>Local <span class="mono">(localdb)\\MSSQLLocalDB/AppMasterDB</span> clone</td>
+                <td>Live local reads are real; parity with the client VPN schema is partial.</td>
+              </tr>
+              <tr>
+                <td>Neo4j</td>
+                <td>Connected and available for schema and entity graph context</td>
+                <td>Graph-backed retrieval and ontology surfaces remain active.</td>
+              </tr>
+              <tr>
+                <td>BM25 retrieval</td>
+                <td>Built from <span class="mono">columns_atnm_dev.csv</span></td>
+                <td>Lexical retrieval remains available even when schema context is sparse.</td>
+              </tr>
+              <tr>
+                <td>Forecast engine</td>
+                <td>Latest well snapshot and job progress refreshed from live local SQL</td>
+                <td>Portfolio and well forecast surfaces reflect the current local clone.</td>
+              </tr>
+              <tr>
+                <td>Causal command</td>
+                <td>Workspace warmed; local fallback for missing plan snapshot; Stan MCMC with Laplace fallback</td>
+                <td>Causal surfaces remain operational despite local schema gaps.</td>
+              </tr>
+              <tr>
+                <td>Data integrity</td>
+                <td>Local sample operational mode active</td>
+                <td>Task daily rules evaluate on operational keys rather than URL-linked client rows.</td>
+              </tr>
+              <tr>
+                <td>CPU ML orchestrator</td>
+                <td>Active on port 8050 with local risk and action simulation</td>
+                <td>Scenario, portfolio risk, and action simulation remain usable without GPU dependency.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <h2>3. Platform architecture</h2>
+        <p>
+          The architecture is layered so the product can continue working even when one source
+          is degraded. This matters in the current local demo setup because the product is not
+          operating against the original VPN-backed client source of truth. Bashira remains useful
+          because it is intentionally redundant.
+        </p>
+        <div class="grid-4" style="margin-top: 18px">
+          <div class="card">
+            <h4>Layer 1</h4>
+            <h3>Truth sources</h3>
+            <p>Local SQL Server clone, CSV fallback assets, job progress export, well monitoring history, and supporting plan and productivity tables.</p>
+          </div>
+          <div class="card">
+            <h4>Layer 2</h4>
+            <h3>Retrieval context</h3>
+            <p>BM25 on columns, Neo4j graph context, SQL schema introspection, and entity-aware prompt assembly.</p>
+          </div>
+          <div class="card">
+            <h4>Layer 3</h4>
+            <h3>Reasoning engines</h3>
+            <p>Intent, retrieval, SQL generation, validation, execution, charting, forecast logic, anomaly layers, causal command, and CPU action simulation.</p>
+          </div>
+          <div class="card">
+            <h4>Layer 4</h4>
+            <h3>Operating surfaces</h3>
+            <p>Portfolio, alerts, rig command, field atlas, integrity, causal, predictive, decision, and governance surfaces for different user roles.</p>
+          </div>
+        </div>
+        <div class="formula" style="margin-top: 18px">
+          <h3>Agent pipeline used by the conversational and decision layer</h3>
+          <p class="mono">Intent -> Retrieval -> SQL -> Validation / Execution -> Chart</p>
+          <p>
+            The orchestrator tracks each step as a reasoning step. That makes the system both
+            inspectable and demoable: the product can expose not only a result but the chain of
+            reasoning that produced it.
+          </p>
+        </div>
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="card">
+            <h3>Retrieval parameters</h3>
+            <ul>
+              <li><span class="mono">VECTOR_TOP_K = 40</span></li>
+              <li><span class="mono">BM25_TOP_K = 40</span></li>
+              <li><span class="mono">FULLTEXT_TOP_K = 40</span></li>
+              <li><span class="mono">FINAL_TOP_K = 75</span></li>
+              <li><span class="mono">RRF_K = 60</span></li>
+            </ul>
+            <p class="small">
+              These settings bias toward high-context retrieval, which is useful in a complex schema
+              where a single question may touch multiple operational entities.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Frontend and visualization stack</h3>
+            <ul>
+              <li>Next.js 15.5.14 and React 19.1</li>
+              <li>Tailwind v4 for design tokens and layout</li>
+              <li>Plotly for analytical 2D and 3D charting</li>
+              <li>Three.js and react-three-fiber for spatial or immersive views</li>
+              <li>Framer Motion for transitions and UI staging</li>
+              <li>Recharts and Force Graph where lightweight or topology views are useful</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="surfaces">
+        <h2>4. Product surfaces and what each one proves</h2>
+        <p>
+          The product is broad enough to be positioned as a command suite rather than a single
+          dashboard. Each surface has a different operating job. That is a strategic advantage.
+          In a client evaluation, it is better to show that the platform can support multiple
+          roles and decisions than to show only one beautiful screen.
+        </p>
+
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">Primary operating surfaces currently present in the dashboard shell</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Surface</th>
+                <th>Operating question</th>
+                <th>Underlying value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Operations</td>
+                <td>How do users query the system conversationally?</td>
+                <td>Natural language access to SQL, charts, drill-downs, and reasoning traces.</td>
+              </tr>
+              <tr>
+                <td>SequelOntology</td>
+                <td>How is schema and entity knowledge organized?</td>
+                <td>Graph-backed schema understanding and relationship navigation.</td>
+              </tr>
+              <tr>
+                <td>Predictive Studio</td>
+                <td>What will happen next for a well or a portfolio?</td>
+                <td>Forecast horizon, trajectory inspection, risk tiers, scenario hooks, and batch evaluation.</td>
+              </tr>
+              <tr>
+                <td>Decision Studio</td>
+                <td>How do decision makers test and score operating options?</td>
+                <td>Model methodology, scoring narrative, and predictive decision support.</td>
+              </tr>
+              <tr>
+                <td>Portfolio Command</td>
+                <td>How healthy is the whole portfolio?</td>
+                <td>Cross-well prioritization, portfolio heat, delay exposure, and top intervention candidates.</td>
+              </tr>
+              <tr>
+                <td>Smart Alerts</td>
+                <td>Which issues require immediate action and why?</td>
+                <td>Ranked alert board with evidence, intervention language, and portfolio contagion context.</td>
+              </tr>
+              <tr>
+                <td>Rig Operations</td>
+                <td>Where is rig pressure accumulating?</td>
+                <td>Rig selection, pressure modeling, bottleneck view, well queue drill-down, and directive framing.</td>
+              </tr>
+              <tr>
+                <td>Field Atlas</td>
+                <td>How does risk cluster spatially?</td>
+                <td>Zone logic, corridor logic, hotspot detection, and spatial exposure mapping.</td>
+              </tr>
+              <tr>
+                <td>Location Preparation</td>
+                <td>Which readiness stages are blocking execution?</td>
+                <td>Stage delay and readiness command across construction and preparation gates.</td>
+              </tr>
+              <tr>
+                <td>Delay Heatmap</td>
+                <td>Where are time losses concentrated?</td>
+                <td>Cross-stage concentration of delay and portfolio heat prioritization.</td>
+              </tr>
+              <tr>
+                <td>Engineering Timeline</td>
+                <td>Which engineering milestones are slipping?</td>
+                <td>Timeline command for issuance, readiness, and stage completion events.</td>
+              </tr>
+              <tr>
+                <td>Watchlist</td>
+                <td>Which entities need continued oversight?</td>
+                <td>Curated high-attention list across multiple risk engines.</td>
+              </tr>
+              <tr>
+                <td>Data Integrity</td>
+                <td>Can the operating data be trusted?</td>
+                <td>Rule engine, exception queue, record detail, and SSMS evidence drill-down.</td>
+              </tr>
+              <tr>
+                <td>Causal Command</td>
+                <td>Which levers change outcomes and by how much?</td>
+                <td>Counterfactual analysis, driver decomposition, and Bayesian fallback logic.</td>
+              </tr>
+              <tr>
+                <td>Trust Layer</td>
+                <td>Why should the user trust this answer?</td>
+                <td>Traceability, reasoning, integrity signals, and model transparency.</td>
+              </tr>
+              <tr>
+                <td>Data Dictionary</td>
+                <td>What does each field mean and where does it come from?</td>
+                <td>Field-level governance and semantic understanding for operational users.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-3" style="margin-top: 18px">
+          <div class="card">
+            <h3>What the command surfaces demonstrate</h3>
+            <p>
+              Portfolio, alerts, rig, field atlas, and readiness views prove that Bashira can
+              synthesize multiple tables into a single operational command model. This is stronger
+              than a typical tab that simply echoes one report.
+            </p>
+          </div>
+          <div class="card">
+            <h3>What the governance surfaces demonstrate</h3>
+            <p>
+              Data Integrity, Trust Layer, and Data Dictionary show that the system takes model
+              trust seriously. This reduces the common enterprise objection that AI answers are
+              difficult to audit.
+            </p>
+          </div>
+          <div class="card">
+            <h3>What the predictive surfaces demonstrate</h3>
+            <p>
+              Predictive Studio, Decision Studio, CPU action simulation, and Causal Command show
+              that the product can move from description to intervention design.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="risk">
+        <h2>5. Risk and forecast logic</h2>
+        <p>
+          The platform does not rely on one monolithic score. Different engines are responsible
+          for different kinds of risk, and that is exactly the right design. Forecast risk,
+          portfolio risk, rig pressure, and causal uplift are related but not identical concepts.
+        </p>
+
+        <div class="formula" style="margin-top: 18px">
+          <h3>Forecast engine base risk logic</h3>
+          <p>
+            In the forecast engine, the detailed well risk score is built from three interpretable
+            components:
+          </p>
+          <ul>
+            <li><span class="mono">risk_prog = (1 - progress) * 35</span></li>
+            <li><span class="mono">risk_vel = max(0, (0.05 - velocity) / 0.05) * 25</span> when velocity is below 0.05</li>
+            <li><span class="mono">risk_stall = 20</span> when velocity is non-positive and progress is below 0.9</li>
+          </ul>
+          <p>
+            The total is clamped to a 0 to 100 band. This is intentionally interpretable: progress
+            drag, velocity drag, and stall penalties are visible and explainable.
+          </p>
+        </div>
+
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="card">
+            <h3>Forecast tiering</h3>
+            <ul>
+              <li><span class="pill red">Critical</span> score 75 or higher</li>
+              <li><span class="pill yellow">High risk</span> score 55 to 74.9</li>
+              <li><span class="pill blue">Watch</span> score 35 to 54.9</li>
+              <li><span class="pill green">Healthy</span> below 35</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Alternative model banding</h3>
+            <p>
+              The product also uses a slightly different banding in the broader portfolio map:
+            </p>
+            <ul>
+              <li><span class="mono">70+</span> Critical</li>
+              <li><span class="mono">40+</span> High risk</li>
+              <li><span class="mono">20+</span> Watch</li>
+              <li>Below 20 Healthy</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">Portfolio risk components currently used in the local hybrid map</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Meaning</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>schedule_variance_risk</td>
+                <td>Difference between planned and actual progress timing</td>
+                <td>Captures slippage against the intended sequence.</td>
+              </tr>
+              <tr>
+                <td>overdue_deadline_risk</td>
+                <td>Penalty for expected dates that have already passed</td>
+                <td>Turns latent schedule miss into explicit risk.</td>
+              </tr>
+              <tr>
+                <td>stagnation_risk</td>
+                <td>Penalty for flat or declining recent throughput</td>
+                <td>Detects slow motion failure before total stall.</td>
+              </tr>
+              <tr>
+                <td>readiness_risk</td>
+                <td>Stage readiness and slowest-stage gap pressure</td>
+                <td>Flags bottlenecks before drilling windows are missed.</td>
+              </tr>
+              <tr>
+                <td>drilling_execution_risk</td>
+                <td>Rig-on and rig-off delay, drilling sequence drag</td>
+                <td>Connects well schedule issues to actual rig execution.</td>
+              </tr>
+              <tr>
+                <td>governance_risk</td>
+                <td>Data quality and completeness drag on operational confidence</td>
+                <td>Prevents false certainty from weak source records.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top: 18px">
+          <h3>Why this is stronger than a simple delay score</h3>
+          <p>
+            Many tools claim to be predictive but simply repaint schedule delay in a colored band.
+            Bashira separates progress drag, velocity drag, stage drag, readiness drag, and
+            governance drag. That decomposition is important because it means the product can not
+            only say that a well is risky, but also show which mechanism is causing the risk and
+            which action family is most likely to reduce it.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="ops">
+        <h2>6. Command and operations logic</h2>
+        <p>
+          The command-center layer is where the product starts to behave like an operating system.
+          These surfaces do more than summarize data. They rank, cluster, prioritize, and attach
+          interventions.
+        </p>
+
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="card">
+            <h3>Smart Alerts logic</h3>
+            <ul>
+              <li>Blends local rig delay exposure, weekly plan divergence, stage stall, portfolio risk prior, and data confidence.</li>
+              <li>Ranks alerts by model score and intervention urgency.</li>
+              <li>Attaches evidence, system flags, and next-step playbook guidance.</li>
+              <li>Connects individual alert severity to portfolio contagion instead of treating each issue as isolated.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Rig Operations logic</h3>
+            <ul>
+              <li>Uses schedule slip, weekly divergence, stage bottlenecks, rig queue contagion, and CPU Isolation Forest outlier signals.</li>
+              <li>Rolls well pressure into rig pressure and rig recovery confidence.</li>
+              <li>Highlights bottleneck ownership and next directive family.</li>
+              <li>Supports both 2D and 3D rig pressure visual inspection.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-3" style="margin-top: 18px">
+          <div class="card">
+            <h3>Field Atlas logic</h3>
+            <p>
+              Spatial clustering, hotspot cells, corridor pressure, neighborhood density, and
+              zone-level exposure mapping convert separate wells into a geographic command view.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Location Prep logic</h3>
+            <p>
+              Stage readiness logic identifies the slowest stage, the widest gap, and the most
+              exposed transition between readiness and drilling windows.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Watchlist logic</h3>
+            <p>
+              Watchlist consolidates the most important objects to follow across multiple engines:
+              forecast, rig command, alerts, and integrity.
+            </p>
+          </div>
+        </div>
+
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">CPU ML orchestration and action simulation capabilities</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>What the engine does</th>
+                <th>Demo value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Baseline and actions</td>
+                <td>Builds baseline operating state and candidate action families</td>
+                <td>Shows the platform can move from diagnosis to action generation.</td>
+              </tr>
+              <tr>
+                <td>Action simulation</td>
+                <td>Runs comparative impact estimates for interventions</td>
+                <td>Useful for explaining what the product means by "recommendation".</td>
+              </tr>
+              <tr>
+                <td>Root cause vector</td>
+                <td>Creates a driver vector behind each operating problem</td>
+                <td>Converts raw data into interpretable risk mechanisms.</td>
+              </tr>
+              <tr>
+                <td>CATE support</td>
+                <td>Computes treatment-effect style uplift estimates for interventions</td>
+                <td>Strong narrative for prescriptive decision support.</td>
+              </tr>
+              <tr>
+                <td>Portfolio live risk</td>
+                <td>Produces risk rows for active assets even when the original classifier is unavailable</td>
+                <td>Shows resilience of the local demo environment.</td>
+              </tr>
+              <tr>
+                <td>Project delay probability</td>
+                <td>Returns project-level delay rows and insight frames</td>
+                <td>Supports executive ranking and capital allocation discussions.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="causal">
+        <h2>7. Causal and counterfactual layer</h2>
+        <p>
+          The causal layer is one of the strongest differentiators in the product because it turns
+          execution data into lever-based reasoning. Instead of only asking which wells are bad,
+          the user can ask which actions or operating changes are likely to shift an outcome.
+        </p>
+
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="card">
+            <h3>Causal workspace construction</h3>
+            <ul>
+              <li>Loads tables into a normalized causal workspace.</li>
+              <li>Builds feature datasets across job progress, task daily, ATP, SAP drilling, productivity, and supporting tables.</li>
+              <li>Computes join coverage and dataset quality signals.</li>
+              <li>Applies local fallback when a client-only table is missing, for example deriving plan snapshot features from job progress reports.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Bayesian and fast-path execution</h3>
+            <ul>
+              <li>Runs a fast CPU layer for immediate command responsiveness.</li>
+              <li>Refreshes the Bayesian layer asynchronously.</li>
+              <li>Uses CmdStan MCMC when the Windows toolchain is available.</li>
+              <li>Falls back to Laplace approximation when MCMC compilation or runtime is unavailable.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 18px">
+          <h3>Why the causal layer matters in a demo</h3>
+          <p>
+            Many products can rank a delay. Far fewer can articulate what change in the operating
+            plan would most likely reduce that delay and how confident the system is in that claim.
+            Bashira can speak that language. Even in the local offline environment, it can still
+            construct a causal workspace, report coverage, and return counterfactual reasoning.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="integrity">
+        <h2>8. Data integrity engine</h2>
+        <p>
+          Enterprise trust requires more than model outputs. The integrity engine is the control
+          layer that tells the user whether the underlying operational records are sound enough to
+          support downstream decision making.
+        </p>
+
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">Current five live integrity rules</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Rule</th>
+                <th>Source</th>
+                <th>What it checks</th>
+                <th>Current severity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TD-01 Required Quantity Exceeded</td>
+                <td>task_daily</td>
+                <td>Required quantity is greater than captured daily quantity on linked rows.</td>
+                <td>High</td>
+              </tr>
+              <tr>
+                <td>TD-02 Daily Execution Fields Missing</td>
+                <td>task_daily</td>
+                <td>Quantity, employees, equipment, hours, or PH name is blank, null, or invalid.</td>
+                <td>Critical</td>
+              </tr>
+              <tr>
+                <td>TD-03 Completed Without Actual End</td>
+                <td>task_daily</td>
+                <td>Completed flag is true while actual_end is missing.</td>
+                <td>Critical</td>
+              </tr>
+              <tr>
+                <td>ATP-01 Actual Duration Exceeds Target</td>
+                <td>ActivityTaskPlan</td>
+                <td>Actual duration exceeds target duration.</td>
+                <td>Medium</td>
+              </tr>
+              <tr>
+                <td>ATP-02 Actual Quantity Exceeds Forecast</td>
+                <td>ActivityTaskPlan</td>
+                <td>Actual quantity is greater than forecast quantity.</td>
+                <td>Medium</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="card">
+            <h3>Local sample operational mode</h3>
+            <p>
+              In the client wording, several task_daily rules are described as URL-linked checks.
+              In the local offline clone there are no URL-linked rows, so the service transparently
+              switches into a sample operational mode. In that mode, the applicable basis becomes:
+            </p>
+            <p class="mono">ActionOn + task_code + project_id</p>
+            <p>
+              This keeps the rule engine live and honest instead of pretending the client-only
+              URL-linked context still exists locally.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Current live exception picture</h3>
+            <p>
+              The local environment currently surfaces 30 open TD-02 exceptions. Those rows are
+              not abstract warnings; each record contains rule id, severity, record key, summary,
+              failing fields, expectation, and fix path, plus a direct SSMS evidence view.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="apis">
+        <h2>9. API and service matrix</h2>
+        <p>
+          The API footprint is broad enough to support both product surfaces and technical diligence.
+          This is important in a client setting because it proves the platform is not just a monolith
+          with hard-coded screens. It is serviceable, extensible, and inspectable.
+        </p>
+
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">Primary API routes currently exposed by the FastAPI backend</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Purpose</th>
+                <th>Demo interpretation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="mono">/api/query</span></td>
+                <td>End-to-end question to SQL to result pipeline</td>
+                <td>Conversational operating access to the platform.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/drill-down</span></td>
+                <td>Interactive chart drill execution</td>
+                <td>Useful for explaining chart-to-data traceability.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/knowledge-graph</span></td>
+                <td>Graph view for schema and ontology navigation</td>
+                <td>Reinforces the retrieval and semantic layer story.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/forecast/wells</span></td>
+                <td>Portfolio well forecast registry</td>
+                <td>Current live list of local wells and risk context.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/forecast/well/{id}</span></td>
+                <td>Single-well forecast and detail payload</td>
+                <td>Drill-down path for demoing per-asset intelligence.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/forecast/portfolio</span></td>
+                <td>Portfolio forecast aggregation</td>
+                <td>Macro predictive view of the local environment.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/portfolio</span></td>
+                <td>Portfolio command center payload</td>
+                <td>Cross-well command surface.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/alerts</span></td>
+                <td>Smart alert board payload</td>
+                <td>Intervention-first alerting layer.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/rig-operations</span></td>
+                <td>Rig pressure and command payload</td>
+                <td>Rig-level quant and execution control.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/location-prep</span></td>
+                <td>Readiness and prep command</td>
+                <td>Stage preparation bottleneck view.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/delay-heatmap</span></td>
+                <td>Delay concentration surface</td>
+                <td>Clustered time-loss view.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/field-atlas</span></td>
+                <td>Spatial intelligence payload</td>
+                <td>Geographic exposure and corridor command.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/engineering-timeline</span></td>
+                <td>Engineering command payload</td>
+                <td>Milestone slippage view.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/watchlist</span></td>
+                <td>Cross-surface watchlist</td>
+                <td>Leadership attention queue.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/command-center/data-dictionary</span></td>
+                <td>Dictionary payload</td>
+                <td>Governance and semantics proof point.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/data-integrity</span></td>
+                <td>Integrity workspace</td>
+                <td>Rule inventory and exception command center.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/data-integrity/rule-view</span></td>
+                <td>Rule-specific row evidence</td>
+                <td>Governance drill-down for auditors and operators.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/causal/command</span></td>
+                <td>Causal command payload</td>
+                <td>Counterfactual and lever-based reasoning.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/model/diagnostics</span></td>
+                <td>Model and runtime diagnostics</td>
+                <td>Useful for technical diligence and trust.</td>
+              </tr>
+              <tr>
+                <td><span class="mono">/api/voice/stt</span>, <span class="mono">/api/voice/reply</span>, <span class="mono">/api/voice/tts</span></td>
+                <td>Voice interaction loop</td>
+                <td>Supports assistant-style product expansion.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="positioning">
+        <h2>10. Positioning versus typical POC dashboards</h2>
+        <p>
+          This section is intentionally written for internal use. It frames the product against
+          the kind of competitive proof-of-concept that often wins initial attention with polished
+          screens but shallow operating depth.
+        </p>
+
+        <div class="grid-2" style="margin-top: 18px">
+          <div class="callout">
+            <h3>What a typical POC dashboard gets wrong</h3>
+            <ul>
+              <li>It shows risk color without exposing the mechanics behind that score.</li>
+              <li>It over-emphasizes status cards and under-emphasizes action pathways.</li>
+              <li>It breaks when the exact client schema is not available.</li>
+              <li>It treats data quality as a side note instead of a first-class operating risk.</li>
+              <li>It lacks a counterfactual layer, so it can only describe, not reason about change.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>How Bashira should be positioned instead</h3>
+            <ul>
+              <li>As a command operating system rather than a static dashboard.</li>
+              <li>As an explainable ML and reasoning platform, not only a visualization layer.</li>
+              <li>As resilient to imperfect source conditions through local fallback paths and governed approximations.</li>
+              <li>As stronger on intervention language: what to do next, why, and where the payoff is likely to come from.</li>
+              <li>As more trustworthy because it includes integrity, dictionary, reasoning traces, and diagnostics.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="table-wrap" style="margin-top: 18px">
+          <div class="table-caption">Internal comparison narrative to use in the demo</div>
+          <table>
+            <thead>
+              <tr>
+                <th>Evaluation dimension</th>
+                <th>Typical POC pattern</th>
+                <th>Bashira narrative</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Schema dependency</td>
+                <td>Assumes one pristine source environment</td>
+                <td>Survives local/offline mode with fallbacks and transparent basis changes</td>
+              </tr>
+              <tr>
+                <td>Risk explanation</td>
+                <td>Single opaque number</td>
+                <td>Driver-based, stage-based, rig-based, and governance-aware decomposition</td>
+              </tr>
+              <tr>
+                <td>Actionability</td>
+                <td>Status with little prescription</td>
+                <td>Playbooks, action simulation, counterfactual logic, and command surfaces</td>
+              </tr>
+              <tr>
+                <td>Governance</td>
+                <td>Light or absent</td>
+                <td>Integrity engine, data dictionary, trust layer, diagnostics</td>
+              </tr>
+              <tr>
+                <td>Operating depth</td>
+                <td>One or two hero screens</td>
+                <td>Portfolio, alerts, rig, atlas, readiness, heatmap, engineering, causal, predictive</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="demo">
+        <h2>11. Demo narrative and talking points</h2>
+        <p>
+          The strongest demo is not a guided UI tour. It is a sequence that progressively proves
+          depth. The goal is to show that Bashira is not merely reporting the portfolio. It is
+          actively structuring operating decisions.
+        </p>
+
+        <div class="grid-3" style="margin-top: 18px">
+          <div class="card">
+            <h3>Act I: Establish truth and control</h3>
+            <ol>
+              <li>Open Portfolio or Predictive Studio and show the live local well count.</li>
+              <li>Explain that the environment is running from a local SQL clone, not a mocked dashboard.</li>
+              <li>Show that the system can still expose structured logic despite offline constraints.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Act II: Surface risk and action</h3>
+            <ol>
+              <li>Move into Smart Alerts or Rig Operations.</li>
+              <li>Select one critical asset and walk through the drivers, stage gap, and action playbook.</li>
+              <li>Explain that the score is decomposed rather than painted.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Act III: Prove governance and depth</h3>
+            <ol>
+              <li>Open Data Integrity and show a real TD-02 record with failing fields.</li>
+              <li>Open Causal Command and explain counterfactual levers.</li>
+              <li>Close by positioning Bashira as a system of command, not an isolated dashboard.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top: 18px">
+          <h3>Suggested one-line positioning for the client video</h3>
+          <p>
+            "Bashira is an institutional operating system for field execution. It does not stop at
+            status visualization. It quantifies risk, traces root cause, validates the source data,
+            and recommends interventions at well, rig, stage, and portfolio level."
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="appendix">
+        <h2>12. Appendix</h2>
+        <div class="appendix-grid" style="grid-template-columns: 1fr 1fr; margin-top: 18px">
+          <div class="card">
+            <h3>Supporting methodology documents already in the repo</h3>
+            <ul>
+              <li><span class="mono">web/public/bashira-studios-operating-manual.html</span></li>
+              <li><span class="mono">web/public/decision-studio-ml-methodology.html</span></li>
+              <li><span class="mono">web/public/decision-studio-risk-score-methodology.html</span></li>
+              <li><span class="mono">web/public/predictive-studio-risk-logic.html</span></li>
+            </ul>
+            <p>
+              These can be used as supporting evidence if the client requests methodology depth
+              beyond the primary demo narrative.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Key implementation files behind the current demo story</h3>
+            <ul>
+              <li><span class="mono">api_server.py</span></li>
+              <li><span class="mono">orchestrator.py</span></li>
+              <li><span class="mono">forecast_engine.py</span></li>
+              <li><span class="mono">command_center_service.py</span></li>
+              <li><span class="mono">data_integrity_service.py</span></li>
+              <li><span class="mono">causal_command_service.py</span></li>
+              <li><span class="mono">causal_stan_service.py</span></li>
+              <li><span class="mono">cpu_ml_orchestrator.py</span></li>
+              <li><span class="mono">web/src/app/[locale]/dashboard/page.tsx</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 18px">
+          <h3>Closing statement</h3>
+          <p>
+            Bashira Intelligence should be presented as a serious operating platform. The local demo
+            already proves that the product can combine retrieval, SQL reasoning, ML scoring,
+            command-center analytics, causal intelligence, integrity controls, and premium UX into
+            one environment. The most important message is not that Bashira has more charts. The
+            message is that Bashira has more operating depth, more transparency, and more decision
+            utility than the class of dashboard product it is being compared against.
+          </p>
+          <p class="footnote">
+            Internal use note: this dossier is deliberately written to support both executive demo
+            narrative and technical diligence. For external distribution, remove the internal
+            positioning section if a softer tone is desired.
+          </p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

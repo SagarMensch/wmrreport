@@ -1,0 +1,37 @@
+
+DSPY SQL GENERATION RULES FROM APPMASTERDB:
+
+1. WELL ID FROM CODE: RIGHT(code, LEN(code) - CHARINDEX('-', code))
+
+2. PROGRESS COLUMNS (Job_Progress_Report_GB):
+   - Use Week-1 Plan %, Week-1 Actual % etc
+   - Multiply fractions by 100 for percentage
+   - Use: CAST(ROUND(100.0 * fraction, 2) AS decimal(18,2))
+
+3. PURPOSE VALUES:
+   - Purpose Value in currency
+   - Calculate: PurposeValue * progress_fraction
+   - Use: CAST(ISNULL(pv.PurposeValue,0) * fraction AS decimal(28,2))
+
+4. WEEK BUCKETS:
+   - W1: day 1-7, W2: 8-14, W3: 15-21, W4: 22-28, W5: 29+
+   - Plan from Job_Progress_PlanSnapshot
+   - Actual from task_daily or TaskPlan
+
+5. RIG CODE FILTER: Revenue.rigcode IN ('NL0010','NF0010',...)
+   - NEVER use well_location for rig codes!
+
+6. MOC STATUS: moc_raised IN ('YES','Yes','yes')
+
+7. CLUSTER: Cluster = 'Nimr' or 'Marmul'
+
+8. PRODUCTIVITY: (data_qty / data_hours) / Norms * 100
+
+9. DATE FORMATS:
+   - target_start, actual_start are DATE type
+   - Use: TRY_CONVERT(date, column)
+
+10. JOIN KEYS:
+    - ActivityTaskPlan.New_Well_ID → WMR.pdo_well_id
+    - task_daily.well_id → Revenue.Well_ID
+    - crews.Code = task_daily.crew_code

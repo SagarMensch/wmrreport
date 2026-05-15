@@ -1,0 +1,29 @@
+# Virtual environments (can be recreated from requirements.txt)
+ml_venv/
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Node dependencies (can be recreated from package.json)
+node_modules/
+
+# Next.js build cache (regenerated on build)
+.next/
+
+# OS files
+.DS_Store
+Thumbs.db
+nul
+
+# Environment secrets
+.env
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.flv
+*.webm

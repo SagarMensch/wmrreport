@@ -1,0 +1,27 @@
+{
+  "generated_at_utc": "2026-03-29T20:16:58.220233+00:00",
+  "database": "ATNM_Dev",
+  "server": "10.100.137.11",
+  "files": {
+    "wmr_full.csv": {
+      "rows": 18969,
+      "query": "SELECT * FROM WMR_Full"
+    },
+    "wmr_latest.csv": {
+      "rows": 268,
+      "query": "SELECT * FROM WellMonitoringReport"
+    },
+    "plan_snapshot.csv": {
+      "rows": 439,
+      "query": "SELECT * FROM Job_Progress_PlanSnapshot"
+    },
+    "job_progress_report_gb.csv": {
+      "rows": 439,
+      "query": "SELECT * FROM Job_Progress_Report_GB"
+    },
+    "sap_drilling_sequence.csv": {
+      "rows": 6159,
+      "query": "SELECT * FROM SAP_DRILLING_SEQUENCE"
+    }
+  }
+}

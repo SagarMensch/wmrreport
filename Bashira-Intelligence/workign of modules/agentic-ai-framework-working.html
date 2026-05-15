@@ -1,0 +1,524 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Agentic AI Framework Working</title>
+  <style>
+    :root {
+      --bg:#f6f7f9; --card:#ffffff; --ink:#101114; --muted:#5c6672; --line:#d6dbe3;
+      --blue:#0f62fe; --green:#00c805; --yellow:#f1c21b; --red:#8e1b1b; --slate:#1f2937;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI","IBM Plex Sans",Arial,sans-serif; line-height:1.58; }
+    .page { max-width:1280px; margin:0 auto; padding:24px; }
+    .hero,.card { background:var(--card); border:1px solid var(--line); border-radius:22px; }
+    .hero { padding:28px; margin-bottom:16px; }
+    .card { padding:20px; margin-bottom:16px; }
+    .eyebrow { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+    h1 { margin:10px 0 12px; font-size:36px; line-height:1.14; }
+    h2 { margin:0 0 14px; font-size:24px; line-height:1.2; }
+    h3 { margin:0 0 10px; font-size:18px; line-height:1.28; }
+    p { margin:0 0 12px; }
+    .subtitle { color:var(--muted); font-size:15px; margin:0; }
+    .grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:16px; margin-bottom:16px; }
+    .span-12 { grid-column:span 12; } .span-8 { grid-column:span 8; } .span-6 { grid-column:span 6; } .span-4 { grid-column:span 4; } .span-3 { grid-column:span 3; }
+    .kpi { font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); font-weight:700; margin-bottom:8px; }
+    .metric { font-size:30px; font-weight:700; line-height:1; margin-bottom:8px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .chip { display:inline-flex; align-items:center; border-radius:999px; border:1px solid var(--line); padding:6px 10px; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--slate); background:#fff; }
+    .chip.blue { color:var(--blue); border-color:rgba(15,98,254,.28); background:rgba(15,98,254,.05); }
+    .chip.green { color:#0b6b0d; border-color:rgba(0,200,5,.28); background:rgba(0,200,5,.06); }
+    .chip.yellow { color:#8a6a00; border-color:rgba(241,194,27,.42); background:rgba(241,194,27,.12); }
+    .chip.red { color:var(--red); border-color:rgba(142,27,27,.28); background:rgba(142,27,27,.06); }
+    .term { border-top:1px solid var(--line); padding-top:16px; margin-top:16px; }
+    .term:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+    .meta { color:var(--muted); font-size:13px; margin-bottom:10px; }
+    .callout { border-left:4px solid var(--blue); background:rgba(15,98,254,.05); border-radius:14px; padding:12px 14px; margin-top:12px; }
+    .warning { border-left-color:var(--yellow); background:rgba(241,194,27,.10); }
+    pre { margin:12px 0; background:#f3f4f6; border:1px solid #e5e7eb; border-radius:12px; padding:12px 14px; overflow:auto; white-space:pre-wrap; font-family:Consolas,monospace; font-size:13px; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th,td { text-align:left; vertical-align:top; padding:12px 10px; border-top:1px solid var(--line); }
+    th { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; background:#fbfcfd; }
+    tr:first-child th,tr:first-child td { border-top:none; }
+    ul,ol { margin:8px 0 12px 20px; padding:0; }
+    li { margin-bottom:6px; }
+    .footer { text-align:center; color:var(--muted); font-size:12px; padding:8px 0 24px; }
+    @media (max-width:980px) { .span-8,.span-6,.span-4,.span-3 { grid-column:span 12; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Agentic Architecture</div>
+      <h1>How the Complete Agentic AI Framework Works in Bashira Intelligence</h1>
+      <p class="subtitle">
+        This document explains the full agentic AI system in Bashira Intelligence as it actually operates across the backend:
+        API entrypoint, orchestration, LangGraph state machine, memory, routing, retrieval, SQL generation, self-healing,
+        predictive branching, public-answer composition, and explainability. The focus is on how the complete multi-agent
+        framework behaves as one governed system.
+      </p>
+      <div class="chips">
+        <span class="chip blue">fastapi entry</span>
+        <span class="chip green">langgraph state machine</span>
+        <span class="chip yellow">dspy agent modules</span>
+        <span class="chip red">self-healing and memory</span>
+      </div>
+      <div class="callout">
+        <strong>Core point.</strong> Bashira is not a single chatbot calling one prompt. It is an agentic runtime where different
+        specialized agents operate over a shared state, are routed conditionally, can skip branches, can repair failures,
+        and can switch between deterministic SQL intelligence and predictive decision intelligence.
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Runtime</div>
+        <div class="metric">LangGraph</div>
+        <p>The workflow is implemented as a stateful graph, not a linear prompt chain.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Agent Modules</div>
+        <div class="metric">DSPy + Python</div>
+        <p>Intent, SQL, charting, predictive scan, and public response use specialized modules.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Memory</div>
+        <div class="metric">Checkpointed</div>
+        <p>Uses checkpointers for session continuity, with Supabase/Postgres preferred and memory fallback.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Output Modes</div>
+        <div class="metric">2 Branches</div>
+        <p>The framework can route to a SQL path or a predictive path depending on question intent.</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>1. What Makes This System Agentic</h2>
+      <p>
+        A system becomes agentic when it stops being one static inference call and instead behaves as a governed decision process.
+        Bashira qualifies as agentic because it has:
+      </p>
+      <ul>
+        <li>specialized agents with distinct responsibilities</li>
+        <li>a shared state object passed through graph nodes</li>
+        <li>conditional routing based on intermediate outputs</li>
+        <li>conversation-aware context resolution</li>
+        <li>retrieval before generation</li>
+        <li>validation and self-healing loops</li>
+        <li>memory/checkpoint support across sessions</li>
+        <li>multiple execution paths depending on question type</li>
+      </ul>
+      <p>
+        In other words, the framework does not just “answer questions.” It reasons about what kind of question was asked,
+        what context is missing, what data is relevant, whether SQL is safe, whether results require a chart or a follow-up,
+        and whether the problem should switch from deterministic SQL to predictive analysis.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. System Entry: FastAPI as the Front Door</h2>
+      <p>
+        The backend entry layer is a FastAPI server. It exposes the main API routes and lazily initializes heavy services so the
+        system does not pay every startup cost immediately.
+      </p>
+      <table>
+        <tr><th>Layer</th><th>Role</th></tr>
+        <tr><td><code>/api/query</code></td><td>Main natural-language entrypoint into the orchestrator.</td></tr>
+        <tr><td><code>/api/drill-down</code></td><td>Executes drill-down actions from charts.</td></tr>
+        <tr><td><code>/api/knowledge-graph</code></td><td>Exposes graph/ontology structure for the graph UI.</td></tr>
+        <tr><td>warm-up routines</td><td>Preload Causal Command, Forecast, Data Integrity, and Command Center views.</td></tr>
+      </table>
+      <p>
+        The API server is not the agent itself. It is the infrastructure boundary that receives the question, ensures services exist,
+        and delegates execution to the orchestrator.
+      </p>
+      <pre>Frontend -> FastAPI /api/query -> PipelineOrchestrator -> LangGraph Agent -> response</pre>
+    </section>
+    <section class="grid">
+      <article class="card span-8">
+        <h2>3. Orchestrator: The Operational Brain</h2>
+        <p>
+          The orchestrator is the application-level brain that assembles the runtime. On initialization it configures DSPy,
+          connects to Neo4j and SQL Server, builds the BM25 index, initializes the graph agent, and wires in the checkpointing layer.
+        </p>
+        <p>
+          It also acts as the stable API-facing contract. The frontend does not need to know which node ran, which branch was taken,
+          or whether the checkpointer failed and fell back. The orchestrator handles that operational complexity.
+        </p>
+        <div class="term">
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>configure DSPy with the active LLM provider</li>
+            <li>connect database clients</li>
+            <li>build the BM25 retrieval index from the columns CSV</li>
+            <li>create the BashiraGraphAgent</li>
+            <li>attach a checkpointer</li>
+            <li>invoke the graph with the current session and chat history</li>
+            <li>normalize the final state into a PipelineResult for the API</li>
+          </ul>
+        </div>
+        <div class="term">
+          <h3>Why This Layer Matters</h3>
+          <p>
+            Without the orchestrator, the system would be a collection of agents with no stable operating contract. The orchestrator
+            is what turns those parts into a product-grade runtime: controlled initialization, controlled invocation, controlled output,
+            and controlled fallback when infrastructure such as the remote checkpointer fails.
+          </p>
+        </div>
+      </article>
+
+      <article class="card span-4">
+        <h2>4. Checkpointing and Session Memory</h2>
+        <p>
+          Bashira supports checkpointed execution. Preferred mode is a Postgres-backed checkpointer. If that is unavailable,
+          the system falls back to an in-memory saver.
+        </p>
+        <p>
+          This is important because the graph keeps conversational context and reasoning state across turns. The checkpointer stores
+          graph state by session or thread ID, allowing follow-up questions and smarter drill-down behavior.
+        </p>
+        <div class="callout warning">
+          <strong>Operational advantage.</strong> If the remote Postgres checkpointer drops mid-request, the orchestrator can retry the
+          same graph invocation using an in-memory checkpointer, so the user query still completes instead of failing hard.
+        </div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>5. Shared Graph State: The Core of Agent Coordination</h2>
+      <p>
+        The graph does not pass text from one prompt to another blindly. It passes a structured state object. This is one of the main
+        reasons the framework is agentic rather than just prompt-chaining.
+      </p>
+      <pre>AgentState includes:
+- messages
+- intent_data
+- schema_context
+- retrieval_metadata
+- session_context
+- current_sql
+- sql_is_safe
+- sql_confidence
+- sql_reasoning
+- columns, rows, total_rows
+- execution_error
+- reasoning_steps
+- chart_config
+- requires_followup
+- followup_prompt
+- response_type
+- clarification_prompt
+- response_mode
+- predictive_context
+- answer_text
+- risk_label
+- predictive_summary</pre>
+      <p>
+        Every node reads part of this state and writes part of this state. That means no node needs to “remember” everything alone.
+        The intelligence emerges from the coordinated mutation of shared state.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>6. Node Graph: The Actual Agent Workflow</h2>
+      <p>
+        The workflow is explicitly built as a LangGraph <code>StateGraph</code>. The important point is that it is not fixed to one path.
+        Conditional routing determines where the state goes next.
+      </p>
+      <pre>Entry -> resolve_context
+      -> extract_intent
+      -> conditional route:
+           sql_only   -> retrieve_schema -> generate_sql -> execute_sql -> analyze_data -> {followup | chart}
+           predictive -> predictive_scan -> compose_public_answer -> end</pre>
+      <p>
+        There is also a clarification branch after SQL generation if the system decides confidence is insufficient or required schema is missing.
+      </p>
+      <table>
+        <tr><th>Node</th><th>Purpose</th></tr>
+        <tr><td><code>resolve_context</code></td><td>Rewrite vague follow-ups into self-contained questions using conversation context.</td></tr>
+        <tr><td><code>extract_intent</code></td><td>Extract entities, expand abbreviations, classify query type, and decide response mode.</td></tr>
+        <tr><td><code>retrieve_schema</code></td><td>Run hybrid retrieval over ontology/schema assets.</td></tr>
+        <tr><td><code>generate_sql</code></td><td>Produce SQL using DSPy + few-shot patterns.</td></tr>
+        <tr><td><code>clarification_node</code></td><td>Ask for a clearer question when the graph cannot safely proceed.</td></tr>
+        <tr><td><code>execute_sql</code></td><td>Validate and execute SQL, including self-healing if needed.</td></tr>
+        <tr><td><code>analyze_data</code></td><td>Decide whether results need a chart or conversational follow-up.</td></tr>
+        <tr><td><code>conversational_followup</code></td><td>Transform list-like outputs into a more explainable intermediate response.</td></tr>
+        <tr><td><code>generate_chart</code></td><td>Build chart configuration and drill-down actions.</td></tr>
+        <tr><td><code>predictive_scan</code></td><td>Collect CPU predictive intelligence when the question is predictive.</td></tr>
+        <tr><td><code>compose_public_answer</code></td><td>Generate an executive-facing answer card from predictive context.</td></tr>
+      </table>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>7. Context Resolution: Why Follow-Ups Work</h2>
+        <p>
+          One of the most important agentic behaviors in Bashira is context resolution. Many users do not ask a perfectly formed new question.
+          They say things like “show me that”, “yes give me details”, “what about it”, or “same for this week”.
+        </p>
+        <p>
+          Bashira handles this with a dedicated DSPy context-resolution signature plus rule patterns. The system looks at recent chat history,
+          identifies whether the latest user message is vague, and if so rewrites it into a fully self-contained question.
+        </p>
+        <pre>conversation history + vague follow-up -> resolved self-contained question</pre>
+        <p>
+          This is a major reason the system feels conversational instead of brittle. The user does not have to restate the entire context every turn.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>8. Intent Agent</h2>
+        <p>
+          The IntentAgent is a lightweight DSPy module that extracts entities, expands abbreviations, adds column hints,
+          and classifies the broad shape of the query before retrieval starts.
+        </p>
+        <pre>Input:
+- user question
+- available tables context
+
+Output:
+- entities
+- query_type
+- expanded_question
+- column_hints</pre>
+        <p>
+          This step improves downstream precision because retrieval does not begin from raw natural language alone. It begins from a partially structured interpretation.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>9. The First Major Routing Decision: SQL or Predictive</h2>
+        <p>
+          Bashira does not push every question through the same path. It uses a classifier that decides whether the question should stay on the
+          deterministic SQL path or switch to the predictive path.
+        </p>
+        <p>
+          The classifier is intentionally conservative. It keeps deterministic KPI and SQL-answerable questions on the SQL branch and reserves the
+          predictive branch for true forecasting, root-cause, intervention, probability, or counterfactual questions.
+        </p>
+        <table>
+          <tr><th>Branch</th><th>Typical Question Type</th></tr>
+          <tr><td><code>sql_only</code></td><td>current metrics, counts, lists, rankings, deterministic aggregations, exact current status</td></tr>
+          <tr><td><code>predictive</code></td><td>probability of delay, root causes, interventions, scenarios, simulations, management actions</td></tr>
+        </table>
+        <p>
+          This routing is a critical agentic capability. It prevents expensive or inappropriate predictive tooling from being invoked for questions that SQL can already answer cleanly.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>10. Retrieval Agent</h2>
+        <p>
+          The retrieval step is hybrid and schema-aware. It combines three retrieval channels:
+        </p>
+        <ul>
+          <li>Neo4j vector search over semantic embeddings</li>
+          <li>Neo4j fulltext search over ontology/schema terms</li>
+          <li>BM25 search over schema and column descriptions</li>
+        </ul>
+        <p>
+          Then the results are merged using Reciprocal Rank Fusion. The retrieval output is not just a bag of matches. It becomes:
+        </p>
+        <ul>
+          <li>a structured set of relevant columns</li>
+          <li>table context</li>
+          <li>join path hints from the knowledge graph</li>
+          <li>a schema context string for the SQL agent</li>
+        </ul>
+        <pre>question -> vector/fulltext/BM25 -> RRF -> schema context + join paths</pre>
+        <p>
+          Retrieval before generation is one of the key reasons the framework is reliable. The model is not asked to invent SQL from memory. It is grounded first.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>11. SQL Agent</h2>
+        <p>
+          The SQL agent is a DSPy-based generation module with manual few-shot examples and anti-hallucination prompt rules.
+          It is not freeform code generation. It is constrained SQL synthesis against the schema context supplied by retrieval.
+        </p>
+        <p>
+          Important properties of this agent:
+        </p>
+        <ul>
+          <li>uses DSPy ChainOfThought style reasoning</li>
+          <li>sees retrieved schema and join hints</li>
+          <li>has domain-specific few-shot examples</li>
+          <li>can emit an insufficiency signal instead of inventing columns</li>
+        </ul>
+        <p>
+          This is what converts the product from semantic search into executable analytics.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>12. Validator Agent and Self-Healing</h2>
+        <p>
+          The validator is one of the most important agentic components because it closes the loop between generation and execution.
+          It validates SQL against four categories:
+        </p>
+        <ol>
+          <li>security rules</li>
+          <li>schema correctness</li>
+          <li>BM25 anti-hallucination checks</li>
+          <li>runtime execution success</li>
+        </ol>
+        <p>
+          If the SQL fails, the system does not simply stop. It can re-prompt the SQL agent with error context and attempt an automatic correction.
+          That is genuine agentic repair behavior.
+        </p>
+        <pre>generated SQL -> validate -> fail -> feed error context back -> regenerate -> retry</pre>
+        <div class="callout warning">
+          <strong>Why this matters.</strong> Many NL2SQL systems break because they generate once and hope for the best.
+          Bashira uses a governed self-healing loop, which is much closer to an actual agent than a one-shot text model.
+        </div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>13. Analyze Data, Follow-Up Logic, and Chart Agent</h2>
+        <p>
+          After SQL execution, the framework does not blindly dump rows. It inspects the result shape and decides what kind of response is appropriate.
+          If the result needs visualization, it routes into chart generation. If the result is more list-like or conversational, it can enter a follow-up node first.
+        </p>
+        <p>
+          The ChartAgent then turns result columns, row counts, and the original question into a chart configuration, including possible drill-down actions.
+          This means the output layer is also agentic: it adapts rendering to the structure of the data.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>14. Predictive Scan Agent</h2>
+        <p>
+          The PredictiveScanAgent only runs when the response mode is predictive. It is intentionally skipped for ordinary SQL questions.
+        </p>
+        <p>
+          This agent pulls from the CPU predictive stack, including:
+        </p>
+        <ul>
+          <li>ForecastEngine for portfolio and well forecast context</li>
+          <li>CPU ML microservice on port 8050 for delay probabilities, SHAP insights, and causal hints</li>
+        </ul>
+        <p>
+          It assembles a predictive context object containing forecast summaries, risk summaries, causal insights, intervention ideas, and structured scan lines.
+          So the predictive branch is not a generic LLM answer. It is a retrieval-and-assembly layer over real predictive services.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>15. Public Response Agent</h2>
+        <p>
+          Once predictive context exists, the PublicResponseAgent composes an executive-facing answer. This layer exists because raw model context is too technical
+          for the frontend answer card.
+        </p>
+        <p>
+          It takes:
+        </p>
+        <ul>
+          <li>the original question</li>
+          <li>SQL summary if present</li>
+          <li>forecast summary</li>
+          <li>causal summary</li>
+          <li>intervention summary</li>
+        </ul>
+        <p>
+          And returns:
+        </p>
+        <ul>
+          <li>answer_text</li>
+          <li>risk_label</li>
+          <li>predictive_summary lines for the UI</li>
+        </ul>
+        <p>
+          Importantly, it is explicitly designed not to expose internal chain-of-thought, SQL, or debugging artifacts. This is the public-facing narrative layer.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>16. Explainability Through Reasoning Steps</h2>
+        <p>
+          Bashira tracks reasoning steps as structured metadata. Each step can record:
+        </p>
+        <ul>
+          <li>step name</li>
+          <li>status</li>
+          <li>detail</li>
+          <li>duration</li>
+          <li>extra metadata</li>
+        </ul>
+        <p>
+          This gives the system a process trace without exposing hidden chain-of-thought. In practical product terms, it means the UI and logs can explain:
+        </p>
+        <ul>
+          <li>which branch ran</li>
+          <li>whether retrieval succeeded</li>
+          <li>whether SQL needed healing</li>
+          <li>whether predictive scan was available</li>
+          <li>how the final output mode was chosen</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>17. Full End-to-End Agentic Flow</h2>
+      <pre>1. Frontend sends question to /api/query
+2. API server lazy-loads orchestrator if needed
+3. Orchestrator gathers session context and chat history
+4. LangGraph invocation starts with resolve_context
+5. Vague follow-ups are rewritten into self-contained questions
+6. Intent agent extracts entities and query shape
+7. Classifier chooses sql_only or predictive mode
+8. If sql_only:
+     a. Retrieval agent builds schema context
+     b. SQL agent generates SQL
+     c. Validator checks security/schema/runtime
+     d. Self-healing runs if necessary
+     e. SQL executes
+     f. Data analysis chooses chart or conversational follow-up
+     g. Chart agent builds final visualization config
+9. If predictive:
+     a. PredictiveScanAgent gathers forecast/risk/causal context
+     b. PublicResponseAgent builds executive answer
+10. Orchestrator normalizes final state into API response
+11. Frontend renders chart, table, predictive card, or clarification</pre>
+    </section>
+
+    <section class="card">
+      <h2>18. Why This Framework Is Strong</h2>
+      <table>
+        <tr><th>Capability</th><th>Why It Matters</th></tr>
+        <tr><td>Shared state graph</td><td>Lets multiple agents coordinate over one evolving context.</td></tr>
+        <tr><td>Conditional routing</td><td>Prevents one-size-fits-all execution and preserves efficiency.</td></tr>
+        <tr><td>Context resolution</td><td>Makes follow-up conversation usable in real workflows.</td></tr>
+        <tr><td>Hybrid retrieval</td><td>Grounds generation in real schema and ontology evidence.</td></tr>
+        <tr><td>Self-healing validation</td><td>Improves robustness beyond one-shot LLM generation.</td></tr>
+        <tr><td>Checkpointed memory</td><td>Supports session continuity and persistent stateful operation.</td></tr>
+        <tr><td>Predictive branch</td><td>Allows the framework to move beyond SQL into decision intelligence.</td></tr>
+        <tr><td>Public response composer</td><td>Translates technical intelligence into executive communication.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>19. Bottom Line</h2>
+      <p>
+        The complete Bashira agentic AI framework works because it separates responsibilities and connects them through a governed graph runtime.
+        The system understands conversational context, classifies the question, retrieves the right schema, generates and repairs SQL, executes safely,
+        adapts the output format, and can switch into a predictive decision branch when required.
+      </p>
+      <p>
+        That is what makes it a real agentic architecture: specialized agents, shared state, memory, routing, validation, recovery, and mode switching,
+        all operating together as one controlled intelligence system.
+      </p>
+    </section>
+
+    <div class="footer">Bashira Intelligence • Complete Agentic AI Framework Working • Technical architecture document</div>
+  </div>
+</body>
+</html>

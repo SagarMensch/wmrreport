@@ -1,0 +1,62 @@
+[
+  {
+    "table": "WellMonitoringReport",
+    "column": "pdo_well_id",
+    "hint": "The unique Petroleum Development Oman assigned identifier for each well. This is the PRIMARY JOIN KE"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "well_location",
+    "hint": "Do NOT use for rig codes like NL0010 - those are in Revenue.rigcode"
+  },
+  {
+    "table": "Revenue",
+    "column": "rigcode",
+    "hint": "This is RIG CODE, not location. Do NOT search in well_location for NL0010!"
+  },
+  {
+    "table": "Revenue",
+    "column": "planned_progress",
+    "hint": "The planned progress target. CRITICAL: This is NVARCHAR (text) type - must CAST to DECIMAL before co"
+  },
+  {
+    "table": "Revenue",
+    "column": "planned_purpose_value",
+    "hint": "CRITICAL: The planned monetary target. This is NVARCHAR (text) - must CAST to DECIMAL before SUM!"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_rig_on_date",
+    "hint": "CRITICAL: Use this for spud/tie-in queries - this is when rig arrived at well. DO NOT use actual_start_date for rig-related date calculations!"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_start_date",
+    "hint": "This is generic work start date - for rig arrival dates use actual_rig_on_date instead"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "location_pegged_date",
+    "hint": "Date location was pegged - use with actual_rig_on_date for Location Pegged to Spud KPI (Target: >140 days)"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "scr_date",
+    "hint": "Site Change Request date - use with actual_rig_on_date for Stable Rig Sequence KPI (Target: >90 days)"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "flaf_issue_date",
+    "hint": "Date FLAF was issued - use with actual_rig_on_date for FLAF to Spud KPI (Target: >90 days)"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "date_of_site_survey_report_issuance",
+    "hint": "Date site survey report was issued - use with flaf_issue_date for Survey Report from FLAF KPI (Target: <15 days)"
+  },
+  {
+    "table": "WellMonitoringReport",
+    "column": "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date",
+    "hint": "Commissioning finish date - use with actual_rig_off_date for Overall Commissioning Duration KPI (Target: <5 days with Rig/FBU/RSR, <15 days with Hoist)"
+  }
+]

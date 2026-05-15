@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Field Atlas Tab Working</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --paper: #ffffff;
+      --ink: #111111;
+      --muted: #60656f;
+      --line: #d8dce3;
+      --soft: #eef1f5;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+
+    .hero, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 14px 38px rgba(17, 17, 17, 0.05);
+    }
+
+    .hero {
+      padding: 34px 34px 28px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #697386;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 44px;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    p { margin: 0 0 14px; color: #2d3239; }
+    ul { margin: 10px 0 0 0; padding-left: 18px; }
+    li { margin: 8px 0; }
+    code {
+      background: #f3f5f8;
+      border: 1px solid #e5e8ee;
+      border-radius: 8px;
+      padding: 1px 6px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-7 { grid-column: span 7; }
+    .span-6 { grid-column: span 6; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+
+    .card { padding: 26px 26px 24px; }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      background: #fcfcfd;
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+    }
+
+    .kpi .label {
+      color: #68707d;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .kpi .value {
+      margin-top: 10px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 10px;
+      border-bottom: 1px solid #eceff3;
+    }
+
+    th {
+      color: #68707d;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #111827;
+      color: #f8fafc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .span-8, .span-7, .span-6, .span-5, .span-4, .span-12 { grid-column: span 12; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Bashira Intelligence / Field Atlas</p>
+      <h1>How the Field Atlas Tab Works</h1>
+      <p style="margin-top:16px; max-width: 1040px;">
+        Field Atlas is the spatial operating-intelligence surface of the product. It takes the rig-risk enriched
+        well roster, positions wells in coordinate space, estimates neighborhood pressure, clusters zones, computes
+        high-pressure corridors between successive rig commitments, and turns the result into an interactive map
+        and topology inspector. This tab is where well risk becomes spatial logistics intelligence.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Backend Route</div>
+          <div class="value" style="color:var(--blue)">/field-atlas</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Primary Unit</div>
+          <div class="value" style="color:var(--red)">Positioned Well</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Spatial ML</div>
+          <div class="value" style="color:var(--yellow)">NN + DBSCAN</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Output Modes</div>
+          <div class="value" style="color:var(--green)">2D + 3D</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-7">
+        <h2>1) Runtime Path</h2>
+        <p>
+          The frontend component is <code>FieldAtlas.tsx</code>. It loads through
+          <code>useCommandCenterData("field_atlas")</code>, which calls the shared proxy route
+          <code>/api/command-center?action=field_atlas</code>. The backend resolves this to
+          <code>/api/command-center/field-atlas</code> and returns
+          <code>CommandCenterService.get_field_atlas_view()</code>.
+        </p>
+        <p>
+          Field Atlas therefore sits on top of the same command-center architecture as Portfolio, Smart Alerts, and Rig Operations.
+          But instead of aggregating by project or rig first, it reprojects the operating frame into physical space.
+        </p>
+      </article>
+
+      <article class="card span-5">
+        <h2>2) Why This Tab Exists</h2>
+        <p>
+          Standard dashboards can tell you that wells are risky. They usually cannot show whether risky wells are geographically concentrated,
+          whether neighboring wells create localized pressure fields, or whether the same rig is about to relay delay across the field.
+        </p>
+        <ul>
+          <li>Portfolio asks: which projects are under pressure?</li>
+          <li>Rig Operations asks: which rig queues are stressed?</li>
+          <li>Field Atlas asks: where is operational pressure physically concentrating, and how does it propagate spatially?</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>3) Upstream Dependency: Rig Operations Enrichment</h2>
+        <p>
+          Field Atlas does not invent its own risk layer from scratch. It first calls <code>get_rig_operations_view()</code> and builds a
+          <code>well_lookup</code> map from the rig payload. That lookup injects into each positioned well:
+        </p>
+        <ul>
+          <li><code>ops_risk_score</code></li>
+          <li><code>ops_risk_tier</code></li>
+          <li><code>recovery_confidence_pct</code></li>
+          <li><code>queue_exposure</code></li>
+          <li><code>dominant_bottleneck</code></li>
+          <li><code>anomaly_flag</code></li>
+          <li><code>badges</code>, <code>evidence</code>, <code>actions</code>, and <code>score_breakdown</code></li>
+        </ul>
+        <p>
+          This means Field Atlas is not a detached geospatial page. It is the spatial extension of the operational risk stack built in Rig Operations.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4) Coordinate Preparation and Fallback Strategy</h2>
+        <p>
+          The service starts from the canonical operating frame and looks for real <code>easting</code> and <code>northing</code> values.
+          Wells with valid coordinates are considered directly positioned.
+        </p>
+        <p>
+          For wells missing coordinates, the service computes cluster centroids from the wells in the same cluster that do have coordinates.
+          If such a centroid exists, the missing well is assigned the centroid position and marked with:
+        </p>
+        <ul>
+          <li><code>coord_source = "actual"</code> for real coordinates</li>
+          <li><code>coord_source = "cluster_imputed"</code> for centroid-filled coordinates</li>
+        </ul>
+        <p>
+          Wells that still cannot be positioned are dropped from the atlas. This gives the tab graceful degradation on incomplete local data.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>5) Atlas Record Construction</h2>
+        <p>
+          Once coordinates are available, the service builds an atlas row for each well containing:
+        </p>
+        <ul>
+          <li>identity: well, project, cluster, rig, well type</li>
+          <li>baseline risk and progress</li>
+          <li>schedule delay and rig-on delay</li>
+          <li>stage completion percentages</li>
+          <li>expected and actual rig dates</li>
+          <li>coordinate source and positioned coordinates</li>
+        </ul>
+        <p>
+          The rig-derived fields are then joined on top of this atlas row, so each positioned well carries both physical location and operational state.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>6) Fallback Logic for Missing Rig-Enriched Fields</h2>
+        <p>
+          If a well is missing rig-enriched attributes, the atlas applies fallback rules:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Fallback</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ops_risk_score</code></td>
+              <td>Falls back to the original <code>risk_score</code></td>
+            </tr>
+            <tr>
+              <td><code>ops_risk_tier</code></td>
+              <td>Falls back to the original <code>risk_tier</code></td>
+            </tr>
+            <tr>
+              <td><code>recovery_confidence_pct</code></td>
+              <td>Falls back to <code>100 - ops_risk_score</code>, clipped into a practical range</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This design lets the tab remain usable even if some upstream enrichment is absent.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>7) Adaptive Neighborhood Radius</h2>
+        <p>
+          Atlas uses nearest-neighbor modeling in two phases. First it calibrates a radius from the wells with actual coordinates.
+          It uses <code>NearestNeighbors</code> with up to six neighbors, examines the neighbor-distance distribution, and sets:
+        </p>
+        <p><code>neighbor_radius = clamp(quantile_0.75(neighbor_distance) * 1.25, 1200, 4200)</code></p>
+        <p>
+          This matters because the field may have different density characteristics depending on the local dataset. A fixed radius would be brittle.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>8) Neighborhood Pressure Model</h2>
+        <p>
+          With a calibrated radius, Atlas runs a radius-neighbor search over all positioned wells. For every well it computes:
+        </p>
+        <ul>
+          <li><code>local_neighbor_count</code>: number of nearby wells</li>
+          <li><code>nearby_critical_count</code>: nearby wells in critical or high-risk tier</li>
+          <li><code>neighborhood_pressure_score</code>: weighted average of nearby wells’ operational risk scores</li>
+        </ul>
+        <p>
+          Neighbor weights decay with distance:
+        </p>
+        <p><code>weight = max(0.08, 1 - distance / neighbor_radius)</code></p>
+        <p>
+          This is a local field-pressure model. Close risky wells matter more than distant risky wells.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>9) Spatial Signal Score Formula</h2>
+        <p>
+          The core metric of Field Atlas is <code>spatial_signal_score</code>. This is the quantity that determines which wells rise to the top
+          of the atlas and which neighborhoods become exposed.
+        </p>
+        <p><code>spatial_signal_score = 0.52 * ops_risk_score + 0.23 * neighborhood_pressure_score + 0.10 * local_density_score + 2.2 * queue_exposure + 2.4 * nearby_critical_count + 6 * anomaly_flag</code></p>
+        <p>
+          The final value is clipped to the range <code>0-99</code>.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ops_risk_score</code></td>
+              <td>Intrinsic operational pressure of the well from Rig Operations</td>
+            </tr>
+            <tr>
+              <td><code>neighborhood_pressure_score</code></td>
+              <td>Average pressure of nearby wells, weighted by distance</td>
+            </tr>
+            <tr>
+              <td><code>local_density_score</code></td>
+              <td>Relative concentration of neighboring wells</td>
+            </tr>
+            <tr>
+              <td><code>queue_exposure</code></td>
+              <td>How many downstream wells share this rig queue</td>
+            </tr>
+            <tr>
+              <td><code>nearby_critical_count</code></td>
+              <td>How many nearby wells are already highly stressed</td>
+            </tr>
+            <tr>
+              <td><code>anomaly_flag</code></td>
+              <td>Boolean lift for execution outlier status</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This is why the tab is useful: a well can become spatially important not only because it is risky itself, but because it sits in a risky neighborhood or in a risky transition corridor.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>10) Adaptive Spatial Zoning with DBSCAN</h2>
+        <p>
+          Field Atlas then groups actual-position wells into zones using <code>DBSCAN</code> when enough positioned wells are available.
+          The <code>eps</code> radius is adapted from the neighborhood radius:
+        </p>
+        <p><code>eps = clamp(neighbor_radius * 1.28, 1500, 5200)</code></p>
+        <p>
+          Only actual-coordinate wells are used to seed these zones. The algorithm discovers organically dense spatial groups without forcing a preset number of zones.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>11) Zone Assignment and Fallback</h2>
+        <p>
+          Once DBSCAN finds actual-coordinate groups, the service computes a centroid and radius envelope for each zone.
+          Every atlas well is then assigned to its nearest zone if it falls within a threshold. Imputed-coordinate wells are given a looser threshold because their position is less certain.
+        </p>
+        <p>
+          If no DBSCAN zone can be confidently assigned, the well falls back to a cluster-derived zone ID:
+        </p>
+        <ul>
+          <li><code>Zxx</code> for DBSCAN-derived zones</li>
+          <li><code>C-cluster</code> for cluster fallback zones</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>12) Zone Objects and What They Mean</h2>
+        <p>
+          Zone objects are then constructed with:
+        </p>
+        <ul>
+          <li>zone center and spatial radii</li>
+          <li>well count and active well count</li>
+          <li>rig count and listed rigs</li>
+          <li>critical wells, delayed wells, anomaly wells</li>
+          <li>average signal score, average risk score, average progress</li>
+          <li>average recovery confidence</li>
+          <li>total queue exposure</li>
+          <li>dominant bottleneck</li>
+          <li>top wells by spatial signal</li>
+        </ul>
+        <p>
+          Zones are sorted by average signal score, then critical-well count, then delayed-well count. That makes them candidate operational theaters.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>13) Hotspot Cells</h2>
+        <p>
+          In addition to adaptive zones, the service creates a simpler hotspot lattice by dividing the coordinate extent into a coarse fixed grid.
+          Each well is assigned to:
+        </p>
+        <ul>
+          <li><code>grid_x = ((easting - min_x) / x_span) * 5</code></li>
+          <li><code>grid_y = ((northing - min_y) / y_span) * 3</code></li>
+        </ul>
+        <p>
+          These grid cells are aggregated into hotspot objects carrying average signal score, average risk, delayed wells, critical wells, and queue exposure.
+          Hotspots are useful as a stable executive heat layer even when adaptive zones vary with data density.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>14) Corridor Construction</h2>
+        <p>
+          The corridor model is one of the most valuable parts of the atlas. For each rig, the service orders wells by expected rig-on date,
+          then by delay and risk, and links successive wells. Each link becomes a possible operational corridor.
+        </p>
+        <p>
+          A corridor therefore represents the transition from one rig commitment to the next under the same rig.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>15) Corridor Pressure Formula</h2>
+        <p>
+          Each corridor receives a <code>pressure_score</code>:
+        </p>
+        <p><code>pressure_score = min(99, 0.62 * max(spatial_signal_current, spatial_signal_next) + 1.45 * combined_delay + 4.6 * max(0, -handover_gap_days) + min(18, distance_m / 850) + 1.8 * max(queue_exposure_current, queue_exposure_next))</code></p>
+        <p>
+          That means corridor pressure rises when:
+        </p>
+        <ul>
+          <li>either end of the corridor is already spatially stressed</li>
+          <li>the two wells carry large delay values</li>
+          <li>the next well is scheduled before the prior one can realistically hand over</li>
+          <li>the physical distance is large enough to complicate transfer</li>
+          <li>queue exposure is already high</li>
+        </ul>
+        <p>
+          Corridors are classified as:
+        </p>
+        <ul>
+          <li><strong>Sequence Clash</strong> if handover gap is negative</li>
+          <li><strong>Pressure Relay</strong> if corridor pressure is high</li>
+          <li><strong>Transition Corridor</strong> otherwise</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>16) Returned Payload</h2>
+        <p>
+          The backend returns:
+        </p>
+        <ul>
+          <li><code>summary</code>: coverage, zones, corridors, exposed wells, and average spatial signal</li>
+          <li><code>bounds</code>: coordinate extent for rendering</li>
+          <li><code>wells</code>: positioned wells sorted by spatial signal</li>
+          <li><code>clusters</code>: cluster-level centroids and aggregate metrics</li>
+          <li><code>zones</code>: adaptive spatial operating theaters</li>
+          <li><code>hotspots</code>: coarse-grid exposure cells</li>
+          <li><code>corridors</code>: rig transition links ranked by pressure score</li>
+        </ul>
+        <p>
+          This payload is rich enough that the frontend can stay client-driven after one fetch.
+        </p>
+      </article>
+
+      <article class="card span-4">
+        <h2>17) Summary Metrics</h2>
+        <p>
+          The summary includes:
+        </p>
+        <ul>
+          <li><code>spatial_coverage_pct</code></li>
+          <li><code>critical_positioned</code></li>
+          <li><code>hotspot_cells</code></li>
+          <li><code>rig_corridors</code></li>
+          <li><code>zone_count</code></li>
+          <li><code>avg_spatial_signal_score</code></li>
+          <li><code>exposed_wells</code></li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>18) Frontend Rendering Architecture</h2>
+        <p>
+          Unlike some other tabs, Field Atlas does not use Plotly for the main spatial canvas. The key renderer is a custom SVG engine called
+          <code>AtlasCanvas</code>.
+        </p>
+        <p>
+          It supports two modes:
+        </p>
+        <ul>
+          <li><code>2d-map</code>: flat coordinate extent view</li>
+          <li><code>3d-topology</code>: isometric lifted topology where vertical lift corresponds to operational risk</li>
+        </ul>
+        <p>
+          This is important for product identity. The map is not a generic GIS embed. It is a designed quantitative canvas with custom geometry.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>19) What the 3D Mode Really Is</h2>
+        <p>
+          The 3D mode is not a geospatial WebGL simulation. It is a custom isometric projection rendered in SVG. Each well is projected into a pseudo-3D coordinate system,
+          lifted by its risk, and connected to the floor plane. Corridors are rendered as projected lines on the same surface.
+        </p>
+        <p>
+          So when the UI says <code>3D Topology</code>, it means a volumetric analytical representation of spatial pressure, not a literal terrain engine.
+          This is still useful because it makes relative spatial concentration legible without introducing a heavy 3D dependency.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>20) Interaction Model</h2>
+        <p>
+          The frontend keeps interaction local after the payload loads:
+        </p>
+        <ul>
+          <li>search by well or project</li>
+          <li>tier filtering</li>
+          <li>mode toggle between 2D and 3D</li>
+          <li>corridor visibility toggle</li>
+          <li>entity selection for well or corridor</li>
+          <li>fullscreen chart overlay</li>
+        </ul>
+        <p>
+          The selected entity drives the right-hand dossier, which can display evidence, queue exposure, recovery confidence, and corridor detail.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>21) Business Value of the Tab</h2>
+        <p>
+          Field Atlas creates value because operations are spatial. If execution pressure clusters geographically or propagates through specific rig corridors,
+          that changes how crews, logistics, sequencing, and managerial attention should be allocated.
+        </p>
+        <ul>
+          <li>It converts abstract risk into field layout</li>
+          <li>It reveals local concentration instead of only global averages</li>
+          <li>It surfaces relay risk between successive rig commitments</li>
+          <li>It lets leadership reason about physical operating theaters rather than isolated records</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>22) The Most Important Architectural Insight</h2>
+        <p>
+          Field Atlas is not a separate geospatial subsystem with unrelated logic. It is the spatial projection of the same operational risk stack already computed in Rig Operations.
+          The tab takes that well-level ops risk, embeds it in geographic context, blends it with neighbor density and local criticality, then elevates the result into zones, hotspots, and rig corridors.
+        </p>
+        <p>
+          In plain terms: Rig Operations explains which wells and rigs are stressed. Field Atlas explains where that stress lives in the field and how it may spread.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Field Atlas is a hybrid spatial pressure model: rig-risk enrichment, adaptive neighborhood analysis, DBSCAN-based zoning, hotspot lattice aggregation, and corridor-based sequence pressure, all rendered through a custom 2D/3D topology canvas.
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+﻿Columns related to timeline and tracking:
+- progress: Task completion progress percentage
+- start_date: Start Date field in ActivityTaskPlan
+- end_date: End Date field in ActivityTaskPlan
+- actual_start: Actual start date of task execution
+- actual_end: Actual end date of task completion
+- updated_at: Updated At field in ActivityTaskPlan
+- Sl.No: Sl.No field in Job_Progress_Report_GB
+- Category: Category field in Job_Progress_Report_GB
+- Well ID: Unique well identifier for job progress tracking join key with WellMonitoringReport pdo_well_id
+- Cum-Prior Month Actual %: Cum-Prior Month Actual % field in Job_Progress_Report_GB
+- Week-1 Plan %: Week 1 planned progress percentage target
+- Week-1 Actual %: Week 1 actual progress achieved percentage
+- Week-2 Plan %: Week-2 Plan % field in Job_Progress_Report_GB
+- Week-2 Actual %: Week-2 Actual % field in Job_Progress_Report_GB
+- Week-3 Plan %: Week-3 Plan % field in Job_Progress_Report_GB
+- Week-3 Actual %: Week-3 Actual % field in Job_Progress_Report_GB
+- Week-4 Plan %: Week-4 Plan % field in Job_Progress_Report_GB
+- Week-4 Actual %: Week-4 Actual % field in Job_Progress_Report_GB
+- Week-5 Plan %: Week-5 Plan % field in Job_Progress_Report_GB
+- Week-5 Actual %: Week-5 Actual % field in Job_Progress_Report_GB
+- Current Month Plan %: Current month planned progress percentage
+- Current Month Actual %: Current month actual progress achieved percentage
+- Cum-Current Month Plan %: Cum-Current Month Plan % field in Job_Progress_Report_GB
+- Cum-Current Month Actual %: Cum-Current Month Actual % field in Job_Progress_Report_GB
+- Target End: Target end date for well completion
+- Cum-Prior Month Plan: Cum-Prior Month Plan field in Job_Progress_Report_GB
+- Cum-Prior Month Actual: Cum-Prior Month Actual field in Job_Progress_Report_GB
+- Current month Plan: Current Month Plan field in Job_Progress_Report_GB
+- Current Month Actual: Current Month Actual field in Job_Progress_Report_GB
+- Cum - Current Month Plan: Cum - Current Month Plan field in Job_Progress_Report_GB
+- Cum - Current Month Actual: Cum - Current Month Actual field in Job_Progress_Report_GB
+- Remarks: Remarks field in Job_Progress_Report_GB
+- planned_progress: Planned Progress field in Revenue
+- acutal_progress: Acutal Progress field in Revenue
+- planned_progress_next_week: Planned Progress Next Week field in Revenue
+- Work_Center: SAP work center for operations
+- Operation_Short: Operation Short field in SAP_DRILLING_SEQUENCE
+- Activity: Activity field in SAP_DRILLING_SEQUENCE
+- Opr_System_status: Opr System Status field in SAP_DRILLING_SEQUENCE
+- Earl_start_date: Earliest planned start date from SAP
+- EarliestEndDate: Earliestenddate field in SAP_DRILLING_SEQUENCE
+- Station_Code: Station Code field in SAP_DRILLING_SEQUENCE
+- Normal_duration: Normal Duration field in SAP_DRILLING_SEQUENCE
+- Norm_duratn_un: Norm Duratn Un field in SAP_DRILLING_SEQUENCE
+- Well_Name: Well name in SAP
+- Responsible_asset: Responsible Asset field in SAP_DRILLING_SEQUENCE
+- Well_ID: Well identifier from SAP system
+- Well_Location: Well Location field in SAP_DRILLING_SEQUENCE
+- Well_Function: Well Function field in SAP_DRILLING_SEQUENCE
+- Well_Category: Well Category field in SAP_DRILLING_SEQUENCE
+- PCAP_Category: Pcap Category field in SAP_DRILLING_SEQUENCE
+- Last_Updated_on: Last Updated On field in WBS_Master_Tracker_
+- well_name_after_spud: Official well name after spudding operation
+- location_po_recvd_date: Location Po Recvd Date field in WellMonitoringReport
+- last_week_exp.rig_on_location_sap_data: Last Week Exp.Rig On Location Sap Data field in WellMonitoringReport
+- latest_exp.rig_on_location_sap_data: Latest Exp.Rig On Location Sap Data field in WellMonitoringReport
+- exp.rig_off_location_sap_data: Exp.Rig Off Location Sap Data field in WellMonitoringReport
+- date_-_material_po_placed: Date - Material Po Placed field in WellMonitoringReport
+- date_-_material_available_at_site: Date - Material Available At Site field in WellMonitoringReport
+- scr_date: Scr Date field in WellMonitoringReport
+- actual_pegged_date: Actual Pegged Date field in WellMonitoringReport
+- last_week_cum_progress: Last Week Cum Progress field in WellMonitoringReport
+- cum_progress_for_this_week: Cum Progress For This Week field in WellMonitoringReport
+- actual_start_date: Actual start date of well construction activity
+- actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables: Actual Date Odc Requested Field Programmer Oso33X For Esp Pcp Surface Cables field in WellMonitoringReport
+- date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor: Date Oso33X Call Out For Cable Installation To Pcp Esp Vendor field in WellMonitoringReport
+- actual_finish_date: Actual finish completion date of well
+- flaf_issue_date: Flaf Issue Date field in WellMonitoringReport
+- ramz_id_received_date_same_day_as_flaf_issue_date: Ramz Id Received Date Same Day As Flaf Issue Date field in WellMonitoringReport
+- date_of_site_survey_report_issuance: Date Of Site Survey Report Issuance field in WellMonitoringReport
+- actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid: Actual Date Odc Requested Field Programmer Oso33X To Install Esp Pcp Skid field in WellMonitoringReport
+- actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid: Actual Date Field Programmer Oso33X Requested Esp Pcp Vendor To Install The Skid field in WellMonitoringReport
+- actual_date_pcp_esp_vendor_delivered_the_skid: Actual Date Pcp Esp Vendor Delivered The Skid field in WellMonitoringReport
+- actual_installation_date_by_vendor_of_esp/pcp_skid: Actual Installation Date By Vendor Of Esp/Pcp Skid field in WellMonitoringReport
+- f_l_po_recd._date: F L Po Recd. Date field in WellMonitoringReport
+- date_of_tie_in_port_readiness: Date Of Tie In Port Readiness field in WellMonitoringReport
+- engineering_actual_start_date: Engineering Actual Start Date field in WellMonitoringReport
+- engineering_actual_finish_date: Engineering Actual Finish Date field in WellMonitoringReport
+- progress: Physical progress percentage decimal representing completion status
+- const._actual_start_date: Const. Actual Start Date field in WellMonitoringReport
+- const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date: Const. Complete Date Including F L Final Hydro Test 1 Day Before Rig On Date field in WellMonitoringReport
+- flowline_construction_progress: Flowline Construction Progress field in WellMonitoringReport
+- ohl_progress: Ohl Progress field in WellMonitoringReport
+- ohl_completion_date: Ohl Completion Date field in WellMonitoringReport
+- z6_data_submitted_date: Z6 Data Submitted Date field in WellMonitoringReport
+- sap_notification_received_date_z6_2_days_before_eng._completion: Sap Notification Received Date Z6 2 Days Before Eng. Completion field in WellMonitoringReport
+- actual_rig_on_date: Actual date when rig was moved onto well location
+- actual_rig_off_date: Actual date when rig moved off well location completed
+- actual_hoist_fbu_rsr_on_date: Actual Hoist Fbu Rsr On Date field in WellMonitoringReport
+- actual_hoist_fbu_rsr_off_date: Actual Hoist Fbu Rsr Off Date field in WellMonitoringReport
+- wellpad_handover-2_from_hoist_fbu_rsr_off_date: Wellpad Handover-2 From Hoist Fbu Rsr Off Date field in WellMonitoringReport
+- actual_eng._completion_date: Actual Eng. Completion Date field in WellMonitoringReport
+- actual_comm._start_date: Actual Comm. Start Date field in WellMonitoringReport
+- actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date: Actual Comm. Finish Date With In 2 Days From Actual Engg. Completion Date field in WellMonitoringReport
+- rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.: Rlmu Submitted To Ho-Date With In 7 Days From Actual Comm. field in WellMonitoringReport
+- flow_line_test_pack_completion_doc._submission_date_to_qs_dept.: Flow Line Test Pack Completion Doc. Submission Date To Qs Dept. field in WellMonitoringReport
+- flow_line_test_pack_completion_progress: Flow Line Test Pack Completion Progress field in WellMonitoringReport
+- over_all_progress_percentages: Overall well completion progress decimal between 0 and 1 multiply by 100 for percentage display
+- overall_comm_progress_100: Overall Comm Progress 100 field in WellMonitoringReport
+- location_preparation_status_in_progress_completed: Location Preparation Status In Progress Completed field in WellMonitoringReport
+- flow_line_const._status_in_progress_completed: Flow Line Const. Status In Progress Completed field in WellMonitoringReport
+- flow_line_commi._status_in_progress_completed: Flow Line Commi. Status In Progress Completed field in WellMonitoringReport
+- well_name_after_spud: Official well name after spudding operation
+- location_po_recvd_date: Location Po Recvd Date field in WellMonitoringReport_Latest
+- last_week_exp.rig_on_location_sap_data: Last Week Exp.Rig On Location Sap Data field in WellMonitoringReport_Latest
+- latest_exp.rig_on_location_sap_data: Latest Exp.Rig On Location Sap Data field in WellMonitoringReport_Latest
+- exp.rig_off_location_sap_data: Exp.Rig Off Location Sap Data field in WellMonitoringReport_Latest
+- date_-_material_po_placed: Date - Material Po Placed field in WellMonitoringReport_Latest
+- date_-_material_available_at_site: Date - Material Available At Site field in WellMonitoringReport_Latest
+- scr_date: Scr Date field in WellMonitoringReport_Latest
+- actual_pegged_date: Actual Pegged Date field in WellMonitoringReport_Latest
+- last_week_cum_progress: Last Week Cum Progress field in WellMonitoringReport_Latest
+- cum_progress_for_this_week: Cum Progress For This Week field in WellMonitoringReport_Latest
+- actual_start_date: Actual Start Date field in WellMonitoringReport_Latest
+- actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables: Actual Date Odc Requested Field Programmer Oso33X For Esp Pcp Surface Cables field in WellMonitoringReport_Latest
+- date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor: Date Oso33X Call Out For Cable Installation To Pcp Esp Vendor field in WellMonitoringReport_Latest
+- actual_finish_date: Actual Finish Date field in WellMonitoringReport_Latest
+- flaf_issue_date: Flaf Issue Date field in WellMonitoringReport_Latest
+- ramz_id_received_date_same_day_as_flaf_issue_date: Ramz Id Received Date Same Day As Flaf Issue Date field in WellMonitoringReport_Latest
+- date_of_site_survey_report_issuance: Date Of Site Survey Report Issuance field in WellMonitoringReport_Latest
+- actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid: Actual Date Odc Requested Field Programmer Oso33X To Install Esp Pcp Skid field in WellMonitoringReport_Latest
+- actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid: Actual Date Field Programmer Oso33X Requested Esp Pcp Vendor To Install The Skid field in WellMonitoringReport_Latest
+- actual_date_pcp_esp_vendor_delivered_the_skid: Actual Date Pcp Esp Vendor Delivered The Skid field in WellMonitoringReport_Latest
+- actual_installation_date_by_vendor_of_esp/pcp_skid: Actual Installation Date By Vendor Of Esp/Pcp Skid field in WellMonitoringReport_Latest
+- f_l_po_recd._date: F L Po Recd. Date field in WellMonitoringReport_Latest
+- date_of_tie_in_port_readiness: Date Of Tie In Port Readiness field in WellMonitoringReport_Latest
+- engineering_actual_start_date: Engineering Actual Start Date field in WellMonitoringReport_Latest
+- engineering_actual_finish_date: Engineering Actual Finish Date field in WellMonitoringReport_Latest
+- progress: Progress field in WellMonitoringReport_Latest
+- const._actual_start_date: Const. Actual Start Date field in WellMonitoringReport_Latest
+- const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date: Const. Complete Date Including F L Final Hydro Test 1 Day Before Rig On Date field in WellMonitoringReport_Latest
+- flowline_construction_progress: Flowline Construction Progress field in WellMonitoringReport_Latest
+- ohl_progress: Ohl Progress field in WellMonitoringReport_Latest
+- ohl_completion_date: Ohl Completion Date field in WellMonitoringReport_Latest
+- z6_data_submitted_date: Z6 Data Submitted Date field in WellMonitoringReport_Latest
+- sap_notification_received_date_z6_2_days_before_eng._completion: Sap Notification Received Date Z6 2 Days Before Eng. Completion field in WellMonitoringReport_Latest
+- actual_rig_on_date: Actual Rig On Date field in WellMonitoringReport_Latest
+- actual_rig_off_date: Actual Rig Off Date field in WellMonitoringReport_Latest
+- actual_hoist_fbu_rsr_on_date: Actual Hoist Fbu Rsr On Date field in WellMonitoringReport_Latest
+- actual_hoist_fbu_rsr_off_date: Actual Hoist Fbu Rsr Off Date field in WellMonitoringReport_Latest
+- wellpad_handover-2_from_hoist_fbu_rsr_off_date: Wellpad Handover-2 From Hoist Fbu Rsr Off Date field in WellMonitoringReport_Latest
+- actual_eng._completion_date: Actual Eng. Completion Date field in WellMonitoringReport_Latest
+- actual_comm._start_date: Actual Comm. Start Date field in WellMonitoringReport_Latest
+- actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date: Actual Comm. Finish Date With In 2 Days From Actual Engg. Completion Date field in WellMonitoringReport_Latest
+- rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.: Rlmu Submitted To Ho-Date With In 7 Days From Actual Comm. field in WellMonitoringReport_Latest
+- flow_line_test_pack_completion_doc._submission_date_to_qs_dept.: Flow Line Test Pack Completion Doc. Submission Date To Qs Dept. field in WellMonitoringReport_Latest
+- flow_line_test_pack_completion_progress: Flow Line Test Pack Completion Progress field in WellMonitoringReport_Latest
+- over_all_progress_percentages: Overall completion percentage decimal 0 to 1
+- overall_comm_progress_100: Overall Comm Progress 100 field in WellMonitoringReport_Latest
+- location_preparation_status_in_progress_completed: Location Preparation Status In Progress Completed field in WellMonitoringReport_Latest
+- flow_line_const._status_in_progress_completed: Flow Line Const. Status In Progress Completed field in WellMonitoringReport_Latest
+- flow_line_commi._status_in_progress_completed: Flow Line Commi. Status In Progress Completed field in WellMonitoringReport_Latest
+- progress: Daily progress percentage completed
+- actual_start: Actual start date
+- actual_end: Actual end date
+- startDate: Startdate field in task_daily
+- endDate: Enddate field in task_daily
+- updated_at: Updated At field in task_daily

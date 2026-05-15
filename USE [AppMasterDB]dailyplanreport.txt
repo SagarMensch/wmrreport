@@ -1,0 +1,49 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[Daily_Plan_Report]    Script Date: 25-03-2026 16:21:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE   VIEW [dbo].[Daily_Plan_Report]
+AS
+SELECT
+    ROW_NUMBER() OVER (
+        ORDER BY r.[Location], r.[Crew Code], r.[Linking_code]
+    ) AS [Sl.No],
+
+    r.[ATNM/SC] AS [ATNM/SC],
+    CAST(NULL AS NVARCHAR(100)) AS [Discipline],
+
+    r.[Well ID] AS [Well ID],
+    r.[Permit Applicant Name] AS [PA Name],
+    CAST(NULL AS NVARCHAR(50)) AS [PA Mob No],
+
+    r.[PH Emp ID] AS [PH Emp ID],
+    r.[PH Name] AS [PH Name],
+    CAST(NULL AS NVARCHAR(50)) AS [PH Mob No],
+
+    r.[PO/WBS] AS [PO No],
+    CAST(NULL AS NVARCHAR(100)) AS [WBS],
+
+    r.[Well Category] AS [Well Category],
+    r.[Location] AS [Location],
+    r.[JOB TITLE/PROJECT NAME] AS [Job Title / Project Name],
+
+    -- ✅ FIX HERE: was r.[ACTIVITIES]
+    r.[Activity Description] AS [Activities],
+
+    CAST(NULL AS NVARCHAR(100)) AS [ATNM Permit No],
+    CAST(NULL AS NVARCHAR(100)) AS [PDO Permit No],
+
+    r.[Manpower] AS [Manpower],
+    r.[Equipment] AS [Eqpt],
+    r.[Plant Equipment] AS [Vehicle],
+
+    CAST(NULL AS NVARCHAR(500)) AS [Remarks]
+FROM dbo.vw_DailyWorkPlanC_TodayReport r;
+GO
+

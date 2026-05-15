@@ -1,0 +1,3058 @@
+{
+  "ActivityTaskPlan": [
+    {
+      "name": "row_id",
+      "type": "bigint"
+    },
+    {
+      "name": "source_id",
+      "type": "varchar"
+    },
+    {
+      "name": "Data",
+      "type": "varchar"
+    },
+    {
+      "name": "ancestor",
+      "type": "varchar"
+    },
+    {
+      "name": "duration",
+      "type": "float"
+    },
+    {
+      "name": "progress",
+      "type": "float"
+    },
+    {
+      "name": "crew_uid",
+      "type": "varchar"
+    },
+    {
+      "name": "crew_type",
+      "type": "varchar"
+    },
+    {
+      "name": "qty",
+      "type": "float"
+    },
+    {
+      "name": "manhours",
+      "type": "float"
+    },
+    {
+      "name": "weightage",
+      "type": "float"
+    },
+    {
+      "name": "parent",
+      "type": "float"
+    },
+    {
+      "name": "start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "end_date",
+      "type": "varchar"
+    },
+    {
+      "name": "target_start",
+      "type": "varchar"
+    },
+    {
+      "name": "target_end",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_start",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_end",
+      "type": "varchar"
+    },
+    {
+      "name": "qtyactual",
+      "type": "float"
+    },
+    {
+      "name": "qtyforacst",
+      "type": "float"
+    },
+    {
+      "name": "manhoursactual",
+      "type": "float"
+    },
+    {
+      "name": "manhourforacst",
+      "type": "float"
+    },
+    {
+      "name": "code",
+      "type": "varchar"
+    },
+    {
+      "name": "text",
+      "type": "varchar"
+    },
+    {
+      "name": "type",
+      "type": "varchar"
+    },
+    {
+      "name": "schedule_id",
+      "type": "bigint"
+    },
+    {
+      "name": "project_id",
+      "type": "varchar"
+    },
+    {
+      "name": "task_assignee",
+      "type": "varchar"
+    },
+    {
+      "name": "supervisor_email",
+      "type": "varchar"
+    },
+    {
+      "name": "attributes",
+      "type": "varchar"
+    },
+    {
+      "name": "remaining_duration",
+      "type": "float"
+    },
+    {
+      "name": "Resume_Suspend",
+      "type": "varchar"
+    },
+    {
+      "name": "data_nonprod",
+      "type": "varchar"
+    },
+    {
+      "name": "created_at",
+      "type": "varchar"
+    },
+    {
+      "name": "updated_at",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_ID",
+      "type": "bigint"
+    },
+    {
+      "name": "Parent_WBS",
+      "type": "varchar"
+    },
+    {
+      "name": "Time_Stamp",
+      "type": "varchar"
+    }
+  ],
+  "Employee": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "UId",
+      "type": "bigint"
+    },
+    {
+      "name": "Name",
+      "type": "varchar"
+    },
+    {
+      "name": "Email",
+      "type": "varchar"
+    },
+    {
+      "name": "Status",
+      "type": "varchar"
+    },
+    {
+      "name": "Supervisor",
+      "type": "bigint"
+    },
+    {
+      "name": "Account",
+      "type": "varchar"
+    },
+    {
+      "name": "EmployeeType",
+      "type": "bigint"
+    },
+    {
+      "name": "Company",
+      "type": "bigint"
+    },
+    {
+      "name": "Manager",
+      "type": "varchar"
+    },
+    {
+      "name": "Location",
+      "type": "bigint"
+    }
+  ],
+  "Job_Progress_Report_GB": [
+    {
+      "name": "Sl_No",
+      "type": "bigint"
+    },
+    {
+      "name": "Category",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_ID",
+      "type": "bigint"
+    },
+    {
+      "name": "Well_Name_Project_Name",
+      "type": "varchar"
+    },
+    {
+      "name": "PO_No",
+      "type": "varchar"
+    },
+    {
+      "name": "WBS_No",
+      "type": "varchar"
+    },
+    {
+      "name": "Cum_Prior_Month_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Week_1_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Week_1_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Week_2_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Week_2_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Week_3_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Week_3_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Week_4_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Week_4_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Week_5_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Week_5_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Current_Month_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Current_Month_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Cum_Current_Month_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Cum_Current_Month_Actual",
+      "type": "float"
+    },
+    {
+      "name": "Target_End",
+      "type": "varchar"
+    },
+    {
+      "name": "Purpose_Value",
+      "type": "float"
+    },
+    {
+      "name": "Cum_Prior_Month_Plan",
+      "type": "float"
+    },
+    {
+      "name": "Cum-Prior Month Actual",
+      "type": "float"
+    },
+    {
+      "name": "Current month Plan",
+      "type": "float"
+    },
+    {
+      "name": "Current Month Actual",
+      "type": "float"
+    },
+    {
+      "name": "Cum - Current Month Plan",
+      "type": "float"
+    },
+    {
+      "name": "Cum - Current Month Actual",
+      "type": "float"
+    },
+    {
+      "name": "Remarks",
+      "type": "varchar"
+    }
+  ],
+  "PH_PRODUCTIVITY_WEEKLY_REPORT": [
+    {
+      "name": "S_No",
+      "type": "bigint"
+    },
+    {
+      "name": "Month",
+      "type": "varchar"
+    },
+    {
+      "name": "Year",
+      "type": "bigint"
+    },
+    {
+      "name": "MonthStart",
+      "type": "varchar"
+    },
+    {
+      "name": "PA_Name",
+      "type": "varchar"
+    },
+    {
+      "name": "PH_Emp_ID",
+      "type": "varchar"
+    },
+    {
+      "name": "PH_Name",
+      "type": "varchar"
+    },
+    {
+      "name": "ATNM_Sub_Contractor",
+      "type": "varchar"
+    },
+    {
+      "name": "Category",
+      "type": "varchar"
+    },
+    {
+      "name": "Crew_Type",
+      "type": "varchar"
+    },
+    {
+      "name": "Crew_Discipline",
+      "type": "varchar"
+    },
+    {
+      "name": "Crew_Name",
+      "type": "varchar"
+    },
+    {
+      "name": "Average_Productivity",
+      "type": "varchar"
+    },
+    {
+      "name": "W1_PI_CMR",
+      "type": "varchar"
+    },
+    {
+      "name": "W1_PI_T_Wise",
+      "type": "varchar"
+    },
+    {
+      "name": "W2_PI_CMR",
+      "type": "varchar"
+    },
+    {
+      "name": "W2_PI_T_Wise",
+      "type": "varchar"
+    },
+    {
+      "name": "W3_PI_CMR",
+      "type": "varchar"
+    },
+    {
+      "name": "W3_PI_T_Wise",
+      "type": "varchar"
+    },
+    {
+      "name": "W4_PI_CMR",
+      "type": "varchar"
+    },
+    {
+      "name": "W4_PI_T_Wise",
+      "type": "varchar"
+    },
+    {
+      "name": "W5_PI_CMR",
+      "type": "varchar"
+    },
+    {
+      "name": "W5_PI_T_Wise",
+      "type": "varchar"
+    },
+    {
+      "name": "Month_PI_CMR",
+      "type": "varchar"
+    },
+    {
+      "name": "Month_PI_T_Wise",
+      "type": "varchar"
+    }
+  ],
+  "ProjectIDs": [
+    {
+      "name": "Code",
+      "type": "varchar"
+    },
+    {
+      "name": "column2",
+      "type": "varchar"
+    },
+    {
+      "name": "Number",
+      "type": "bigint"
+    },
+    {
+      "name": "ID",
+      "type": "varchar"
+    }
+  ],
+  "Revenue": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "rigcode",
+      "type": "varchar"
+    },
+    {
+      "name": "well_id",
+      "type": "bigint"
+    },
+    {
+      "name": "code",
+      "type": "varchar"
+    },
+    {
+      "name": "pms",
+      "type": "float"
+    },
+    {
+      "name": "step_type",
+      "type": "varchar"
+    },
+    {
+      "name": "planned_progress",
+      "type": "bigint"
+    },
+    {
+      "name": "plan_percent",
+      "type": "float"
+    },
+    {
+      "name": "acutal_progress",
+      "type": "float"
+    },
+    {
+      "name": "act_percent",
+      "type": "float"
+    },
+    {
+      "name": "total_purpose_value",
+      "type": "float"
+    },
+    {
+      "name": "planned_purpose_value",
+      "type": "bigint"
+    },
+    {
+      "name": "actual_purpose_value",
+      "type": "float"
+    },
+    {
+      "name": "planned_progress_next_week",
+      "type": "bigint"
+    },
+    {
+      "name": "plan_percent_next_week",
+      "type": "float"
+    },
+    {
+      "name": "planned_purpose_value_next_week",
+      "type": "bigint"
+    },
+    {
+      "name": "Title",
+      "type": "varchar"
+    },
+    {
+      "name": "created_at",
+      "type": "varchar"
+    }
+  ],
+  "SAP_DRILLING_SEQUENCE": [
+    {
+      "name": "Work_Center",
+      "type": "varchar"
+    },
+    {
+      "name": "Operation_Short",
+      "type": "varchar"
+    },
+    {
+      "name": "Activity",
+      "type": "varchar"
+    },
+    {
+      "name": "Opr_System_status",
+      "type": "varchar"
+    },
+    {
+      "name": "Earl_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "EarliestEndDate",
+      "type": "varchar"
+    },
+    {
+      "name": "Station_Code",
+      "type": "varchar"
+    },
+    {
+      "name": "Normal_duration",
+      "type": "float"
+    },
+    {
+      "name": "Norm_duratn_un",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_Name",
+      "type": "varchar"
+    },
+    {
+      "name": "Field",
+      "type": "varchar"
+    },
+    {
+      "name": "Responsible_asset",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_ID",
+      "type": "bigint"
+    },
+    {
+      "name": "Well_Location",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_Function",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_Category",
+      "type": "varchar"
+    },
+    {
+      "name": "PCAP_Category",
+      "type": "varchar"
+    },
+    {
+      "name": "Move_days",
+      "type": "bigint"
+    },
+    {
+      "name": "PDO_Well_Type",
+      "type": "varchar"
+    }
+  ],
+  "task_daily": [
+    {
+      "name": "id",
+      "type": "bigint"
+    },
+    {
+      "name": "ActionOn",
+      "type": "varchar"
+    },
+    {
+      "name": "task_code",
+      "type": "varchar"
+    },
+    {
+      "name": "schedule_id",
+      "type": "bigint"
+    },
+    {
+      "name": "project_id",
+      "type": "varchar"
+    },
+    {
+      "name": "required",
+      "type": "float"
+    },
+    {
+      "name": "planned",
+      "type": "float"
+    },
+    {
+      "name": "duration",
+      "type": "float"
+    },
+    {
+      "name": "remaining_duration",
+      "type": "float"
+    },
+    {
+      "name": "progress",
+      "type": "float"
+    },
+    {
+      "name": "ready",
+      "type": "bit"
+    },
+    {
+      "name": "completed",
+      "type": "bit"
+    },
+    {
+      "name": "plan",
+      "type": "varchar"
+    },
+    {
+      "name": "committed_start",
+      "type": "varchar"
+    },
+    {
+      "name": "committed_end",
+      "type": "varchar"
+    },
+    {
+      "name": "target_start",
+      "type": "varchar"
+    },
+    {
+      "name": "target_end",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_start",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_end",
+      "type": "varchar"
+    },
+    {
+      "name": "startDate",
+      "type": "varchar"
+    },
+    {
+      "name": "endDate",
+      "type": "varchar"
+    },
+    {
+      "name": "crew_type",
+      "type": "varchar"
+    },
+    {
+      "name": "crew_code",
+      "type": "varchar"
+    },
+    {
+      "name": "planned_crew",
+      "type": "varchar"
+    },
+    {
+      "name": "well_id",
+      "type": "bigint"
+    },
+    {
+      "name": "task_uom",
+      "type": "varchar"
+    },
+    {
+      "name": "data_hours",
+      "type": "varchar"
+    },
+    {
+      "name": "data_qty",
+      "type": "varchar"
+    },
+    {
+      "name": "data_employees",
+      "type": "varchar"
+    },
+    {
+      "name": "task_assignee",
+      "type": "varchar"
+    },
+    {
+      "name": "supervisor_email",
+      "type": "varchar"
+    },
+    {
+      "name": "url",
+      "type": "varchar"
+    },
+    {
+      "name": "task_data",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_data",
+      "type": "varchar"
+    },
+    {
+      "name": "created_at",
+      "type": "varchar"
+    },
+    {
+      "name": "updated_at",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_ph_name",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_equipment_ids",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_employee_ids",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_actual_quantity",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_actual_hours",
+      "type": "varchar"
+    },
+    {
+      "name": "daily_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "time_stamp",
+      "type": "varchar"
+    }
+  ],
+  "WBS_Master_Tracker_": [
+    {
+      "name": "Sr_No",
+      "type": "bigint"
+    },
+    {
+      "name": "WBS_Code",
+      "type": "varchar"
+    },
+    {
+      "name": "Project_Def",
+      "type": "varchar"
+    },
+    {
+      "name": "WD_PRJ",
+      "type": "varchar"
+    },
+    {
+      "name": "Plant_Code",
+      "type": "bigint"
+    },
+    {
+      "name": "Plant_Name",
+      "type": "varchar"
+    },
+    {
+      "name": "Cluster",
+      "type": "varchar"
+    },
+    {
+      "name": "Well_ID_Project_PO",
+      "type": "bigint"
+    },
+    {
+      "name": "Activity_code",
+      "type": "varchar"
+    },
+    {
+      "name": "Activity",
+      "type": "varchar"
+    },
+    {
+      "name": "Category",
+      "type": "varchar"
+    },
+    {
+      "name": "Sr_No_2",
+      "type": "bigint"
+    },
+    {
+      "name": "LMPS",
+      "type": "varchar"
+    },
+    {
+      "name": "Duplicate_check",
+      "type": "bigint"
+    },
+    {
+      "name": "Last_Updated_on",
+      "type": "varchar"
+    }
+  ],
+  "WellMonitoringReport": [
+    {
+      "name": "sl_no",
+      "type": "bigint"
+    },
+    {
+      "name": "sl_no_raw",
+      "type": "float"
+    },
+    {
+      "name": "rig_no",
+      "type": "varchar"
+    },
+    {
+      "name": "well_location",
+      "type": "varchar"
+    },
+    {
+      "name": "well_name_after_spud",
+      "type": "varchar"
+    },
+    {
+      "name": "pdo_well_id",
+      "type": "bigint"
+    },
+    {
+      "name": "well_type",
+      "type": "varchar"
+    },
+    {
+      "name": "northing",
+      "type": "varchar"
+    },
+    {
+      "name": "easting",
+      "type": "varchar"
+    },
+    {
+      "name": "locationdd",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_linedl",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_recvd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "location_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "latest_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "exp_rig_off_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_po_placed",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_available_at_site",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_no",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_date",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_raised",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_approved",
+      "type": "varchar"
+    },
+    {
+      "name": "buffer_status",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_pegged_date",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_cum_progress",
+      "type": "float"
+    },
+    {
+      "name": "cum_progress_for_this_week",
+      "type": "float"
+    },
+    {
+      "name": "actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+      "type": "varchar"
+    },
+    {
+      "name": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+      "type": "varchar"
+    },
+    {
+      "name": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+      "type": "varchar"
+    },
+    {
+      "name": "installation_of_esp_pcp_surface_cable_by_vendors",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id_received_date_same_day_as_flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_site_survey_report_issuance",
+      "type": "varchar"
+    },
+    {
+      "name": "well_engineer_to_add_location_name_in_edm",
+      "type": "varchar"
+    },
+    {
+      "name": "pt_to_request_for_esp_preliminary_design_through_ald",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_pcp_esp_vendor_delivered_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_installation_date_by_vendor_of_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "f_l_po_recd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "station_name_no",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_number",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_tie_in_port_readiness",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_available_when_flaf_issued",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "progress",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_dia",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "const_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_construction_progress",
+      "type": "float"
+    },
+    {
+      "name": "ohl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "ohl_progress",
+      "type": "float"
+    },
+    {
+      "name": "ohl_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "z6_data_submitted_date",
+      "type": "varchar"
+    },
+    {
+      "name": "sap_notification_received_date_z6_2_days_before_eng_completion",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wlctf_acceptanceapproval_from_production",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wellpad_handover_2_from_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "completion_type_rig_fbu_or_rsr_hoist",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_eng_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engg_kpi_after_rig_off_days",
+      "type": "varchar"
+    },
+    {
+      "name": "data_error",
+      "type": "varchar"
+    },
+    {
+      "name": "reason_if_kpi_not_met",
+      "type": "varchar"
+    },
+    {
+      "name": "remark_status_area_of_attention_issues",
+      "type": "varchar"
+    },
+    {
+      "name": "rlmu_submitted_to_ho_date_with_in_7_days_from_actual_comm",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_doc_submission_date_to_qs_dept",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_progress",
+      "type": "varchar"
+    },
+    {
+      "name": "over_all_progress_percentages",
+      "type": "float"
+    },
+    {
+      "name": "ssfd_wells",
+      "type": "varchar"
+    },
+    {
+      "name": "ipm",
+      "type": "varchar"
+    },
+    {
+      "name": "access_road_5",
+      "type": "float"
+    },
+    {
+      "name": "earth_work_60",
+      "type": "float"
+    },
+    {
+      "name": "cellar_20",
+      "type": "float"
+    },
+    {
+      "name": "beam_pump_base_esp_pcp_foundation_5",
+      "type": "float"
+    },
+    {
+      "name": "earthing_1",
+      "type": "float"
+    },
+    {
+      "name": "septic_tank_1",
+      "type": "float"
+    },
+    {
+      "name": "water_2",
+      "type": "float"
+    },
+    {
+      "name": "waste_water_2",
+      "type": "float"
+    },
+    {
+      "name": "hdpe_liner_instalat_4",
+      "type": "float"
+    },
+    {
+      "name": "overall_loc_preparation_10_100",
+      "type": "float"
+    },
+    {
+      "name": "site_survey_5",
+      "type": "float"
+    },
+    {
+      "name": "survey_report_issue_5",
+      "type": "float"
+    },
+    {
+      "name": "design_sta_5",
+      "type": "float"
+    },
+    {
+      "name": "design_completed_issue_for_ta2_5_40",
+      "type": "float"
+    },
+    {
+      "name": "approved_by_15",
+      "type": "float"
+    },
+    {
+      "name": "afc_3_30",
+      "type": "float"
+    },
+    {
+      "name": "overall_engg_10_100",
+      "type": "float"
+    },
+    {
+      "name": "piping_mech_50",
+      "type": "varchar"
+    },
+    {
+      "name": "elect_30",
+      "type": "varchar"
+    },
+    {
+      "name": "instr_20",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_material_10_100",
+      "type": "varchar"
+    },
+    {
+      "name": "cold_b_2",
+      "type": "float"
+    },
+    {
+      "name": "sleeper_pre_cast_ins_15",
+      "type": "float"
+    },
+    {
+      "name": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+      "type": "float"
+    },
+    {
+      "name": "pe_fussion_pull_20",
+      "type": "float"
+    },
+    {
+      "name": "final_hydro_t_3",
+      "type": "float"
+    },
+    {
+      "name": "overall_const_10_100",
+      "type": "float"
+    },
+    {
+      "name": "pole_hole_drill_40",
+      "type": "float"
+    },
+    {
+      "name": "pole_erect_40",
+      "type": "float"
+    },
+    {
+      "name": "conductor_string_18",
+      "type": "float"
+    },
+    {
+      "name": "ohl_ti_2",
+      "type": "float"
+    },
+    {
+      "name": "overall_ohl_progr_100",
+      "type": "float"
+    },
+    {
+      "name": "mechani_60",
+      "type": "float"
+    },
+    {
+      "name": "electri_15",
+      "type": "float"
+    },
+    {
+      "name": "instrumentat_20",
+      "type": "float"
+    },
+    {
+      "name": "overall_comm_mi_5",
+      "type": "float"
+    },
+    {
+      "name": "overall_comm_progress_100",
+      "type": "float"
+    },
+    {
+      "name": "location_preparation_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_const_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_commi_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "well_year_white_space",
+      "type": "varchar"
+    },
+    {
+      "name": "reasons_for_year_2018",
+      "type": "varchar"
+    },
+    {
+      "name": "column7",
+      "type": "varchar"
+    },
+    {
+      "name": "digital_wmr_import_remarks",
+      "type": "varchar"
+    },
+    {
+      "name": "project_id",
+      "type": "varchar"
+    },
+    {
+      "name": "Week_Number",
+      "type": "varchar"
+    },
+    {
+      "name": "Cluster",
+      "type": "varchar"
+    }
+  ],
+  "WellMonitoringReport_Latest": [
+    {
+      "name": "sl_no",
+      "type": "bigint"
+    },
+    {
+      "name": "sl_no_raw",
+      "type": "float"
+    },
+    {
+      "name": "rig_no",
+      "type": "varchar"
+    },
+    {
+      "name": "well_location",
+      "type": "varchar"
+    },
+    {
+      "name": "well_name_after_spud",
+      "type": "varchar"
+    },
+    {
+      "name": "pdo_well_id",
+      "type": "bigint"
+    },
+    {
+      "name": "well_type",
+      "type": "varchar"
+    },
+    {
+      "name": "northing",
+      "type": "varchar"
+    },
+    {
+      "name": "easting",
+      "type": "varchar"
+    },
+    {
+      "name": "locationdd",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_linedl",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_recvd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "location_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "latest_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "exp_rig_off_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_po_placed",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_available_at_site",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_no",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_date",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_raised",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_approved",
+      "type": "varchar"
+    },
+    {
+      "name": "buffer_status",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_pegged_date",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_cum_progress",
+      "type": "float"
+    },
+    {
+      "name": "cum_progress_for_this_week",
+      "type": "float"
+    },
+    {
+      "name": "actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+      "type": "varchar"
+    },
+    {
+      "name": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+      "type": "varchar"
+    },
+    {
+      "name": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+      "type": "varchar"
+    },
+    {
+      "name": "installation_of_esp_pcp_surface_cable_by_vendors",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id_received_date_same_day_as_flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_site_survey_report_issuance",
+      "type": "varchar"
+    },
+    {
+      "name": "well_engineer_to_add_location_name_in_edm",
+      "type": "varchar"
+    },
+    {
+      "name": "pt_to_request_for_esp_preliminary_design_through_ald",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_pcp_esp_vendor_delivered_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_installation_date_by_vendor_of_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "f_l_po_recd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "station_name_no",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_number",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_tie_in_port_readiness",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_available_when_flaf_issued",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "progress",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_dia",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "const_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_construction_progress",
+      "type": "float"
+    },
+    {
+      "name": "ohl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "ohl_progress",
+      "type": "float"
+    },
+    {
+      "name": "ohl_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "z6_data_submitted_date",
+      "type": "varchar"
+    },
+    {
+      "name": "sap_notification_received_date_z6_2_days_before_eng_completion",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wlctf_acceptanceapproval_from_production",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wellpad_handover_2_from_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "completion_type_rig_fbu_or_rsr_hoist",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_eng_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engg_kpi_after_rig_off_days",
+      "type": "varchar"
+    },
+    {
+      "name": "data_error",
+      "type": "varchar"
+    },
+    {
+      "name": "reason_if_kpi_not_met",
+      "type": "varchar"
+    },
+    {
+      "name": "remark_status_area_of_attention_issues",
+      "type": "varchar"
+    },
+    {
+      "name": "rlmu_submitted_to_ho_date_with_in_7_days_from_actual_comm",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_doc_submission_date_to_qs_dept",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_progress",
+      "type": "varchar"
+    },
+    {
+      "name": "over_all_progress_percentages",
+      "type": "float"
+    },
+    {
+      "name": "ssfd_wells",
+      "type": "varchar"
+    },
+    {
+      "name": "ipm",
+      "type": "varchar"
+    },
+    {
+      "name": "access_road_5",
+      "type": "float"
+    },
+    {
+      "name": "earth_work_60",
+      "type": "float"
+    },
+    {
+      "name": "cellar_20",
+      "type": "float"
+    },
+    {
+      "name": "beam_pump_base_esp_pcp_foundation_5",
+      "type": "float"
+    },
+    {
+      "name": "earthing_1",
+      "type": "float"
+    },
+    {
+      "name": "septic_tank_1",
+      "type": "float"
+    },
+    {
+      "name": "water_2",
+      "type": "float"
+    },
+    {
+      "name": "waste_water_2",
+      "type": "float"
+    },
+    {
+      "name": "hdpe_liner_instalat_4",
+      "type": "float"
+    },
+    {
+      "name": "overall_loc_preparation_10_100",
+      "type": "float"
+    },
+    {
+      "name": "site_survey_5",
+      "type": "float"
+    },
+    {
+      "name": "survey_report_issue_5",
+      "type": "float"
+    },
+    {
+      "name": "design_sta_5",
+      "type": "float"
+    },
+    {
+      "name": "design_completed_issue_for_ta2_5_40",
+      "type": "float"
+    },
+    {
+      "name": "approved_by_15",
+      "type": "float"
+    },
+    {
+      "name": "afc_3_30",
+      "type": "float"
+    },
+    {
+      "name": "overall_engg_10_100",
+      "type": "float"
+    },
+    {
+      "name": "piping_mech_50",
+      "type": "varchar"
+    },
+    {
+      "name": "elect_30",
+      "type": "varchar"
+    },
+    {
+      "name": "instr_20",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_material_10_100",
+      "type": "varchar"
+    },
+    {
+      "name": "cold_b_2",
+      "type": "float"
+    },
+    {
+      "name": "sleeper_pre_cast_ins_15",
+      "type": "float"
+    },
+    {
+      "name": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+      "type": "float"
+    },
+    {
+      "name": "pe_fussion_pull_20",
+      "type": "float"
+    },
+    {
+      "name": "final_hydro_t_3",
+      "type": "float"
+    },
+    {
+      "name": "overall_const_10_100",
+      "type": "float"
+    },
+    {
+      "name": "pole_hole_drill_40",
+      "type": "float"
+    },
+    {
+      "name": "pole_erect_40",
+      "type": "float"
+    },
+    {
+      "name": "conductor_string_18",
+      "type": "float"
+    },
+    {
+      "name": "ohl_ti_2",
+      "type": "float"
+    },
+    {
+      "name": "overall_ohl_progr_100",
+      "type": "float"
+    },
+    {
+      "name": "mechani_60",
+      "type": "float"
+    },
+    {
+      "name": "electri_15",
+      "type": "float"
+    },
+    {
+      "name": "instrumentat_20",
+      "type": "float"
+    },
+    {
+      "name": "overall_comm_mi_5",
+      "type": "float"
+    },
+    {
+      "name": "overall_comm_progress_100",
+      "type": "float"
+    },
+    {
+      "name": "location_preparation_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_const_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_commi_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "well_year_white_space",
+      "type": "varchar"
+    },
+    {
+      "name": "reasons_for_year_2018",
+      "type": "varchar"
+    },
+    {
+      "name": "column7",
+      "type": "varchar"
+    },
+    {
+      "name": "digital_wmr_import_remarks",
+      "type": "varchar"
+    },
+    {
+      "name": "project_id",
+      "type": "varchar"
+    },
+    {
+      "name": "Week_Number",
+      "type": "varchar"
+    },
+    {
+      "name": "Cluster",
+      "type": "varchar"
+    }
+  ],
+  "WellMonitoringReport_Staged": [
+    {
+      "name": "sl_no",
+      "type": "float"
+    },
+    {
+      "name": "rig_no",
+      "type": "varchar"
+    },
+    {
+      "name": "well_location",
+      "type": "varchar"
+    },
+    {
+      "name": "well_name_after_spud",
+      "type": "varchar"
+    },
+    {
+      "name": "pdo_well_id",
+      "type": "bigint"
+    },
+    {
+      "name": "well_type",
+      "type": "varchar"
+    },
+    {
+      "name": "northing",
+      "type": "varchar"
+    },
+    {
+      "name": "easting",
+      "type": "varchar"
+    },
+    {
+      "name": "locationdd",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_linedl",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_recvd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "location_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "latest_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "exp_rig_off_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_po_placed",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_available_at_site",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_no",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_date",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_raised",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_approved",
+      "type": "varchar"
+    },
+    {
+      "name": "buffer_status",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_pegged_date",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_cum_progress",
+      "type": "bigint"
+    },
+    {
+      "name": "cum_progress_for_this_week",
+      "type": "bigint"
+    },
+    {
+      "name": "actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+      "type": "varchar"
+    },
+    {
+      "name": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+      "type": "varchar"
+    },
+    {
+      "name": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+      "type": "varchar"
+    },
+    {
+      "name": "installation_of_esp_pcp_surface_cable_by_vendors",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id_received_date_same_day_as_flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_site_survey_report_issuance",
+      "type": "varchar"
+    },
+    {
+      "name": "well_engineer_to_add_location_name_in_edm",
+      "type": "varchar"
+    },
+    {
+      "name": "pt_to_request_for_esp_preliminary_design_through_ald",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_pcp_esp_vendor_delivered_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_installation_date_by_vendor_of_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "f_l_po_recd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "station_name_no",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_number",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_tie_in_port_readiness",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_available_when_flaf_issued",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "progress",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_dia",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "const_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_construction_progress",
+      "type": "bigint"
+    },
+    {
+      "name": "ohl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "ohl_progress",
+      "type": "float"
+    },
+    {
+      "name": "ohl_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "z6_data_submitted_date",
+      "type": "varchar"
+    },
+    {
+      "name": "sap_notification_received_date_z6_2_days_before_eng_completion",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wlctf_acceptanceapproval_from_production",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wellpad_handover_2_from_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "completion_type_rig_fbu_or_rsr_hoist",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_eng_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engg_kpi_after_rig_off_days",
+      "type": "bigint"
+    },
+    {
+      "name": "data_error",
+      "type": "varchar"
+    },
+    {
+      "name": "reason_if_kpi_not_met",
+      "type": "varchar"
+    },
+    {
+      "name": "remark_status_area_of_attention_issues",
+      "type": "varchar"
+    },
+    {
+      "name": "rlmu_submitted_to_ho_date_with_in_7_days_from_actual_comm",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_doc_submission_date_to_qs_dept",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_progress",
+      "type": "varchar"
+    },
+    {
+      "name": "over_all_progress_percentages",
+      "type": "float"
+    },
+    {
+      "name": "ssfd_wells",
+      "type": "varchar"
+    },
+    {
+      "name": "ipm",
+      "type": "varchar"
+    },
+    {
+      "name": "access_road_5",
+      "type": "bigint"
+    },
+    {
+      "name": "earth_work_60",
+      "type": "bigint"
+    },
+    {
+      "name": "cellar_20",
+      "type": "bigint"
+    },
+    {
+      "name": "beam_pump_base_esp_pcp_foundation_5",
+      "type": "bigint"
+    },
+    {
+      "name": "earthing_1",
+      "type": "bigint"
+    },
+    {
+      "name": "septic_tank_1",
+      "type": "bigint"
+    },
+    {
+      "name": "water_2",
+      "type": "bigint"
+    },
+    {
+      "name": "waste_water_2",
+      "type": "bigint"
+    },
+    {
+      "name": "hdpe_liner_instalat_4",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_loc_preparation_10_100",
+      "type": "bigint"
+    },
+    {
+      "name": "site_survey_5",
+      "type": "varchar"
+    },
+    {
+      "name": "survey_report_issue_5",
+      "type": "varchar"
+    },
+    {
+      "name": "design_sta_5",
+      "type": "varchar"
+    },
+    {
+      "name": "design_completed_issue_for_ta2_5_40",
+      "type": "varchar"
+    },
+    {
+      "name": "approved_by_15",
+      "type": "varchar"
+    },
+    {
+      "name": "afc_3_30",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_engg_10_100",
+      "type": "varchar"
+    },
+    {
+      "name": "piping_mech_50",
+      "type": "varchar"
+    },
+    {
+      "name": "elect_30",
+      "type": "varchar"
+    },
+    {
+      "name": "instr_20",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_material_10_100",
+      "type": "varchar"
+    },
+    {
+      "name": "cold_b_2",
+      "type": "bigint"
+    },
+    {
+      "name": "sleeper_pre_cast_ins_15",
+      "type": "float"
+    },
+    {
+      "name": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+      "type": "float"
+    },
+    {
+      "name": "pe_fussion_pull_20",
+      "type": "float"
+    },
+    {
+      "name": "final_hydro_t_3",
+      "type": "float"
+    },
+    {
+      "name": "overall_const_10_100",
+      "type": "float"
+    },
+    {
+      "name": "pole_hole_drill_40",
+      "type": "bigint"
+    },
+    {
+      "name": "pole_erect_40",
+      "type": "bigint"
+    },
+    {
+      "name": "conductor_string_18",
+      "type": "bigint"
+    },
+    {
+      "name": "ohl_ti_2",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_ohl_progr_100",
+      "type": "bigint"
+    },
+    {
+      "name": "mechani_60",
+      "type": "float"
+    },
+    {
+      "name": "electri_15",
+      "type": "bigint"
+    },
+    {
+      "name": "instrumentat_20",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_comm_mi_5",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_comm_progress_100",
+      "type": "bigint"
+    },
+    {
+      "name": "location_preparation_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_const_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_commi_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "well_year_white_space",
+      "type": "varchar"
+    },
+    {
+      "name": "reasons_for_year_2018",
+      "type": "varchar"
+    },
+    {
+      "name": "column7",
+      "type": "varchar"
+    },
+    {
+      "name": "digital_wmr_import_remarks",
+      "type": "varchar"
+    },
+    {
+      "name": "project_id",
+      "type": "varchar"
+    },
+    {
+      "name": "Week_Number",
+      "type": "varchar"
+    },
+    {
+      "name": "Week_Number_d",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_on_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_off_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "wlctf_acceptance_d",
+      "type": "varchar"
+    },
+    {
+      "name": "hoist_on_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "hoist_off_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "handover2_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "eng_completion_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "comm_start_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "comm_finish_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "flaf_issue_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_recvd_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_pegged_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_start_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_finish_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id_received_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "site_survey_report_issuance_d",
+      "type": "varchar"
+    },
+    {
+      "name": "f_l_po_recd_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "tie_in_port_readiness_d",
+      "type": "varchar"
+    },
+    {
+      "name": "const_actual_start_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "ohl_completion_date_d",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_cum_progress_p",
+      "type": "float"
+    },
+    {
+      "name": "cum_progress_for_this_week_p",
+      "type": "float"
+    },
+    {
+      "name": "flowline_construction_progress_p",
+      "type": "float"
+    },
+    {
+      "name": "ohl_progress_p",
+      "type": "float"
+    },
+    {
+      "name": "overall_progress_p",
+      "type": "float"
+    },
+    {
+      "name": "overall_loc_preparation_p",
+      "type": "float"
+    },
+    {
+      "name": "overall_engg_p",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_material_p",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_const_p",
+      "type": "float"
+    },
+    {
+      "name": "overall_ohl_p",
+      "type": "float"
+    },
+    {
+      "name": "overall_comm_progress_p",
+      "type": "float"
+    }
+  ],
+  "WMR_Full": [
+    {
+      "name": "sl_no",
+      "type": "float"
+    },
+    {
+      "name": "rig_no",
+      "type": "varchar"
+    },
+    {
+      "name": "well_location",
+      "type": "varchar"
+    },
+    {
+      "name": "well_name_after_spud",
+      "type": "varchar"
+    },
+    {
+      "name": "pdo_well_id",
+      "type": "bigint"
+    },
+    {
+      "name": "well_type",
+      "type": "varchar"
+    },
+    {
+      "name": "northing",
+      "type": "varchar"
+    },
+    {
+      "name": "easting",
+      "type": "varchar"
+    },
+    {
+      "name": "locationdd",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_linedl",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "location_po_recvd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "location_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "latest_exp_rig_on_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "exp_rig_off_location_sap_data",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_po_placed",
+      "type": "varchar"
+    },
+    {
+      "name": "date_material_available_at_site",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_no",
+      "type": "varchar"
+    },
+    {
+      "name": "scr_date",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_raised",
+      "type": "varchar"
+    },
+    {
+      "name": "moc_approved",
+      "type": "varchar"
+    },
+    {
+      "name": "buffer_status",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_pegged_date",
+      "type": "varchar"
+    },
+    {
+      "name": "last_week_cum_progress",
+      "type": "bigint"
+    },
+    {
+      "name": "cum_progress_for_this_week",
+      "type": "float"
+    },
+    {
+      "name": "actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables",
+      "type": "varchar"
+    },
+    {
+      "name": "date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor",
+      "type": "varchar"
+    },
+    {
+      "name": "delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x",
+      "type": "varchar"
+    },
+    {
+      "name": "installation_of_esp_pcp_surface_cable_by_vendors",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id",
+      "type": "varchar"
+    },
+    {
+      "name": "ramz_id_received_date_same_day_as_flaf_issue_date",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_site_survey_report_issuance",
+      "type": "varchar"
+    },
+    {
+      "name": "well_engineer_to_add_location_name_in_edm",
+      "type": "varchar"
+    },
+    {
+      "name": "pt_to_request_for_esp_preliminary_design_through_ald",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_date_pcp_esp_vendor_delivered_the_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_installation_date_by_vendor_of_esp_pcp_skid",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_po_no",
+      "type": "varchar"
+    },
+    {
+      "name": "f_l_po_recd_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_purpose_value",
+      "type": "varchar"
+    },
+    {
+      "name": "station_name_no",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_number",
+      "type": "varchar"
+    },
+    {
+      "name": "date_of_tie_in_port_readiness",
+      "type": "varchar"
+    },
+    {
+      "name": "physical_tie_in_port_available_when_flaf_issued",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engineering_actual_finish_date",
+      "type": "varchar"
+    },
+    {
+      "name": "progress",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_dia",
+      "type": "varchar"
+    },
+    {
+      "name": "fl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "const_actual_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "flowline_construction_progress",
+      "type": "bigint"
+    },
+    {
+      "name": "ohl_length_meter",
+      "type": "varchar"
+    },
+    {
+      "name": "ohl_progress",
+      "type": "float"
+    },
+    {
+      "name": "ohl_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "z6_data_submitted_date",
+      "type": "varchar"
+    },
+    {
+      "name": "sap_notification_received_date_z6_2_days_before_eng_completion",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_rig_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wlctf_acceptanceapproval_from_production",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_on_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "wellpad_handover_2_from_hoist_fbu_rsr_off_date",
+      "type": "varchar"
+    },
+    {
+      "name": "completion_type_rig_fbu_or_rsr_hoist",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_eng_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_start_date",
+      "type": "varchar"
+    },
+    {
+      "name": "actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date",
+      "type": "varchar"
+    },
+    {
+      "name": "engg_kpi_after_rig_off_days",
+      "type": "bigint"
+    },
+    {
+      "name": "data_error",
+      "type": "varchar"
+    },
+    {
+      "name": "reason_if_kpi_not_met",
+      "type": "varchar"
+    },
+    {
+      "name": "remark_status_area_of_attention_issues",
+      "type": "varchar"
+    },
+    {
+      "name": "rlmu_submitted_to_ho_date_with_in_7_days_from_actual_comm",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_doc_submission_date_to_qs_dept",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_test_pack_completion_progress",
+      "type": "varchar"
+    },
+    {
+      "name": "over_all_progress_percentages",
+      "type": "float"
+    },
+    {
+      "name": "ssfd_wells",
+      "type": "varchar"
+    },
+    {
+      "name": "ipm",
+      "type": "varchar"
+    },
+    {
+      "name": "access_road_5",
+      "type": "float"
+    },
+    {
+      "name": "earth_work_60",
+      "type": "float"
+    },
+    {
+      "name": "cellar_20",
+      "type": "float"
+    },
+    {
+      "name": "beam_pump_base_esp_pcp_foundation_5",
+      "type": "float"
+    },
+    {
+      "name": "earthing_1",
+      "type": "float"
+    },
+    {
+      "name": "septic_tank_1",
+      "type": "float"
+    },
+    {
+      "name": "water_2",
+      "type": "float"
+    },
+    {
+      "name": "waste_water_2",
+      "type": "float"
+    },
+    {
+      "name": "hdpe_liner_instalat_4",
+      "type": "float"
+    },
+    {
+      "name": "overall_loc_preparation_10_100",
+      "type": "float"
+    },
+    {
+      "name": "site_survey_5",
+      "type": "varchar"
+    },
+    {
+      "name": "survey_report_issue_5",
+      "type": "varchar"
+    },
+    {
+      "name": "design_sta_5",
+      "type": "varchar"
+    },
+    {
+      "name": "design_completed_issue_for_ta2_5_40",
+      "type": "varchar"
+    },
+    {
+      "name": "approved_by_15",
+      "type": "varchar"
+    },
+    {
+      "name": "afc_3_30",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_engg_10_100",
+      "type": "varchar"
+    },
+    {
+      "name": "piping_mech_50",
+      "type": "varchar"
+    },
+    {
+      "name": "elect_30",
+      "type": "varchar"
+    },
+    {
+      "name": "instr_20",
+      "type": "varchar"
+    },
+    {
+      "name": "overall_material_10_100",
+      "type": "varchar"
+    },
+    {
+      "name": "cold_b_2",
+      "type": "bigint"
+    },
+    {
+      "name": "sleeper_pre_cast_ins_15",
+      "type": "float"
+    },
+    {
+      "name": "cs_pipe_welding_ndt_10_rt_for_op_100_for_60",
+      "type": "float"
+    },
+    {
+      "name": "pe_fussion_pull_20",
+      "type": "float"
+    },
+    {
+      "name": "final_hydro_t_3",
+      "type": "float"
+    },
+    {
+      "name": "overall_const_10_100",
+      "type": "float"
+    },
+    {
+      "name": "pole_hole_drill_40",
+      "type": "bigint"
+    },
+    {
+      "name": "pole_erect_40",
+      "type": "bigint"
+    },
+    {
+      "name": "conductor_string_18",
+      "type": "bigint"
+    },
+    {
+      "name": "ohl_ti_2",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_ohl_progr_100",
+      "type": "bigint"
+    },
+    {
+      "name": "mechani_60",
+      "type": "float"
+    },
+    {
+      "name": "electri_15",
+      "type": "bigint"
+    },
+    {
+      "name": "instrumentat_20",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_comm_mi_5",
+      "type": "bigint"
+    },
+    {
+      "name": "overall_comm_progress_100",
+      "type": "bigint"
+    },
+    {
+      "name": "location_preparation_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_const_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "flow_line_commi_status_in_progress_completed",
+      "type": "varchar"
+    },
+    {
+      "name": "well_year_white_space",
+      "type": "varchar"
+    },
+    {
+      "name": "reasons_for_year_2018",
+      "type": "varchar"
+    },
+    {
+      "name": "column7",
+      "type": "varchar"
+    },
+    {
+      "name": "digital_wmr_import_remarks",
+      "type": "varchar"
+    },
+    {
+      "name": "project_id",
+      "type": "varchar"
+    },
+    {
+      "name": "Week_Number",
+      "type": "varchar"
+    }
+  ],
+  "schema_metadata": [
+    {
+      "name": "table_name",
+      "type": "varchar"
+    },
+    {
+      "name": "column_name",
+      "type": "varchar"
+    },
+    {
+      "name": "data_type",
+      "type": "varchar"
+    },
+    {
+      "name": "max_length",
+      "type": "varchar"
+    },
+    {
+      "name": "nullable",
+      "type": "varchar"
+    }
+  ]
+}

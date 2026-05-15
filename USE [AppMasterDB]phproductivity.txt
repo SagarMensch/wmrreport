@@ -1,0 +1,214 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[PH_Productivity]    Script Date: 25-03-2026 16:22:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+/* ============================================================
+   VIEW: dbo.PH_Productivity  (FINAL UPDATED)
+
+   LOGIC SUMMARY
+   ------------------------------------------------------------
+   1) PH Name:
+      supervisor_email = Employee.Email → Employee.Name
+
+   2) PH Emp ID:
+      supervisor_email = Employee.Email → Employee.UId
+
+   3) PA Name:
+      task_assignee trimmed till '.'  (basil.971144@ → basil)
+
+   4) Crew Name:
+      Compare crew_type with CrewType.Code after removing '-'
+      → Bring CrewType.Description
+
+   5) Productivity:
+      QtyPerHour = data_qty / data_hours
+      Productivity% = QtyPerHour / Norms * 100
+      Averaged per Date + PH + Crew
+
+   6) PI Buckets:
+      As per your CMR & T-Wise slabs
+   ============================================================ */
+
+CREATE   VIEW [dbo].[PH_Productivity]
+AS
+
+/* ================= BASE ================= */
+WITH Base AS (
+    SELECT
+        CAST(td.ActionOn AS date) AS [Date],
+
+        td.supervisor_email,   -- PH email
+        td.task_assignee,      -- PA email
+        td.crew_type,
+        td.task_code,
+
+        TRY_CONVERT(decimal(18,6),
+            NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(100), td.data_qty))), '')
+        ) AS qty_num,
+
+        TRY_CONVERT(decimal(18,6),
+            NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(100), td.data_hours))), '')
+        ) AS hours_num,
+
+        LEFT(LTRIM(RTRIM(td.task_code)), 8) AS Activity_ID
+
+    FROM dbo.task_daily td
+    WHERE td.ActionOn IS NOT NULL
+      AND td.task_code IS NOT NULL
+      AND td.supervisor_email IS NOT NULL
+),
+
+/* ================= PA NAME ================= */
+Parsed AS (
+    SELECT
+        b.*,
+
+        CASE
+            WHEN b.task_assignee IS NULL THEN NULL
+            WHEN CHARINDEX('.', b.task_assignee) > 0
+                THEN LEFT(b.task_assignee, CHARINDEX('.', b.task_assignee) - 1)
+            ELSE NULL
+        END AS [PA Name]
+
+    FROM Base b
+),
+
+/* ================= NORMS ================= */
+NormJoined AS (
+    SELECT
+        p.*,
+
+        TRY_CONVERT(decimal(18,6),
+            NULLIF(LTRIM(RTRIM(CONVERT(nvarchar(100), n.Norms))), '')
+        ) AS Norms_num
+
+    FROM Parsed p
+    LEFT JOIN dbo.ActivityCodesNorms n
+      ON LTRIM(RTRIM(n.Activity_ID))
+       = LTRIM(RTRIM(p.Activity_ID))
+),
+
+/* ================= PRODUCTIVITY ================= */
+PerActivity AS (
+    SELECT
+        n.[Date],
+        n.[PA Name],
+        n.supervisor_email,
+        n.crew_type,
+
+        CASE
+            WHEN n.qty_num IS NULL
+              OR n.hours_num IS NULL
+              OR n.hours_num <= 0
+              OR n.Norms_num IS NULL
+              OR n.Norms_num <= 0
+            THEN NULL
+            ELSE ((n.qty_num / NULLIF(n.hours_num, 0))
+                  / NULLIF(n.Norms_num, 0)) * 100.0
+        END AS ProdPct
+
+    FROM NormJoined n
+),
+
+/* ================= ROLLUP ================= */
+Rolled AS (
+    SELECT
+        [Date],
+        [PA Name],
+        supervisor_email,
+        crew_type,
+        AVG(ProdPct) AS AvgProdPct
+    FROM PerActivity
+    GROUP BY [Date], [PA Name], supervisor_email, crew_type
+),
+
+/* ================= CREW NAME ================= */
+CrewNamed AS (
+    SELECT
+        r.*,
+        ct.Description AS [Crew Name]
+    FROM Rolled r
+    LEFT JOIN dbo.CrewType ct
+      ON REPLACE(LTRIM(RTRIM(r.crew_type)), '-', '')
+       = REPLACE(LTRIM(RTRIM(ct.Code)), '-', '')
+),
+
+/* ================= PH NAME + EMP ID ================= */
+PHNamed AS (
+    SELECT
+        c.*,
+        emp.Name AS [PH Name],
+        emp.UId  AS [PH Emp ID]
+    FROM CrewNamed c
+    LEFT JOIN dbo.Employee emp
+      ON LTRIM(RTRIM(emp.Email))
+       = LTRIM(RTRIM(c.supervisor_email))
+)
+
+/* ================= FINAL SELECT ================= */
+SELECT
+    ROW_NUMBER() OVER (
+        ORDER BY [Date], supervisor_email, crew_type
+    ) AS [S.No],
+
+    [Date],
+    [PA Name],
+    [PH Emp ID],
+    [PH Name],
+
+    /* ATNM / Sub Contractor */
+    CASE
+        WHEN [PH Emp ID] IS NOT NULL
+         AND LEN(CONVERT(varchar(20), [PH Emp ID])) = 6
+         AND LEFT(CONVERT(varchar(20), [PH Emp ID]), 1) = '9'
+            THEN 'ATNM'
+        ELSE 'Sub contractor'
+    END AS [ATNM/Sub Contractor],
+
+    crew_type AS [Crew Type],
+    [Crew Name],
+
+    CAST(AvgProdPct AS decimal(10,2))
+        AS [Average Productivity (%)],
+
+    /* ================= PI (CMR) ================= */
+    CASE
+        WHEN AvgProdPct IS NULL THEN NULL
+        WHEN AvgProdPct < 65 THEN 'P0'
+        WHEN AvgProdPct BETWEEN 65 AND 69 THEN 'P1'
+        WHEN AvgProdPct BETWEEN 70 AND 74 THEN 'P2'
+        WHEN AvgProdPct BETWEEN 75 AND 79 THEN 'P3'
+        WHEN AvgProdPct BETWEEN 80 AND 84 THEN 'P4'
+        WHEN AvgProdPct BETWEEN 85 AND 89 THEN 'P5'
+        WHEN AvgProdPct BETWEEN 90 AND 94 THEN 'P6'
+        WHEN AvgProdPct BETWEEN 95 AND 99 THEN 'P7'
+        WHEN AvgProdPct >= 100 THEN 'P8'
+        ELSE NULL
+    END AS [PI (CMR)],
+
+    /* ================= PI (T-Wise) ================= */
+    CASE
+        WHEN AvgProdPct IS NULL THEN NULL
+        WHEN AvgProdPct <= 75 THEN 'P0'
+        WHEN AvgProdPct BETWEEN 76 AND 80 THEN 'P1'
+        WHEN AvgProdPct BETWEEN 81 AND 85 THEN 'P2'
+        WHEN AvgProdPct BETWEEN 86 AND 90 THEN 'P3'
+        WHEN AvgProdPct BETWEEN 91 AND 95 THEN 'P4'
+        WHEN AvgProdPct BETWEEN 96 AND 99 THEN 'P5'
+        WHEN AvgProdPct = 100 THEN 'P6'
+        WHEN AvgProdPct BETWEEN 101 AND 105 THEN 'P7'
+        WHEN AvgProdPct BETWEEN 106 AND 110 THEN 'P8'
+        WHEN AvgProdPct > 110 THEN 'P8'
+        ELSE NULL
+    END AS [PI (T-Wise)]
+
+FROM PHNamed;
+GO
+

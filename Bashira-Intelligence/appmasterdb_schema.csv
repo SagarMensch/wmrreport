@@ -1,0 +1,111 @@
+tableName,columnName,dataType,description
+AppMasterDB.dbo.New_Daily_Plan,*,VIEW,VIEW in AppMasterDB: Daily planning view - retrieves daily work plan data. Source: dbo.vw_New_Daily_Plan
+AppMasterDB.dbo.New_Daily_Plan,Sl.No,int,VIEW column: Row number
+AppMasterDB.dbo.New_Daily_Plan,ATNM/SC,nvarchar,VIEW column: ATNM/SC identifier
+AppMasterDB.dbo.New_Daily_Plan,Discipline,nvarchar,VIEW column: Discipline (nullable)
+AppMasterDB.dbo.New_Daily_Plan,Well ID,nvarchar,VIEW column: Well identifier
+AppMasterDB.dbo.New_Daily_Plan,PA Name,nvarchar,VIEW column: Permit Applicant Name
+AppMasterDB.dbo.New_Daily_Plan,PA Mob No,nvarchar,VIEW column: PA Mobile Number
+AppMasterDB.dbo.New_Daily_Plan,PH Emp ID,nvarchar,VIEW column: PH Employee ID
+AppMasterDB.dbo.New_Daily_Plan,PH Name,nvarchar,VIEW column: PH Name
+AppMasterDB.dbo.New_Daily_Plan,PH Mob No,nvarchar,VIEW column: PH Mobile Number
+AppMasterDB.dbo.New_Daily_Plan,PO No,nvarchar,VIEW column: PO/WBS Number
+AppMasterDB.dbo.New_Daily_Plan,WBS,nvarchar,VIEW column: Work Breakdown Structure
+AppMasterDB.dbo.New_Daily_Plan,Well Category,nvarchar,VIEW column: Category of well
+AppMasterDB.dbo.New_Daily_Plan,Location,nvarchar,VIEW column: Location
+AppMasterDB.dbo.New_Daily_Plan,Job Title / Project Name,nvarchar,VIEW column: Job or project name
+AppMasterDB.dbo.New_Daily_Plan,Activities,nvarchar,VIEW column: Activity description
+AppMasterDB.dbo.New_Daily_Plan,Manpower,nvarchar,VIEW column: Manpower count
+AppMasterDB.dbo.New_Daily_Plan,Eqpt,nvarchar,VIEW column: Equipment
+AppMasterDB.dbo.New_Daily_Plan,Vehicle,nvarchar,VIEW column: Vehicle
+AppMasterDB.dbo.New_Daily_Plan,Remarks,nvarchar,VIEW column: Additional remarks
+AppMasterDB.dbo.Daily_Plan_Report,*,VIEW,VIEW in AppMasterDB: Daily plan report with crew and location details. Source: dbo.vw_DailyWorkPlanC_TodayReport
+AppMasterDB.dbo.Daily_Plan_Report,Sl.No,int,VIEW column: Serial number
+AppMasterDB.dbo.Daily_Plan_Report,ATNM/SC,nvarchar,VIEW column: ATNM/SC
+AppMasterDB.dbo.Daily_Plan_Report,Discipline,nvarchar,VIEW column: Discipline
+AppMasterDB.dbo.Daily_Plan_Report,Well ID,nvarchar,VIEW column: Well ID
+AppMasterDB.dbo.Daily_Plan_Report,PA Name,nvarchar,VIEW column: Permit Applicant Name
+AppMasterDB.dbo.Daily_Plan_Report,PH Emp ID,nvarchar,VIEW column: PH Employee ID
+AppMasterDB.dbo.Daily_Plan_Report,PH Name,nvarchar,VIEW column: PH Name
+AppMasterDB.dbo.Daily_Plan_Report,PO No,nvarchar,VIEW column: PO Number
+AppMasterDB.dbo.Daily_Plan_Report,Well Category,nvarchar,VIEW column: Well category
+AppMasterDB.dbo.Daily_Plan_Report,Location,nvarchar,VIEW column: Location
+AppMasterDB.dbo.Daily_Plan_Report,Job Title / Project Name,nvarchar,VIEW column: Project name
+AppMasterDB.dbo.Daily_Plan_Report,Activities,nvarchar,VIEW column: Activities/Task description
+AppMasterDB.dbo.Daily_Plan_Report,Manpower,nvarchar,VIEW column: Manpower required
+AppMasterDB.dbo.Daily_Plan_Report,Eqpt,nvarchar,VIEW column: Equipment
+AppMasterDB.dbo.Daily_Plan_Report,Vehicle,nvarchar,VIEW column: Vehicles
+AppMasterDB.dbo.vw_JOB_COST,*,VIEW,"VIEW in AppMasterDB: Job cost tracking - compares planned vs actual for employees and equipment. Source: Complex view joining task_daily, Revenue, crews, Employee, Equipment"
+AppMasterDB.dbo.vw_JOB_COST,sr.no,int,VIEW column: Serial number
+AppMasterDB.dbo.vw_JOB_COST,Plant/ Location,nvarchar,VIEW column: Plant or location (MML/NIM derived from Project)
+AppMasterDB.dbo.vw_JOB_COST,Project,nvarchar,VIEW column: Project - links to Revenue.rigcode
+AppMasterDB.dbo.vw_JOB_COST,Well ID,nvarchar,VIEW column: Well identifier
+AppMasterDB.dbo.vw_JOB_COST,Activity ID,nvarchar,VIEW column: Activity code (first 8 chars)
+AppMasterDB.dbo.vw_JOB_COST,Activity Code,nvarchar,VIEW column: Mapped activity code from ActivityMasterMapping
+AppMasterDB.dbo.vw_JOB_COST,Action On,date,VIEW column: Action date
+AppMasterDB.dbo.vw_JOB_COST,start_date,date,VIEW column: Planned start date
+AppMasterDB.dbo.vw_JOB_COST,end_date,date,VIEW column: Planned end date
+AppMasterDB.dbo.vw_JOB_COST,target_start,datetime,VIEW column: Target start
+AppMasterDB.dbo.vw_JOB_COST,target_end,datetime,VIEW column: Target end
+AppMasterDB.dbo.vw_JOB_COST,actual_start,datetime,VIEW column: Actual start
+AppMasterDB.dbo.vw_JOB_COST,actual_end,datetime,VIEW column: Actual end
+AppMasterDB.dbo.vw_JOB_COST,crew type,nvarchar,VIEW column: Crew type
+AppMasterDB.dbo.vw_JOB_COST,crew code,nvarchar,VIEW column: Crew code
+AppMasterDB.dbo.vw_JOB_COST,Plan Employee Name/ Equipment Name,nvarchar,VIEW column: Planned resource name
+AppMasterDB.dbo.vw_JOB_COST,Plan Employee ID/ Equipment ID/Plate No,nvarchar,VIEW column: Planned resource ID
+AppMasterDB.dbo.vw_JOB_COST,Plan PG / EG Code,nvarchar,VIEW column: Planned payment group code
+AppMasterDB.dbo.vw_JOB_COST,Plan PG / EG Text,nvarchar,VIEW column: Planned payment group description
+AppMasterDB.dbo.vw_JOB_COST,Actual Employee / Equipment Name,nvarchar,VIEW column: Actual resource name
+AppMasterDB.dbo.vw_JOB_COST,Actual Employee ID/ Equipment ID/Plate No,nvarchar,VIEW column: Actual resource ID
+AppMasterDB.dbo.vw_JOB_COST,Actual PG/EG Code,nvarchar,VIEW column: Actual PG code
+AppMasterDB.dbo.vw_JOB_COST,Actual PG/EG Text,nvarchar,VIEW column: Actual PG description
+AppMasterDB.dbo.vw_JOB_COST,Effective Work Hours,decimal,VIEW column: Effective work hours from JSON
+AppMasterDB.dbo.WellMonitoringReport,*,VIEW,"VIEW in AppMasterDB: Comprehensive well monitoring with progress, MOC, dates, SAP data. Source: Complex view - multiple CTEs joining WMR, TaskPlan, DesignTracker, SAP, Revenue, Crews"
+AppMasterDB.dbo.WellMonitoringReport,pdo_well_id,nvarchar,KEY COLUMN: PDO well identifier - PRIMARY KEY
+AppMasterDB.dbo.WellMonitoringReport,well_name_after_spud,nvarchar,KEY COLUMN: Official well name
+AppMasterDB.dbo.WellMonitoringReport,well_location,nvarchar,KEY COLUMN: Location
+AppMasterDB.dbo.WellMonitoringReport,Cluster,nvarchar,KEY COLUMN: Nimr or Marmul
+AppMasterDB.dbo.WellMonitoringReport,rig_no,nvarchar,KEY COLUMN: Rig number
+AppMasterDB.dbo.WellMonitoringReport,well_type,nvarchar,"KEY COLUMN: ESP, OP, WI"
+AppMasterDB.dbo.WellMonitoringReport,over_all_progress_percentages,decimal,KEY COLUMN: Overall progress 0-1
+AppMasterDB.dbo.WellMonitoringReport,moc_raised,nvarchar,KEY COLUMN: MOC raised YES/No
+AppMasterDB.dbo.WellMonitoringReport,moc_approved,nvarchar,KEY COLUMN: MOC approved YES/No
+AppMasterDB.dbo.WellMonitoringReport,actual_rig_on_date,date,KEY COLUMN: Rig arrival
+AppMasterDB.dbo.WellMonitoringReport,actual_rig_off_date,date,KEY COLUMN: Rig departure
+AppMasterDB.dbo.vw_JobProgress,*,VIEW,"VIEW in AppMasterDB: Weekly job progress with plan vs actual bucketed by week. Source: ActivityTaskPlan, ProjectIDs, WMR"
+AppMasterDB.dbo.vw_JobProgress,Sl.No,int,VIEW column: Serial number
+AppMasterDB.dbo.vw_JobProgress,Category,nvarchar,VIEW column: Project category from ProjectIDs.column2
+AppMasterDB.dbo.vw_JobProgress,Well ID / Project ID,int,VIEW column: Well ID
+AppMasterDB.dbo.vw_JobProgress,Well Name / Project Name,nvarchar,VIEW column: Well name
+AppMasterDB.dbo.vw_JobProgress,PO No - Location,nvarchar,VIEW column: Location PO
+AppMasterDB.dbo.vw_JobProgress,PO No - FlowLine,nvarchar,VIEW column: Flowline PO
+AppMasterDB.dbo.vw_JobProgress,WBS No - Location,nvarchar,VIEW column: Location WBS
+AppMasterDB.dbo.vw_JobProgress,WBS No - FlowLine,nvarchar,VIEW column: Flowline WBS
+AppMasterDB.dbo.vw_JobProgress,Cum-Prior Month Plan %,decimal,VIEW column: Cumulative prior month plan
+AppMasterDB.dbo.vw_JobProgress,Cum-Prior Month Actual %,decimal,VIEW column: Cumulative prior month actual
+AppMasterDB.dbo.vw_JobProgress,Week-1 Plan %,decimal,VIEW column: Week 1 plan
+AppMasterDB.dbo.vw_JobProgress,Week-1 Actual %,decimal,VIEW column: Week 1 actual
+AppMasterDB.dbo.vw_JobProgress,Week-2 Plan %,decimal,VIEW column: Week 2 plan
+AppMasterDB.dbo.vw_JobProgress,Week-2 Actual %,decimal,VIEW column: Week 2 actual
+AppMasterDB.dbo.vw_JobProgress,Week-3 Plan %,decimal,VIEW column: Week 3 plan
+AppMasterDB.dbo.vw_JobProgress,Week-3 Actual %,decimal,VIEW column: Week 3 actual
+AppMasterDB.dbo.vw_JobProgress,Week-4 Plan %,decimal,VIEW column: Week 4 plan
+AppMasterDB.dbo.vw_JobProgress,Week-4 Actual %,decimal,VIEW column: Week 4 actual
+AppMasterDB.dbo.vw_JobProgress,Current Month Plan %,decimal,VIEW column: Current month total plan
+AppMasterDB.dbo.vw_JobProgress,Current Month Actual %,decimal,VIEW column: Current month total actual
+AppMasterDB.dbo.PH_Productivity,*,VIEW,"VIEW in AppMasterDB: Productivity tracking per PH (QHSE Supervisor) and Crew. Source: task_daily, Employee, ActivityCodesNorms, CrewType"
+AppMasterDB.dbo.PH_Productivity,Year,int,VIEW column: Year
+AppMasterDB.dbo.PH_Productivity,Month,int,VIEW column: Month
+AppMasterDB.dbo.PH_Productivity,PA Name,nvarchar,VIEW column: Permit Applicant name (from task_assignee email)
+AppMasterDB.dbo.PH_Productivity,PH Name,nvarchar,VIEW column: QHSE Supervisor name (from supervisor_email)
+AppMasterDB.dbo.PH_Productivity,Crew Name,nvarchar,VIEW column: Crew type description
+AppMasterDB.dbo.PH_Productivity,Crew Type,nvarchar,VIEW column: Crew type code
+AppMasterDB.dbo.PH_Productivity,Category,nvarchar,VIEW column: Category from ProjectIDs
+AppMasterDB.dbo.PH_Productivity,Sub_Contractor,nvarchar,VIEW column: Subcontractor
+AppMasterDB.dbo.PH_Productivity,Avg_Productivity_Pct,decimal,VIEW column: Average productivity percentage
+AppMasterDB.dbo.PH_Productivity,W1_PI_T_Wise,decimal,VIEW column: Week 1 Productivity Index T-Wise
+AppMasterDB.dbo.PH_Productivity,W1_PI_CMR,decimal,VIEW column: Week 1 Productivity Index CMR
+AppMasterDB.dbo.PH_Productivity,W2_PI_T_Wise,decimal,VIEW column: Week 2 Productivity Index T-Wise
+AppMasterDB.dbo.PH_Productivity,W2_PI_CMR,decimal,VIEW column: Week 2 Productivity Index CMR
+AppMasterDB.dbo.PH_Productivity,Month_PI_T_Wise,decimal,VIEW column: Month Productivity Index T-Wise
+AppMasterDB.dbo.PH_Productivity,Month_PI_CMR,decimal,VIEW column: Month Productivity Index CMR

@@ -1,0 +1,11 @@
+WellMonitoringReport_Latest:
+FOUND: exp.rig_off_location_sap_data
+FOUND: engg_kpi_after_rig-off_days
+FOUND: overall_loc._preparation_10_100
+FOUND: overall_const._10_100
+
+WMR_Full:
+FOUND: overall_loc._preparation_10_100
+FOUND: overall_const._10_100
+FOUND: engg_kpi_after_rig-off_days
+MISSING: exp.rig_off_location_sap_data

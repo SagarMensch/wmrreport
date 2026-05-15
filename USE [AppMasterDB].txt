@@ -1,0 +1,707 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[Job_Progress_Report_GB]    Script Date: 25-03-2026 16:17:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE   VIEW [dbo].[Job_Progress_Report_GB]
+AS
+WITH WMR_1 AS (
+    SELECT
+        WellID = TRY_CONVERT(nvarchar(50), pdo_well_id),
+        well_name_after_spud = MAX(well_name_after_spud),
+        location_po_no       = MAX(location_po_no),
+        flow_line_po_no      = MAX(flow_line_po_no)
+    FROM dbo.WMR
+    GROUP BY TRY_CONVERT(nvarchar(50), pdo_well_id)
+),
+
+Base AS (
+    SELECT
+        tp.project_id,
+        tp.code,
+        Well_ID      = LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), tp.New_Well_ID))),
+        target_start = TRY_CONVERT(date, tp.target_start),
+        target_end   = TRY_CONVERT(date, tp.target_end),
+        actual_start = TRY_CONVERT(date, tp.actual_start),
+        actual_end   = TRY_CONVERT(date, tp.actual_end),
+        qty_num      = TRY_CONVERT(float, tp.qty),
+
+        weight_frac =
+            CASE
+                WHEN tp.weightage IS NULL THEN 0.0
+                WHEN TRY_CONVERT(float, REPLACE(TRY_CONVERT(nvarchar(50), tp.weightage), '%', '')) IS NULL THEN 0.0
+                ELSE
+                    CASE
+                        WHEN TRY_CONVERT(nvarchar(50), tp.weightage) LIKE '%[%]%'
+                            THEN TRY_CONVERT(float, REPLACE(TRY_CONVERT(nvarchar(50), tp.weightage), '%', '')) / 100.0
+                        WHEN TRY_CONVERT(float, tp.weightage) > 1.0
+                            THEN TRY_CONVERT(float, tp.weightage) / 100.0
+                        ELSE TRY_CONVERT(float, tp.weightage)
+                    END
+            END,
+
+        progress_frac =
+            CASE
+                WHEN tp.progress IS NULL THEN 0.0
+                WHEN TRY_CONVERT(float, REPLACE(TRY_CONVERT(nvarchar(50), tp.progress), '%', '')) IS NULL THEN 0.0
+                ELSE
+                    CASE
+                        WHEN TRY_CONVERT(nvarchar(50), tp.progress) LIKE '%[%]%'
+                            THEN TRY_CONVERT(float, REPLACE(TRY_CONVERT(nvarchar(50), tp.progress), '%', '')) / 100.0
+                        WHEN TRY_CONVERT(float, tp.progress) > 1.0
+                            THEN TRY_CONVERT(float, tp.progress) / 100.0
+                        ELSE TRY_CONVERT(float, tp.progress)
+                    END
+            END
+    FROM dbo.WMR_TaskPlan_csv_imported tp
+    WHERE tp.[type] = 'A'
+      AND tp.New_Well_ID IS NOT NULL
+      AND LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), tp.New_Well_ID))) <> ''
+      AND UPPER(LTRIM(RTRIM(COALESCE(TRY_CONVERT(nvarchar(100), tp.Resume_Suspend), '')))) <> 'SUSPEND'
+),
+
+Params AS (
+    SELECT
+        MonthStart = DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1),
+        MonthEnd   = EOMONTH(GETDATE()),
+        W1End      = DATEADD(day, 6,  DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1)),
+        W2End      = DATEADD(day, 13, DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1)),
+        W3End      = DATEADD(day, 20, DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1)),
+        W4End      = DATEADD(day, 27, DATEFROMPARTS(YEAR(GETDATE()), MONTH(GETDATE()), 1))
+),
+
+Nums AS (
+    SELECT TOP (5000)
+        ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) - 1 AS n
+    FROM sys.all_objects a
+    CROSS JOIN sys.all_objects b
+),
+
+PlanSnap AS (
+    SELECT
+        Well_ID                 = LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), ps.Well_ID))),
+        project_id              = ps.project_id,
+        Cum_Prior_Plan_frac     = ISNULL(TRY_CONVERT(float, ps.Cum_Prior_Plan_frac), 0.0),
+        W1_Plan_frac            = ISNULL(TRY_CONVERT(float, ps.W1_Plan_frac), 0.0),
+        W2_Plan_frac            = ISNULL(TRY_CONVERT(float, ps.W2_Plan_frac), 0.0),
+        W3_Plan_frac            = ISNULL(TRY_CONVERT(float, ps.W3_Plan_frac), 0.0),
+        W4_Plan_frac            = ISNULL(TRY_CONVERT(float, ps.W4_Plan_frac), 0.0),
+        W5_Plan_frac            = ISNULL(TRY_CONVERT(float, ps.W5_Plan_frac), 0.0),
+        CurrentMonthPlanFrac    = ISNULL(TRY_CONVERT(float, ps.CurrentMonthPlanFrac), 0.0),
+        CumCurrentMonthPlanFrac = ISNULL(TRY_CONVERT(float, ps.CumCurrentMonthPlanFrac), 0.0),
+        Latest_Target_End       = TRY_CONVERT(date, ps.Latest_Target_End)
+    FROM dbo.Job_Progress_PlanSnapshot ps
+),
+
+TargetEndAgg AS (
+    SELECT
+        Well_ID,
+        project_id,
+        Latest_Target_End = MAX(target_end)
+    FROM Base
+    GROUP BY Well_ID, project_id
+),
+
+/* =========================
+   ACTUAL LOGIC - PART 1
+   If actual_start and actual_end both exist and range is valid,
+   calculate directly from TaskPlan by daily split.
+   FIX APPLIED:
+   daily_actual_frac = (progress_frac * weight_frac) / total_days
+   ========================= */
+ActualDateBase AS (
+    SELECT *
+    FROM Base
+    WHERE actual_start IS NOT NULL
+      AND actual_end   IS NOT NULL
+      AND actual_end  >= actual_start
+),
+
+ActualDateDaily AS (
+    SELECT
+        b.Well_ID,
+        b.project_id,
+        b.code,
+        ActualDate = DATEADD(day, n.n, b.actual_start),
+        daily_actual_frac =
+            CASE
+                WHEN b.actual_start IS NULL
+                  OR b.actual_end   IS NULL
+                  OR b.actual_end   < b.actual_start
+                THEN 0.0
+                ELSE
+                    (ISNULL(b.progress_frac, 0.0) * ISNULL(b.weight_frac, 0.0))
+                    / NULLIF(DATEDIFF(day, b.actual_start, b.actual_end) + 1, 0)
+            END
+    FROM ActualDateBase b
+    INNER JOIN Nums n
+        ON n.n <= DATEDIFF(day, b.actual_start, b.actual_end)
+),
+
+ActualDateAgg AS (
+    SELECT
+        d.Well_ID,
+        d.project_id,
+
+        Cum_Prior_Act_frac = SUM(
+            CASE WHEN d.ActualDate < prm.MonthStart THEN d.daily_actual_frac ELSE 0 END
+        ),
+        W1_Act_frac = SUM(
+            CASE WHEN d.ActualDate >= prm.MonthStart AND d.ActualDate <= prm.W1End THEN d.daily_actual_frac ELSE 0 END
+        ),
+        W2_Act_frac = SUM(
+            CASE WHEN d.ActualDate > prm.W1End AND d.ActualDate <= prm.W2End THEN d.daily_actual_frac ELSE 0 END
+        ),
+        W3_Act_frac = SUM(
+            CASE WHEN d.ActualDate > prm.W2End AND d.ActualDate <= prm.W3End THEN d.daily_actual_frac ELSE 0 END
+        ),
+        W4_Act_frac = SUM(
+            CASE WHEN d.ActualDate > prm.W3End AND d.ActualDate <= prm.W4End THEN d.daily_actual_frac ELSE 0 END
+        ),
+        W5_Act_frac = SUM(
+            CASE WHEN d.ActualDate > prm.W4End AND d.ActualDate <= prm.MonthEnd THEN d.daily_actual_frac ELSE 0 END
+        )
+    FROM ActualDateDaily d
+    CROSS JOIN Params prm
+    GROUP BY
+        d.Well_ID,
+        d.project_id
+),
+
+/* =========================
+   ACTUAL LOGIC - PART 2
+   Fallback to task_daily only when:
+   - no actual_start and no actual_end
+   - or actual_start exists but actual_end is null
+   - or actual_end exists but actual_start is null
+   - or invalid range actual_end < actual_start
+   Keep only latest time_stamp per task_code + ActionOn
+   ========================= */
+FallbackBase AS (
+    SELECT *
+    FROM Base
+    WHERE NOT (
+        actual_start IS NOT NULL
+        AND actual_end IS NOT NULL
+        AND actual_end >= actual_start
+    )
+),
+
+TaskDailyRanked AS (
+    SELECT
+        td.id,
+        td.task_code,
+        ActionDate   = TRY_CONVERT(date, td.ActionOn),
+        data_qty_num = TRY_CONVERT(float, td.data_qty),
+        project_id_td = LTRIM(RTRIM(TRY_CONVERT(nvarchar(100), td.project_id))),
+        rn = ROW_NUMBER() OVER (
+            PARTITION BY
+                LTRIM(RTRIM(TRY_CONVERT(nvarchar(200), td.task_code))),
+                TRY_CONVERT(date, td.ActionOn)
+            ORDER BY
+                TRY_CONVERT(datetimeoffset, td.time_stamp) DESC,
+                td.id DESC
+        )
+    FROM dbo.task_daily td
+    WHERE td.task_code IS NOT NULL
+      AND TRY_CONVERT(date, td.ActionOn) IS NOT NULL
+      AND TRY_CONVERT(float, td.data_qty) IS NOT NULL
+),
+
+TaskDailyBase AS (
+    SELECT
+        id,
+        task_code,
+        ActionDate,
+        data_qty_num,
+        project_id_td
+    FROM TaskDailyRanked
+    WHERE rn = 1
+),
+
+TaskDailyBucketed AS (
+    SELECT
+        b.Well_ID,
+        b.project_id,
+        b.code,
+        b.qty_num,
+        b.weight_frac,
+        td.ActionDate,
+        td.data_qty_num,
+        act_bucket =
+            CASE
+                WHEN td.ActionDate <  p.MonthStart THEN 'PRIOR'
+                WHEN td.ActionDate >= p.MonthStart AND td.ActionDate <= p.W1End THEN 'W1'
+                WHEN td.ActionDate >  p.W1End AND td.ActionDate <= p.W2End THEN 'W2'
+                WHEN td.ActionDate >  p.W2End AND td.ActionDate <= p.W3End THEN 'W3'
+                WHEN td.ActionDate >  p.W3End AND td.ActionDate <= p.W4End THEN 'W4'
+                WHEN td.ActionDate >  p.W4End AND td.ActionDate <= p.MonthEnd THEN 'W5'
+                ELSE 'FUTURE'
+            END
+    FROM FallbackBase b
+    INNER JOIN TaskDailyBase td
+        ON LTRIM(RTRIM(td.task_code)) = LTRIM(RTRIM(b.code))
+       AND (
+            td.project_id_td IS NULL
+            OR td.project_id_td = ''
+            OR LOWER(td.project_id_td) = LOWER(LTRIM(RTRIM(TRY_CONVERT(nvarchar(100), b.project_id))))
+       )
+    CROSS JOIN Params p
+),
+
+ActualPerActivityWeek AS (
+    SELECT
+        Well_ID,
+        project_id,
+        code,
+        qty_num,
+        weight_frac,
+        act_bucket,
+        week_qty = SUM(data_qty_num)
+    FROM TaskDailyBucketed
+    WHERE act_bucket <> 'FUTURE'
+    GROUP BY
+        Well_ID,
+        project_id,
+        code,
+        qty_num,
+        weight_frac,
+        act_bucket
+),
+
+ActualFallbackAgg AS (
+    SELECT
+        Well_ID,
+        project_id,
+
+        Cum_Prior_Act_frac = SUM(
+            CASE
+                WHEN act_bucket = 'PRIOR' THEN
+                    CASE
+                        WHEN ISNULL(qty_num, 0) <= 0 THEN 0.0
+                        WHEN (week_qty / NULLIF(qty_num, 0)) >= 1 THEN weight_frac
+                        ELSE (week_qty / NULLIF(qty_num, 0)) * weight_frac
+                    END
+                ELSE 0
+            END
+        ),
+
+        W1_Act_frac = SUM(
+            CASE
+                WHEN act_bucket = 'W1' THEN
+                    CASE
+                        WHEN ISNULL(qty_num, 0) <= 0 THEN 0.0
+                        WHEN (week_qty / NULLIF(qty_num, 0)) >= 1 THEN weight_frac
+                        ELSE (week_qty / NULLIF(qty_num, 0)) * weight_frac
+                    END
+                ELSE 0
+            END
+        ),
+
+        W2_Act_frac = SUM(
+            CASE
+                WHEN act_bucket = 'W2' THEN
+                    CASE
+                        WHEN ISNULL(qty_num, 0) <= 0 THEN 0.0
+                        WHEN (week_qty / NULLIF(qty_num, 0)) >= 1 THEN weight_frac
+                        ELSE (week_qty / NULLIF(qty_num, 0)) * weight_frac
+                    END
+                ELSE 0
+            END
+        ),
+
+        W3_Act_frac = SUM(
+            CASE
+                WHEN act_bucket = 'W3' THEN
+                    CASE
+                        WHEN ISNULL(qty_num, 0) <= 0 THEN 0.0
+                        WHEN (week_qty / NULLIF(qty_num, 0)) >= 1 THEN weight_frac
+                        ELSE (week_qty / NULLIF(qty_num, 0)) * weight_frac
+                    END
+                ELSE 0
+            END
+        ),
+
+        W4_Act_frac = SUM(
+            CASE
+                WHEN act_bucket = 'W4' THEN
+                    CASE
+                        WHEN ISNULL(qty_num, 0) <= 0 THEN 0.0
+                        WHEN (week_qty / NULLIF(qty_num, 0)) >= 1 THEN weight_frac
+                        ELSE (week_qty / NULLIF(qty_num, 0)) * weight_frac
+                    END
+                ELSE 0
+            END
+        ),
+
+        W5_Act_frac = SUM(
+            CASE
+                WHEN act_bucket = 'W5' THEN
+                    CASE
+                        WHEN ISNULL(qty_num, 0) <= 0 THEN 0.0
+                        WHEN (week_qty / NULLIF(qty_num, 0)) >= 1 THEN weight_frac
+                        ELSE (week_qty / NULLIF(qty_num, 0)) * weight_frac
+                    END
+                ELSE 0
+            END
+        )
+    FROM ActualPerActivityWeek
+    GROUP BY Well_ID, project_id
+),
+
+ActualKeys AS (
+    SELECT Well_ID, project_id FROM ActualDateAgg
+    UNION
+    SELECT Well_ID, project_id FROM ActualFallbackAgg
+),
+
+ActualAgg AS (
+    SELECT
+        k.Well_ID,
+        k.project_id,
+
+        Cum_Prior_Act_frac = ISNULL(d.Cum_Prior_Act_frac, 0.0) + ISNULL(f.Cum_Prior_Act_frac, 0.0),
+        W1_Act_frac        = ISNULL(d.W1_Act_frac,        0.0) + ISNULL(f.W1_Act_frac,        0.0),
+        W2_Act_frac        = ISNULL(d.W2_Act_frac,        0.0) + ISNULL(f.W2_Act_frac,        0.0),
+        W3_Act_frac        = ISNULL(d.W3_Act_frac,        0.0) + ISNULL(f.W3_Act_frac,        0.0),
+        W4_Act_frac        = ISNULL(d.W4_Act_frac,        0.0) + ISNULL(f.W4_Act_frac,        0.0),
+        W5_Act_frac        = ISNULL(d.W5_Act_frac,        0.0) + ISNULL(f.W5_Act_frac,        0.0)
+    FROM ActualKeys k
+    LEFT JOIN ActualDateAgg     d ON d.Well_ID = k.Well_ID AND d.project_id = k.project_id
+    LEFT JOIN ActualFallbackAgg f ON f.Well_ID = k.Well_ID AND f.project_id = k.project_id
+),
+
+Keys AS (
+    SELECT
+        ps.Well_ID,
+        ps.project_id
+    FROM PlanSnap ps
+
+    UNION
+
+    SELECT
+        aa.Well_ID,
+        aa.project_id
+    FROM ActualAgg aa
+),
+
+AggRaw AS (
+    SELECT
+        k.Well_ID,
+        k.project_id,
+
+        HasPlan = CASE WHEN p.Well_ID IS NULL THEN 0 ELSE 1 END,
+
+        Cum_Prior_Plan_frac = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.Cum_Prior_Plan_frac END,
+        W1_Plan_frac        = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.W1_Plan_frac END,
+        W2_Plan_frac        = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.W2_Plan_frac END,
+        W3_Plan_frac        = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.W3_Plan_frac END,
+        W4_Plan_frac        = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.W4_Plan_frac END,
+        W5_Plan_frac        = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.W5_Plan_frac END,
+        CurrentMonthPlanFrac    = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.CurrentMonthPlanFrac END,
+        CumCurrentMonthPlanFrac = CASE WHEN p.Well_ID IS NULL THEN NULL ELSE p.CumCurrentMonthPlanFrac END,
+
+        Cum_Prior_Act_frac = ISNULL(a.Cum_Prior_Act_frac, 0.0),
+        W1_Act_frac        = ISNULL(a.W1_Act_frac, 0.0),
+        W2_Act_frac        = ISNULL(a.W2_Act_frac, 0.0),
+        W3_Act_frac        = ISNULL(a.W3_Act_frac, 0.0),
+        W4_Act_frac        = ISNULL(a.W4_Act_frac, 0.0),
+        W5_Act_frac        = ISNULL(a.W5_Act_frac, 0.0),
+
+        Snapshot_Target_End = p.Latest_Target_End
+    FROM Keys k
+    LEFT JOIN PlanSnap  p ON p.Well_ID = k.Well_ID AND p.project_id = k.project_id
+    LEFT JOIN ActualAgg a ON a.Well_ID = k.Well_ID AND a.project_id = k.project_id
+),
+
+Agg AS (
+    SELECT
+        Well_ID,
+        project_id,
+        HasPlan,
+
+        Cum_Prior_Plan_frac =
+            CASE
+                WHEN Cum_Prior_Plan_frac IS NULL THEN NULL
+                WHEN Cum_Prior_Plan_frac > 1 THEN 1.0
+                WHEN Cum_Prior_Plan_frac < 0 THEN 0.0
+                ELSE Cum_Prior_Plan_frac
+            END,
+
+        W1_Plan_frac =
+            CASE
+                WHEN W1_Plan_frac IS NULL THEN NULL
+                WHEN W1_Plan_frac > 1 THEN 1.0
+                WHEN W1_Plan_frac < 0 THEN 0.0
+                ELSE W1_Plan_frac
+            END,
+
+        W2_Plan_frac =
+            CASE
+                WHEN W2_Plan_frac IS NULL THEN NULL
+                WHEN W2_Plan_frac > 1 THEN 1.0
+                WHEN W2_Plan_frac < 0 THEN 0.0
+                ELSE W2_Plan_frac
+            END,
+
+        W3_Plan_frac =
+            CASE
+                WHEN W3_Plan_frac IS NULL THEN NULL
+                WHEN W3_Plan_frac > 1 THEN 1.0
+                WHEN W3_Plan_frac < 0 THEN 0.0
+                ELSE W3_Plan_frac
+            END,
+
+        W4_Plan_frac =
+            CASE
+                WHEN W4_Plan_frac IS NULL THEN NULL
+                WHEN W4_Plan_frac > 1 THEN 1.0
+                WHEN W4_Plan_frac < 0 THEN 0.0
+                ELSE W4_Plan_frac
+            END,
+
+        W5_Plan_frac =
+            CASE
+                WHEN W5_Plan_frac IS NULL THEN NULL
+                WHEN W5_Plan_frac > 1 THEN 1.0
+                WHEN W5_Plan_frac < 0 THEN 0.0
+                ELSE W5_Plan_frac
+            END,
+
+        CurrentMonthPlanFrac =
+            CASE
+                WHEN CurrentMonthPlanFrac IS NULL THEN NULL
+                WHEN CurrentMonthPlanFrac > 1 THEN 1.0
+                WHEN CurrentMonthPlanFrac < 0 THEN 0.0
+                ELSE CurrentMonthPlanFrac
+            END,
+
+        CumCurrentMonthPlanFrac =
+            CASE
+                WHEN CumCurrentMonthPlanFrac IS NULL THEN NULL
+                WHEN CumCurrentMonthPlanFrac > 1 THEN 1.0
+                WHEN CumCurrentMonthPlanFrac < 0 THEN 0.0
+                ELSE CumCurrentMonthPlanFrac
+            END,
+
+        Cum_Prior_Act_frac = CASE WHEN Cum_Prior_Act_frac > 1 THEN 1.0 WHEN Cum_Prior_Act_frac < 0 THEN 0.0 ELSE Cum_Prior_Act_frac END,
+        W1_Act_frac        = CASE WHEN W1_Act_frac        > 1 THEN 1.0 WHEN W1_Act_frac        < 0 THEN 0.0 ELSE W1_Act_frac END,
+        W2_Act_frac        = CASE WHEN W2_Act_frac        > 1 THEN 1.0 WHEN W2_Act_frac        < 0 THEN 0.0 ELSE W2_Act_frac END,
+        W3_Act_frac        = CASE WHEN W3_Act_frac        > 1 THEN 1.0 WHEN W3_Act_frac        < 0 THEN 0.0 ELSE W3_Act_frac END,
+        W4_Act_frac        = CASE WHEN W4_Act_frac        > 1 THEN 1.0 WHEN W4_Act_frac        < 0 THEN 0.0 ELSE W4_Act_frac END,
+        W5_Act_frac        = CASE WHEN W5_Act_frac        > 1 THEN 1.0 WHEN W5_Act_frac        < 0 THEN 0.0 ELSE W5_Act_frac END,
+
+        Snapshot_Target_End
+    FROM AggRaw
+),
+
+SchedParsed AS (
+    SELECT
+        s.*,
+        Well_ID_norm = LTRIM(RTRIM(CONVERT(nvarchar(50), s.Well_ID))),
+        Cluster =
+            CASE
+                WHEN s.Source = 'NC-WD' THEN 'nimr'
+                WHEN s.Source = 'MC-WD' THEN 'marmul'
+                ELSE NULL
+            END,
+        ProjCode =
+            CASE
+                WHEN s.FileName IS NULL THEN NULL
+                WHEN CHARINDEX('SCHED-', s.FileName) > 0
+                 AND CHARINDEX('-RIG', s.FileName) > CHARINDEX('SCHED-', s.FileName)
+                    THEN UPPER(
+                        LTRIM(RTRIM(
+                            SUBSTRING(
+                                s.FileName,
+                                CHARINDEX('SCHED-', s.FileName) + 6,
+                                CHARINDEX('-RIG', s.FileName) - (CHARINDEX('SCHED-', s.FileName) + 6)
+                            )
+                        ))
+                    )
+                ELSE NULL
+            END
+    FROM dbo.data_table_sched_jsons s
+),
+
+SchedNorm AS (
+    SELECT
+        Well_ID_norm,
+        Cluster,
+        ProjCodeClean =
+            CASE
+                WHEN ProjCode IS NULL THEN NULL
+                ELSE
+                    LEFT(
+                        REPLACE(REPLACE(REPLACE(REPLACE(ProjCode,'_','-'),'.','-'),' ','-'),'--','-'),
+                        CASE
+                            WHEN CHARINDEX('-', REPLACE(REPLACE(REPLACE(REPLACE(ProjCode,'_','-'),'.','-'),' ','-'),'--','-')) > 0
+                            THEN CHARINDEX('-', REPLACE(REPLACE(REPLACE(REPLACE(ProjCode,'_','-'),'.','-'),' ','-'),'--','-')) - 1
+                            ELSE LEN(REPLACE(REPLACE(REPLACE(REPLACE(ProjCode,'_','-'),'.','-'),' ','-'),'--','-'))
+                        END
+                    )
+            END,
+        purpose_value
+    FROM SchedParsed
+),
+
+SchedAgg AS (
+    SELECT
+        Well_ID_norm,
+        Cluster,
+        ProjCodeClean,
+        PurposeValue = SUM(TRY_CONVERT(float, NULLIF(LTRIM(RTRIM(purpose_value)), '')))
+    FROM SchedNorm
+    GROUP BY Well_ID_norm, Cluster, ProjCodeClean
+)
+
+SELECT
+    [Sl.No] = ROW_NUMBER() OVER (ORDER BY TRY_CONVERT(int, a.Well_ID), pid.column2),
+    [Category] = pid.column2,
+    [Well ID]  = a.Well_ID,
+    [Well Name / Project Name] = wmr1.well_name_after_spud,
+
+    [PO No] =
+        CASE
+            WHEN LOWER(pid.column2) LIKE '%flowline%' OR LOWER(pid.column2) LIKE '%flc%'
+              OR LOWER(pid.column2) LIKE '%conversion with%' OR LOWER(pid.column2) LIKE '%cwf%'
+              OR LOWER(pid.column2) LIKE '%reopen with%' OR LOWER(pid.column2) LIKE '%rwf%'
+                THEN wmr1.flow_line_po_no
+            ELSE wmr1.location_po_no
+        END,
+
+    [WBS No] = wbsPick.WBS_Code,
+
+    [Cum-Prior Month Actual %] = CAST(ROUND(100.0 * a.Cum_Prior_Act_frac, 2) AS decimal(18,2)),
+
+    [Week-1 Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.W1_Plan_frac, 2) AS decimal(18,2)) ELSE NULL END,
+    [Week-1 Actual %] = CAST(ROUND(100.0 * a.W1_Act_frac, 2) AS decimal(18,2)),
+
+    [Week-2 Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.W2_Plan_frac, 2) AS decimal(18,2)) ELSE NULL END,
+    [Week-2 Actual %] = CAST(ROUND(100.0 * a.W2_Act_frac, 2) AS decimal(18,2)),
+
+    [Week-3 Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.W3_Plan_frac, 2) AS decimal(18,2)) ELSE NULL END,
+    [Week-3 Actual %] = CAST(ROUND(100.0 * a.W3_Act_frac, 2) AS decimal(18,2)),
+
+    [Week-4 Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.W4_Plan_frac, 2) AS decimal(18,2)) ELSE NULL END,
+    [Week-4 Actual %] = CAST(ROUND(100.0 * a.W4_Act_frac, 2) AS decimal(18,2)),
+
+    [Week-5 Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.W5_Plan_frac, 2) AS decimal(18,2)) ELSE NULL END,
+    [Week-5 Actual %] = CAST(ROUND(100.0 * a.W5_Act_frac, 2) AS decimal(18,2)),
+
+    [Current Month Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.CurrentMonthPlanFrac, 2) AS decimal(18,2)) ELSE NULL END,
+
+    [Current Month Actual %] =
+        CAST(ROUND(100.0 * (
+            CASE
+                WHEN (a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac) > 1
+                    THEN 1.0
+                ELSE (a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac)
+            END
+        ), 2) AS decimal(18,2)),
+
+    [Cum-Current Month Plan %] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ROUND(100.0 * a.CumCurrentMonthPlanFrac, 2) AS decimal(18,2)) ELSE NULL END,
+
+    [Cum-Current Month Actual %] =
+        CAST(ROUND(100.0 * (
+            CASE
+                WHEN (a.Cum_Prior_Act_frac + a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac) > 1
+                    THEN 1.0
+                ELSE (a.Cum_Prior_Act_frac + a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac)
+            END
+        ), 2) AS decimal(18,2)),
+
+    [Target End] = COALESCE(a.Snapshot_Target_End, te2.Latest_Target_End),
+
+    [Purpose Value] = CAST(ISNULL(pv.PurposeValue, 0) AS decimal(28,2)),
+
+    [Cum-Prior Month Plan] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ISNULL(pv.PurposeValue,0) * a.Cum_Prior_Plan_frac AS decimal(28,2)) ELSE NULL END,
+
+    [Cum-Prior Month Actual] =
+        CAST(ISNULL(pv.PurposeValue,0) * a.Cum_Prior_Act_frac AS decimal(28,2)),
+
+    [Current month Plan] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ISNULL(pv.PurposeValue,0) * a.CurrentMonthPlanFrac AS decimal(28,2)) ELSE NULL END,
+
+    [Current Month Actual] =
+        CAST(ISNULL(pv.PurposeValue,0) *
+            (CASE
+                WHEN (a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac) > 1
+                    THEN 1.0
+                ELSE (a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac)
+             END) AS decimal(28,2)),
+
+    [Cum - Current Month Plan] =
+        CASE WHEN a.HasPlan = 1 THEN CAST(ISNULL(pv.PurposeValue,0) * a.CumCurrentMonthPlanFrac AS decimal(28,2)) ELSE NULL END,
+
+    [Cum - Current Month Actual] =
+        CAST(ISNULL(pv.PurposeValue,0) *
+            (CASE
+                WHEN (a.Cum_Prior_Act_frac + a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac) > 1
+                    THEN 1.0
+                ELSE (a.Cum_Prior_Act_frac + a.W1_Act_frac + a.W2_Act_frac + a.W3_Act_frac + a.W4_Act_frac + a.W5_Act_frac)
+             END) AS decimal(28,2)),
+
+    [Remarks] = CAST('' AS nvarchar(200))
+FROM Agg a
+LEFT JOIN dbo.ProjectIDs pid
+    ON pid.ID = a.project_id
+LEFT JOIN WMR_1 wmr1
+    ON wmr1.WellID = a.Well_ID
+LEFT JOIN TargetEndAgg te2
+    ON te2.Well_ID = a.Well_ID
+   AND te2.project_id = a.project_id
+OUTER APPLY (
+    SELECT TOP (1)
+        t.WBS_Code
+    FROM dbo.[WBS_Master_Tracker_] t
+    WHERE t.Well_ID_Project_PO LIKE '%' + a.Well_ID + '%'
+      AND (
+            ((LOWER(pid.column2) LIKE '%flowline%' OR LOWER(pid.column2) LIKE '%flc%')
+              AND (LOWER(t.Category) LIKE '%flowline%' OR LOWER(t.Category) LIKE '%flc%'))
+         OR (LOWER(pid.column2) LIKE '%snlp%' AND LOWER(t.Category) LIKE '%snlp%')
+         OR (NOT (LOWER(pid.column2) LIKE '%flowline%' OR LOWER(pid.column2) LIKE '%flc%' OR LOWER(pid.column2) LIKE '%snlp%')
+              AND (LOWER(t.Category) LIKE '%location%' OR LOWER(t.Category) LIKE '%loc%'))
+      )
+    ORDER BY t.WBS_Code
+) wbsPick
+OUTER APPLY (
+    SELECT TOP (1)
+        sa.PurposeValue
+    FROM SchedAgg sa
+    WHERE sa.Well_ID_norm = a.Well_ID
+      AND sa.PurposeValue IS NOT NULL
+      AND (
+            (sa.Cluster = 'nimr'   AND LOWER(pid.column2) LIKE '%nimr%')
+         OR (sa.Cluster = 'marmul' AND LOWER(pid.column2) LIKE '%marmul%')
+      )
+      AND sa.ProjCodeClean =
+            CASE
+                WHEN LOWER(pid.column2) LIKE '%conversion without%' OR LOWER(pid.column2) LIKE '%cof%' THEN 'COF'
+                WHEN LOWER(pid.column2) LIKE '%conversion with%'    OR LOWER(pid.column2) LIKE '%cwf%' THEN 'CWF'
+                WHEN LOWER(pid.column2) LIKE '%non-standard%'       OR LOWER(pid.column2) LIKE '%nsw%' THEN 'NSW'
+                WHEN LOWER(pid.column2) LIKE '%reopen with%'        OR LOWER(pid.column2) LIKE '%rwf%' THEN 'RWF'
+                WHEN LOWER(pid.column2) LIKE '%re-open%' OR LOWER(pid.column2) LIKE '%reopen without%' OR LOWER(pid.column2) LIKE '%rop%' THEN 'ROP'
+                WHEN LOWER(pid.column2) LIKE '%yard%'               OR LOWER(pid.column2) LIKE '%yrd%' THEN 'YRD'
+                WHEN LOWER(pid.column2) LIKE '%snlp%'               THEN 'SLP'
+                WHEN LOWER(pid.column2) LIKE '%flowline%' OR LOWER(pid.column2) LIKE '%flc%' THEN 'FLC'
+                ELSE 'LOC'
+            END
+    ORDER BY sa.PurposeValue DESC
+) pv;
+GO
+

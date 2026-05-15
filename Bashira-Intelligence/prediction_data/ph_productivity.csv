@@ -1,0 +1,2530 @@
+S.No,Month,Year,MonthStart,PA Name,PH Emp ID,PH Name,ATNM/Sub Contractor,Category,Crew Type,Crew Discipline,Crew Name,Average Productivity (%),W1_PI (CMR),W1_PI (T-Wise),W2_PI (CMR),W2_PI (T-Wise),W3_PI (CMR),W3_PI (T-Wise),W4_PI (CMR),W4_PI (T-Wise),W5_PI (CMR),W5_PI (T-Wise),Month PI (CMR),Month PI (T-Wise)
+1,December,2025,2025-12-01,"arul
+arunraj
+basil
+dipukumar
+gopakumar
+hamza
+hansraj
+jitendra
+karthik
+kavin
+marwan
+mohammad
+mohammed
+NA
+niyas
+pritthiraj
+rajesh
+Salman
+sandeep
+Santhosh
+siteengcivil4
+siteengmech4
+srinivas
+thambidurai",NA,NA,Sub contractor,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Location
+NA
+Nimr Flowline
+Nimr Location","CFD0803
+CGR0702
+FII-0502
+FRL-0504
+FWP-0702
+NA","Instrument
+Mechanical
+NA","Beam Pump_Rigging Crew
+Civil Support Crew - FOC Duct
+Grouting Crew
+Instrument Crew
+NA
+Welding Crew - FL",245.11,P8,P8,P8,P8,P8,P8,P4,P2,P2,P0,P8,P8
+5,December,2025,2025-12-01,NA,110754265,SHAJI,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,76.19,,,P3,P1,,,,,,,P3,P1
+9,December,2025,2025-12-01,arul,116020874,JEBARAJ,Sub contractor,Nimr Flowline,FWM-0501,Mechanical,Welding Crew - Misc,,,,,,,,NA,NA,,,NA,NA
+13,December,2025,2025-12-01,"mohamed
+NA",122253392,SULEMAN WAHEED RAJA,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,114.32,P8,P8,P7,P5,P8,P8,P8,P8,P1,P0,P8,P8
+17,December,2025,2025-12-01,pritthiraj,503186,HAYTHAM BAKHIT ALI AHMED GHAFARAM AL SHA,Sub contractor,Marmul Flowline,FCS-0402,Civil,FL Civil Sleeper (HS),,,,,,,,,,NA,NA,NA,NA
+21,December,2025,2025-12-01,"NA
+Salman",88645598,SAJID YOUNUS ,Sub contractor,"Marmul Flowline
+NA","CSI0602
+SSS-0401","Civil
+NA","FL Civil Sleeper (HS) 
+Survey Crew",,NA,NA,NA,NA,,,,,,,NA,NA
+25,December,2025,2025-12-01,hamza,916457,SHARMA BRIJESH,ATNM,Marmul Flowline,FCG-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW",30.77,,,P0,P0,,,,,,,P0,P0
+29,December,2025,2025-12-01,"arul
+NA",922922,ACHUTHAN PILLAI BIJUKUMAR CHARUVILA,ATNM,Nimr Flowline,"FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",82.29,,,P8,P8,,,,,P3,P1,P4,P2
+33,December,2025,2025-12-01,NA,954874,CHANDRA PRAKASH GANESH,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,91.61,P0,P0,P0,P0,P8,P8,P8,P8,P8,P8,P6,P4
+37,December,2025,2025-12-01,basil,967494,MURUGAN VIJAYAN,ATNM,Marmul Flowline,FRL-0502,General,Rigging Crew,,,,,,NA,NA,,,,,NA,NA
+41,December,2025,2025-12-01,NA,970597,DHIRAJ RAMESH PATEL,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,139.37,,,,,,,,,P8,P8,P8,P8
+45,December,2025,2025-12-01,NA,971119,SANDEEP KUMAR PALAPHALA,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,99.27,P8,P8,P8,P8,P0,P0,NA,NA,,,P7,P5
+49,December,2025,2025-12-01,"mohamed
+NA",971415,DINESHKUMAR SHANMUGAM,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",63.7,P0,P0,P0,P0,P0,P0,P2,P0,P0,P0,P0,P0
+53,December,2025,2025-12-01,NA,973301,MOHAMMED ISMAIL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,107.74,,,,,,,P8,P8,P3,P1,P8,P8
+57,January,2026,2026-01-01,basil,107283075,Mahmudul Hasam,Sub contractor,Marmul Flowline,FWP-0702,Mechanical,Welding Crew - FL,,,,,,,,,,NA,NA,NA,NA
+61,January,2026,2026-01-01,"mohamed
+NA",111017428,Abdul Hasseeb,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,136.33,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+65,January,2026,2026-01-01,"hamza
+niyas
+siteengcivil4",114435301,Malhi Rizwan Aslam,Sub contractor,Marmul Flowline,"FCE-0402
+FCG-0402
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",0.0,NA,NA,NA,NA,,,P0,P0,,,P0,P0
+69,January,2026,2026-01-01,karthik,116697293,Jamil Aslam,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,55.94,,,,,,,,,P0,P0,P0,P0
+73,January,2026,2026-01-01,mohammed,117973059,MUHAMMAD UZAIR,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",,NA,NA,NA,NA,,,,,,,NA,NA
+77,January,2026,2026-01-01,mohammed,125138889,Masood Shah,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,46.07,P0,P0,,,P0,P0,P0,P0,P4,P2,P0,P0
+81,January,2026,2026-01-01,arunraj,126641027,Muhammad Amjad,Sub contractor,Marmul Flowline,FWP-0702,Mechanical,Welding Crew - FL,55.1,,,P0,P0,NA,NA,NA,NA,NA,NA,P0,P0
+85,January,2026,2026-01-01,arul,131056591,Riyaz,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL",39.73,P0,P0,,,,,NA,NA,NA,NA,P0,P0
+89,January,2026,2026-01-01,pritthiraj,503186,HAYTHAM BAKHIT ALI AHMED GHAFARAM AL SHA,Sub contractor,Marmul Flowline,FCS-0402,Civil,FL Civil Sleeper (HS),,NA,NA,,,,,,,,,NA,NA
+93,January,2026,2026-01-01,mohammed,79477275,MD JASIM UDDIN ,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",742.14,P8,P8,P0,P0,P8,P8,P8,P8,P0,P0,P8,P8
+97,January,2026,2026-01-01,"niyas
+siteengcivil4",85780016,AJMAL KAMAL,Sub contractor,Marmul Flowline,"FCG-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - ROW",7.11,,,,,P2,P0,NA,NA,P0,P0,P0,P0
+101,January,2026,2026-01-01,"arunraj
+siteengmech4",910296,MAHESHWRI GOVIND HARSHI,ATNM,"Marmul Conversion with Flowline
+Marmul SNLP",FBH-0502,Mechanical,Box Up Crew - Hookup,101925.61,,,,,,,NA,NA,P8,P8,P8,P8
+105,January,2026,2026-01-01,basil,913174,DHARMENDRA KUMAR YADAV,ATNM,Marmul Flowline,FPA-0402,Mechanical,PE Pulling Crew,,,,NA,NA,,,,,,,NA,NA
+109,January,2026,2026-01-01,"arul
+karthik",918105,JADHAV VILAS BABU,ATNM,Nimr Flowline,"FPA-0402
+FPP-0506",Mechanical,PE Pulling Crew,155.14,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+113,January,2026,2026-01-01,"niyas
+pritthiraj",92299872,Azizul Hoque,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",50.74,,,P0,P0,NA,NA,NA,NA,NA,NA,P0,P0
+117,January,2026,2026-01-01,"arunraj
+NA",927190,DUDHNATH PRASAD .,ATNM,"Marmul Flowline
+NA",FRL-0502,General,Rigging Crew,169.9,,,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+121,January,2026,2026-01-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,"Marmul Flowline
+Marmul SNLP","FBH-0502
+FSI-0501",Mechanical,"Box Up Crew - Hookup
+Stopaqe Crew(ODC)",55.67,,,P8,P8,P0,P0,P0,P0,P0,P0,P0,P0
+125,January,2026,2026-01-01,"mohamed
+NA",954874,CHANDRA PRAKASH GANESH,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,101.07,P8,P8,P8,P7,P8,P8,P2,P0,P8,P8,P8,P7
+129,January,2026,2026-01-01,siteengcivil4,96440329,Asad Ali,Sub contractor,Marmul Flowline,LCC-0803,Civil,Cellar Crew,,NA,NA,NA,NA,,,,,,,NA,NA
+133,January,2026,2026-01-01,"basil
+siteengmech4",967494,MURUGAN VIJAYAN,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline",FRL-0502,General,Rigging Crew,-40.79,,,,,P0,P0,P8,P8,P8,P8,P0,P0
+137,January,2026,2026-01-01,"hamza
+Salman
+siteengcivil4",969027,RAJESH JAGAN MOHAN,ATNM,Marmul Flowline,"FCE-0402
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Cvil - Pre and Post Padding",93.66,NA,NA,P7,P5,NA,NA,P2,P0,,,P6,P4
+141,January,2026,2026-01-01,jitendra,970270,SHAILESH KUMAR TIWARI,ATNM,Marmul Flowline,FII-0502,Instrument,Instrument Crew,,,,,,NA,NA,,,,,NA,NA
+145,January,2026,2026-01-01,"karthik
+NA",970597,DHIRAJ RAMESH PATEL,ATNM,"Nimr Flowline
+Nimr SNLP","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",-22.97,P0,P0,P8,P8,,,P8,P8,,,P0,P0
+149,January,2026,2026-01-01,niyas,970835,RAMESHCHANDRA VISRAM PANCHANI,ATNM,Marmul Flowline,"FCE-0402
+FCG-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",144.77,,,,,P0,P0,P8,P8,P0,P0,P8,P8
+153,January,2026,2026-01-01,mohammed,971582,THARCIUS FRANKLIN RAJ MOSES,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",567.1,,,,,P0,P0,P0,P0,P8,P8,P8,P8
+157,January,2026,2026-01-01,"ahmed
+basil",972374,ADNAN HAQUE,ATNM,Marmul Flowline,"FBH-0502
+YWS-0602",Mechanical,"Box Up Crew - Hookup
+Welding Crew - Structure",13.77,,,P0,P0,P0,P0,P0,P0,P0,P0,P0,P0
+161,January,2026,2026-01-01,"arul
+mohammad
+NA",973618,ARIF HASSAN,ATNM,"Nimr Flowline
+Nimr SNLP",FII-0502,Instrument,Instrument Crew,164.67,NA,NA,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+165,February,2026,2026-02-01,"arul
+arunraj
+basil
+Gajendra
+gopakumar
+hansraj
+jaldeepsinh
+jitendra
+karthik
+kavin
+kunda
+mohamed
+mohammad
+mohammed
+murugesh
+NA
+niyas
+pritthiraj
+rajesh
+sandeep
+siteengcivil4
+siteengmech4
+srinivas
+suresh
+thambidurai",NA,NA,Sub contractor,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline
+Marmul Location
+Marmul Re-Open
+Marmul SNLP
+Marmul Yard
+NA
+Nimr Conversion without flowline
+Nimr Flowline
+Nimr LLRTP
+Nimr Location
+Nimr Non-Standard Well
+Nimr SNLP
+Nimr Yard","BPL-0302
+CBP0704
+CUL0604
+FBH-0502
+FCD-0402
+FCM-0401
+FCO-0502
+FCS-0402
+FHT-0503
+FII-0502
+FRL-0502
+FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+LCC-0803
+LCP-0511
+NA
+OLI-0501
+OLI-0702
+YCB-0600
+YPB-0500
+YPN-0500
+YPN0700
+YPP-0500
+YRL-0502
+YRT-0300
+YWS-0500
+YWS-0602
+YWW-0700","Civil
+Electrical
+General
+Instrument
+Mechanical
+NA
+YARD","Box Up Crew - Hookup
+Cellar Crew
+Civil Support Crew -  Drilling
+Civil Support Crew - Borrow Pit 
+Civil Unloading Crew - Borrow Pit
+FL Civil Sleeper (HS)
+Grouting Crew
+Hydro Test Crew
+Instrument Crew
+Manual Excavation crew
+NA
+OHL Crew ( Vendor&Tasnim)
+RDX Lowering Crew
+RDX Welding Crew
+Rigging Crew
+Str Welding Crew - Yard
+WD Location Const Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure
+Welding Crew - Yard",-294.33,P0,P0,P0,P0,P8,P8,P8,P8,,,P0,P0
+169,February,2026,2026-02-01,kavin,109493555,SYED KAMRAN ULHASSAN RIZVI,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,,,,,,NA,NA,NA,NA,,,NA,NA
+173,February,2026,2026-02-01,karthik,110962792,Muhammad Zishan Muhammad Aslam,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Structure",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+177,February,2026,2026-02-01,"niyas
+siteengcivil4",112756907,MUHAMMAD ZOHAIB,Sub contractor,Marmul Flowline,"FCE-0403
+FCO-0502",Civil,"Civil Support Crew - RDX / EDX / UG Excavation
+Grouting Crew",218.29,P8,P8,,,,,P8,P8,,,P8,P8
+181,February,2026,2026-02-01,karthik,116020874,JEBARAJ,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Structure",,,,NA,NA,NA,NA,,,,,NA,NA
+185,February,2026,2026-02-01,"niyas
+thambidurai",117920,MURUGAN IYANGAR,Sub contractor,"Marmul Flowline
+Marmul Location",SSS-0401,Civil,Survey Crew,12.57,NA,NA,P0,P0,NA,NA,NA,NA,,,P0,P0
+189,February,2026,2026-02-01,arunraj,120669665,Muhammad Awais,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc",48.55,NA,NA,P0,P0,P0,P0,P8,P8,,,P0,P0
+193,February,2026,2026-02-01,karthik,122075627,Muhammad Sadaqat Ali,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+Welding Crew - FL
+Welding Crew - Structure",89.53,,,P0,P0,P4,P2,P8,P8,,,P5,P3
+197,February,2026,2026-02-01,kavin,124568387,Usman Arshad,Sub contractor,Nimr Flowline,"FCE-0403
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW",,,,NA,NA,NA,NA,,,,,NA,NA
+201,February,2026,2026-02-01,kavin,126617838,Muhammad Asad Ali,Sub contractor,Nimr Non-Standard Well,FCP-0403,Civil,Cvil - Pre and Post Padding,,,,NA,NA,,,,,,,NA,NA
+205,February,2026,2026-02-01,kavin,127590164,Aleem Abbas,Sub contractor,Nimr Flowline,FCP-0403,Civil,Cvil - Pre and Post Padding,,,,,,,,NA,NA,,,NA,NA
+209,February,2026,2026-02-01,"arul
+karthik",131056591,Riyaz,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Structure",797.88,P8,P8,NA,NA,NA,NA,NA,NA,,,P8,P8
+213,February,2026,2026-02-01,kavin,135799029,TASSAWAR ABBAS,Sub contractor,Nimr Flowline,FCP-0403,Civil,Cvil - Pre and Post Padding,,,,,,NA,NA,,,,,NA,NA
+217,February,2026,2026-02-01,murugesh,503140,SALEH SALIM ALI THOAR,Sub contractor,Marmul Yard,FPP-0506,Mechanical,PE Pulling Crew,,,,NA,NA,NA,NA,,,,,NA,NA
+221,February,2026,2026-02-01,gopakumar,70877591,SOKKAIYA SUBBIAH,Sub contractor,Marmul Flowline,FEC-0502,"Electrical
+Instrument",Electrical Crew - Cable Laying,,,,NA,NA,,,,,,,NA,NA
+225,February,2026,2026-02-01,"niyas
+pritthiraj
+siteengcivil4",81587016,VIKRAMDAN MOHANDAN,Sub contractor,Marmul Flowline,"FCE-0302
+FCG-0402
+FCO-0502
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)
+Grouting Crew",65.05,P3,P1,P4,P2,P2,P0,P0,P0,,,P1,P0
+229,February,2026,2026-02-01,siteengcivil4,85780016,AJMAL KAMAL,Sub contractor,Marmul Flowline,"FCG-0402
+FCM-0401
+FCO-0502
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Grouting Crew
+Manual Excavation crew",64.69,P0,P0,P0,P0,,,P8,P8,,,P0,P0
+233,February,2026,2026-02-01,"arunraj
+siteengmech4",910296,MAHESHWRI GOVIND HARSHI,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul SNLP
+Marmul Yard
+NA","FBB-0503
+FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Beam Pump
+Box Up Crew - Hookup
+Box Up Crew - Precom
+Hydro Test Crew",75.66,P6,P4,P0,P0,NA,NA,P4,P2,,,P3,P1
+237,February,2026,2026-02-01,"basil
+murugesh
+siteengmech4",913143,DAS ANIMESH,ATNM,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline
+Marmul Yard","FBH-0502
+FHT-0503
+FPA-0402
+FWM-0501
+YWS-0500","Mechanical
+YARD","Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew
+Str Welding Crew - Yard
+Welding Crew - Misc",415.98,P8,P8,P0,P0,P8,P8,P8,P8,,,P8,P8
+241,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",916457,SHARMA BRIJESH,ATNM,"Marmul Flowline
+Marmul Re-Open
+Marmul SNLP","FCE-0302
+FCE-0402
+FCG-0402
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)",47.23,P0,P0,P0,P0,P0,P0,P8,P8,,,P0,P0
+245,February,2026,2026-02-01,"arul
+karthik",918105,JADHAV VILAS BABU,ATNM,Nimr Flowline,"FPA-0402
+FPP-0506",Mechanical,PE Pulling Crew,167.31,P8,P8,P8,P8,,,,,,,P8,P8
+249,February,2026,2026-02-01,karthik,922102,KATUKURI RAKESH,ATNM,Nimr Flowline,FSI-0501,Mechanical,Stopaqe Crew(ODC),317.46,,,P8,P8,,,,,,,P8,P8
+253,February,2026,2026-02-01,kavin,927042,JEGAN BRITTO YESU RATHINAM,ATNM,Nimr Flowline,"FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+257,February,2026,2026-02-01,karthik,927522,SUDHEENDRAN SANIL .,ATNM,Nimr Flowline,FPA-0402,Mechanical,PE Pulling Crew,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+261,February,2026,2026-02-01,arunraj,938134,ERULAPPASAMY KARUPPASAMY,ATNM,Marmul Flowline,FPF-0503,Mechanical,PE Fusion Crew,-12.93,P0,P0,P0,P0,P8,P8,P6,P4,,,P0,P0
+265,February,2026,2026-02-01,"arul
+NA
+rajesh",945195,PRATIKKUMAR AMRUTBHAI PATEL,ATNM,Nimr Flowline,"OLI-0501
+OLI-0702",Electrical,OHL Crew ( Vendor&Tasnim),88.68,P3,P1,P7,P5,,,,,,,P5,P3
+269,February,2026,2026-02-01,"jaldeepsinh
+jitendra",961556,RAJANIKANT DALSUKHBHAI TANDEL,ATNM,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline
+Marmul SNLP",FII-0502,Instrument,Instrument Crew,105.08,P0,P0,P8,P8,P8,P8,P8,P8,,,P8,P8
+273,February,2026,2026-02-01,"arul
+karthik",967399,SHAMSHAD ALAM,ATNM,Nimr Flowline,FPF-0503,Mechanical,PE Fusion Crew,142.36,P8,P8,P8,P8,NA,NA,NA,NA,,,P8,P8
+277,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",967568,GHULAM HAQQUANI,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Re-Open
+Marmul Yard","CBP0704
+FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Borrow Pit 
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",-200.0,,,P0,P0,NA,NA,NA,NA,,,P0,P0
+281,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",969027,RAJESH JAGAN MOHAN,ATNM,Marmul Flowline,"FCE-0302
+FCE-0402
+FCG-0402
+FCM-0401
+FCM-0501
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+Manual Excavation crew",59.51,P0,P0,P0,P0,P8,P8,P0,P0,,,P0,P0
+285,February,2026,2026-02-01,kavin,969894,SHARUKH UDDIN SEKH,ATNM,"Nimr Conversion without flowline
+Nimr Flowline","FCE-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Cvil - Pre and Post Padding",,,,,,NA,NA,NA,NA,,,NA,NA
+289,February,2026,2026-02-01,"arunraj
+basil
+siteengmech4",970560,JAYESH ARVINDBHAI SINDHAL,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Re-Open","FBH-0502
+FHT-0503
+FPA-0402",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew",225.19,P8,P8,P8,P8,P8,P8,P8,P8,,,P8,P8
+293,February,2026,2026-02-01,"arunraj
+siteengmech4",970631,RAHUL KUMAR,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul SNLP
+Marmul Yard","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",124.43,P0,P0,P6,P4,P8,P8,P8,P8,,,P8,P8
+297,February,2026,2026-02-01,"mohammed
+niyas
+pritthiraj",970835,RAMESHCHANDRA VISRAM PANCHANI,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline","FCE-0302
+FCE-0402
+FCG-0402
+FCM-0401
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Manual Excavation crew",195.73,P8,P8,P0,P0,P8,P8,P8,P8,,,P8,P8
+301,February,2026,2026-02-01,NA,971236,JOEL MOSES JOSEPH CELVYN .,ATNM,NA,YWW-0500,YARD,Welding Crew - Yard,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+305,February,2026,2026-02-01,"karthik
+NA",971487,JEGAN THANGARAJ,ATNM,"NA
+Nimr Yard",YWW-0500,YARD,Welding Crew - Yard,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+309,February,2026,2026-02-01,"jaldeepsinh
+jitendra
+NA",972173,PRINANKBHAI LALLUBHAI PATEL,ATNM,"Marmul Conversion without flowline
+Marmul Flowline
+Marmul Re-Open",FII-0502,Instrument,Instrument Crew,248.05,P8,P8,P8,P8,P8,P8,P8,P8,,,P8,P8
+313,February,2026,2026-02-01,mohammed,97240139,MUHAMMAD WASIF,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,75.03,P0,P0,P0,P0,P0,P0,P8,P8,,,P3,P1
+317,February,2026,2026-02-01,NA,973618,ARIF HASSAN,ATNM,Nimr Flowline,FII-0502,Instrument,Instrument Crew,,NA,NA,,,,,,,,,NA,NA
+321,February,2026,2026-02-01,niyas,98615196,Mahmmed Saifallah,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCP-0403
+FCR-0303
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Grading
+FL Civil Sleeper (HS)",146.88,P0,P0,P8,P8,P8,P8,P0,P0,,,P8,P8
+325,March,2026,2026-03-01,karthik,107562166,AMIT KUMAR SHARMA ,Sub contractor,Nimr Flowline,FRL-0502,General,Rigging Crew,159.75,NA,NA,,,P8,P8,NA,NA,,,P8,P8
+329,March,2026,2026-03-01,karthik,110754265,SHAJI,Sub contractor,Nimr Flowline,"FWM-0501
+YWS-0602",Mechanical,"Welding Crew - Misc
+Welding Crew - Structure",49.13,,,P0,P0,P0,P0,NA,NA,,,P0,P0
+333,March,2026,2026-03-01,mohammed,112563873,REZAUL HASAN,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,401.76,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+337,March,2026,2026-03-01,"pritthiraj
+siteengcivil4",115199016,MD SAMIULLAH ANSARI,Sub contractor,Marmul Flowline,"FCC-0501
+FCE-0302
+FCE-0403
+FCG-0402
+FCM-0401
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Concrete_Civil Support Crew
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Manual Excavation crew",19963.01,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+341,March,2026,2026-03-01,arunraj,116960261,JAFAR ISLAM SIDDIQUE,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",150.11,P7,P5,P8,P8,P8,P8,,,,,P8,P8
+345,March,2026,2026-03-01,arunraj,120669665,Muhammad Awais,Sub contractor,Marmul Flowline,"FWP-0702
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+Welding Crew - FL
+Welding Crew - Structure",95.74,P0,P0,P8,P8,NA,NA,,,,,P7,P5
+349,March,2026,2026-03-01,karthik,121982248,UMAIR,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+Welding Crew - FL
+Welding Crew - Structure",158.97,P8,P8,NA,NA,P6,P4,,,,,P8,P8
+353,March,2026,2026-03-01,karthik,123778978,Usama Javed,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,,NA,NA,,,,,,,,,NA,NA
+357,March,2026,2026-03-01,kavin,126617838,Muhammad Asad Ali,Sub contractor,Nimr Flowline,FCS-0402,Civil,FL Civil Sleeper (HS),,,,,,NA,NA,,,,,NA,NA
+361,March,2026,2026-03-01,karthik,127579243,MD ARMAN HUSSAIN,Sub contractor,Nimr Flowline,FRL-0502,General,Rigging Crew,161.03,,,P8,P8,NA,NA,NA,NA,,,P8,P8
+365,March,2026,2026-03-01,"gopakumar
+srinivas",130760225,MD Abu Bashar,Sub contractor,"Marmul Flowline
+NA","FEC-0502
+FEC-0602
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",12105.58,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+369,March,2026,2026-03-01,gopakumar,133040286,Muhammad Ishfaq,Sub contractor,Marmul Flowline,FEL-0501,Electrical,Electrical Crew - LV Cable Termination,,NA,NA,,,,,,,,,NA,NA
+373,March,2026,2026-03-01,murugesh,503117,AMMAR SAIF NASSER ABDULLAH AL RASHDI,Sub contractor,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,,,,,,,,,NA,NA
+377,March,2026,2026-03-01,"pritthiraj
+siteengcivil4",503184,GHAZI AHMED MOHAMMED RAFIT,Sub contractor,"Marmul Flowline
+NA","FCE-0302
+FCE-0402
+FCG-0402
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)",438.77,,,P8,P8,P0,P0,,,,,P8,P8
+381,March,2026,2026-03-01,pritthiraj,77605175,Nazmul Hasan,Sub contractor,NA,"FCE-0403
+FCG-0402
+FCM-0401
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)
+Manual Excavation crew",,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+385,March,2026,2026-03-01,kavin,82745376,Muhammad Yasir Khan,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,82.32,,,P3,P1,P4,P2,,,,,P4,P2
+389,March,2026,2026-03-01,siteengcivil4,90176501,Naeem Masih,Sub contractor,Marmul Flowline,"FCE-0402
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Cvil - Pre and Post Padding",-2.98,P0,P0,P0,P0,P0,P0,,,,,P0,P0
+393,March,2026,2026-03-01,"basil
+siteengmech4",911341,UMA SHANKAR YADAVA,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Yard","YWS-0602
+YWW-0500","Mechanical
+YARD","Welding Crew - Structure
+Welding Crew - Yard",62.18,NA,NA,P0,P0,P3,P1,NA,NA,NA,NA,P0,P0
+397,March,2026,2026-03-01,"arunraj
+basil",913174,DHARMENDRA KUMAR YADAV,ATNM,"Marmul Flowline
+NA","FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",66.74,P1,P0,P2,P0,P0,P0,,,,,P1,P0
+401,March,2026,2026-03-01,"NA
+rajesh",917290,KARKADA PAUL BARNABAS,ATNM,Nimr Flowline,"FEC-0502
+FEH-0601
+FEL-0501
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",214.62,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+405,March,2026,2026-03-01,karthik,922102,KATUKURI RAKESH,ATNM,Nimr Flowline,FSI-0501,Mechanical,Stopaqe Crew(ODC),85.27,NA,NA,NA,NA,P5,P3,NA,NA,,,P5,P3
+409,March,2026,2026-03-01,"arunraj
+basil
+siteengmech4",927123,SANJAY YADAV .,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline","FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",-27.96,P0,P0,P4,P2,P2,P0,NA,NA,,,P0,P0
+413,March,2026,2026-03-01,kavin,927806,BAKRUDEEN AMIRUDEEN,ATNM,Nimr Flowline,FCP-0403,Civil,Cvil - Pre and Post Padding,47485.8,,,,,P8,P8,,,,,P8,P8
+417,March,2026,2026-03-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,"Marmul Flowline
+Marmul SNLP
+Marmul Yard","FSI-0501
+YWW-0700","Mechanical
+YARD","Stopaqe Crew(ODC)
+Welding Crew - Yard",104.84,P0,P0,P8,P8,P8,P8,NA,NA,NA,NA,P8,P7
+421,March,2026,2026-03-01,mohamed,954874,CHANDRA PRAKASH GANESH,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,64.95,P2,P0,P0,P0,P7,P5,,,,,P0,P0
+425,March,2026,2026-03-01,jitendra,961556,RAJANIKANT DALSUKHBHAI TANDEL,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+NA",FII-0502,Instrument,Instrument Crew,138.05,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+429,March,2026,2026-03-01,karthik,967399,SHAMSHAD ALAM,ATNM,Nimr Flowline,"FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+433,March,2026,2026-03-01,pritthiraj,967568,GHULAM HAQQUANI,ATNM,"Marmul Conversion with Flowline
+Marmul Conversion without flowline","FCE-0402
+FCG-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+437,March,2026,2026-03-01,pritthiraj,969027,RAJESH JAGAN MOHAN,ATNM,Marmul Flowline,"FCE-0302
+FCE-0402
+FCG-0402
+FCM-0401
+FCM-0501
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+Manual Excavation crew",79.4,P0,P0,P8,P8,P0,P0,,,,,P3,P1
+441,March,2026,2026-03-01,kavin,969894,SHARUKH UDDIN SEKH,ATNM,Nimr Flowline,"FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",24.25,,,NA,NA,P0,P0,,,,,P0,P0
+445,March,2026,2026-03-01,"arunraj
+basil
+siteengmech4",970560,JAYESH ARVINDBHAI SINDHAL,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Yard
+NA","FBH-0502
+FHT-0503
+FPA-0402",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew",206.27,P8,P8,P8,P8,P4,P2,NA,NA,NA,NA,P8,P8
+449,March,2026,2026-03-01,karthik,970597,DHIRAJ RAMESH PATEL,ATNM,Nimr Flowline,"FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",90.52,P8,P8,NA,NA,P4,P2,,,,,P6,P4
+453,March,2026,2026-03-01,karthik,970688,LAVLESH KUMAR SINGH,ATNM,Nimr Flowline,"FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+457,March,2026,2026-03-01,niyas,970867,REJISH KUMAR CHENAMGARA KUMARAN,ATNM,Marmul Flowline,"FCE-0302
+FCG-0402
+FCM-0501
+FCO-0502
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Grouting Crew",55.88,P0,P0,P8,P8,P0,P0,,,,,P0,P0
+461,March,2026,2026-03-01,mohamed,971404,MOHAMMAD IRSHAD .,ATNM,Nimr Yard,"YCC-0600
+YCP-0500",NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+465,March,2026,2026-03-01,mohammed,971582,THARCIUS FRANKLIN RAJ MOSES,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",357.9,P8,P8,P0,P0,P0,P0,,,,,P8,P8
+469,March,2026,2026-03-01,murugesh,972295,RAJA KESAVAN,ATNM,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+473,March,2026,2026-03-01,niyas,972952,MOHAMED ALI ALLI KHADER MOHAMED,ATNM,Marmul Flowline,"FCE-0302
+FCE-0402
+FCE-0403
+FCG-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",55.87,P0,P0,P0,P0,P1,P0,,,,,P0,P0
+477,March,2026,2026-03-01,kavin,977028,Sathiyamoorthy,ATNM,Nimr Flowline,"FCE-0302
+FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",56.09,,,P0,P0,P1,P0,,,,,P0,P0
+481,April,2026,2026-04-01,murugesh,503162,WATHAB MAHKOOM ALI AL HINAI,Sub contractor,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,,,,,,,,,NA,NA
+485,April,2026,2026-04-01,karthik,927003,RAJENDRA CHUDHARY,ATNM,Nimr Yard,YRL-0502,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+489,April,2026,2026-04-01,basil,970560,JAYESH ARVINDBHAI SINDHAL,ATNM,Marmul Yard,FHT-0503,Mechanical,Hydro Test Crew,,NA,NA,NA,NA,,,,,,,NA,NA
+493,May,2026,2026-05-01,karthik,927003,RAJENDRA CHUDHARY,ATNM,Nimr Yard,YRL-0502,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+497,June,2026,2026-06-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+501,August,2026,2026-08-01,suresh,NA,NA,Sub contractor,Nimr Yard,NA,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+505,October,2026,2026-10-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+509,February,2027,2027-02-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+4,December,2025,2025-12-01,"karthik
+NA",109687704,VIKASH GUPTA,Sub contractor,Nimr Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",38.82,NA,NA,P0,P0,,,,,,,P0,P0
+8,December,2025,2025-12-01,mohammed,112563873,REZAUL HASAN,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,448.81,,,,,P8,P8,,,P8,P8,P8,P8
+12,December,2025,2025-12-01,arul,118933668,HAFIZ MUHAMMAD ZESHAN SALEEM,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,,,,,,,,NA,NA,,,NA,NA
+16,December,2025,2025-12-01,mohammed,132280393,RAJEEV PILLAI SADASIVAN,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,,,,,,NA,NA,,,,,NA,NA
+20,December,2025,2025-12-01,kavin,82745376,Muhammad Yasir Khan,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,266.67,,,P8,P8,,,,,,,P8,P8
+24,December,2025,2025-12-01,NA,912392,DHANANI JAGDISH DEVJI,ATNM,NA,CSI0602,NA,FL Civil Sleeper (HS) ,,,,,,NA,NA,NA,NA,,,NA,NA
+28,December,2025,2025-12-01,arul,918259,RAJ DHARMESHKUMAR GANPATSINH,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,100.25,,,P8,P8,,,,,P7,P5,P8,P7
+32,December,2025,2025-12-01,Salman,95067436,PANKAJ KUMAR ,Sub contractor,Marmul Flowline,SSS-0401,Civil,Survey Crew,,NA,NA,,,,,,,,,NA,NA
+36,December,2025,2025-12-01,NA,967401,MOHAMMAD GOUSE .,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",-12.24,P0,P0,P0,P0,P0,P0,P5,P3,P8,P8,P0,P0
+40,December,2025,2025-12-01,"arul
+NA",969662,UGANDHAR REDDY DURGASI,ATNM,Nimr Flowline,FSI-0501,Mechanical,Stopaqe Crew(ODC),139.09,,,,,P1,P0,P2,P0,P8,P8,P8,P8
+44,December,2025,2025-12-01,pritthiraj,970835,RAMESHCHANDRA VISRAM PANCHANI,ATNM,Marmul Flowline,FCP-0403,Civil,Cvil - Pre and Post Padding,,NA,NA,,,,,,,,,NA,NA
+48,December,2025,2025-12-01,NA,971275,MITHUN BARIK,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,139.51,P1,P0,P8,P8,P8,P8,,,,,P8,P8
+52,December,2025,2025-12-01,mohammed,97240139,MUHAMMAD WASIF,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,194.86,,,,,P8,P8,,,P0,P0,P8,P8
+56,January,2026,2026-01-01,"ahmed
+arul
+arunraj
+basil
+dipukumar
+Gajendra
+gopakumar
+hamza
+jaldeepsinh
+jitendra
+karthik
+kavin
+marwan
+mohamed
+mohammad
+mohammed
+NA
+niyas
+pritthiraj
+rajesh
+Salman
+sandeep
+siteengcivil4
+siteengmech4
+srinivas
+thambidurai",NA,NA,Sub contractor,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline
+Marmul Location
+Marmul SNLP
+NA
+Nimr Conversion without flowline
+Nimr Flowline
+Nimr Location
+Nimr SNLP","FRL-0502
+FRL-0504
+FWM-0501
+FWP-0702
+LCP-0511
+NA
+YWS-0602","Civil
+General
+Mechanical
+NA","Beam Pump_Rigging Crew
+NA
+Rigging Crew
+WD Location Const Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",46.69,P0,P0,P0,P0,P0,P0,P8,P8,P0,P0,P0,P0
+60,January,2026,2026-01-01,arul,110962792,Muhammad Zishan Muhammad Aslam,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,56.92,P1,P0,P0,P0,,,P0,P0,,,P0,P0
+64,January,2026,2026-01-01,niyas,112756907,MUHAMMAD ZOHAIB,Sub contractor,Marmul Flowline,"FCO-0502
+FCP-0403",Civil,"Cvil - Pre and Post Padding
+Grouting Crew",,,,,,,,NA,NA,NA,NA,NA,NA
+68,January,2026,2026-01-01,niyas,116224173,Mohammed Adil,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCP-0403
+FCR-0303
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Grading",97.71,,,NA,NA,P0,P0,P7,P5,P0,P0,P7,P5
+72,January,2026,2026-01-01,arul,117933803,AMEER JAYACHANDRAN,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,,,,,,,,NA,NA,,,NA,NA
+76,January,2026,2026-01-01,basil,123073422,AFTAB ALAM,Sub contractor,Marmul Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",123.63,NA,NA,P0,P0,P8,P8,NA,NA,NA,NA,P8,P8
+80,January,2026,2026-01-01,"niyas
+siteengcivil4",126456572,Dishant Sharma,Sub contractor,Marmul Flowline,"FCG-0402
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",,,,,,,,NA,NA,,,NA,NA
+84,January,2026,2026-01-01,srinivas,130760225,MD Abu Bashar,Sub contractor,Marmul Flowline,FEC-0602,Electrical,Electrical Crew - Cable Laying,,,,NA,NA,,,,,,,NA,NA
+88,January,2026,2026-01-01,siteengcivil4,503176,HAITHAM SALEEM NASIB BAIT FARAJ,Sub contractor,Marmul Flowline,"FCE-0302
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",31.65,,,,,,,NA,NA,P0,P0,P0,P0
+92,January,2026,2026-01-01,siteengcivil4,77605175,Nazmul Hasan,Sub contractor,Marmul Flowline,"FCE-0403
+FCP-0403",Civil,"Civil Support Crew - RDX / EDX / UG Excavation
+Cvil - Pre and Post Padding",,,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+96,January,2026,2026-01-01,arunraj,81833056,SHABU THANKACHAN,Sub contractor,Marmul Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",105.04,,,,,P0,P0,NA,NA,P8,P8,P8,P8
+100,January,2026,2026-01-01,"mohamed
+NA",907960,JETHALAL SHIVJI RABADIYA .,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,118.87,P8,P8,P1,P0,P8,P8,P8,P8,P1,P0,P8,P8
+104,January,2026,2026-01-01,basil,913143,DAS ANIMESH,ATNM,Marmul Flowline,FHT-0503,Mechanical,Hydro Test Crew,77.7,,,,,,,,,P3,P1,P3,P1
+108,January,2026,2026-01-01,"arul
+NA
+rajesh",917290,KARKADA PAUL BARNABAS,ATNM,"Nimr Flowline
+Nimr SNLP","FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",189.03,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+112,January,2026,2026-01-01,NA,922922,ACHUTHAN PILLAI BIJUKUMAR CHARUVILA,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,96.62,P7,P5,,,,,NA,NA,NA,NA,P7,P5
+116,January,2026,2026-01-01,basil,927189,SURYA NATH YADAV,ATNM,Marmul Flowline,"FBH-0502
+YWS-0602",Mechanical,"Box Up Crew - Hookup
+Welding Crew - Structure",162.58,,,,,P0,P0,P8,P8,P1,P0,P8,P8
+120,January,2026,2026-01-01,"arul
+NA
+rajesh",936707,PRAVEEN KUMAR .,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FER-0703
+FET-0501
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing
+OHL Crew ( Vendor&Tasnim)",594.6,P8,P8,P8,P8,P8,P8,P8,P8,P7,P5,P8,P8
+124,January,2026,2026-01-01,"arul
+NA
+rajesh",945195,PRATIKKUMAR AMRUTBHAI PATEL,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FER-0703
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+OHL Crew ( Vendor&Tasnim)",75.59,P0,P0,P0,P0,P5,P3,P7,P5,P8,P8,P3,P1
+128,January,2026,2026-01-01,"jaldeepsinh
+jitendra",961556,RAJANIKANT DALSUKHBHAI TANDEL,ATNM,"Marmul Flowline
+Marmul SNLP",FII-0502,Instrument,Instrument Crew,75.11,,,P3,P1,P0,P0,P8,P8,P0,P0,P3,P1
+132,January,2026,2026-01-01,"mohamed
+NA",967401,MOHAMMAD GOUSE .,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",-405.33,P0,P0,P0,P0,P0,P0,P0,P0,P8,P8,P0,P0
+136,January,2026,2026-01-01,"arul
+NA
+rajesh",968734,BIBHUTI BHUSAN BHUNIA,ATNM,"Nimr Flowline
+Nimr SNLP","FEC-0502
+FEC-0602
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",254.1,P8,P8,P8,P8,P8,P7,P8,P8,P0,P0,P8,P8
+140,January,2026,2026-01-01,"hamza
+siteengcivil4",969896,ARCHISMAN GHOSH,ATNM,"Marmul Flowline
+Marmul SNLP","FCE-0402
+FCR-0303","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+FL Civil Grading",34.57,,,,,P0,P0,,,P0,P0,P0,P0
+144,January,2026,2026-01-01,"ahmed
+arunraj
+basil
+siteengmech4",970560,JAYESH ARVINDBHAI SINDHAL,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline","FBH-0502
+FHT-0503
+FPA-0402",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew",301.79,,,P0,P0,P8,P8,P8,P8,P8,P8,P8,P8
+148,January,2026,2026-01-01,"mohamed
+NA",970685,MOHAMMED SAHADUL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,89.24,P0,P0,,,P0,P0,P8,P8,P1,P0,P5,P3
+152,January,2026,2026-01-01,"mohamed
+NA",971415,DINESHKUMAR SHANMUGAM,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",39.78,P5,P3,P0,P0,P6,P4,P3,P1,P7,P5,P0,P0
+156,January,2026,2026-01-01,karthik,972323,NIKHIL CHEMMALATH DHARMAJAN,ATNM,Nimr SNLP,FBH-0502,Mechanical,Box Up Crew - Hookup,116.96,,,,,NA,NA,P8,P8,,,P8,P8
+160,January,2026,2026-01-01,"mohamed
+NA",973301,MOHAMMED ISMAIL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,74.69,P8,P8,P0,P0,P2,P0,,,,,P2,P0
+164,January,2026,2026-01-01,niyas,98615196,Mahmmed Saifallah,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCP-0403
+FCR-0303
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Grading",97.71,,,NA,NA,P0,P0,P7,P5,P0,P0,P7,P5
+168,February,2026,2026-02-01,karthik,107562166,AMIT KUMAR SHARMA ,Sub contractor,Nimr Flowline,FRL-0502,General,Rigging Crew,,,,,,NA,NA,,,,,NA,NA
+172,February,2026,2026-02-01,karthik,110754265,SHAJI,Sub contractor,Nimr Flowline,FWM-0501,Mechanical,Welding Crew - Misc,-171.01,P0,P0,P0,P0,P0,P0,,,,,P0,P0
+176,February,2026,2026-02-01,mohammed,112563873,REZAUL HASAN,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",834.4,P8,P8,P0,P0,P0,P0,P8,P8,,,P8,P8
+180,February,2026,2026-02-01,pritthiraj,115199016,MD SAMIULLAH ANSARI,Sub contractor,Marmul Flowline,"FCO-0502
+FCP-0403
+FCS-0402",Civil,"Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Grouting Crew",,,,,,,,NA,NA,,,NA,NA
+184,February,2026,2026-02-01,arunraj,116960261,JAFAR ISLAM SIDDIQUE,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",48.48,P0,P0,P0,P0,P0,P0,P1,P0,,,P0,P0
+188,February,2026,2026-02-01,karthik,118933668,HAFIZ MUHAMMAD ZESHAN SALEEM,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Structure",38.5,,,NA,NA,P0,P0,P0,P0,,,P0,P0
+192,February,2026,2026-02-01,karthik,121982248,UMAIR,Sub contractor,Nimr Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",46.28,,,NA,NA,P0,P0,NA,NA,,,P0,P0
+196,February,2026,2026-02-01,karthik,123778978,Usama Javed,Sub contractor,Nimr Flowline,"FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - Structure",142.86,,,,,P8,P8,NA,NA,,,P8,P8
+200,February,2026,2026-02-01,"niyas
+siteengcivil4",126456572,Dishant Sharma,Sub contractor,Marmul Flowline,"FCP-0403
+FCS-0402",Civil,"Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",,NA,NA,NA,NA,,,,,,,NA,NA
+204,February,2026,2026-02-01,niyas,126940039,MAJID ABBAS,Sub contractor,Marmul Flowline,"FCM-0401
+FCP-0403
+FCR-0303
+FCS-0402",Civil,"Cvil - Pre and Post Padding
+FL Civil Grading
+FL Civil Sleeper (HS)
+Manual Excavation crew",,,,,,,,NA,NA,,,NA,NA
+208,February,2026,2026-02-01,"gopakumar
+srinivas",130760225,MD Abu Bashar,Sub contractor,Marmul Flowline,"FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination",0.0,P0,P0,NA,NA,NA,NA,NA,NA,,,P0,P0
+212,February,2026,2026-02-01,gopakumar,133040286,Muhammad Ishfaq,Sub contractor,Marmul Flowline,FEC-0602,Electrical,Electrical Crew - Cable Laying,,,,,,NA,NA,,,,,NA,NA
+216,February,2026,2026-02-01,murugesh,503109,RASHID ABDULLAH SEIF NASSER AL BARWANI,Sub contractor,Marmul Yard,FPP-0506,Mechanical,PE Pulling Crew,,,,NA,NA,,,NA,NA,,,NA,NA
+220,February,2026,2026-02-01,"mohammed
+niyas
+pritthiraj",503184,GHAZI AHMED MOHAMMED RAFIT,Sub contractor,"Marmul Conversion with Flowline
+Marmul Flowline","FCE-0402
+FCG-0402
+FCM-0401
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Manual Excavation crew",,,,NA,NA,NA,NA,,,,,NA,NA
+224,February,2026,2026-02-01,mohammed,79477275,MD JASIM UDDIN ,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,75.03,P0,P0,P0,P0,P0,P0,P8,P8,,,P3,P1
+228,February,2026,2026-02-01,kavin,82826192,MAHMOOD ASIF,Sub contractor,Nimr Flowline,"FCE-0403
+FCP-0403",Civil,"Civil Support Crew - RDX / EDX / UG Excavation
+Cvil - Pre and Post Padding",,,,NA,NA,NA,NA,,,,,NA,NA
+232,February,2026,2026-02-01,"mohamed
+NA",907960,JETHALAL SHIVJI RABADIYA .,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,93.82,P8,P8,P4,P2,P0,P0,P3,P1,,,P6,P4
+236,February,2026,2026-02-01,kavin,913082,RAMESH KUMAR,ATNM,Nimr LLRTP,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,,,,,,NA,NA,NA,NA,,,NA,NA
+240,February,2026,2026-02-01,suresh,914700,SINGH RAJESH KUMAR,ATNM,Nimr Yard,YWS-0500,YARD,Str Welding Crew - Yard,,,,,,,,NA,NA,,,NA,NA
+244,February,2026,2026-02-01,karthik,917501,CHAUHAN BHARAT,ATNM,Nimr Non-Standard Well,"FWP-0702
+FWR-0803",Mechanical,"RDX Lowering Crew
+Welding Crew - FL",,,,NA,NA,,,,,,,NA,NA
+248,February,2026,2026-02-01,mohammad,922020,ANSARI MOHAMMAD IRSHAD,ATNM,"Nimr Conversion without flowline
+Nimr Flowline",FII-0502,Instrument,Instrument Crew,191.64,P8,P8,P0,P0,P8,P8,P8,P8,,,P8,P8
+252,February,2026,2026-02-01,karthik,923252,MANOJ KUMAR YADAV .,ATNM,Nimr Flowline,"FPA-0402
+FPP-0506",Mechanical,PE Pulling Crew,,,,NA,NA,,,,,,,NA,NA
+256,February,2026,2026-02-01,arunraj,927190,DUDHNATH PRASAD .,ATNM,"Marmul Flowline
+Marmul SNLP","FBB-0503
+FRL-0502","General
+Mechanical","Box Up Crew - Beam Pump
+Box Up Crew - Precom
+Rigging Crew",-5094.82,P8,P8,P0,P0,P8,P8,P8,P8,,,P0,P0
+260,February,2026,2026-02-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,"Marmul Flowline
+Marmul SNLP","FPA-0402
+FSI-0501
+FWR-0602",Mechanical,"PE Pulling Crew
+RDX Welding Crew
+Stopaqe Crew(ODC)",29.6,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+264,February,2026,2026-02-01,"arunraj
+basil",945056,MINTU YADAV,ATNM,Marmul Flowline,"FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",78.43,P5,P3,P7,P5,P3,P1,P0,P0,,,P3,P1
+268,February,2026,2026-02-01,"gopakumar
+srinivas",96079045,Syed Amjad Zia,Sub contractor,Marmul Flowline,"FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination",0.0,P0,P0,NA,NA,NA,NA,NA,NA,,,P0,P0
+272,February,2026,2026-02-01,basil,967281,DUNA CHELAPATI RAO,ATNM,Marmul Flowline,FHT-0503,Mechanical,Hydro Test Crew,109.59,,,,,,,P8,P8,,,P8,P8
+276,February,2026,2026-02-01,"basil
+siteengmech4",967510,RAVISH KUMAR MISHRA,ATNM,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline","FBH-0502
+FHT-0503
+FPA-0402",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew",158.82,P8,P8,P8,P8,P8,P8,P8,P8,,,P8,P8
+280,February,2026,2026-02-01,kavin,968897,AUGUSTIN JOSEPH,ATNM,"Nimr Flowline
+Nimr Non-Standard Well","FCE-0302
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",79.36,P8,P8,NA,NA,P0,P0,,,,,P3,P1
+284,February,2026,2026-02-01,karthik,969662,UGANDHAR REDDY DURGASI,ATNM,"Nimr Flowline
+Nimr Non-Standard Well",FSI-0501,Mechanical,Stopaqe Crew(ODC),106.23,NA,NA,NA,NA,P4,P2,P8,P8,,,P8,P8
+288,February,2026,2026-02-01,"gopakumar
+srinivas",970515,VIRAJ .,ATNM,"Marmul Conversion without flowline
+Marmul Flowline
+Marmul Re-Open","FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",128.03,P8,P8,P1,P0,P2,P0,P8,P8,,,P8,P8
+292,February,2026,2026-02-01,karthik,970597,DHIRAJ RAMESH PATEL,ATNM,"Nimr Conversion without flowline
+Nimr Flowline
+Nimr Yard","FBH-0502
+FHT-0503
+YHT-0500","Mechanical
+NA","Box Up Crew - Hookup
+Hydro Test Crew
+NA",87.19,NA,NA,,,P8,P8,P2,P0,,,P5,P3
+296,February,2026,2026-02-01,"karthik
+NA",970777,DHARMENDRA BALUBHAI DHOKIYA,ATNM,"NA
+Nimr Yard",YPP-0500,YARD,NA,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+300,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",970957,UMESH PRASAD .,ATNM,Marmul Flowline,"FCE-0302
+FCE-0402
+FCG-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",129.86,P0,P0,P8,P8,P0,P0,P0,P0,,,P8,P8
+304,February,2026,2026-02-01,"mohamed
+NA",971415,DINESHKUMAR SHANMUGAM,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",100.27,P5,P3,P8,P8,P8,P8,P5,P3,,,P8,P7
+308,February,2026,2026-02-01,mohamed,972048,SAKKAMMAL DURAI CHELLAPANDIAN,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,132.61,P6,P4,P8,P8,P8,P8,P8,P8,,,P8,P8
+312,February,2026,2026-02-01,"basil
+siteengmech4",972374,ADNAN HAQUE,ATNM,"Marmul Flowline
+Marmul Re-Open","FBB-0503
+FBH-0502
+FHT-0503
+YWS-0602",Mechanical,"Box Up Crew - Beam Pump
+Box Up Crew - Hookup
+Box Up Crew - Precom
+Hydro Test Crew
+Welding Crew - Structure",-16.78,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+316,February,2026,2026-02-01,mohamed,973301,MOHAMMED ISMAIL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,-143.73,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+320,February,2026,2026-02-01,karthik,98076316,BIPIN KUMAR SUKLA ,Sub contractor,Nimr Flowline,YWS-0602,Mechanical,Welding Crew - Structure,332.31,,,,,,,P8,P8,,,P8,P8
+324,March,2026,2026-03-01,basil,107283075,Mahmudul Hasam,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",,NA,NA,NA,NA,NA,NA,,,,,NA,NA
+328,March,2026,2026-03-01,"niyas
+siteengcivil4",110716305,SYED ASIM RAZA,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCO-0502
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Grouting Crew",254.6,P0,P0,P6,P4,P8,P8,,,,,P8,P8
+332,March,2026,2026-03-01,kavin,111140737,FARHAN HAIDER,Sub contractor,Nimr Flowline,"FCE-0403
+FCP-0403",Civil,"Civil Support Crew - RDX / EDX / UG Excavation
+Cvil - Pre and Post Padding",989.21,,,P8,P8,P8,P8,,,,,P8,P8
+336,March,2026,2026-03-01,niyas,114791187,SAEED AHMAD,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCM-0501
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",128.58,P8,P8,P8,P8,P8,P7,,,,,P8,P8
+340,March,2026,2026-03-01,karthik,116697293,Jamil Aslam,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0803",Mechanical,"RDX Lowering Crew
+Welding Crew - FL",121.21,P8,P8,NA,NA,NA,NA,NA,NA,,,P8,P8
+344,March,2026,2026-03-01,karthik,118933668,HAFIZ MUHAMMAD ZESHAN SALEEM,Sub contractor,Nimr Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",55.46,P0,P0,P0,P0,P2,P0,NA,NA,,,P0,P0
+348,March,2026,2026-03-01,kavin,121978417,INHAM UR REHMAN,Sub contractor,Nimr Flowline,"FCP-0403
+FCS-0402",Civil,"Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",95.24,,,,,P7,P5,,,,,P7,P5
+352,March,2026,2026-03-01,"arunraj
+basil
+siteengmech2",123073422,AFTAB ALAM,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",114.37,P8,P8,P8,P8,P6,P4,,,,,P8,P8
+356,March,2026,2026-03-01,"niyas
+pritthiraj",125372792,ADNAN KHALID,Sub contractor,Marmul Flowline,"FCE-0402
+FCM-0401
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Cvil - Pre and Post Padding
+Manual Excavation crew",60.35,P0,P0,P8,P8,P0,P0,NA,NA,,,P0,P0
+360,March,2026,2026-03-01,niyas,126940039,MAJID ABBAS,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCM-0401
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Manual Excavation crew",30.89,NA,NA,NA,NA,P0,P0,,,,,P0,P0
+364,March,2026,2026-03-01,arunraj,129421593,SYED IMTIAZ ALI,Sub contractor,Marmul Flowline,"FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Structure",217.22,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+368,March,2026,2026-03-01,mohammed,132280393,RAJEEV PILLAI SADASIVAN,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,157.61,P8,P8,P2,P0,P8,P8,,,,,P8,P8
+372,March,2026,2026-03-01,murugesh,503109,RASHID ABDULLAH SEIF NASSER AL BARWANI,Sub contractor,Marmul Yard,FPP-0506,Mechanical,PE Pulling Crew,,NA,NA,,,NA,NA,,,,,NA,NA
+376,March,2026,2026-03-01,siteengcivil4,503176,HAITHAM SALEEM NASIB BAIT FARAJ,Sub contractor,Marmul Flowline,"FCE-0302
+FCE-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator",50.7,P0,P0,,,,,,,,,P0,P0
+380,March,2026,2026-03-01,mohammed,77166855,Falak Naz Muhammad Iqbal,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,157.61,P8,P8,P2,P0,P8,P8,,,,,P8,P8
+384,March,2026,2026-03-01,"arunraj
+basil",81833056,SHABU THANKACHAN,Sub contractor,"Marmul Flowline
+NA","FRL-0502
+FWM-0501
+FWP-0702
+YWS-0602","General
+Mechanical","Rigging Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",41.29,P0,P0,NA,NA,NA,NA,,,,,P0,P0
+388,March,2026,2026-03-01,"pritthiraj
+siteengcivil4",89730005,Sohaib Romi,Sub contractor,"Marmul Flowline
+Marmul SNLP","FCE-0403
+FCG-0402
+FCM-0401
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Manual Excavation crew",130.69,P0,P0,P0,P0,P8,P8,,,,,P8,P8
+392,March,2026,2026-03-01,rajesh,910626,GURAV VIJAY GHANASHYAM .,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FEL-0501
+FER-0703
+FET-0501
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing
+OHL Crew ( Vendor&Tasnim)",108.76,P0,P0,P8,P8,P8,P8,,,,,P8,P8
+396,March,2026,2026-03-01,murugesh,913143,DAS ANIMESH,ATNM,Marmul Yard,YWS-0500,YARD,Str Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+400,March,2026,2026-03-01,suresh,916753,RAN VIJAY SINGH,ATNM,Nimr Yard,YWS-0500,YARD,Str Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+404,March,2026,2026-03-01,mohammad,922020,ANSARI MOHAMMAD IRSHAD,ATNM,Nimr Flowline,FII-0502,Instrument,Instrument Crew,191.43,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+408,March,2026,2026-03-01,kavin,927042,JEGAN BRITTO YESU RATHINAM,ATNM,Nimr Flowline,FCE-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator",-115.29,,,,,P0,P0,,,,,P0,P0
+412,March,2026,2026-03-01,karthik,927522,SUDHEENDRAN SANIL .,ATNM,Nimr Flowline,"FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",46.37,P8,P8,P8,P8,P0,P0,NA,NA,,,P0,P0
+416,March,2026,2026-03-01,rajesh,936707,PRAVEEN KUMAR .,ATNM,"Nimr Conversion without flowline
+Nimr Flowline","FEC-0502
+FEC-0602
+FER-0703
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+OHL Crew ( Vendor&Tasnim)",108.35,P6,P4,P0,P0,P8,P8,,,,,P8,P8
+420,March,2026,2026-03-01,"arunraj
+basil",945056,MINTU YADAV,ATNM,"Marmul Flowline
+Marmul SNLP
+NA","FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",93.66,P8,P8,P5,P3,P5,P3,,,,,P6,P4
+424,March,2026,2026-03-01,"gopakumar
+srinivas",96079045,Syed Amjad Zia,Sub contractor,"Marmul Flowline
+NA","FEC-0502
+FEC-0602
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",12105.58,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+428,March,2026,2026-03-01,"basil
+siteengmech4",967281,DUNA CHELAPATI RAO,ATNM,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline","FBH-0502
+FHT-0503
+FPA-0402",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew",254.65,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+432,March,2026,2026-03-01,"arunraj
+basil
+siteengmech4",967510,RAVISH KUMAR MISHRA,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline","FBH-0502
+FHT-0503
+FPA-0402",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew
+PE Pulling Crew",95.97,P8,P8,P0,P0,P8,P8,,,,,P7,P5
+436,March,2026,2026-03-01,kavin,968897,AUGUSTIN JOSEPH,ATNM,Nimr Flowline,"FCE-0302
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",,,,,,NA,NA,,,,,NA,NA
+440,March,2026,2026-03-01,karthik,969662,UGANDHAR REDDY DURGASI,ATNM,Nimr Flowline,FSI-0501,Mechanical,Stopaqe Crew(ODC),89.51,P7,P5,P0,P0,P5,P3,NA,NA,,,P5,P3
+444,March,2026,2026-03-01,"gopakumar
+srinivas",970515,VIRAJ .,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Re-Open
+NA","FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",102.73,NA,NA,P8,P8,P0,P0,NA,NA,,,P8,P7
+448,March,2026,2026-03-01,suresh,970595,AKHLAKH KHAN,ATNM,Nimr Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+452,March,2026,2026-03-01,mohamed,970685,MOHAMMED SAHADUL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,-101.67,P8,P7,P0,P0,P0,P0,NA,NA,,,P0,P0
+456,March,2026,2026-03-01,niyas,970835,RAMESHCHANDRA VISRAM PANCHANI,ATNM,Marmul Flowline,"FCE-0302
+FCE-0402
+FCE-0403
+FCG-0402
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",326.73,P8,P8,P8,P8,P0,P0,,,,,P8,P8
+460,March,2026,2026-03-01,karthik,971368,NAYEEMUDDIN MOHAMMED,ATNM,Nimr Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+464,March,2026,2026-03-01,karthik,971554,SAHUL HAMEED RAHAMATULLA,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,,NA,NA,,,NA,NA,,,,,NA,NA
+468,March,2026,2026-03-01,jitendra,972173,PRINANKBHAI LALLUBHAI PATEL,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Re-Open
+NA",FII-0502,Instrument,Instrument Crew,192.61,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+472,March,2026,2026-03-01,mohammed,97240139,MUHAMMAD WASIF,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,146.17,P8,P8,P0,P0,P8,P8,,,,,P8,P8
+476,March,2026,2026-03-01,srinivas,976793,Neon Jose,ATNM,"Marmul Flowline
+NA","FEC-0502
+FEC-0602
+FEH-0601
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - Testing",97.8,P0,P0,P8,P8,P8,P8,,,,,P7,P5
+480,April,2026,2026-04-01,"arunraj
+basil
+murugesh
+pritthiraj
+suresh",NA,NA,Sub contractor,"Marmul Yard
+Nimr Yard","CUL0604
+FHT-0503
+NA
+YWS-0500
+YWW-0500
+YWW-0700","Civil
+Mechanical
+NA
+YARD","Civil Unloading Crew - Borrow Pit
+Hydro Test Crew
+NA
+Str Welding Crew - Yard
+Welding Crew - Yard",,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+484,April,2026,2026-04-01,murugesh,913143,DAS ANIMESH,ATNM,Marmul Yard,YWS-0500,YARD,Str Welding Crew - Yard,,NA,NA,,,,,,,,,NA,NA
+488,April,2026,2026-04-01,arunraj,967210,SARADHI KARAGANA,ATNM,Marmul Yard,FHT-0503,Mechanical,Hydro Test Crew,,NA,NA,NA,NA,,,,,,,NA,NA
+492,May,2026,2026-05-01,"pritthiraj
+suresh",NA,NA,Sub contractor,"Marmul Yard
+Nimr Yard","CUL0604
+NA","Civil
+NA","Civil Unloading Crew - Borrow Pit
+NA",,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+496,June,2026,2026-06-01,karthik,927003,RAJENDRA CHUDHARY,ATNM,Nimr Yard,YRL-0502,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+500,July,2026,2026-07-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+504,September,2026,2026-09-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+508,January,2027,2027-01-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+2,December,2025,2025-12-01,NA,101696565,VIMLESH KUMAR DUBEY ,Sub contractor,NA,MPF0704,NA,PE Fusion Crew,,NA,NA,NA,NA,,,,,,,NA,NA
+6,December,2025,2025-12-01,arul,110962792,Muhammad Zishan Muhammad Aslam,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,48.73,,,,,P0,P0,P0,P0,P0,P0,P0,P0
+10,December,2025,2025-12-01,karthik,116697293,Jamil Aslam,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,,NA,NA,,,,,,,,,NA,NA
+14,December,2025,2025-12-01,"arul
+karthik",131056591,Riyaz,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,112.36,NA,NA,NA,NA,NA,NA,P8,P8,P5,P3,P8,P8
+18,December,2025,2025-12-01,mohammed,77166855,Falak Naz Muhammad Iqbal,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,,,,,,NA,NA,,,,,NA,NA
+22,December,2025,2025-12-01,NA,89468958,Umer Saleem,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,256.83,,,NA,NA,P8,P8,P8,P8,P8,P8,P8,P8
+26,December,2025,2025-12-01,"NA
+rajesh",917290,KARKADA PAUL BARNABAS,ATNM,Nimr Flowline,"FEC-0502
+FEH-0601
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",356.13,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+30,December,2025,2025-12-01,"arul
+NA
+rajesh",936707,PRAVEEN KUMAR .,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FER-0703
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+OHL Crew ( Vendor&Tasnim)",95.49,P8,P8,P8,P8,P8,P8,P1,P0,P0,P0,P7,P5
+34,December,2025,2025-12-01,"mohamed
+NA",955369,PRABAKARAN MURUGAN,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,263.58,P8,P8,P8,P8,P8,P8,P8,P8,P2,P0,P8,P8
+38,December,2025,2025-12-01,arunraj,967510,RAVISH KUMAR MISHRA,ATNM,Marmul Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,,,,,,NA,NA,,,,,NA,NA
+42,December,2025,2025-12-01,NA,970678,SAJIKUMAR FRANCIS,ATNM,Nimr Flowline,FII-0502,Instrument,Instrument Crew,107.39,P8,P8,P8,P8,P8,P7,,,P5,P3,P8,P8
+46,December,2025,2025-12-01,NA,971150,VINOTH THIRUNAVUKARASU,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,280.5,P8,P8,,,,,,,,,P8,P8
+50,December,2025,2025-12-01,hansraj,971797,GOKUL JYOTHI,ATNM,NA,CMD1002,NA,MSV Drain Pit Crew,,NA,NA,,,,,,,,,NA,NA
+54,December,2025,2025-12-01,"mohammad
+NA
+rajesh",973618,ARIF HASSAN,ATNM,Nimr Flowline,FII-0502,Instrument,Instrument Crew,110.33,P8,P8,,,P7,P5,P8,P8,P0,P0,P8,P8
+58,January,2026,2026-01-01,karthik,107562166,AMIT KUMAR SHARMA ,Sub contractor,Nimr Flowline,FRL-0502,General,Rigging Crew,133.67,P8,P8,,,,,,,NA,NA,P8,P8
+62,January,2026,2026-01-01,"hamza
+niyas
+siteengcivil4",111958633,Zia Ashraf,Sub contractor,Marmul Flowline,"FCE-0402
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",234.23,P0,P0,P8,P8,,,P0,P0,NA,NA,P8,P8
+66,January,2026,2026-01-01,"niyas
+siteengcivil4",114791187,SAEED AHMAD,Sub contractor,Marmul Flowline,"FCG-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - ROW",100.22,NA,NA,,,,,NA,NA,P8,P7,P8,P7
+70,January,2026,2026-01-01,basil,116960261,JAFAR ISLAM SIDDIQUE,Sub contractor,Marmul Flowline,FWP-0702,Mechanical,Welding Crew - FL,-4266.67,,,,,P0,P0,,,,,P0,P0
+74,January,2026,2026-01-01,hansraj,118327,HANSRAJ DAYANAND BARI,Sub contractor,NA,MPF0704,NA,PE Fusion Crew,,,,,,,,NA,NA,NA,NA,NA,NA
+78,January,2026,2026-01-01,"niyas
+siteengcivil4",125372792,ADNAN KHALID,Sub contractor,Marmul Flowline,LCC-0803,Civil,Cellar Crew,,NA,NA,,,,,NA,NA,,,NA,NA
+82,January,2026,2026-01-01,niyas,126940039,MAJID ABBAS,Sub contractor,Marmul Flowline,FCG-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW",,,,,,,,NA,NA,,,NA,NA
+86,January,2026,2026-01-01,mohammed,132280393,RAJEEV PILLAI SADASIVAN,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",669.95,P0,P0,P0,P0,P8,P8,P1,P0,P0,P0,P8,P8
+90,January,2026,2026-01-01,"gopakumar
+srinivas",614069,BADAR HARIB SALIM AL MAHRUQI,Sub contractor,Marmul Flowline,"FEC-0502
+FEH-0601
+FEL-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination",,,,,,,,NA,NA,,,NA,NA
+94,January,2026,2026-01-01,siteengcivil4,79740787,Razon Shaifullah,Sub contractor,Marmul Flowline,FCG-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW",,NA,NA,NA,NA,,,,,,,NA,NA
+98,January,2026,2026-01-01,"mohamed
+NA",89468958,Umer Saleem,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,-300.8,P8,P8,P4,P2,P8,P8,P0,P0,P0,P0,P0,P0
+102,January,2026,2026-01-01,"arul
+rajesh",910626,GURAV VIJAY GHANASHYAM .,ATNM,Nimr Flowline,"FEC-0602
+FEH-0601",Electrical,"Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination",72.46,,,NA,NA,P2,P0,NA,NA,,,P2,P0
+106,January,2026,2026-01-01,"ahmed
+arunraj
+basil",913202,LAKKAM MURALI MANOHAR,ATNM,"Marmul Flowline
+Marmul SNLP",FSI-0501,Mechanical,Stopaqe Crew(ODC),152.63,,,,,P8,P8,P8,P8,P0,P0,P8,P8
+110,January,2026,2026-01-01,"karthik
+NA",918259,RAJ DHARMESHKUMAR GANPATSINH,ATNM,"Nimr Flowline
+Nimr SNLP","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",77.02,,,P4,P2,P6,P4,P0,P0,,,P3,P1
+114,January,2026,2026-01-01,arul,923252,MANOJ KUMAR YADAV .,ATNM,Nimr Flowline,FPP-0506,Mechanical,PE Pulling Crew,121.14,,,P8,P8,P8,P8,NA,NA,,,P8,P8
+118,January,2026,2026-01-01,arunraj,930515,TRILOKI YADAV,ATNM,Marmul Flowline,YWS-0602,Mechanical,Welding Crew - Structure,68.54,,,P0,P0,P0,P0,P0,P0,P8,P8,P1,P0
+122,January,2026,2026-01-01,basil,94279793,Maha Asif Muhammad,Sub contractor,Marmul Flowline,FWP-0702,Mechanical,Welding Crew - FL,40.18,,,,,NA,NA,P0,P0,P0,P0,P0,P0
+126,January,2026,2026-01-01,"mohamed
+NA",955369,PRABAKARAN MURUGAN,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,233.9,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8,P8
+130,January,2026,2026-01-01,mohammed,964467,SADDAM SIDDIQUE,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",240.09,P0,P0,P0,P0,P8,P8,P8,P8,P8,P8,P8,P8
+134,January,2026,2026-01-01,"ahmed
+basil
+siteengmech4",967510,RAVISH KUMAR MISHRA,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",91.4,,,P0,P0,P7,P5,P8,P8,P6,P4,P6,P4
+138,January,2026,2026-01-01,srinivas,969507,JYOTHIBASU SEENIVASAN,ATNM,Marmul Flowline,FEC-0502,"Electrical
+Instrument",Electrical Crew - Cable Laying,-769.23,,,,,,,,,P0,P0,P0,P0
+142,January,2026,2026-01-01,mohammed,970505,ANUJ KUMAR,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",156.54,P0,P0,P8,P8,P8,P8,P0,P0,P0,P0,P8,P8
+146,January,2026,2026-01-01,arunraj,970631,RAHUL KUMAR,ATNM,Marmul Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,,NA,NA,,,,,,,,,NA,NA
+150,January,2026,2026-01-01,niyas,970867,REJISH KUMAR CHENAMGARA KUMARAN,ATNM,Marmul Flowline,"FCG-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",,,,,,NA,NA,NA,NA,NA,NA,NA,NA
+154,January,2026,2026-01-01,NA,972048,SAKKAMMAL DURAI CHELLAPANDIAN,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,83.78,P0,P0,P6,P4,P8,P7,NA,NA,,,P4,P2
+158,January,2026,2026-01-01,mohammed,97240139,MUHAMMAD WASIF,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",742.14,P8,P8,P0,P0,P8,P8,P8,P8,P0,P0,P8,P8
+162,January,2026,2026-01-01,"gopakumar
+srinivas",976793,Neon Jose,ATNM,Marmul Flowline,"FEC-0502
+FEC-0602
+FEL-0501
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",62.99,,,P1,P0,P8,P8,P0,P0,P0,P0,P0,P0
+166,February,2026,2026-02-01,basil,107283075,Mahmudul Hasam,Sub contractor,Marmul Flowline,"FWM-0501
+YWS-0602",Mechanical,"Welding Crew - Misc
+Welding Crew - Structure",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+170,February,2026,2026-02-01,kavin,110607228,Naimat Ullah,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,,,,NA,NA,NA,NA,,,,,NA,NA
+174,February,2026,2026-02-01,mohamed,111017428,Abdul Hasseeb,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,125.71,P7,P5,P6,P4,P8,P8,P8,P8,,,P8,P8
+178,February,2026,2026-02-01,"niyas
+siteengcivil4",114435301,Malhi Rizwan Aslam,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCM-0401
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Manual Excavation crew",87.63,P8,P8,P0,P0,P2,P0,P1,P0,,,P5,P3
+182,February,2026,2026-02-01,niyas,116224173,Mohammed Adil,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCP-0403
+FCR-0303
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Grading
+FL Civil Sleeper (HS)",146.88,P0,P0,P8,P8,P8,P8,P0,P0,,,P8,P8
+186,February,2026,2026-02-01,"arul
+karthik",117933803,AMEER JAYACHANDRAN,Sub contractor,Nimr Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",63.08,P0,P0,NA,NA,NA,NA,,,,,P0,P0
+190,February,2026,2026-02-01,arunraj,121466075,MANIKANDAN CHINNAKANNAN,Sub contractor,Marmul Flowline,"FWM-0501
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - Misc
+Welding Crew - Structure",,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+194,February,2026,2026-02-01,mohamed,122253392,SULEMAN WAHEED RAJA,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,100.09,P7,P5,P0,P0,P8,P8,P8,P8,,,P8,P7
+198,February,2026,2026-02-01,mohammed,125138889,Masood Shah,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,114.92,P8,P8,P8,P8,P0,P0,P4,P2,,,P8,P8
+202,February,2026,2026-02-01,arunraj,126641027,Muhammad Amjad,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",84.18,NA,NA,NA,NA,NA,NA,P4,P2,,,P4,P2
+206,February,2026,2026-02-01,mohamed,127736661,MUHAMMAD ATIF,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,,,,NA,NA,,,NA,NA,,,NA,NA
+210,February,2026,2026-02-01,arunraj,131873311,Farhan Ghafoor,Sub contractor,Marmul Flowline,"FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - Structure",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+214,February,2026,2026-02-01,"arul
+mohamed",137954852,ABDUL RAHMAN,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,94.21,,,NA,NA,P5,P3,P8,P7,,,P6,P4
+218,February,2026,2026-02-01,murugesh,503162,WATHAB MAHKOOM ALI AL HINAI,Sub contractor,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,,,,,NA,NA,NA,NA,,,NA,NA
+222,February,2026,2026-02-01,mohammed,77166855,Falak Naz Muhammad Iqbal,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,213.39,P8,P8,P6,P4,P8,P8,P8,P8,,,P8,P8
+226,February,2026,2026-02-01,"arunraj
+basil",81833056,SHABU THANKACHAN,Sub contractor,"Marmul Flowline
+Marmul SNLP
+NA","FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",133.76,P8,P8,P8,P8,NA,NA,P0,P0,,,P8,P8
+230,February,2026,2026-02-01,mohamed,89468958,Umer Saleem,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,201.86,P8,P8,NA,NA,,,,,,,P8,P8
+234,February,2026,2026-02-01,"arul
+NA
+rajesh",910626,GURAV VIJAY GHANASHYAM .,ATNM,"Nimr Conversion without flowline
+Nimr Flowline","FEC-0502
+FEC-0602
+FEL-0501
+FER-0703
+FET-0501
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing
+OHL Crew ( Vendor&Tasnim)",190.87,P8,P8,P8,P8,P8,P8,P8,P7,,,P8,P8
+238,February,2026,2026-02-01,"arunraj
+basil
+siteengmech4",913174,DHARMENDRA KUMAR YADAV,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul SNLP","FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",19.57,P0,P0,P8,P8,P6,P4,P0,P0,,,P0,P0
+242,February,2026,2026-02-01,"karthik
+NA
+suresh",916753,RAN VIJAY SINGH,ATNM,"NA
+Nimr Yard","YHT0500
+YWS-0500",YARD,"NA
+Str Welding Crew - Yard",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+246,February,2026,2026-02-01,"karthik
+kavin",918130,GUPTA RAJESH,ATNM,"Nimr Flowline
+Nimr Yard","FCG-0402
+FPA-0402
+YPP-0500","Civil
+Mechanical
+YARD","Civil Support Crew
+Civil Support Crew - ROW
+NA
+PE Pulling Crew",36.49,,,P8,P8,P0,P0,,,,,P0,P0
+250,February,2026,2026-02-01,"arul
+karthik",922922,ACHUTHAN PILLAI BIJUKUMAR CHARUVILA,ATNM,"Nimr Flowline
+Nimr SNLP","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",62.16,P0,P0,,,,,,,,,P0,P0
+254,February,2026,2026-02-01,arunraj,927123,SANJAY YADAV .,ATNM,"Marmul Flowline
+NA","FPA-0402
+FPP-0506",Mechanical,PE Pulling Crew,63.55,P0,P0,P0,P0,P7,P5,P8,P8,,,P0,P0
+258,February,2026,2026-02-01,arunraj,930515,TRILOKI YADAV,ATNM,"Marmul Flowline
+Marmul SNLP
+Marmul Yard","YWS-0602
+YWW-0500","Mechanical
+YARD","Welding Crew - Structure
+Welding Crew - Yard",37.74,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+262,February,2026,2026-02-01,NA,942135,DEVANGKUMAR MAHESHBHAI PATEL,ATNM,NA,CUL0604,Civil,Civil Unloading Crew - Borrow Pit,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+266,February,2026,2026-02-01,"mohamed
+NA",954874,CHANDRA PRAKASH GANESH,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",119.37,P8,P8,P8,P8,P8,P8,P8,P8,,,P8,P8
+270,February,2026,2026-02-01,mohammed,964467,SADDAM SIDDIQUE,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",11.27,P0,P0,P4,P2,P8,P8,P1,P0,,,P0,P0
+274,February,2026,2026-02-01,mohamed,967401,MOHAMMAD GOUSE .,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",55.29,P8,P8,,,P0,P0,P0,P0,,,P0,P0
+278,February,2026,2026-02-01,niyas,96817328,Atulesh Kumar Giri,Sub contractor,Marmul Flowline,"FCE-0402
+FCG-0402
+FCM-0401
+FCM-0501
+FCO-0502
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Grouting Crew
+Manual Excavation crew",1018.77,P0,P0,P1,P0,P8,P8,NA,NA,,,P8,P8
+282,February,2026,2026-02-01,srinivas,969507,JYOTHIBASU SEENIVASAN,ATNM,"Marmul Flowline
+NA","FEC-0502
+FEC-0602
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",5.06,P0,P0,P0,P0,P0,P0,P3,P1,,,P0,P0
+286,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",969896,ARCHISMAN GHOSH,ATNM,"Marmul Flowline
+NA","FCE-0302
+FCE-0402
+FCG-0402
+FCM-0501
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - ROW",30.46,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+290,February,2026,2026-02-01,mohammed,970568,VISHNU RAJAN,ATNM,Marmul Yard,CBP0704,Civil,Civil Support Crew - Borrow Pit ,,,,NA,NA,,,,,,,NA,NA
+294,February,2026,2026-02-01,"arul
+mohammad
+NA",970678,SAJIKUMAR FRANCIS,ATNM,"Nimr Flowline
+Nimr Non-Standard Well
+Nimr SNLP",FII-0502,Instrument,Instrument Crew,80.03,P6,P4,P6,P4,P0,P0,P2,P0,,,P4,P2
+298,February,2026,2026-02-01,"niyas
+pritthiraj",970867,REJISH KUMAR CHENAMGARA KUMARAN,ATNM,"Marmul Conversion without flowline
+Marmul Flowline","FCE-0302
+FCE-0402
+FCG-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",549.42,NA,NA,NA,NA,NA,NA,P8,P8,,,P8,P8
+302,February,2026,2026-02-01,"karthik
+NA",971368,NAYEEMUDDIN MOHAMMED,ATNM,"NA
+Nimr Yard",YWW-0500,YARD,Welding Crew - Yard,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+306,February,2026,2026-02-01,mohammed,971582,THARCIUS FRANKLIN RAJ MOSES,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",315.5,P8,P8,P0,P0,P8,P8,P8,P8,,,P8,P8
+310,February,2026,2026-02-01,murugesh,972295,RAJA KESAVAN,ATNM,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+314,February,2026,2026-02-01,"niyas
+pritthiraj",972952,MOHAMED ALI ALLI KHADER MOHAMED,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline","FCE-0302
+FCE-0402
+FCG-0402
+FCM-0401
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Manual Excavation crew",52.64,NA,NA,P0,P0,P0,P0,P0,P0,,,P0,P0
+318,February,2026,2026-02-01,"gopakumar
+srinivas",976793,Neon Jose,ATNM,"Marmul Flowline
+Marmul Re-Open","FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",192.26,P0,P0,P8,P8,P0,P0,P8,P8,,,P8,P8
+322,March,2026,2026-03-01,"arunraj
+basil
+dipukumar
+gobinath
+gopakumar
+hansraj
+jitendra
+karthik
+kavin
+kunda
+mohamed
+mohammad
+mohammed
+murugesh
+NA
+niyas
+pritthiraj
+rajesh
+sandeep
+siteengcivil4
+siteengmech2
+siteengmech4
+srinivas
+suresh
+thambidurai",NA,NA,Sub contractor,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Location
+Marmul Re-Open
+Marmul SNLP
+Marmul Yard
+NA
+Nimr Conversion without flowline
+Nimr Flowline
+Nimr LLRTP
+Nimr Location
+Nimr Non-Standard Well
+Nimr Yard","BPL-0302
+CBP-0304
+CBP0704
+CCL1103
+CUL0604
+FBH-0502
+FCD-0402
+FCE-0402
+FCE-0403
+FCG-0402
+FCM-0401
+FCM-0501
+FCO-0502
+FCP-0403
+FCR-0303
+FCS-0402
+FEC-0502
+FEC-0602
+FEL-0501
+FHT-0503
+FII-0502
+FPA-0402
+FRL-0502
+FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+LCC-0803
+LCP-0511
+NA
+OLI-0501
+OLI-0702
+SSS-0401
+YCB-0600
+YHT-0500
+YPB-0500
+YPN-0500
+YPP-0500
+YRL-0502
+YRT-0300
+YWS-0500
+YWS-0602
+YWW-0500
+YWW-0700","Civil
+Electrical
+General
+Instrument
+Mechanical
+NA
+YARD","Box Up Crew - Hookup
+Cellar Crew
+Civil Support Crew
+Civil Support Crew -  Drilling
+Civil Support Crew - Borrow Pit 
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Civil Unloading Crew - Borrow Pit
+Cvil - Pre and Post Padding
+Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+FL Civil Grading
+FL Civil Sleeper (HS)
+Grouting Crew
+Hydro Test Crew
+Instrument Crew
+Manual Excavation crew
+NA
+OHL Crew ( Vendor&Tasnim)
+PE Pulling Crew
+RDX Lowering Crew
+RDX Welding Crew
+Rigging Crew
+Str Welding Crew - Yard
+Survey Crew
+WD Location Const Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure
+Welding Crew - Yard",121.26,P8,P8,P8,P8,P0,P0,NA,NA,NA,NA,P8,P8
+326,March,2026,2026-03-01,kavin,109493555,SYED KAMRAN ULHASSAN RIZVI,Sub contractor,Nimr Flowline,"FCE-0403
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW",-52.15,NA,NA,P0,P0,P0,P0,NA,NA,,,P0,P0
+330,March,2026,2026-03-01,karthik,110962792,Muhammad Zishan Muhammad Aslam,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602
+YWS-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Structure",61.51,NA,NA,NA,NA,P0,P0,,,,,P0,P0
+334,March,2026,2026-03-01,siteengcivil4,112756907,MUHAMMAD ZOHAIB,Sub contractor,Marmul Flowline,"FCE-0402
+FCO-0502
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+FL Civil Sleeper (HS)
+Grouting Crew",26.08,P0,P0,P0,P0,,,,,,,P0,P0
+338,March,2026,2026-03-01,karthik,116020874,JEBARAJ,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,,NA,NA,NA,NA,NA,NA,NA,NA,,,NA,NA
+342,March,2026,2026-03-01,thambidurai,117920,MURUGAN IYANGAR,Sub contractor,Marmul Flowline,SSS-0401,Civil,Survey Crew,27.4,P0,P0,,,,,,,,,P0,P0
+346,March,2026,2026-03-01,arunraj,121466075,MANIKANDAN CHINNAKANNAN,Sub contractor,NA,FWP-0702,Mechanical,Welding Crew - FL,,NA,NA,,,,,,,,,NA,NA
+350,March,2026,2026-03-01,"karthik
+kavin",122075627,Muhammad Sadaqat Ali,Sub contractor,Nimr Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+354,March,2026,2026-03-01,kavin,124568387,Usman Arshad,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,,,,NA,NA,NA,NA,,,,,NA,NA
+358,March,2026,2026-03-01,"arunraj
+basil",126641027,Muhammad Amjad,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",136.84,P0,P0,P8,P8,P8,P8,NA,NA,,,P8,P8
+362,March,2026,2026-03-01,kavin,127590164,Aleem Abbas,Sub contractor,Nimr Flowline,"FCE-0403
+FCP-0403",Civil,"Civil Support Crew - RDX / EDX / UG Excavation
+Cvil - Pre and Post Padding",50.0,NA,NA,,,P0,P0,,,,,P0,P0
+366,March,2026,2026-03-01,karthik,131056591,Riyaz,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,85.14,NA,NA,NA,NA,P5,P3,NA,NA,,,P5,P3
+370,March,2026,2026-03-01,kavin,135799029,TASSAWAR ABBAS,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,243.76,,,,,P8,P8,NA,NA,,,P8,P8
+374,March,2026,2026-03-01,murugesh,503140,SALEH SALIM ALI THOAR,Sub contractor,Marmul Yard,FPP-0506,Mechanical,PE Pulling Crew,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+378,March,2026,2026-03-01,siteengcivil4,503186,HAYTHAM BAKHIT ALI AHMED GHAFARAM AL SHA,Sub contractor,Marmul Flowline,"FCD-0402
+FCE-0402
+FCM-0501
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew -  Drilling
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",67.74,NA,NA,P0,P0,P8,P8,,,,,P1,P0
+382,March,2026,2026-03-01,mohammed,79477275,MD JASIM UDDIN ,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,146.17,P8,P8,P0,P0,P8,P8,,,,,P8,P8
+386,March,2026,2026-03-01,kavin,82826192,MAHMOOD ASIF,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,425.62,,,,,P8,P8,NA,NA,,,P8,P8
+390,March,2026,2026-03-01,mohamed,907960,JETHALAL SHIVJI RABADIYA .,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,204.29,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+394,March,2026,2026-03-01,kavin,912409,HIRANI MAVJI SHAMJI,ATNM,Nimr Flowline,"FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",0.0,NA,NA,P0,P0,P0,P0,,,,,P0,P0
+398,March,2026,2026-03-01,"arunraj
+basil",913202,LAKKAM MURALI MANOHAR,ATNM,"Marmul Flowline
+NA",FSI-0501,Mechanical,Stopaqe Crew(ODC),76.37,P0,P0,P1,P0,P8,P8,,,,,P3,P1
+402,March,2026,2026-03-01,karthik,917501,CHAUHAN BHARAT,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,53.64,NA,NA,,,P0,P0,,,,,P0,P0
+406,March,2026,2026-03-01,niyas,92299872,Azizul Hoque,Sub contractor,Marmul Flowline,"FCE-0403
+FCM-0401
+LCC-0803",Civil,"Cellar Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Manual Excavation crew",,NA,NA,NA,NA,,,,,,,NA,NA
+410,March,2026,2026-03-01,basil,927189,SURYA NATH YADAV,ATNM,"Marmul Flowline
+Marmul Yard","FBB-0503
+FBH-0502
+YWS-0602
+YWW-0500","Mechanical
+YARD","Box Up Crew - Beam Pump
+Box Up Crew - Hookup
+Box Up Crew - Precom
+Welding Crew - Structure
+Welding Crew - Yard",-287.38,P0,P0,P0,P0,P8,P6,NA,NA,NA,NA,P0,P0
+414,March,2026,2026-03-01,"arunraj
+siteengmech4",930515,TRILOKI YADAV,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Yard","YWS-0602
+YWW-0500","Mechanical
+YARD","Welding Crew - Structure
+Welding Crew - Yard",-643.68,P0,P0,NA,NA,P1,P0,NA,NA,,,P0,P0
+418,March,2026,2026-03-01,"arunraj
+basil",938134,ERULAPPASAMY KARUPPASAMY,ATNM,"Marmul Flowline
+Marmul SNLP
+NA",FPF-0503,Mechanical,PE Fusion Crew,90.09,P3,P1,P7,P5,P7,P5,NA,NA,,,P6,P4
+422,March,2026,2026-03-01,mohamed,955369,PRABAKARAN MURUGAN,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,131.63,P8,P7,P8,P8,P8,P8,,,,,P8,P8
+426,March,2026,2026-03-01,mohammed,964467,SADDAM SIDDIQUE,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",149.4,P0,P0,P8,P8,P4,P2,,,,,P8,P8
+430,March,2026,2026-03-01,mohamed,967401,MOHAMMAD GOUSE .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,-22.08,P0,P0,P4,P2,P1,P0,,,,,P0,P0
+434,March,2026,2026-03-01,niyas,96817328,Atulesh Kumar Giri,Sub contractor,Marmul Flowline,"FCE-0403
+FCM-0401
+LCC-0803",Civil,"Cellar Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Manual Excavation crew",,NA,NA,NA,NA,,,,,,,NA,NA
+438,March,2026,2026-03-01,"gopakumar
+srinivas",969507,JYOTHIBASU SEENIVASAN,ATNM,"Marmul Flowline
+NA","FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",-27.96,P1,P0,P8,P8,P0,P0,,,,,P0,P0
+442,March,2026,2026-03-01,"pritthiraj
+siteengcivil4",969896,ARCHISMAN GHOSH,ATNM,"Marmul Flowline
+NA","FCE-0302
+FCE-0402
+FCG-0402
+FCM-0401
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Manual Excavation crew",175.18,NA,NA,P0,P0,P8,P8,,,,,P8,P8
+446,March,2026,2026-03-01,karthik,970568,VISHNU RAJAN,ATNM,Nimr Flowline,"FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",68.09,,,NA,NA,P1,P0,NA,NA,,,P1,P0
+450,March,2026,2026-03-01,"arunraj
+basil
+siteengmech4",970631,RAHUL KUMAR,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul SNLP
+Marmul Yard
+NA","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",84.74,P3,P1,P6,P4,P8,P8,NA,NA,NA,NA,P4,P2
+454,March,2026,2026-03-01,karthik,970745,VISHAL SAURAV,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,157.18,,,,,P8,P8,,,,,P8,P8
+458,March,2026,2026-03-01,mohamed,970893,GOPINATHAN VELUSAMY,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,38.19,P0,P0,,,,,,,,,P0,P0
+462,March,2026,2026-03-01,mohamed,971415,DINESHKUMAR SHANMUGAM,ATNM,Nimr Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",45.14,P0,P0,P0,P0,P8,P8,NA,NA,,,P0,P0
+466,March,2026,2026-03-01,karthik,971713,MURALIDHARAN PANCHALAM,ATNM,Nimr Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+470,March,2026,2026-03-01,karthik,972323,NIKHIL CHEMMALATH DHARMAJAN,ATNM,Nimr Flowline,"FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",175.23,NA,NA,P8,P8,P8,P8,,,,,P8,P8
+474,March,2026,2026-03-01,karthik,973030,MANOJ KUMAR,ATNM,Nimr Yard,YPB-0500,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+478,March,2026,2026-03-01,karthik,98076316,BIPIN KUMAR SUKLA ,Sub contractor,Nimr Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",152.01,NA,NA,NA,NA,P8,P8,NA,NA,,,P8,P8
+482,April,2026,2026-04-01,mohamed,907960,JETHALAL SHIVJI RABADIYA .,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,,,,,,NA,NA,,,,,NA,NA
+486,April,2026,2026-04-01,basil,927189,SURYA NATH YADAV,ATNM,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,,,,,,,NA,NA
+490,April,2026,2026-04-01,arunraj,970631,RAHUL KUMAR,ATNM,Marmul Yard,FHT-0503,Mechanical,Hydro Test Crew,,NA,NA,NA,NA,,,,,,,NA,NA
+494,May,2026,2026-05-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+498,July,2026,2026-07-01,suresh,NA,NA,Sub contractor,Nimr Yard,NA,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+502,August,2026,2026-08-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+506,November,2026,2026-11-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+510,March,2027,2027-03-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,,,,,,,NA,NA
+3,December,2025,2025-12-01,NA,107562166,AMIT KUMAR SHARMA ,Sub contractor,Nimr Flowline,FRL-0502,General,Rigging Crew,96.39,,,P7,P5,,,,,,,P7,P5
+7,December,2025,2025-12-01,"mohamed
+NA",111017428,Abdul Hasseeb,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,87.05,P0,P0,P8,P7,P7,P5,P5,P3,P8,P7,P5,P3
+11,December,2025,2025-12-01,"arul
+NA",117933803,AMEER JAYACHANDRAN,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,41.16,,,P1,P0,P0,P0,,,,,P0,P0
+15,December,2025,2025-12-01,NA,131990532,SAQIB MALIK,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL",1.06,P8,P8,P0,P0,P0,P0,P0,P0,,,P0,P0
+19,December,2025,2025-12-01,mohammed,79477275,MD JASIM UDDIN ,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,194.86,,,,,P8,P8,,,P0,P0,P8,P8
+23,December,2025,2025-12-01,NA,907960,JETHALAL SHIVJI RABADIYA .,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,111.78,P8,P8,P8,P8,P2,P0,P8,P8,P0,P0,P8,P8
+27,December,2025,2025-12-01,"arul
+karthik
+NA",918105,JADHAV VILAS BABU,ATNM,Nimr Flowline,"FPA-0402
+FPP-0506",Mechanical,PE Pulling Crew,169.53,,,,,P8,P8,P8,P8,P8,P8,P8,P8
+31,December,2025,2025-12-01,"arul
+NA
+rajesh",945195,PRATIKKUMAR AMRUTBHAI PATEL,ATNM,Nimr Flowline,"FEC-0602
+FEH-0601
+FER-0703
+OLI-0501
+OLI-0702",Electrical,"Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+OHL Crew ( Vendor&Tasnim)",81.86,P8,P8,NA,NA,P4,P2,,,,,P4,P2
+35,December,2025,2025-12-01,NA,96632756,SATYA PRAKASH SINGH,Sub contractor,NA,MPF0704,NA,PE Fusion Crew,,NA,NA,,,,,,,,,NA,NA
+39,December,2025,2025-12-01,"NA
+rajesh",968734,BIBHUTI BHUSAN BHUNIA,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",6616.95,P8,P8,P8,P8,P7,P5,P8,P8,P8,P8,P8,P8
+43,December,2025,2025-12-01,NA,970685,MOHAMMED SAHADUL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,267.35,,,,,P8,P8,P8,P8,P0,P0,P8,P8
+47,December,2025,2025-12-01,NA,971270,RAHUL RAJENDRA HAJARE,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,139.51,P1,P0,P8,P8,P8,P8,,,,,P8,P8
+51,December,2025,2025-12-01,NA,972048,SAKKAMMAL DURAI CHELLAPANDIAN,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,96.05,P8,P8,P6,P4,P7,P5,P8,P7,P2,P0,P7,P5
+55,December,2025,2025-12-01,karthik,98076316,BIPIN KUMAR SUKLA ,Sub contractor,Nimr Flowline,YWS-0602,Mechanical,Welding Crew - Structure,,,,,,,,NA,NA,,,NA,NA
+59,January,2026,2026-01-01,niyas,110716305,SYED ASIM RAZA,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCO-0502
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)
+Grouting Crew",47.7,P0,P0,P0,P0,P0,P0,NA,NA,P3,P1,P0,P0
+63,January,2026,2026-01-01,mohammed,112563873,REZAUL HASAN,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",843.72,P0,P0,P0,P0,P8,P8,P8,P8,P0,P0,P8,P8
+67,January,2026,2026-01-01,dipukumar,115199016,MD SAMIULLAH ANSARI,Sub contractor,Marmul Flowline,FCG-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW",,NA,NA,,,,,,,,,NA,NA
+71,January,2026,2026-01-01,"mohammed
+siteengcivil4",117920,MURUGAN IYANGAR,Sub contractor,"Marmul Flowline
+Marmul Location",SSS-0401,Civil,Survey Crew,,,,,,,,NA,NA,,,NA,NA
+75,January,2026,2026-01-01,"mohamed
+NA",122253392,SULEMAN WAHEED RAJA,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,122.53,P8,P8,P2,P0,NA,NA,P8,P8,P8,P8,P8,P8
+79,January,2026,2026-01-01,NA,125822439,DURGA PRASAD,Sub contractor,NA,MWF0903,NA,Welding Crew - FL,,NA,NA,,,,,,,,,NA,NA
+83,January,2026,2026-01-01,arunraj,129421593,SYED IMTIAZ ALI,Sub contractor,Marmul Flowline,FWP-0702,Mechanical,Welding Crew - FL,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+87,January,2026,2026-01-01,srinivas,503174,SAID MOHAMMED SALIM MOHSIN GHAWAS,Sub contractor,Marmul Flowline,"FEC-0502
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",,,,,,NA,NA,NA,NA,,,NA,NA
+91,January,2026,2026-01-01,mohammed,77166855,Falak Naz Muhammad Iqbal,Sub contractor,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",669.95,P0,P0,P0,P0,P8,P8,P1,P0,P0,P0,P8,P8
+95,January,2026,2026-01-01,"hamza
+niyas
+siteengcivil4",81587016,VIKRAMDAN MOHANDAN,Sub contractor,Marmul Flowline,"FCE-0403
+FCO-0502
+LCC-0803",Civil,"Cellar Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Grouting Crew",71.03,NA,NA,P0,P0,P2,P0,NA,NA,NA,NA,P2,P0
+99,January,2026,2026-01-01,siteengcivil4,90176501,Naeem Masih,Sub contractor,Marmul Flowline,LCC-0803,Civil,Cellar Crew,,,,,,,,NA,NA,NA,NA,NA,NA
+103,January,2026,2026-01-01,basil,911341,UMA SHANKAR YADAVA,ATNM,Marmul Flowline,"FBH-0502
+YWS-0602",Mechanical,"Box Up Crew - Hookup
+Welding Crew - Structure",11.64,,,NA,NA,P0,P0,P0,P0,P0,P0,P0,P0
+107,January,2026,2026-01-01,"hamza
+siteengcivil4",916457,SHARMA BRIJESH,ATNM,Marmul Flowline,"FCE-0302
+FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",50.66,,,,,P0,P0,P3,P1,P0,P0,P0,P0
+111,January,2026,2026-01-01,karthik,922102,KATUKURI RAKESH,ATNM,Nimr Flowline,FSI-0501,Mechanical,Stopaqe Crew(ODC),,,,,,,,NA,NA,,,NA,NA
+115,January,2026,2026-01-01,arunraj,927123,SANJAY YADAV .,ATNM,Marmul Flowline,"FPA-0402
+FPF-0503
+FPP-0506",Mechanical,"PE Fusion Crew
+PE Pulling Crew",75.49,NA,NA,NA,NA,P6,P4,P0,P0,P2,P0,P3,P1
+119,January,2026,2026-01-01,NA,936642,RAMESH AZHAGARSAMY,ATNM,Nimr Flowline,FCM-0401,Civil,Manual Excavation crew,230.77,,,P8,P8,,,NA,NA,,,P8,P8
+123,January,2026,2026-01-01,"arunraj
+basil",945056,MINTU YADAV,ATNM,Marmul Flowline,"FPA-0402
+FPP-0506",Mechanical,PE Pulling Crew,98.29,,,P8,P6,P7,P5,P8,P8,P1,P0,P7,P5
+127,January,2026,2026-01-01,srinivas,96079045,Syed Amjad Zia,Sub contractor,Marmul Flowline,FEC-0602,Electrical,Electrical Crew - Cable Laying,,,,NA,NA,,,,,,,NA,NA
+131,January,2026,2026-01-01,arul,967399,SHAMSHAD ALAM,ATNM,Nimr Flowline,FPF-0503,Mechanical,PE Fusion Crew,126.25,,,NA,NA,,,P8,P8,P8,P8,P8,P8
+135,January,2026,2026-01-01,"niyas
+pritthiraj",96817328,Atulesh Kumar Giri,Sub contractor,Marmul Flowline,"FCE-0402
+FCE-0403
+FCG-0402
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",50.74,,,P0,P0,NA,NA,NA,NA,NA,NA,P0,P0
+139,January,2026,2026-01-01,"arul
+karthik
+NA",969662,UGANDHAR REDDY DURGASI,ATNM,Nimr Flowline,FSI-0501,Mechanical,Stopaqe Crew(ODC),38.35,P0,P0,P0,P0,P0,P0,P8,P8,,,P0,P0
+143,January,2026,2026-01-01,"gopakumar
+srinivas",970515,VIRAJ .,ATNM,Marmul Flowline,"FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",95.59,,,,,P0,P0,NA,NA,P7,P5,P7,P5
+147,January,2026,2026-01-01,"arul
+mohammad
+NA",970678,SAJIKUMAR FRANCIS,ATNM,"Nimr Flowline
+Nimr SNLP",FII-0502,Instrument,Instrument Crew,170.19,P8,P8,P6,P4,P7,P5,P4,P2,P0,P0,P8,P8
+151,January,2026,2026-01-01,"hamza
+siteengcivil4",970957,UMESH PRASAD .,ATNM,Marmul Flowline,"FCE-0402
+FCG-0402
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",71.02,NA,NA,P0,P0,,,P6,P4,P0,P0,P2,P0
+155,January,2026,2026-01-01,"jaldeepsinh
+jitendra",972173,PRINANKBHAI LALLUBHAI PATEL,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline",FII-0502,Instrument,Instrument Crew,110.05,,,,,P0,P0,P3,P1,P8,P8,P8,P8
+159,January,2026,2026-01-01,"niyas
+pritthiraj",972952,MOHAMED ALI ALLI KHADER MOHAMED,ATNM,"Marmul Conversion with Flowline
+Marmul Conversion without flowline
+Marmul Flowline","FCG-0402
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)",88.89,,,,,NA,NA,P5,P3,P5,P3,P5,P3
+163,January,2026,2026-01-01,kavin,977028,Sathiyamoorthy,ATNM,Nimr Flowline,FCE-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator",0.0,,,,,P0,P0,,,P0,P0,P0,P0
+167,February,2026,2026-02-01,murugesh,107305088,KAMLESH,Sub contractor,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,,,NA,NA,,,,,,,NA,NA
+171,February,2026,2026-02-01,"niyas
+pritthiraj
+siteengcivil4",110716305,SYED ASIM RAZA,Sub contractor,Marmul Flowline,"FCE-0302
+FCE-0402
+FCG-0402
+FCO-0502
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+FL Civil Sleeper (HS)
+Grouting Crew",91.4,P8,P8,P8,P8,P5,P3,P1,P0,,,P6,P4
+175,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",111958633,Zia Ashraf,Sub contractor,"Marmul Flowline
+Marmul SNLP","FCE-0402
+FCE-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - RDX / EDX / UG Excavation",43.52,P0,P0,,,,,P0,P0,,,P0,P0
+179,February,2026,2026-02-01,"niyas
+siteengcivil4",114791187,SAEED AHMAD,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCM-0401
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Manual Excavation crew",20.98,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+183,February,2026,2026-02-01,karthik,116697293,Jamil Aslam,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0803",Mechanical,"RDX Lowering Crew
+Welding Crew - FL",33.41,P0,P0,P1,P0,,,P0,P0,,,P0,P0
+187,February,2026,2026-02-01,hansraj,118327,HANSRAJ DAYANAND BARI,Sub contractor,NA,MPF0704,NA,PE Fusion Crew,,,,NA,NA,NA,NA,,,,,NA,NA
+191,February,2026,2026-02-01,kavin,121978417,INHAM UR REHMAN,Sub contractor,Nimr Flowline,FCP-0403,Civil,Cvil - Pre and Post Padding,,,,,,NA,NA,,,,,NA,NA
+195,February,2026,2026-02-01,"arunraj
+basil",123073422,AFTAB ALAM,Sub contractor,Marmul Flowline,"FWP-0702
+FWR-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL",77.44,NA,NA,P2,P0,P0,P0,P8,P8,,,P3,P1
+199,February,2026,2026-02-01,"niyas
+siteengcivil4",125372792,ADNAN KHALID,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCM-0401
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+Manual Excavation crew",15.67,NA,NA,P0,P0,P2,P0,P8,P8,,,P0,P0
+203,February,2026,2026-02-01,kavin,126908496,HASSAN RAZA,Sub contractor,Nimr Flowline,FCP-0403,Civil,Cvil - Pre and Post Padding,,,,NA,NA,,,,,,,NA,NA
+207,February,2026,2026-02-01,"arunraj
+basil",129421593,SYED IMTIAZ ALI,Sub contractor,Marmul Flowline,"FWP-0702
+YWS-0602",Mechanical,"Welding Crew - FL
+Welding Crew - Structure",-828.1,NA,NA,P0,P0,P0,P0,P0,P0,,,P0,P0
+211,February,2026,2026-02-01,mohammed,132280393,RAJEEV PILLAI SADASIVAN,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,213.39,P8,P8,P6,P4,P8,P8,P8,P8,,,P8,P8
+215,February,2026,2026-02-01,srinivas,502619,MOHAMMED ALI MOHAMMED ALI AL MASHIKHI,Sub contractor,Marmul Flowline,"FEC-0502
+FEL-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination",,NA,NA,,,,,,,,,NA,NA
+219,February,2026,2026-02-01,siteengcivil4,503176,HAITHAM SALEEM NASIB BAIT FARAJ,Sub contractor,Marmul Flowline,"FCE-0302
+FCG-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",-44.23,P0,P0,,,,,P0,P0,,,P0,P0
+223,February,2026,2026-02-01,"pritthiraj
+siteengcivil4",77605175,Nazmul Hasan,Sub contractor,"Marmul Flowline
+NA","FCE-0403
+FCP-0403
+FCR-0303",Civil,"Civil Support Crew - RDX / EDX / UG Excavation
+Cvil - Pre and Post Padding
+FL Civil Grading",137.84,P2,P0,P8,P8,P8,P8,NA,NA,,,P8,P8
+227,February,2026,2026-02-01,kavin,82745376,Muhammad Yasir Khan,Sub contractor,Nimr Flowline,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,,,,NA,NA,,,,,,,NA,NA
+231,February,2026,2026-02-01,siteengcivil4,90176501,Naeem Masih,Sub contractor,Marmul Flowline,"FCE-0302
+FCE-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator",,NA,NA,,,,,NA,NA,,,NA,NA
+235,February,2026,2026-02-01,"basil
+siteengmech4",911341,UMA SHANKAR YADAVA,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Yard","FBB-0503
+FBH-0502
+YWS-0602
+YWW-0500","Mechanical
+YARD","Box Up Crew - Beam Pump
+Box Up Crew - Hookup
+Box Up Crew - Precom
+Welding Crew - Structure
+Welding Crew - Yard",-42.96,P0,P0,P0,P0,NA,NA,P0,P0,,,P0,P0
+239,February,2026,2026-02-01,"arunraj
+basil",913202,LAKKAM MURALI MANOHAR,ATNM,Marmul Flowline,"FHT-0503
+FSI-0501",Mechanical,"Hydro Test Crew
+Stopaqe Crew(ODC)",76.73,P5,P3,P4,P2,P3,P1,P0,P0,,,P3,P1
+243,February,2026,2026-02-01,"arul
+rajesh",917290,KARKADA PAUL BARNABAS,ATNM,"Nimr Conversion without flowline
+Nimr Flowline","FEC-0502
+FEH-0601
+FEL-0501
+FER-0703
+FET-0501","Electrical
+Instrument","Electrical - Transformer Installation Crew
+Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",184.12,P8,P8,P8,P8,P8,P8,P8,P8,,,P8,P8
+247,February,2026,2026-02-01,"arul
+karthik
+NA",918259,RAJ DHARMESHKUMAR GANPATSINH,ATNM,"Nimr Flowline
+Nimr SNLP","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",89.62,P4,P2,,,NA,NA,P7,P5,,,P5,P3
+251,February,2026,2026-02-01,niyas,92299872,Azizul Hoque,Sub contractor,Marmul Flowline,"FCE-0402
+FCG-0402
+FCM-0401
+FCM-0501
+FCO-0502
+FCP-0403
+FCS-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - Manual Excavation (NS)
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)
+Grouting Crew
+Manual Excavation crew",1018.77,P0,P0,P1,P0,P8,P8,NA,NA,,,P8,P8
+255,February,2026,2026-02-01,basil,927189,SURYA NATH YADAV,ATNM,Marmul Flowline,"FBH-0502
+YWS-0602",Mechanical,"Box Up Crew - Hookup
+Welding Crew - Structure",-47.46,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+259,February,2026,2026-02-01,"arul
+NA
+rajesh",936707,PRAVEEN KUMAR .,ATNM,"Nimr Conversion without flowline
+Nimr Flowline","FEC-0502
+FEC-0602
+FEL-0501
+FET-0501
+OLI-0501
+OLI-0702","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing
+OHL Crew ( Vendor&Tasnim)",91.51,P0,P0,P8,P8,P8,P8,P7,P5,,,P6,P4
+263,February,2026,2026-02-01,basil,94279793,Maha Asif Muhammad,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",-363.73,P0,P0,P8,P8,P0,P0,P8,P8,,,P0,P0
+267,February,2026,2026-02-01,"mohamed
+NA",955369,PRABAKARAN MURUGAN,ATNM,Nimr Location,LCC-0803,Civil,Cellar Crew,134.09,P8,P7,P8,P8,P8,P8,P8,P8,,,P8,P8
+271,February,2026,2026-02-01,arunraj,967210,SARADHI KARAGANA,ATNM,Marmul Yard,FHT-0503,Mechanical,Hydro Test Crew,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+275,February,2026,2026-02-01,"basil
+siteengmech4",967494,MURUGAN VIJAYAN,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Re-Open","FRL-0502
+FRL-0504","General
+Mechanical","Beam Pump_Rigging Crew
+Rigging Crew",207.2,P0,P0,P8,P8,P8,P8,P8,P8,,,P8,P8
+279,February,2026,2026-02-01,"NA
+rajesh",968734,BIBHUTI BHUSAN BHUNIA,ATNM,"Nimr Flowline
+Nimr Non-Standard Well","FEC-0502
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",5777.01,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+283,February,2026,2026-02-01,rajesh,969613,BATHMANAPAN SIVANANITHA PERUMAL,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",117.23,P8,P8,,,P2,P0,P8,P8,,,P8,P8
+287,February,2026,2026-02-01,mohammed,970505,ANUJ KUMAR,ATNM,Marmul Location,LCC-0803,Civil,Cellar Crew,124.55,P8,P8,P8,P8,P8,P8,P3,P1,,,P8,P8
+291,February,2026,2026-02-01,"arunraj
+siteengmech4",970585,DHRUVKUMAR JITENDRABHAI MISTRY,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Yard","YWS-0602
+YWW-0500","Mechanical
+YARD","Welding Crew - Structure
+Welding Crew - Yard",-95.19,P0,P0,P0,P0,P0,P0,P0,P0,,,P0,P0
+295,February,2026,2026-02-01,mohamed,970685,MOHAMMED SAHADUL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,108.67,P0,P0,P8,P8,P1,P0,P8,P8,,,P8,P8
+299,February,2026,2026-02-01,mohamed,970893,GOPINATHAN VELUSAMY,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,,,,NA,NA,,,,,,,NA,NA
+303,February,2026,2026-02-01,mohamed,971404,MOHAMMAD IRSHAD .,ATNM,Nimr Yard,YLM-0401,NA,NA,,,,,,NA,NA,NA,NA,,,NA,NA
+307,February,2026,2026-02-01,"karthik
+NA",971713,MURALIDHARAN PANCHALAM,ATNM,"NA
+Nimr Yard",YWW-0500,YARD,Welding Crew - Yard,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+311,February,2026,2026-02-01,"arul
+karthik",972323,NIKHIL CHEMMALATH DHARMAJAN,ATNM,Nimr Flowline,FBH-0502,Mechanical,Box Up Crew - Hookup,377.44,P8,P8,,,NA,NA,NA,NA,,,P8,P8
+315,February,2026,2026-02-01,"karthik
+NA",973030,MANOJ KUMAR,ATNM,"NA
+Nimr Yard","YBC0500
+YPB-0500","NA
+YARD",NA,,,,NA,NA,NA,NA,NA,NA,,,NA,NA
+319,February,2026,2026-02-01,kavin,977028,Sathiyamoorthy,ATNM,Nimr Flowline,FCE-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator",0.0,P0,P0,,,,,,,,,P0,P0
+323,March,2026,2026-03-01,karthik,101219014,Mohammad Sultan,Sub contractor,Nimr Flowline,FWP-0702,Mechanical,Welding Crew - FL,0.0,NA,NA,,,P0,P0,NA,NA,,,P0,P0
+327,March,2026,2026-03-01,kavin,110607228,Naimat Ullah,Sub contractor,Nimr Flowline,FCG-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW",22.92,,,P0,P0,P0,P0,,,,,P0,P0
+331,March,2026,2026-03-01,mohamed,111017428,Abdul Hasseeb,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,135.93,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+335,March,2026,2026-03-01,"niyas
+siteengcivil4",114435301,Malhi Rizwan Aslam,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",129.23,P8,P8,P4,P2,P8,P8,,,,,P8,P8
+339,March,2026,2026-03-01,niyas,116224173,Mohammed Adil,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCP-0403
+FCR-0303
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Grading
+FL Civil Sleeper (HS)",73.76,P2,P0,P0,P0,P4,P2,,,,,P2,P0
+343,March,2026,2026-03-01,karthik,117933803,AMEER JAYACHANDRAN,Sub contractor,Nimr Flowline,"FWP-0702
+FWR-0602",Mechanical,"RDX Welding Crew
+Welding Crew - FL",80.7,,,P0,P0,P6,P4,NA,NA,,,P4,P2
+347,March,2026,2026-03-01,kavin,121604409,Muhammad Mubeen,Sub contractor,Nimr Flowline,FCG-0402,"Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW",,,,,,NA,NA,,,,,NA,NA
+351,March,2026,2026-03-01,mohamed,122253392,SULEMAN WAHEED RAJA,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,149.77,P2,P0,P8,P8,P8,P8,NA,NA,,,P8,P8
+355,March,2026,2026-03-01,mohammed,125138889,Masood Shah,Sub contractor,Marmul Location,LCP-0511,Civil,WD Location Const Crew,318.32,P8,P8,P6,P4,P8,P8,NA,NA,,,P8,P8
+359,March,2026,2026-03-01,kavin,126908496,HASSAN RAZA,Sub contractor,Nimr Flowline,"FCG-0402
+FCP-0403","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding",59.7,,,,,P0,P0,,,,,P0,P0
+363,March,2026,2026-03-01,mohamed,127736661,MUHAMMAD ATIF,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,,NA,NA,,,,,,,,,NA,NA
+367,March,2026,2026-03-01,arunraj,131873311,Farhan Ghafoor,Sub contractor,Marmul Flowline,"FWP-0702
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+Welding Crew - FL
+Welding Crew - Structure",8.56,P0,P0,P0,P0,NA,NA,,,,,P0,P0
+371,March,2026,2026-03-01,mohamed,137954852,ABDUL RAHMAN,Sub contractor,Nimr Location,LCP-0511,Civil,WD Location Const Crew,146.41,P8,P7,P8,P8,P8,P8,,,,,P8,P8
+375,March,2026,2026-03-01,murugesh,503162,WATHAB MAHKOOM ALI AL HINAI,Sub contractor,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+379,March,2026,2026-03-01,gopakumar,614069,BADAR HARIB SALIM AL MAHRUQI,Sub contractor,Marmul Flowline,FEL-0501,Electrical,Electrical Crew - LV Cable Termination,,,,NA,NA,,,,,,,NA,NA
+383,March,2026,2026-03-01,"niyas
+siteengcivil4",81587016,VIKRAMDAN MOHANDAN,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCM-0401
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Manual Excavation crew",30.32,P0,P0,P0,P0,P0,P0,,,,,P0,P0
+387,March,2026,2026-03-01,"niyas
+pritthiraj",85780016,AJMAL KAMAL,Sub contractor,"Marmul Conversion with Flowline
+Marmul Flowline","FCE-0403
+FCG-0402
+FCP-0403
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Sleeper (HS)",75.65,P0,P0,P2,P0,P8,P8,,,,,P3,P1
+391,March,2026,2026-03-01,"arunraj
+NA
+siteengmech4",910296,MAHESHWRI GOVIND HARSHI,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul SNLP
+Marmul Yard
+NA","FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",1340.17,P8,P8,P8,P8,P8,P8,NA,NA,NA,NA,P8,P8
+395,March,2026,2026-03-01,kavin,913082,RAMESH KUMAR,ATNM,Nimr LLRTP,FCE-0403,Civil,Civil Support Crew - RDX / EDX / UG Excavation,,NA,NA,NA,NA,NA,NA,,,,,NA,NA
+399,March,2026,2026-03-01,"pritthiraj
+siteengcivil4",916457,SHARMA BRIJESH,ATNM,"Marmul Flowline
+Marmul Re-Open","FCE-0302
+FCE-0402
+FCG-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",48.64,P0,P0,NA,NA,P0,P0,,,,,P0,P0
+403,March,2026,2026-03-01,karthik,918259,RAJ DHARMESHKUMAR GANPATSINH,ATNM,Nimr Flowline,"FBH-0502
+FHT-0503",Mechanical,"Box Up Crew - Hookup
+Hydro Test Crew",80.87,P3,P1,,,P5,P3,,,,,P4,P2
+407,March,2026,2026-03-01,karthik,927003,RAJENDRA CHUDHARY,ATNM,Nimr Yard,YRL-0502,NA,NA,,,,,,NA,NA,NA,NA,NA,NA,NA,NA
+411,March,2026,2026-03-01,arunraj,927190,DUDHNATH PRASAD .,ATNM,"Marmul Flowline
+Marmul SNLP
+NA",FRL-0502,General,Rigging Crew,128.23,P8,P8,P8,P8,P0,P0,NA,NA,,,P8,P8
+415,March,2026,2026-03-01,kavin,936642,RAMESH AZHAGARSAMY,ATNM,Nimr Flowline,"FCE-0402
+FCG-0402","Civil
+Mechanical","Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW",49.38,,,NA,NA,P0,P0,,,,,P0,P0
+419,March,2026,2026-03-01,basil,94279793,Maha Asif Muhammad,Sub contractor,Marmul Flowline,"FWM-0501
+FWP-0702
+FWR-0602
+FWR-0803
+YWS-0602",Mechanical,"RDX Lowering Crew
+RDX Welding Crew
+Welding Crew - FL
+Welding Crew - Misc
+Welding Crew - Structure",-13.21,P5,P3,P6,P4,P0,P0,,,,,P0,P0
+423,March,2026,2026-03-01,gopakumar,95967244,MUHAMMAD IMRAN,Sub contractor,"Marmul Conversion with Flowline
+Marmul Flowline","FEC-0502
+FEH-0601
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",321.79,,,P8,P8,P8,P8,,,,,P8,P8
+427,March,2026,2026-03-01,arunraj,967210,SARADHI KARAGANA,ATNM,Marmul Yard,FHT-0503,Mechanical,Hydro Test Crew,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+431,March,2026,2026-03-01,"arunraj
+basil",967494,MURUGAN VIJAYAN,ATNM,"Marmul Flowline
+NA",FRL-0502,General,Rigging Crew,382.0,P8,P8,P8,P8,P8,P8,,,,,P8,P8
+435,March,2026,2026-03-01,NA,968734,BIBHUTI BHUSAN BHUNIA,ATNM,Nimr Flowline,FEL-0501,Electrical,Electrical Crew - LV Cable Termination,,,,,,NA,NA,,,,,NA,NA
+439,March,2026,2026-03-01,rajesh,969613,BATHMANAPAN SIVANANITHA PERUMAL,ATNM,Nimr Flowline,"FEC-0502
+FEC-0602
+FEH-0601
+FEL-0501
+FET-0501","Electrical
+Instrument","Electrical Crew - Cable Laying
+Electrical Crew - HV Cable Termination
+Electrical Crew - LV Cable Termination
+Electrical Crew - Testing",96.56,P0,P0,P8,P8,P8,P8,,,,,P7,P5
+443,March,2026,2026-03-01,mohammed,970505,ANUJ KUMAR,ATNM,Marmul Location,"LCC-0803
+LCP-0511",Civil,"Cellar Crew
+WD Location Const Crew",137.77,P4,P2,P8,P8,P4,P2,,,,,P8,P8
+447,March,2026,2026-03-01,arunraj,970585,DHRUVKUMAR JITENDRABHAI MISTRY,ATNM,"Marmul Flowline
+Marmul Yard","YWS-0602
+YWW-0500","Mechanical
+YARD","Welding Crew - Structure
+Welding Crew - Yard",32.74,P0,P0,P0,P0,P0,P0,,,,,P0,P0
+451,March,2026,2026-03-01,mohammad,970678,SAJIKUMAR FRANCIS,ATNM,Nimr Flowline,FII-0502,Instrument,Instrument Crew,78.31,P6,P4,P1,P0,P3,P1,,,,,P3,P1
+455,March,2026,2026-03-01,karthik,970777,DHARMENDRA BALUBHAI DHOKIYA,ATNM,"Nimr Flowline
+Nimr Yard","FBH-0502
+YPB-0500","Mechanical
+NA","Box Up Crew - Hookup
+NA",94.12,,,NA,NA,P6,P4,,,,,P6,P4
+459,March,2026,2026-03-01,"pritthiraj
+siteengcivil4",970957,UMESH PRASAD .,ATNM,Marmul Flowline,"FCC-0501
+FCE-0302
+FCE-0402
+FCG-0402
+FCP-0403
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - Excavator
+Civil Support Crew - ROW
+Concrete_Civil Support Crew
+Cvil - Pre and Post Padding",40.01,P0,P0,P0,P0,P8,P8,NA,NA,,,P0,P0
+463,March,2026,2026-03-01,karthik,971487,JEGAN THANGARAJ,ATNM,Nimr Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+467,March,2026,2026-03-01,mohamed,972048,SAKKAMMAL DURAI CHELLAPANDIAN,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,110.21,P8,P8,P8,P8,P6,P4,NA,NA,,,P8,P8
+471,March,2026,2026-03-01,"basil
+siteengmech4",972374,ADNAN HAQUE,ATNM,"Marmul Conversion with Flowline
+Marmul Flowline
+Marmul Yard","YWS-0602
+YWW-0500","Mechanical
+YARD","Welding Crew - Structure
+Welding Crew - Yard",102.03,P8,P6,P8,P6,P8,P7,NA,NA,NA,NA,P8,P7
+475,March,2026,2026-03-01,mohamed,973301,MOHAMMED ISMAIL .,ATNM,Nimr Location,LCP-0511,Civil,WD Location Const Crew,92.14,NA,NA,P0,P0,P8,P8,NA,NA,,,P6,P4
+479,March,2026,2026-03-01,niyas,98615196,Mahmmed Saifallah,Sub contractor,Marmul Flowline,"FCE-0403
+FCG-0402
+FCP-0403
+FCR-0303
+FCS-0402
+LCC-0803","Civil
+Mechanical","Cellar Crew
+Civil Support Crew
+Civil Support Crew - RDX / EDX / UG Excavation
+Civil Support Crew - ROW
+Cvil - Pre and Post Padding
+FL Civil Grading
+FL Civil Sleeper (HS)",73.76,P2,P0,P0,P0,P4,P2,,,,,P2,P0
+483,April,2026,2026-04-01,arunraj,910296,MAHESHWRI GOVIND HARSHI,ATNM,Marmul Yard,FHT-0503,Mechanical,Hydro Test Crew,,NA,NA,NA,NA,,,,,,,NA,NA
+487,April,2026,2026-04-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+491,April,2026,2026-04-01,murugesh,972295,RAJA KESAVAN,ATNM,Marmul Yard,YWW-0500,YARD,Welding Crew - Yard,,NA,NA,,,,,,,,,NA,NA
+495,June,2026,2026-06-01,suresh,NA,NA,Sub contractor,Nimr Yard,NA,NA,NA,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+499,July,2026,2026-07-01,karthik,927003,RAJENDRA CHUDHARY,ATNM,Nimr Yard,YRL-0502,NA,NA,,NA,NA,NA,NA,NA,NA,,,,,NA,NA
+503,September,2026,2026-09-01,suresh,NA,NA,Sub contractor,Nimr Yard,NA,NA,NA,,NA,NA,,,,,,,,,NA,NA
+507,December,2026,2026-12-01,arunraj,937915,UMESHBHAI ISHVARBHAI LAD,ATNM,Marmul Yard,YWW-0700,YARD,Welding Crew - Yard,,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

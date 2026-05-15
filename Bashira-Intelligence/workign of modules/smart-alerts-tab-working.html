@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Alerts Tab Working</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --paper: #ffffff;
+      --ink: #111111;
+      --muted: #5f636b;
+      --line: #d9dce3;
+      --soft: #eef1f5;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+
+    .hero, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 14px 38px rgba(17, 17, 17, 0.05);
+    }
+
+    .hero {
+      padding: 34px 34px 28px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #697386;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 44px;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    p { margin: 0 0 14px; color: #2c3138; }
+    ul { margin: 10px 0 0 0; padding-left: 18px; }
+    li { margin: 8px 0; }
+    code {
+      background: #f3f5f8;
+      border: 1px solid #e5e8ee;
+      border-radius: 8px;
+      padding: 1px 6px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-7 { grid-column: span 7; }
+    .span-6 { grid-column: span 6; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+
+    .card { padding: 26px 26px 24px; }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      background: #fcfcfd;
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+    }
+
+    .kpi .label {
+      color: #68707d;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .kpi .value {
+      margin-top: 10px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+
+    .diagram {
+      width: 100%;
+      background: linear-gradient(180deg, #fdfdfd 0%, #f7f8fb 100%);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 10px;
+      border-bottom: 1px solid #eceff3;
+    }
+
+    th {
+      color: #68707d;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #111827;
+      color: #f8fafc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .span-7, .span-6, .span-5, .span-4, .span-12 { grid-column: span 12; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Bashira Intelligence / Smart Alerts</p>
+      <h1>How the Smart Alerts Tab Works</h1>
+      <p style="margin-top:16px; max-width: 980px;">
+        Smart Alerts is the alert-ranking and intervention surface of the product. It does not simply list delayed wells.
+        It constructs a hybrid execution-pressure score for each active well by blending schedule delay, plan-vs-actual divergence,
+        stage stall, project risk prior, anomaly transitions, and governance confidence. The result is a ranked escalation board
+        that is explainable, drillable, and tied back to the local AppMasterDB clone.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Backend Route</div>
+          <div class="value" style="color:var(--blue)">/alerts</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Cache TTL</div>
+          <div class="value" style="color:var(--yellow)">30s</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Ranking Unit</div>
+          <div class="value" style="color:var(--red)">Well Alert</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Cross-System Inputs</div>
+          <div class="value" style="color:var(--green)">4 Layers</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-7">
+        <h2>1) Runtime Path</h2>
+        <p>
+          The tab is loaded by <code>SmartAlerts.tsx</code>, which uses the shared hook
+          <code>useCommandCenterData("alerts")</code>. The browser fetches
+          <code>/api/command-center?action=alerts</code>, the Next.js proxy maps that to
+          <code>/api/command-center/alerts</code>, and the Python backend returns
+          <code>service.get_smart_alerts_view()</code>.
+        </p>
+        <p>
+          The important architectural point is that Smart Alerts is not fed by a dedicated SQL query written only for this screen.
+          It is composed from a command-center service that fuses portfolio context, integrity context, forecast context, and anomaly context.
+        </p>
+      </article>
+
+      <article class="card span-5">
+        <h2>2) Freshness Model</h2>
+        <p>
+          The frontend always requests with <code>cache: "no-store"</code>, but the backend caches the computed alert payload for
+          roughly <code>30 seconds</code>. This keeps the board responsive while avoiding unnecessary recomputation of the full alert stack.
+        </p>
+        <ul>
+          <li>UI refresh button re-requests the board</li>
+          <li>Backend recalculates after cache expiry</li>
+          <li>Alert ranking therefore behaves near-live without recomputing every paint</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>3) Cross-System Inputs That Feed the Alert Model</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Input Layer</th>
+              <th>Source</th>
+              <th>What It Adds</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Operating frame</td>
+              <td><code>_operating_frame()</code></td>
+              <td>Canonical well-level state: well ID, project, rig, progress, delay, risk tier, dates, and stage completion</td>
+            </tr>
+            <tr>
+              <td>Job progress signal map</td>
+              <td><code>_build_job_progress_signal_map(job_progress_df)</code></td>
+              <td>Weekly plan-vs-actual timeline, current-month gap, average gap, and short-horizon execution velocity</td>
+            </tr>
+            <tr>
+              <td>Governance layer</td>
+              <td><code>_integrity_workspace()</code></td>
+              <td>Open rule exceptions used as trust and confidence modifiers</td>
+            </tr>
+            <tr>
+              <td>Risk transitions</td>
+              <td><code>AnomalyTracker.get_recent_anomalies()</code></td>
+              <td>Recent risk-tier jumps and anomaly pressure linked to wells</td>
+            </tr>
+            <tr>
+              <td>Portfolio context</td>
+              <td><code>get_portfolio_view()</code></td>
+              <td>Project pressure used for executive insights and board framing</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4) Job Progress Signal Map</h2>
+        <p>
+          Smart Alerts becomes more than a delay list because it converts weekly operational tracking into a compact per-well signal object.
+          <code>_build_job_progress_signal_map()</code> groups Job Progress by <code>Well ID</code> and computes a five-week mini-time-series.
+        </p>
+        <ul>
+          <li><code>timeline</code>: W1 to W5 plan, actual, and gap values</li>
+          <li><code>velocity_pct</code>: recent throughput slope, roughly last minus third-last actual value</li>
+          <li><code>avg_gap_pct</code>: average plan shortfall across the weekly series</li>
+          <li><code>current_month_plan_pct</code> and <code>current_month_actual_pct</code></li>
+          <li><code>current_month_gap_pct</code>: current plan minus current actual, clipped at zero</li>
+        </ul>
+        <p>
+          This is what gives the board temporal intelligence. It can see whether execution is merely behind, or actively deteriorating.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>5) Stage Metrics and Bottleneck Detection</h2>
+        <p>
+          The service computes stage completion for six operating stages:
+          <code>Location Prep</code>, <code>Engineering</code>, <code>Construction</code>,
+          <code>Commissioning</code>, <code>Flowline</code>, and <code>OHL</code>.
+        </p>
+        <p>
+          For each stage it records:
+        </p>
+        <ul>
+          <li><code>value_pct</code>: current completion</li>
+          <li><code>gap_pct</code>: remaining distance to 100 percent</li>
+        </ul>
+        <p>
+          The slowest stage is selected as the bottleneck. That bottleneck drives owner assignment, action generation, evidence text,
+          and part of the model score. This makes the alert operationally explainable rather than purely statistical.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>6) The Hybrid Smart Alert Score</h2>
+        <p>
+          The core of the tab is a five-part additive score breakdown. Each well gets five components, each normalized to a maximum of
+          <code>10</code>. The final <code>model_score</code> is:
+        </p>
+        <p><code>model_score = min(99, 2 * (delay_component + trend_component + stage_component + scope_component + data_component))</code></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Formula Logic</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>delay_component</code></td>
+              <td>Rig-off delay, rig-on delay, plus status bump if the rig is already <code>DELAYED</code> or <code>OVERDUE</code></td>
+              <td>Direct schedule pain</td>
+            </tr>
+            <tr>
+              <td><code>trend_component</code></td>
+              <td>Current month gap plus negative velocity plus average historical gap</td>
+              <td>Whether the well is falling behind plan over time</td>
+            </tr>
+            <tr>
+              <td><code>stage_component</code></td>
+              <td>Average stage gap plus a penalty if the slowest stage is very immature</td>
+              <td>Execution bottleneck intensity</td>
+            </tr>
+            <tr>
+              <td><code>scope_component</code></td>
+              <td>Current well risk score scaled into 0-10 space</td>
+              <td>Project or portfolio prior risk already known upstream</td>
+            </tr>
+            <tr>
+              <td><code>data_component</code></td>
+              <td>Missing milestone fields, pending MOC, and anomaly count</td>
+              <td>Confidence and governance pressure</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This is why the label <em>Hybrid Local Signal Model</em> is technically correct. The board blends deterministic schedule math,
+          short-horizon trend extraction, stage bottleneck logic, upstream risk priors, and governance confidence.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>7) Alert Gating and Severity Thresholds</h2>
+        <p>
+          Not every well becomes an alert. If the computed score is weak, the well has no positive delay, and its risk score is still low,
+          the service discards it. That prevents the board from filling with harmless rows.
+        </p>
+        <p>
+          Severity thresholds are then assigned from <code>model_score</code>:
+        </p>
+        <ul>
+          <li><strong>Critical</strong>: <code>&gt;= 66</code></li>
+          <li><strong>High</strong>: <code>&gt;= 52</code></li>
+          <li><strong>Medium</strong>: <code>&gt;= 35</code></li>
+          <li><strong>Low</strong>: below that</li>
+        </ul>
+        <p>
+          Finally the board is sorted by severity rank, then by <code>model_score</code>, then by <code>risk_score</code>, and clipped to the top
+          <code>18</code> rows. That means the tab is intentionally a ranked intervention board, not a full historical archive.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>8) Confidence Score</h2>
+        <p>
+          Each alert includes <code>confidence_pct</code>. This is not model probability in the strict statistical sense. It is an operational
+          confidence heuristic built from evidence density and corroboration.
+        </p>
+        <p><code>confidence_pct = min(98, 56 + 5 * evidence_count + 0.25 * model_score + min(10, 4 * anomaly_count))</code></p>
+        <p>
+          That means confidence rises when:
+        </p>
+        <ul>
+          <li>more independent evidence lines are present</li>
+          <li>the alert score itself is stronger</li>
+          <li>recent risk transitions corroborate that something is changing</li>
+        </ul>
+        <p>
+          The goal is pragmatic: the board should prioritize alerts that are both important and well-supported.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>9) Evidence Construction</h2>
+        <p>
+          Evidence is built through <code>_build_alert_evidence()</code>. The service turns raw schedule and governance facts into short,
+          human-readable statements. Evidence can include:
+        </p>
+        <ul>
+          <li>rig-off overdue days</li>
+          <li>rig-on lateness</li>
+          <li>current month plan shortfall</li>
+          <li>flat or declining weekly throughput</li>
+          <li>the slowest stage and its progress level</li>
+          <li>rig queue overlap with other active wells</li>
+          <li>recent anomaly transitions</li>
+          <li>missing milestone fields</li>
+          <li>pending MOC approval</li>
+        </ul>
+        <p>
+          These are not generic LLM sentences. They are deterministic statements created from measured conditions.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>10) Action Recommendation Logic</h2>
+        <p>
+          Smart Alerts also generates intervention suggestions through <code>_recommend_alert_actions()</code>. The function looks at the dominant
+          contributors in the breakdown and maps them into operational directives.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Dominant Driver</th>
+              <th>Action Style</th>
+              <th>Typical Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Delay trend</td>
+              <td>Re-sequence rig commitment</td>
+              <td>Rig Planner</td>
+            </tr>
+            <tr>
+              <td>Progress slope</td>
+              <td>Recover weekly throughput</td>
+              <td>Project Controls</td>
+            </tr>
+            <tr>
+              <td>Stage stall</td>
+              <td>Unblock the slowest stage</td>
+              <td>Stage lead</td>
+            </tr>
+            <tr>
+              <td>Scope risk</td>
+              <td>Escalate project recovery review</td>
+              <td>Project Controls</td>
+            </tr>
+            <tr>
+              <td>Data quality</td>
+              <td>Close data confidence gaps</td>
+              <td>Data Steward</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          If other wells share the same rig, a queue-protection action is also appended. This is why the tab can surface contagion rather than just isolated local pain.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>11) Anomaly Tracker Integration</h2>
+        <p>
+          Smart Alerts uses <code>AnomalyTracker</code> as a risk-transition memory layer. This tracker persists tier changes in SQL Server when possible,
+          can fall back to SQLite only if explicitly allowed, and otherwise keeps an in-memory store so the product continues to work.
+        </p>
+        <p>
+          The tracker records transitions like <code>WATCH -> HIGH_RISK</code> or <code>HIGH_RISK -> CRITICAL</code>, stores the score delta,
+          and exposes recent anomalies back to the command-center service. These anomalies influence:
+        </p>
+        <ul>
+          <li><code>data_component</code></li>
+          <li><code>confidence_pct</code></li>
+          <li>evidence strings</li>
+          <li>system-wide flags and executive insights</li>
+        </ul>
+        <p>
+          This means Smart Alerts is not only snapshot-based. It has memory of change.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-7">
+        <h2>12) Frontend Interaction Model</h2>
+        <p>
+          The frontend intentionally downloads one alert payload and then performs local slicing. Search, severity filtering, alert selection,
+          and center-pane tab changes happen client-side. The component uses <code>useDeferredValue</code> for the search input so filtering stays
+          responsive while typing.
+        </p>
+        <p>
+          The center pane has six operating views:
+        </p>
+        <ul>
+          <li><code>Exposure</code>: board-level severity composition</li>
+          <li><code>Drivers</code>: per-alert score breakdown</li>
+          <li><code>Timeline</code>: plan vs actual over time</li>
+          <li><code>Playbook</code>: recommended interventions plus executive directives</li>
+          <li><code>Evidence</code>: stage progression and factual rationale</li>
+          <li><code>Impact</code>: affected wells, rig dates, governance flags, and local exposure facts</li>
+        </ul>
+      </article>
+
+      <article class="card span-5">
+        <h2>13) Chart System</h2>
+        <p>
+          Smart Alerts mixes two chart strategies:
+        </p>
+        <ul>
+          <li>2D charts are rendered with Plotly through a dynamically imported client-only component</li>
+          <li>3D-style column views are rendered by a local SVG engine called <code>ExtrudedBarsChart</code></li>
+        </ul>
+        <p>
+          That design matters. It avoids relying entirely on heavyweight 3D libraries while still giving the user both flat and volumetric views of the same data.
+        </p>
+        <p>
+          Summary composition, driver stacks, and timeline divergence are all derived directly from the alert payload on the client.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>14) Board-Level Metrics and Executive Framing</h2>
+        <p>
+          The board emits headline metrics such as <code>Critical Wells</code>, <code>Avg Model Score</code>, <code>Delay Exposure</code>,
+          <code>Rig Contagion</code>, and <code>Governance Flags</code>. These are aggregated from the ranked alert set, not raw copied fields.
+        </p>
+        <p>
+          It also emits executive insights built from other tabs:
+        </p>
+        <ul>
+          <li>Portfolio pressure projects become board-level strategic context</li>
+          <li>Recent anomaly transitions become live risk-governance commentary</li>
+          <li>Data Integrity open exceptions affect whether leadership can trust the board as “real operations pressure” rather than bad data</li>
+        </ul>
+        <p>
+          That is the architectural reason Smart Alerts is valuable: it is where multiple intelligence layers are compressed into one intervention surface.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>15) Why This Tab Creates Real Operational Value</h2>
+        <p>
+          In real operations, the hardest problem is not merely detecting that some wells are late. The hard problem is deciding what needs attention now,
+          why it matters, who should act, and how confident the organization should be in that signal. Smart Alerts solves exactly that problem.
+        </p>
+        <ul>
+          <li>It converts noisy operational telemetry into a ranked intervention queue</li>
+          <li>It makes the score explainable with deterministic evidence and driver decomposition</li>
+          <li>It brings schedule, execution, risk, anomaly memory, and governance trust into one board</li>
+          <li>It preserves drill-down so the board is not just executive theater but an actionable operating surface</li>
+        </ul>
+        <p>
+          The tab is therefore best understood as a local decision engine for where field attention should move first.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Smart Alerts is a hybrid ranking system: part schedule analytics, part execution monitoring, part risk memory, and part governance trust layer. That combination is what lets it behave like an intervention board instead of a generic notification list.
+    </div>
+  </div>
+</body>
+</html>

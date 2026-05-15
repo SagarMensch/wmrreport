@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - SequelOntology Tab Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #111111;
+      --muted: #5f6670;
+      --line: #d7dbe1;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", "Figtree", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    h1 {
+      margin: 8px 0 6px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    .kpi {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    p { margin: 0 0 10px; }
+    ul, ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin-bottom: 6px; }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      background: #fbfcfd;
+    }
+    .pill.blue { border-color: #b7cdfd; color: #0a46b3; background: #eef3ff; }
+    .pill.green { border-color: #bdeec6; color: #06722f; background: #ecfcf0; }
+    .pill.yellow { border-color: #f2dfa0; color: #7d6308; background: #fff9e6; }
+    .pill.red { border-color: #ecc0c0; color: #8e1b1b; background: #fff1f1; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #fafbfd;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #404854;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.95em;
+      background: #f7f8fa;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .svg-wrap {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fdfdff;
+    }
+    .dark-box {
+      background: linear-gradient(180deg, #111720 0%, #0a0e14 100%);
+      color: #eef2f7;
+      border: 1px solid #1f2733;
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .footer {
+      color: #626a75;
+      font-size: 12px;
+      margin-top: 20px;
+      padding: 10px 4px 20px;
+    }
+    @media (max-width: 1080px) {
+      .span-8, .span-6, .span-4, .span-3 { grid-column: span 12; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Working Of Modules</div>
+      <h1>SequelOntology - Technical Working Document</h1>
+      <p class="subtitle">
+        Detailed explanation of how the <strong>SequelOntology</strong> tab works as a graph-based metadata system, how it is rendered in 3D,
+        and how it powers retrieval, join reasoning, and natural-language analytics across the rest of Bashira Intelligence.
+      </p>
+      <div class="pill-row">
+        <span class="pill blue">Graph Store: Neo4j Aura</span>
+        <span class="pill blue">Embedding Model: all-MiniLM-L6-v2 (384-dim)</span>
+        <span class="pill blue">Lexical Search: BM25 + Fulltext</span>
+        <span class="pill blue">Fusion: RRF</span>
+        <span class="pill green">Runtime Orchestration: LangGraph</span>
+        <span class="pill yellow">Renderer: react-force-graph-3d</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Role</div>
+        <p class="kpi-value">Metadata OS</p>
+        <p class="note">Not just visualization. It is the schema intelligence layer behind Operations and NL2SQL.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Core Unit</div>
+        <p class="kpi-value">Nodes + Edges</p>
+        <p class="note">Tables, columns, and well hubs encoded as graph entities and relationships.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Search Modes</div>
+        <p class="kpi-value">3 Sources</p>
+        <p class="note">Vector, Neo4j fulltext, and BM25 all converge to grounded schema context.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">UI Surface</div>
+        <p class="kpi-value">3D Matrix</p>
+        <p class="note">Client-side WebGL scene with hover HUD, zoom-to-fit, and node focus behavior.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>1) End-to-End Runtime Flow</h2>
+        <p>
+          SequelOntology has two jobs. First, it exposes the schema graph visually through the graph tab. Second, it serves as the retrieval substrate for Operations.
+          The same graph that the user sees in 3D is also queried programmatically for semantic search, keyword search, and join-path resolution.
+        </p>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1180 390" width="100%" role="img" aria-label="SequelOntology end-to-end runtime flow">
+            <rect x="24" y="24" width="170" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="109" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">CSV / Schema Sources</text>
+            <rect x="230" y="24" width="178" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="319" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Neo4j Seed Scripts</text>
+            <rect x="444" y="24" width="202" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="545" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Neo4j Graph + Indexes</text>
+            <rect x="682" y="24" width="194" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="779" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">FastAPI /api/knowledge-graph</text>
+            <rect x="912" y="24" width="232" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="1028" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Next.js Proxy + IntelligenceMatrix</text>
+
+            <line x1="194" y1="51" x2="230" y2="51" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="408" y1="51" x2="444" y2="51" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="646" y1="51" x2="682" y2="51" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="876" y1="51" x2="912" y2="51" stroke="#4f78d6" stroke-width="2"/>
+
+            <rect x="72" y="128" width="220" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="182" y="156" text-anchor="middle" font-size="12.5" fill="#222">tables_updated.csv</text>
+            <rect x="72" y="182" width="220" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="182" y="210" text-anchor="middle" font-size="12.5" fill="#222">columns_atnm_dev.csv</text>
+
+            <rect x="348" y="128" width="248" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="472" y="156" text-anchor="middle" font-size="12.5" fill="#222">Create Table / Column / Well nodes</text>
+            <rect x="348" y="182" width="248" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="472" y="210" text-anchor="middle" font-size="12.5" fill="#222">Create HAS_COLUMN / JOINS_ON / MIRRORS edges</text>
+
+            <rect x="652" y="112" width="220" height="44" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="762" y="140" text-anchor="middle" font-size="12.5" fill="#0a6a2b">Fulltext Index</text>
+            <rect x="652" y="166" width="220" height="44" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="762" y="194" text-anchor="middle" font-size="12.5" fill="#0a6a2b">Vector Index</text>
+            <rect x="652" y="220" width="220" height="44" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="762" y="248" text-anchor="middle" font-size="12.5" fill="#0a6a2b">Join Path Resolution</text>
+
+            <rect x="920" y="126" width="220" height="44" rx="8" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="1030" y="154" text-anchor="middle" font-size="12.5" fill="#7d6308">ForceGraph3D Scene</text>
+            <rect x="920" y="180" width="220" height="44" rx="8" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="1030" y="208" text-anchor="middle" font-size="12.5" fill="#7d6308">Hover HUD + Camera Focus</text>
+
+            <rect x="314" y="302" width="266" height="52" rx="10" fill="#fff1f1" stroke="#e4b5b5"/>
+            <text x="447" y="334" text-anchor="middle" font-size="13" font-weight="700" fill="#8e1b1b">Also consumed by RetrievalAgent</text>
+            <rect x="612" y="302" width="314" height="52" rx="10" fill="#fff1f1" stroke="#e4b5b5"/>
+            <text x="769" y="334" text-anchor="middle" font-size="13" font-weight="700" fill="#8e1b1b">Feeds NL2SQL grounding for Operations</text>
+          </svg>
+        </div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-8">
+        <h2>2) What SequelOntology Means in This Product</h2>
+        <p>
+          In Bashira, "ontology" does not mean an academic taxonomy disconnected from runtime. It means the product has converted the SQL schema
+          into a machine-usable graph where structure, semantics, and joinability are explicit. A plain relational schema only tells you that columns exist.
+          This ontology additionally tells you how those columns relate, which tables mirror each other, which columns are well keys, and where safe join paths exist.
+        </p>
+        <p>
+          That distinction matters because natural-language analytics fails when the system only knows table names. It succeeds when the system knows
+          that <code>WellMonitoringReport.pdo_well_id</code> is semantically tied to <code>Job_Progress_Report_GB.Well_ID</code>, that certain tables mirror each other,
+          and that some tables are direct or indirect references to the well hub.
+        </p>
+      </article>
+      <article class="card span-4">
+        <h2>3) Why a Graph Database Was Used</h2>
+        <ul>
+          <li><strong>Schema relationships are first-class:</strong> joins, well references, and mirrored tables can be traversed directly.</li>
+          <li><strong>Search is hybrid:</strong> same graph hosts fulltext and vector indexes over column meaning.</li>
+          <li><strong>Explainability improves:</strong> retrieved columns and join paths can be shown as graph structure rather than hidden prompt text.</li>
+          <li><strong>It scales better for reasoning:</strong> join-path discovery is natural in graph form.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4) Ontology Model: Node Classes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Node Label</th>
+              <th>Meaning</th>
+              <th>Important Properties</th>
+              <th>Why It Exists</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Table</td>
+              <td>A SQL table or view modeled as a graph entity</td>
+              <td><code>name</code>, <code>description</code></td>
+              <td>Provides a parent structure for columns and table-level semantics</td>
+            </tr>
+            <tr>
+              <td>Column</td>
+              <td>A single field within a table</td>
+              <td><code>name</code>, <code>tableName</code>, <code>description</code>, <code>dataType</code>, <code>embedding</code>, <code>isWellKey</code></td>
+              <td>Primary retrieval unit used for NL2SQL grounding</td>
+            </tr>
+            <tr>
+              <td>Well</td>
+              <td>Central well hub used to express operational identity</td>
+              <td><code>wellId</code>, <code>description</code></td>
+              <td>Anchors multiple operational tables around a common business entity</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-6">
+        <h2>5) Ontology Model: Relationship Classes</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Edge Type</th>
+              <th>Direction</th>
+              <th>Meaning</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>HAS_COLUMN</td>
+              <td>Table -&gt; Column</td>
+              <td>Declares membership of a field inside a table</td>
+              <td>Lets renderer and retrieval group schema by table</td>
+            </tr>
+            <tr>
+              <td>BELONGS_TO</td>
+              <td>Column -&gt; Table</td>
+              <td>Reverse containment relation</td>
+              <td>Useful for traversals starting from column retrieval</td>
+            </tr>
+            <tr>
+              <td>REFERENCES_WELL</td>
+              <td>Table -&gt; Well</td>
+              <td>Table contains direct or indirect well identity</td>
+              <td>Builds business-entity connectivity beyond SQL syntax</td>
+            </tr>
+            <tr>
+              <td>MIRRORS</td>
+              <td>Table -&gt; Table</td>
+              <td>Sibling tables represent filtered or denormalized variants</td>
+              <td>Stops the system from treating near-duplicate tables as unrelated</td>
+            </tr>
+            <tr>
+              <td>JOINS_ON</td>
+              <td>Column -&gt; Column</td>
+              <td>Explicit join hint between fields</td>
+              <td>Critical for NL2SQL reliability and join-path enrichment</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>6) How the Graph Is Built</h2>
+        <ol>
+          <li><strong>Seed constraints and indexes:</strong> uniqueness constraints for wells, tables, and composite column identity are created first.</li>
+          <li><strong>Create fulltext indexes:</strong> Neo4j fulltext search is enabled over column names and descriptions.</li>
+          <li><strong>Create a well hub:</strong> a central well entity is introduced so multiple tables can resolve toward the same business object.</li>
+          <li><strong>Load tables from CSV:</strong> each table becomes a <code>Table</code> node with description metadata.</li>
+          <li><strong>Load columns from CSV:</strong> each column becomes a <code>Column</code> node attached to its table via <code>HAS_COLUMN</code>.</li>
+          <li><strong>Mark well-key columns:</strong> columns like <code>pdo_well_id</code> or <code>Well_ID</code> get semantic flags.</li>
+          <li><strong>Create mirror links:</strong> related tables such as historical and latest variants are linked with <code>MIRRORS</code>.</li>
+          <li><strong>Create join hints:</strong> curated cross-table column mappings become <code>JOINS_ON</code> edges.</li>
+          <li><strong>Generate embeddings:</strong> MiniLM embeddings are computed for column descriptions and stored on <code>Column</code> nodes.</li>
+          <li><strong>Create Neo4j vector index:</strong> semantic search can now run natively inside Neo4j.</li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>7) Indexing Strategy</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Index / Constraint</th>
+              <th>Stored On</th>
+              <th>Purpose</th>
+              <th>Technical Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Well uniqueness constraint</td>
+              <td><code>Well.wellId</code></td>
+              <td>Prevents duplicate well hubs</td>
+              <td>Stable entity identity</td>
+            </tr>
+            <tr>
+              <td>Table uniqueness constraint</td>
+              <td><code>Table.name</code></td>
+              <td>One graph node per table</td>
+              <td>Deterministic graph structure</td>
+            </tr>
+            <tr>
+              <td>Column composite uniqueness</td>
+              <td><code>Column(name, tableName)</code></td>
+              <td>Same column name can exist in multiple tables safely</td>
+              <td>Correct join hints and retrieval keys</td>
+            </tr>
+            <tr>
+              <td><code>column_description_ft</code></td>
+              <td>Column fulltext index</td>
+              <td>Lucene-style keyword search over names and descriptions</td>
+              <td>Good for exact enterprise wording and abbreviations</td>
+            </tr>
+            <tr>
+              <td><code>column_embeddings</code></td>
+              <td>Column vector index</td>
+              <td>Cosine similarity search over MiniLM embeddings</td>
+              <td>Good for paraphrases and semantically similar questions</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-4">
+        <h2>8) Why 384-Dimensional MiniLM Was Chosen</h2>
+        <ul>
+          <li><strong>Compact:</strong> 384 dimensions are cheaper to store and query than larger embeddings.</li>
+          <li><strong>Fast:</strong> suitable for local CPU use and fast startup.</li>
+          <li><strong>Enough semantics:</strong> good for mapping business language to schema descriptions.</li>
+          <li><strong>Operationally balanced:</strong> strong enough for schema retrieval without heavy GPU dependency.</li>
+        </ul>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-12">
+        <h2>9) Embedding and Search Mathematics</h2>
+        <h3>9.1 MiniLM embedding generation</h3>
+        <p>
+          Each column description is converted to a 384-dimensional dense vector. Operationally, the input text is a compact semantic descriptor such as
+          column name plus description. The resulting vector is stored directly on the corresponding Neo4j <code>Column</code> node.
+        </p>
+        <h3>9.2 Vector search in Neo4j</h3>
+        <p>
+          During runtime, the user query is expanded, embedded, and compared against indexed column vectors. Neo4j returns the nearest columns using cosine similarity:
+          <code>cos(u,v) = (u.v) / (||u|| ||v||)</code>.
+        </p>
+        <h3>9.3 Fulltext search</h3>
+        <p>
+          The same question is also transformed into a Lucene-style keyword query and sent to Neo4j fulltext index. This is useful when wording contains exact IDs,
+          rigid column names, or specific enterprise abbreviations.
+        </p>
+        <h3>9.4 BM25 lexical scoring</h3>
+        <p>
+          In parallel, an in-memory BM25 index over the column corpus scores how strongly each schema document matches query terms. Conceptually:
+          <code>score(D,Q)=sum(IDF(q_i) * (f(q_i,D)*(k1+1)) / (f(q_i,D)+k1*(1-b+b*|D|/avgdl)))</code>.
+        </p>
+        <h3>9.5 RRF fusion</h3>
+        <p>
+          The three ranked lists are merged using Reciprocal Rank Fusion:
+          <code>RRF(d)=sum(1/(k + rank_j(d)))</code>.
+          This is important because no single retrieval mode is sufficient in enterprise schema search. Vector is strong on meaning, fulltext is strong on exact wording,
+          and BM25 is strong on weighted lexical evidence.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>10) Abbreviation Expansion and Domain NLP</h2>
+        <p>
+          The ontology layer is designed for oilfield and operations language, not generic English. Before retrieval, the query is expanded with a domain abbreviation map.
+          This is why a question using terms like <code>WMR</code>, <code>PDO</code>, <code>WBS</code>, <code>SCR</code>, or <code>PH</code> can still reach the correct schema.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Abbreviation</th>
+              <th>Expansion Intent</th>
+              <th>Retrieval Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>WMR</td>
+              <td>Well Monitoring Report</td>
+              <td>Maps business shorthand to real table semantics</td>
+            </tr>
+            <tr>
+              <td>PDO</td>
+              <td>Petroleum Development Oman / <code>pdo_well_id</code></td>
+              <td>Improves matching of well identity fields</td>
+            </tr>
+            <tr>
+              <td>WBS</td>
+              <td>Work breakdown structure</td>
+              <td>Improves project/task schema grounding</td>
+            </tr>
+            <tr>
+              <td>PH</td>
+              <td>Project holder / PH name / PH employee ID</td>
+              <td>Improves personnel/productivity mapping</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-6">
+        <h2>11) Join Path Resolution</h2>
+        <p>
+          SequelOntology does not stop at returning a list of relevant columns. After top-ranked columns are selected, the system asks Neo4j for all
+          <code>JOINS_ON</code> relationships touching those columns. This creates an explicit join-hint pack for the SQL generator.
+        </p>
+        <ul>
+          <li><strong>Input:</strong> selected <code>(table, column)</code> pairs from fused retrieval.</li>
+          <li><strong>Graph query:</strong> match column nodes, traverse <code>JOINS_ON</code>, return opposite side and description.</li>
+          <li><strong>Output:</strong> structured join hints such as <code>WellMonitoringReport.pdo_well_id JOINS_ON Job_Progress_Report_GB.Well_ID</code>.</li>
+          <li><strong>Value:</strong> SQL generation becomes less guess-based and more topology-aware.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>12) How LangGraph Uses SequelOntology</h2>
+        <p>
+          The SequelOntology tab is visually separate, but technically it is embedded into the LangGraph analytics pipeline. Inside the graph workflow,
+          the <code>retrieve_schema</code> node calls the RetrievalAgent, which in turn calls Neo4j hybrid search, BM25 search, RRF fusion, and join-path resolution.
+          The final product of that step is a schema context string that the SQL agent consumes.
+        </p>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1120 290" width="100%" role="img" aria-label="LangGraph and SequelOntology interaction">
+            <rect x="34" y="36" width="180" height="50" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="124" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">resolve_context</text>
+            <rect x="248" y="36" width="180" height="50" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="338" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">extract_intent</text>
+            <rect x="462" y="36" width="200" height="50" rx="10" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="562" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#7d6308">retrieve_schema</text>
+            <rect x="696" y="36" width="180" height="50" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="786" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">generate_sql</text>
+            <rect x="910" y="36" width="176" height="50" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="998" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">execute_sql</text>
+
+            <rect x="408" y="148" width="312" height="54" rx="10" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="564" y="181" text-anchor="middle" font-size="13" font-weight="700" fill="#0a6a2b">SequelOntology Retrieval Core</text>
+
+            <rect x="146" y="228" width="188" height="42" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="240" y="254" text-anchor="middle" font-size="12.5" fill="#222">Neo4j Vector Search</text>
+            <rect x="358" y="228" width="188" height="42" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="452" y="254" text-anchor="middle" font-size="12.5" fill="#222">Neo4j Fulltext Search</text>
+            <rect x="570" y="228" width="188" height="42" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="664" y="254" text-anchor="middle" font-size="12.5" fill="#222">BM25 Retrieval</text>
+            <rect x="782" y="228" width="188" height="42" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="876" y="254" text-anchor="middle" font-size="12.5" fill="#222">Join Path Enrichment</text>
+          </svg>
+        </div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-8">
+        <h2>13) Frontend Rendering Path</h2>
+        <p>
+          The graph UI is rendered by the <code>IntelligenceMatrix</code> React component. It dynamically imports <code>react-force-graph-3d</code> to avoid
+          SSR issues because WebGL must run client-side. On mount, it calls <code>/api/knowledge-graph?limit=2000</code>, normalizes nodes and edges,
+          filters orphaned links, and feeds the result into <code>ForceGraph3D</code>.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Frontend Behavior</th>
+              <th>Implementation Effect</th>
+              <th>User Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dynamic import</td>
+              <td>Loads 3D engine only in browser</td>
+              <td>Prevents server-side rendering breakage</td>
+            </tr>
+            <tr>
+              <td>Edge normalization</td>
+              <td>Converts backend edge payload to <code>links</code> format</td>
+              <td>Stable graph rendering</td>
+            </tr>
+            <tr>
+              <td>Orphan-edge filter</td>
+              <td>Removes edges whose endpoints are outside current node set</td>
+              <td>Prevents runtime corruption and blank scenes</td>
+            </tr>
+            <tr>
+              <td>Initial zoom-to-fit</td>
+              <td>Runs once after graph data loads</td>
+              <td>User sees full topology immediately</td>
+            </tr>
+            <tr>
+              <td>Node click camera focus</td>
+              <td>Moves camera toward clicked node with computed distance ratio</td>
+              <td>Interactive drill-in without separate page</td>
+            </tr>
+            <tr>
+              <td>Hover HUD</td>
+              <td>Shows label, identity, schema ref, and data type</td>
+              <td>Makes raw graph readable</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-4">
+        <h2>14) Visual Semantics</h2>
+        <ul>
+          <li><strong>Table nodes:</strong> institutional blue, largest size.</li>
+          <li><strong>Well nodes:</strong> green, medium size.</li>
+          <li><strong>Column nodes:</strong> gray, smaller size.</li>
+          <li><strong>Edges:</strong> low-opacity dark lines so topology stays readable.</li>
+          <li><strong>Backdrop:</strong> dark scene to make node classes stand out.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>15) What Technical Value This Tab Creates</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Without SequelOntology</th>
+              <th>With SequelOntology</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Schema discovery</td>
+              <td>Flat table and column lists only</td>
+              <td>Connected graph with semantics and joinability</td>
+            </tr>
+            <tr>
+              <td>NL2SQL grounding</td>
+              <td>LLM relies on text-only schema prompt</td>
+              <td>LLM receives fused retrieval context plus join-path hints</td>
+            </tr>
+            <tr>
+              <td>Business entity reasoning</td>
+              <td>Tables appear isolated</td>
+              <td>Well hub makes operational entity structure visible</td>
+            </tr>
+            <tr>
+              <td>Mirror-table awareness</td>
+              <td>Latest and historical tables look unrelated</td>
+              <td>MIRRORS relation captures lineage and duplication risk</td>
+            </tr>
+            <tr>
+              <td>Cross-table explanation</td>
+              <td>Hard to justify why a join was chosen</td>
+              <td>Join path can be explained as graph topology</td>
+            </tr>
+            <tr>
+              <td>User trust</td>
+              <td>Schema reasoning is opaque</td>
+              <td>Graph surface makes metadata intelligence visible</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>16) Why This Is Hard Technically</h2>
+        <ul>
+          <li><strong>Schema naming is inconsistent:</strong> similar concepts appear as <code>Well_ID</code>, <code>well_id</code>, and <code>pdo_well_id</code>.</li>
+          <li><strong>Business meaning is not explicit in SQL:</strong> mirror tables and denormalized views need manual semantic encoding.</li>
+          <li><strong>Enterprise abbreviations distort search:</strong> generic retrieval would miss domain shorthand without expansion logic.</li>
+          <li><strong>Join correctness is fragile:</strong> LLMs often invent joins unless topology is grounded.</li>
+          <li><strong>UI rendering is nontrivial:</strong> large graph scenes require filtering and camera control to remain readable.</li>
+        </ul>
+      </article>
+
+      <article class="dark-box span-6">
+        <h2 style="color:#f8fafc;">17) Practical Limitation Notes</h2>
+        <p style="color:#d6dde6;">
+          This ontology reflects the local clone and the seeded graph, not necessarily every object from the original client VPN environment. If the clone lacks a table,
+          SequelOntology can still show meaningful topology for what exists locally, but it cannot invent missing metadata. The graph is therefore accurate for the current
+          local deployment boundary, not for the inaccessible remote environment.
+        </p>
+        <p style="color:#d6dde6;">
+          Also, the graph tab endpoint is optimized for visualization and limits returned nodes. The full reasoning graph used by retrieval remains richer than any single
+          front-end view because the retrieval stack can query indexes and join paths programmatically beyond what is visible in one 3D frame.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Generated for module-level technical understanding of Bashira Intelligence - SequelOntology tab.
+    </div>
+  </div>
+</body>
+</html>

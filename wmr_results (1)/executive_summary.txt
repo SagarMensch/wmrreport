@@ -1,0 +1,54 @@
+
+╔══════════════════════════════════════════════════════════════╗
+║   WELL MONITORING REPORT — AI ANALYSIS EXECUTIVE SUMMARY   ║
+╚══════════════════════════════════════════════════════════════╝
+Generated: 2026-03-21 17:26
+
+PORTFOLIO OVERVIEW
+  Total wells analysed : 482
+  Average progress     : 39.3%
+  Completed            : 20
+  Not yet started      : 120
+
+MODEL PERFORMANCE (4-week lead prediction)
+  Best model : RandomForest_BAG_L3
+  RMSE       : 0.0410  (avg prediction error = 4.1 percentage points)
+  R²         : 0.9873  (explains 98.7% of all variation)
+  MAPE       : 7.1% on active wells
+
+RISK DISTRIBUTION (8-week outlook)
+  CRITICAL  : 34 wells — below 25% progress, urgent action needed
+  HIGH RISK : 205 wells — slow trend, at risk of missing targets
+  WATCH     : 145 wells — progressing but needs monitoring
+  HEALTHY   : 98 wells — on track, no action needed
+
+SURVIVAL ANALYSIS
+  Random Survival Forest C-index : 0.9927
+  (0.5 = random guessing, 1.0 = perfect — above 0.7 is strong)
+
+TOP RISK DRIVERS (SHAP analysis)
+  1. Current progress level (lag-1)
+  2. Location preparation composite score
+  3. Days until expected rig-off date
+  4. Progress momentum (velocity + acceleration)
+  5. Rig identity (some rigs consistently underperform)
+
+RIG PERFORMANCE GAP
+  Best rig  : SWERIG98  (85% avg progress)
+  Worst rig : SWERIG75  (1% avg progress)
+  Gap       : 84 percentage points
+
+OUTPUT FILES
+  priority_wells_final.csv     — all wells ranked by risk + completion dates
+  risk_scores.csv              — risk score 0-100 for every well
+  survival_predictions.csv     — completion date predictions with confidence intervals
+  shap_importance.png          — what drives predictions
+  shap_beeswarm.png            — direction of each feature's impact
+  shap_risk_drivers.png        — why the worst wells are failing
+  survival_kaplan_meier.png    — completion probability curve
+  survival_cox_hazard.png      — what accelerates / delays completion
+  completion_forecast.png      — timeline chart with confidence bands
+  risk_donut.png               — risk distribution chart
+  rig_performance.png          — rig comparison chart
+  ag_diagnostics.png           — model accuracy chart
+  feature_importance.png       — top predictors

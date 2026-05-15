@@ -1,0 +1,350 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[vw_JOB_COST]    Script Date: 25-03-2026 16:20:32 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE   VIEW [dbo].[vw_JOB_COST]
+AS
+WITH TD AS (
+    SELECT
+        td.*,
+        LEFT(LTRIM(RTRIM(td.task_code)), 8) AS ActivityID,
+        CASE
+            WHEN LEFT(LTRIM(td.daily_data), 1) = ''''
+                THEN STUFF(LTRIM(td.daily_data), 1, 1, '')
+            ELSE td.daily_data
+        END AS Clean1
+    FROM dbo.task_daily td
+    WHERE td.well_id IS NOT NULL
+      AND td.task_code IS NOT NULL
+),
+TD2 AS (
+    SELECT
+        t.*,
+        REPLACE(t.Clean1, '=>', ':') AS DailyDataJson
+    FROM TD t
+),
+REV AS (
+    SELECT
+        r.*,
+        LEFT(LTRIM(RTRIM(r.code)), 8) AS ActivityID
+    FROM dbo.Revenue r
+),
+ActivityMap AS (
+    SELECT
+        LTRIM(RTRIM(ActivityID)) AS ActivityID,
+        Activity_Code
+    FROM dbo.ActivityMasterMapping
+),
+BaseTask AS (
+    SELECT
+        td.id,
+        td.well_id,
+        td.ActionOn,
+        td.ActivityID,
+
+        td.startDate,
+        td.endDate,
+        td.target_start,
+        td.target_end,
+        td.actual_start,
+        td.actual_end,
+
+        td.crew_type,
+        td.crew_code,
+
+        td.DailyDataJson AS daily_data,
+
+        CASE WHEN ISJSON(td.DailyDataJson) = 1
+             THEN TRY_CONVERT(DECIMAL(18,4), JSON_VALUE(td.DailyDataJson, '$.actual_hours'))
+             ELSE NULL
+        END AS EffWorkHours,
+
+        CASE WHEN ISJSON(td.DailyDataJson) = 1
+             THEN JSON_VALUE(td.DailyDataJson, '$.employee_ids')
+             ELSE NULL
+        END AS employee_ids_text,
+
+        CASE WHEN ISJSON(td.DailyDataJson) = 1
+             THEN JSON_VALUE(td.DailyDataJson, '$.equipment_ids')
+             ELSE NULL
+        END AS equipment_ids_text,
+
+        rev.rigcode AS Project
+    FROM TD2 td
+    LEFT JOIN REV rev
+        ON rev.well_id = td.well_id
+       AND rev.ActivityID = td.ActivityID
+),
+
+/* ===================== PLANNED ===================== */
+PlannedExplode AS (
+    SELECT
+        bt.*,
+        pr.resource_type,
+        pr.resource_sort,
+        pr.emp_id,
+        pr.equip_id
+    FROM BaseTask bt
+    LEFT JOIN dbo.crews c
+        ON c.Code = bt.crew_code
+    OUTER APPLY (
+        SELECT *
+        FROM (
+            SELECT
+                'EMP' AS resource_type,
+                ROW_NUMBER() OVER (ORDER BY (SELECT 1)) AS resource_sort,
+                TRY_CAST(j.value AS BIGINT) AS emp_id,
+                CAST(NULL AS BIGINT) AS equip_id
+            FROM OPENJSON(c.Employees) j
+
+            UNION ALL
+
+            SELECT
+                'EQUIP' AS resource_type,
+                ROW_NUMBER() OVER (ORDER BY (SELECT 1)) AS resource_sort,
+                CAST(NULL AS BIGINT) AS emp_id,
+                TRY_CAST(j2.value AS BIGINT) AS equip_id
+            FROM OPENJSON(c.Equipments) j2
+        ) x
+
+        UNION ALL
+        SELECT
+            'NONE' AS resource_type,
+            1      AS resource_sort,
+            CAST(NULL AS BIGINT) AS emp_id,
+            CAST(NULL AS BIGINT) AS equip_id
+        WHERE (c.Code IS NULL)
+           OR (
+                (ISJSON(c.Employees) = 0 OR c.Employees IS NULL OR JSON_VALUE(c.Employees,'$[0]') IS NULL)
+            AND (ISJSON(c.Equipments) = 0 OR c.Equipments IS NULL OR JSON_VALUE(c.Equipments,'$[0]') IS NULL)
+           )
+    ) pr
+),
+PlannedEnriched AS (
+    SELECT
+        pe.*,
+        CASE
+            WHEN pe.resource_type = 'EMP'   THEN e.[Name]
+            WHEN pe.resource_type = 'EQUIP' THEN eq.[Description]
+            ELSE NULL
+        END AS PlanName,
+        CASE
+            WHEN pe.resource_type = 'EMP'   THEN e.[UId]
+            WHEN pe.resource_type = 'EQUIP' THEN eq.[LicensePlate]
+            ELSE NULL
+        END AS PlanIdOrPlate,
+        CASE
+            WHEN pe.resource_type = 'EMP'   THEN ce.code
+            WHEN pe.resource_type = 'EQUIP' THEN eqt.[Code]
+            ELSE NULL
+        END AS PlanPGCode,
+        CASE
+            WHEN pe.resource_type = 'EMP' THEN et.[Description]
+            ELSE NULL
+        END AS PlanPGText
+    FROM PlannedExplode pe
+    LEFT JOIN dbo.Employee e
+        ON pe.resource_type = 'EMP'
+       AND e.id = pe.emp_id
+    LEFT JOIN dbo.company_employees ce
+        ON pe.resource_type = 'EMP'
+       AND ce.id = pe.emp_id
+    LEFT JOIN dbo.EmployeeType et
+        ON pe.resource_type = 'EMP'
+       AND et.Code = ce.code
+    LEFT JOIN dbo.Equipment eq
+        ON pe.resource_type = 'EQUIP'
+       AND eq.ID = pe.equip_id
+    LEFT JOIN dbo.EquipmentType eqt
+        ON pe.resource_type = 'EQUIP'
+       AND eqt.ID = eq.EquipmentType
+),
+PlannedNumbered AS (
+    SELECT
+        p.*,
+        ROW_NUMBER() OVER (
+            PARTITION BY p.well_id, p.ActionOn, p.ActivityID, p.resource_type, p.PlanPGCode
+            ORDER BY p.PlanIdOrPlate, p.PlanName, p.resource_sort
+        ) AS rn
+    FROM PlannedEnriched p
+),
+
+/* ===================== ACTUALS ===================== */
+ActualEmpRaw AS (
+    SELECT
+        bt.*,
+        'EMP' AS resource_type,
+        LTRIM(RTRIM(s.value)) AS emp_uid
+    FROM BaseTask bt
+    OUTER APPLY (
+        SELECT value
+        FROM STRING_SPLIT(COALESCE(bt.employee_ids_text, ''), ',')
+    ) s
+    WHERE NULLIF(LTRIM(RTRIM(s.value)), '') IS NOT NULL
+),
+ActualEmpEnriched AS (
+    SELECT
+        a.well_id, a.ActionOn, a.ActivityID,
+        a.startDate, a.endDate, a.target_start, a.target_end, a.actual_start, a.actual_end,
+        a.crew_type, a.crew_code, a.Project,
+        a.EffWorkHours,
+        a.resource_type,
+
+        e.[Name] AS ActualName,
+        e.[UId]  AS ActualIdOrPlate,
+        ce.code AS ActualPGCode,
+        et.[Description] AS ActualPGText
+    FROM ActualEmpRaw a
+    LEFT JOIN dbo.Employee e
+        ON e.UId = a.emp_uid
+    LEFT JOIN dbo.company_employees ce
+        ON ce.id = e.id
+    LEFT JOIN dbo.EmployeeType et
+        ON et.Code = ce.code
+),
+ActualEquipRaw AS (
+    SELECT
+        bt.*,
+        'EQUIP' AS resource_type,
+        LTRIM(RTRIM(s.value)) AS plate
+    FROM BaseTask bt
+    OUTER APPLY (
+        SELECT value
+        FROM STRING_SPLIT(COALESCE(bt.equipment_ids_text, ''), ',')
+    ) s
+    WHERE NULLIF(LTRIM(RTRIM(s.value)), '') IS NOT NULL
+),
+ActualEquipEnriched AS (
+    SELECT
+        a.well_id, a.ActionOn, a.ActivityID,
+        a.startDate, a.endDate, a.target_start, a.target_end, a.actual_start, a.actual_end,
+        a.crew_type, a.crew_code, a.Project,
+        a.EffWorkHours,
+        a.resource_type,
+
+        eq.[Description] AS ActualName,
+        eq.[LicensePlate] AS ActualIdOrPlate,
+        eqt.[Code] AS ActualPGCode,
+        eqt.[Description] AS ActualPGText
+    FROM ActualEquipRaw a
+    LEFT JOIN dbo.Equipment eq
+        ON eq.LicensePlate = a.plate
+    LEFT JOIN dbo.EquipmentType eqt
+        ON eqt.ID = eq.EquipmentType
+),
+ActualAll AS (
+    SELECT * FROM ActualEmpEnriched
+    UNION ALL
+    SELECT * FROM ActualEquipEnriched
+),
+ActualNumbered AS (
+    SELECT
+        a.*,
+        ROW_NUMBER() OVER (
+            PARTITION BY a.well_id, a.ActionOn, a.ActivityID, a.resource_type, a.ActualPGCode
+            ORDER BY a.ActualIdOrPlate, a.ActualName
+        ) AS rn
+    FROM ActualAll a
+),
+
+/* ===================== PAIR ===================== */
+Paired AS (
+    SELECT
+        COALESCE(p.well_id, a.well_id) AS well_id,
+        COALESCE(p.ActionOn, a.ActionOn) AS ActionOn,
+        COALESCE(p.ActivityID, a.ActivityID) AS ActivityID,
+
+        COALESCE(p.Project, a.Project) AS Project,
+
+        COALESCE(p.startDate, a.startDate) AS startDate,
+        COALESCE(p.endDate, a.endDate) AS endDate,
+        COALESCE(p.target_start, a.target_start) AS target_start,
+        COALESCE(p.target_end, a.target_end) AS target_end,
+        COALESCE(p.actual_start, a.actual_start) AS actual_start,
+        COALESCE(p.actual_end, a.actual_end) AS actual_end,
+
+        COALESCE(p.crew_type, a.crew_type) AS crew_type,
+        COALESCE(p.crew_code, a.crew_code) AS crew_code,
+
+        COALESCE(p.EffWorkHours, a.EffWorkHours) AS EffWorkHours,
+
+        COALESCE(p.resource_type, a.resource_type) AS resource_type,
+        COALESCE(p.rn, a.rn) AS rn,
+
+        /* Planned stays planned */
+        p.PlanName,
+        p.PlanIdOrPlate,
+        p.PlanPGCode,
+        p.PlanPGText,
+
+        /* Actual */
+        a.ActualName,
+        a.ActualIdOrPlate,
+        a.ActualPGCode,
+        a.ActualPGText
+    FROM PlannedNumbered p
+    FULL OUTER JOIN ActualNumbered a
+        ON a.well_id = p.well_id
+       AND a.ActionOn = p.ActionOn
+       AND a.ActivityID = p.ActivityID
+       AND a.resource_type = p.resource_type
+       AND a.ActualPGCode = p.PlanPGCode
+       AND a.rn = p.rn
+)
+
+SELECT
+    ROW_NUMBER() OVER (ORDER BY p.ActionOn, p.well_id, p.ActivityID, p.crew_code, p.resource_type, p.rn) AS [sr.no],
+
+    CASE
+        WHEN LEFT(LTRIM(RTRIM(p.Project)), 1) = 'M' THEN 'MML'
+        WHEN LEFT(LTRIM(RTRIM(p.Project)), 1) = 'N' THEN 'NIM'
+        ELSE NULL
+    END AS [Plant/ Location],
+
+    p.Project AS [Project],
+    p.well_id AS [Well ID],
+    p.ActivityID AS [Activity ID],
+
+    am.Activity_Code AS [Activity Code],
+
+    p.ActionOn AS [Action On],
+    p.startDate AS [start_date],
+    p.endDate AS [end_date],
+    p.target_start AS [target_start],
+    p.target_end AS [target_end],
+    p.actual_start AS [actual_start],
+    p.actual_end AS [actual_end],
+
+    p.crew_type AS [crew type],
+    p.crew_code AS [crew code],
+
+    p.PlanName AS [Plan Employee Name/ Equipment Name],
+    p.PlanIdOrPlate AS [Plan Employee ID/  Equipment ID/Plate No],
+    CAST(NULL AS DECIMAL(18,4)) AS [PG/EG code rate (Per Hr)],
+    p.PlanPGCode AS [Plan PG / EG Code],
+    p.PlanPGText AS [Plan PG / EG Text],
+    CAST(NULL AS DECIMAL(18,4)) AS [Plan Hrs],
+
+    p.ActualName AS [Actual Employee / Equipment Name],
+    p.ActualIdOrPlate AS [Actual Employee ID/ Equipment ID/Plate No],
+    p.ActualPGCode AS [Actual PG/EG Code],
+    p.ActualPGText AS [Actual PG/EG Text],
+
+    CAST(NULL AS DECIMAL(18,4)) AS [Actual Working Hours],
+    CAST(NULL AS DECIMAL(18,4)) AS [Actual Interruption Hours],
+    CAST(NULL AS DECIMAL(18,4)) AS [Actual Idle Hours],
+
+    p.EffWorkHours AS [Effective Work Hours],
+
+    CAST(NULL AS DECIMAL(18,4)) AS [Job Cost]
+FROM Paired p
+LEFT JOIN ActivityMap am
+    ON am.ActivityID = p.ActivityID;
+GO
+

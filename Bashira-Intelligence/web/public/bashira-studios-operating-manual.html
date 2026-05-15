@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bashira Studios Operating Manual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #111111;
+        --muted: #56606e;
+        --line: #dde3ea;
+        --panel: #f8fafc;
+        --blue: #0f62fe;
+        --green: #00c805;
+        --yellow: #f1c21b;
+        --orange: #ed6c02;
+        --red: #da1e28;
+        --shadow: 0 14px 38px rgba(15, 23, 32, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at top right, rgba(15, 98, 254, 0.08), transparent 24%),
+          radial-gradient(circle at bottom left, rgba(0, 200, 5, 0.06), transparent 18%),
+          #ffffff;
+        color: var(--ink);
+        font-family: "Figtree", "Segoe UI", sans-serif;
+        line-height: 1.68;
+      }
+
+      .page {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 40px 28px 88px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        line-height: 1.12;
+      }
+
+      h1 {
+        margin-top: 14px;
+        font-size: 46px;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+      }
+
+      h2 {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      h4 {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      p {
+        margin: 12px 0 0;
+        font-size: 15px;
+      }
+
+      ul,
+      ol {
+        margin: 12px 0 0 20px;
+        padding: 0;
+      }
+
+      li + li {
+        margin-top: 8px;
+      }
+
+      code,
+      pre {
+        font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+      }
+
+      .hero,
+      .panel,
+      .metric,
+      .toc,
+      .callout,
+      .formula,
+      .table-wrap {
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 34px 36px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: #eef4ff;
+        border: 1px solid #cfe0ff;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .subhead {
+        max-width: 980px;
+        font-size: 18px;
+        color: #334155;
+      }
+
+      .meta-grid,
+      .summary-grid,
+      .three-col,
+      .two-col,
+      .card-grid,
+      .studio-grid,
+      .compare-grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .meta-grid {
+        margin-top: 26px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .summary-grid {
+        margin-top: 20px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .three-col {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .two-col {
+        grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+        align-items: start;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .studio-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .compare-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .metric {
+        padding: 18px 18px 16px;
+      }
+
+      .metric .label {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .metric .value {
+        margin-top: 10px;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .metric .note {
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .panel {
+        padding: 24px 26px;
+      }
+
+      .section {
+        margin-top: 28px;
+      }
+
+      .section h2 {
+        margin-bottom: 12px;
+      }
+
+      .toc {
+        margin-top: 22px;
+        padding: 20px 22px;
+      }
+
+      .toc a {
+        color: var(--blue);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .toc a:hover {
+        text-decoration: underline;
+      }
+
+      .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .pill.blue {
+        background: #eef4ff;
+        border-color: #d6e4ff;
+        color: #0d46b3;
+      }
+
+      .pill.green {
+        background: #effcf2;
+        border-color: #c8f2d0;
+        color: #0d7f20;
+      }
+
+      .pill.yellow {
+        background: #fff9df;
+        border-color: #f3dc73;
+        color: #7c5e00;
+      }
+
+      .callout {
+        margin-top: 16px;
+        padding: 17px 18px;
+        border-left: 6px solid var(--blue);
+        background: #fbfdff;
+      }
+
+      .callout strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      .callout.green {
+        border-left-color: var(--green);
+        background: #f8fff8;
+      }
+
+      .callout.yellow {
+        border-left-color: var(--yellow);
+        background: #fffef6;
+      }
+
+      .callout.red {
+        border-left-color: var(--red);
+        background: #fff8f8;
+      }
+
+      .formula {
+        margin-top: 14px;
+        padding: 15px 16px;
+        background: #fbfbfb;
+      }
+
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+        font-size: 13px;
+        color: #17202b;
+      }
+
+      .table-wrap {
+        margin-top: 16px;
+        overflow: hidden;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+      }
+
+      th {
+        background: #f4f7fa;
+        font-weight: 800;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      .side-note {
+        position: sticky;
+        top: 24px;
+      }
+
+      .studio-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .studio-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 6px;
+      }
+
+      .studio-card.decision::before {
+        background: var(--blue);
+      }
+
+      .studio-card.predictive::before {
+        background: var(--green);
+      }
+
+      .studio-card.causal::before {
+        background: var(--yellow);
+      }
+
+      .studio-card .panel {
+        height: 100%;
+      }
+
+      .kpi-chip {
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f3f6fb;
+        border: 1px solid var(--line);
+        font-size: 12px;
+        font-weight: 700;
+        color: #334155;
+      }
+
+      .footnote {
+        margin-top: 28px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px dashed #b8c4d1;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 1080px) {
+        .meta-grid,
+        .summary-grid,
+        .studio-grid,
+        .compare-grid,
+        .card-grid,
+        .three-col,
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        .side-note {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <span class="eyebrow">Bashira Intelligence Platform Manual</span>
+        <h1>How Decision Studio, Predictive Studio, and Causal Command Work</h1>
+        <p class="subhead">
+          This document is a client-team operating guide for the three analytic
+          studios in Bashira Intelligence. It explains what each studio is for,
+          which data it uses, what machine-learning or decision logic sits
+          behind it, how each screen should be interpreted, and how the three
+          studios connect into one operating workflow rather than three
+          disconnected dashboards.
+        </p>
+
+        <div class="meta-grid">
+          <div class="metric">
+            <div class="label">Decision Studio</div>
+            <div class="value">Portfolio ML</div>
+            <div class="note">
+              Model package, risk tiers, completion forecast, feature
+              explainability.
+            </div>
+          </div>
+          <div class="metric">
+            <div class="label">Predictive Studio</div>
+            <div class="value">Well Drill-Down</div>
+            <div class="note">
+              One-well execution state, history, forecast, milestones, risk, and
+              causal simulator.
+            </div>
+          </div>
+          <div class="metric">
+            <div class="label">Causal Command</div>
+            <div class="value">Intervention Deck</div>
+            <div class="note">
+              Portfolio ranking, intervention ladder, scenario frontier, driver
+              geometry, evidence and model basis.
+            </div>
+          </div>
+          <div class="metric">
+            <div class="label">Primary Value</div>
+            <div class="value">From insight to action</div>
+            <div class="note">
+              The platform is designed to move from visibility to prediction to
+              intervention.
+            </div>
+          </div>
+        </div>
+
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ol>
+            <li><a href="#operating-model">Platform operating model</a></li>
+            <li><a href="#decision-studio">Decision Studio</a></li>
+            <li><a href="#predictive-studio">Predictive Studio</a></li>
+            <li><a href="#causal-command">Causal Command</a></li>
+            <li><a href="#how-they-connect">How the three studios connect</a></li>
+            <li><a href="#client-guidance">How to guide the client team</a></li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="operating-model" class="section">
+        <h2>1. Platform Operating Model</h2>
+        <div class="two-col">
+          <div>
+            <div class="panel">
+              <h3>What the platform is trying to do</h3>
+              <p>
+                The platform is built around three operational questions.
+                Decision Studio answers <strong>what is likely to happen across
+                the portfolio</strong>. Predictive Studio answers
+                <strong>what is happening on one well and where it is heading</strong>.
+                Causal Command answers <strong>what action should be taken now,
+                on which wells, and how much time could be recovered</strong>.
+              </p>
+              <p>
+                The studios should not be presented as duplicates. They are
+                intended to be used in sequence:
+              </p>
+              <ol>
+                <li>Decision Studio identifies portfolio pressure and model-backed risk.</li>
+                <li>Predictive Studio validates that picture on a specific well.</li>
+                <li>Causal Command turns the picture into intervention priority.</li>
+              </ol>
+
+              <div class="pill-row">
+                <span class="pill blue">Portfolio-level intelligence</span>
+                <span class="pill green">Well-level operational diagnosis</span>
+                <span class="pill yellow">Action and recovery scenarios</span>
+              </div>
+            </div>
+
+            <div class="panel section">
+              <h3>Main data surfaces used across the platform</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Table / Asset</th>
+                      <th>Main role</th>
+                      <th>Where it matters most</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>WellMonitoringReport_Latest</code></td>
+                      <td>Current-state well snapshot.</td>
+                      <td>Predictive Studio, Causal Command, live current metrics.</td>
+                    </tr>
+                    <tr>
+                      <td><code>WMR_Full</code></td>
+                      <td>Historical weekly well progression.</td>
+                      <td>Decision model training, Predictive Studio history, Causal trend logic.</td>
+                    </tr>
+                    <tr>
+                      <td><code>Job_Progress_Report_GB</code></td>
+                      <td>Category-level actual-vs-plan progress signals.</td>
+                      <td>Predictive and causal operational pressure features.</td>
+                    </tr>
+                    <tr>
+                      <td><code>Job_Progress_PlanSnapshot</code></td>
+                      <td>Near-term plan curve and cumulative plan load.</td>
+                      <td>Decision features, Causal plan pressure, Predictive plan context.</td>
+                    </tr>
+                    <tr>
+                      <td><code>SAP_DRILLING_SEQUENCE</code></td>
+                      <td>Rig movement and drilling sequence context.</td>
+                      <td>Causal Command rig pressure and scheduling context.</td>
+                    </tr>
+                    <tr>
+                      <td><code>task_daily</code></td>
+                      <td>Daily execution activity and operational evidence.</td>
+                      <td>Data Integrity, Causal execution pressure, crew and overdue work.</td>
+                    </tr>
+                    <tr>
+                      <td><code>ActivityTaskPlan</code></td>
+                      <td>Planned task duration and quantity picture.</td>
+                      <td>Data Integrity, Causal overdue / duration / remaining plan signals.</td>
+                    </tr>
+                    <tr>
+                      <td><code>PH_PRODUCTIVITY_WEEKLY_REPORT</code></td>
+                      <td>Productivity by crew discipline / supervisor linkage.</td>
+                      <td>Causal crew-side support and productivity interpretation.</td>
+                    </tr>
+                    <tr>
+                      <td><code>wmr_results</code> package</td>
+                      <td>Precomputed GPU-trained Decision Studio output package.</td>
+                      <td>Decision Studio only.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <aside class="side-note">
+            <div class="panel">
+              <h3>Simple mental model</h3>
+              <p>
+                A useful way to explain the platform is:
+              </p>
+              <ul>
+                <li><strong>Decision Studio</strong> is the portfolio control tower.</li>
+                <li><strong>Predictive Studio</strong> is the well investigation room.</li>
+                <li><strong>Causal Command</strong> is the intervention desk.</li>
+              </ul>
+
+              <div class="callout green">
+                <strong>Operational sequence</strong>
+                If a client asks “where are we under pressure?”, start in
+                Decision Studio. If they ask “show me this well in detail,” move
+                to Predictive Studio. If they ask “what do we do about it?”, move
+                to Causal Command.
+              </div>
+
+              <div class="callout yellow">
+                <strong>Important discipline</strong>
+                Do not present any single screen as the whole product. The
+                strength of the platform is that it links model outputs,
+                operational detail, and intervention choices.
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="decision-studio" class="section">
+        <h2>2. Decision Studio</h2>
+
+        <div class="studio-card decision">
+          <div class="panel">
+            <h3>Purpose</h3>
+            <p>
+              Decision Studio is the portfolio-level machine-learning surface. It
+              is designed to answer: which wells are most at risk, what
+              completion timing looks like across the live portfolio, which
+              factors are most strongly associated with progress and completion,
+              and how much confidence the model has in those calls.
+            </p>
+            <p>
+              This screen is not training models live in the browser. It reads a
+              validated output package generated offline by the Decision Studio
+              training pipeline and placed into the <code>wmr_results</code>
+              artifact folder.
+            </p>
+          </div>
+        </div>
+
+        <div class="summary-grid section">
+          <div class="metric">
+            <div class="label">Primary Inputs</div>
+            <div class="value">WMR + plan + SAP</div>
+            <div class="note">Historical well progression, plan context, job progress, drilling sequence.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Main Package Files</div>
+            <div class="value">CSV + JSON + PNG</div>
+            <div class="note">Metrics, scored wells, feature importance, leaderboard, survival outputs, explainability images.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Model Family</div>
+            <div class="value">GPU ensemble</div>
+            <div class="note">CatBoost + XGBoost ensemble with calibration, survival outputs, and explainability package.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Main Question</div>
+            <div class="value">What is likely?</div>
+            <div class="note">It is a forecast and ranking studio, not a direct intervention engine.</div>
+          </div>
+        </div>
+
+        <div class="card-grid section">
+          <div class="panel">
+            <h3>How the data arrives in the screen</h3>
+            <p>
+              The component loads its outputs from the prebuilt
+              <code>wmr_results</code> package. The core files are:
+            </p>
+            <ul>
+              <li><code>ag_metrics.json</code> for top-line model metrics.</li>
+              <li><code>training_manifest.json</code> for lineage, thresholds, survival metrics, and model metadata.</li>
+              <li><code>risk_scores.csv</code> for scored wells and tier assignments.</li>
+              <li><code>priority_wells_final.csv</code> for the ranked portfolio view.</li>
+              <li><code>feature_importance.csv</code> for ensemble driver ranking.</li>
+              <li>PNG artifacts for diagnostics, SHAP, rig performance, forecast, and survival visuals.</li>
+            </ul>
+            <div class="callout">
+              <strong>Key implication</strong>
+              Decision Studio is deterministic at display time. If the artifact
+              package is stable, the screen is stable. The heavy ML work
+              happened earlier during the training run.
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>How the models are constructed</h3>
+            <p>
+              The training pipeline builds multiple outputs, each with a
+              different job:
+            </p>
+            <ul>
+              <li>A progress model forecasts near-term movement in well progress.</li>
+              <li>A completion model estimates time remaining and completion windows.</li>
+              <li>A risk model estimates the probability of missing target and maps it into score and tier.</li>
+              <li>A survival block produces completion-probability and hazard-ratio views.</li>
+            </ul>
+            <p>
+              The pipeline also produces calibration, feature importance, SHAP
+              plots, and survival metrics such as the C-index.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h3>What each major Decision Studio panel means</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Panel</th>
+                  <th>What it is showing</th>
+                  <th>How to explain it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Portfolio metrics</td>
+                  <td>Total wells, tier counts, portfolio status mix.</td>
+                  <td>“This is the current scored portfolio footprint.”</td>
+                </tr>
+                <tr>
+                  <td>Model metrics</td>
+                  <td>R², RMSE, MAE, MAPE, AUC, Brier, C-index.</td>
+                  <td>“This is how accurately the package performed on validation and survival ranking.”</td>
+                </tr>
+                <tr>
+                  <td>Risk distribution</td>
+                  <td>Tier allocation and risk score spread across wells.</td>
+                  <td>“This shows where pressure is concentrated across the live portfolio.”</td>
+                </tr>
+                <tr>
+                  <td>Timeline forecast</td>
+                  <td>Predicted completion dates with intervals.</td>
+                  <td>“This converts the ML output into an expected delivery window.”</td>
+                </tr>
+                <tr>
+                  <td>Predictive drivers</td>
+                  <td>Ensemble driver ranking from feature importance.</td>
+                  <td>“These are the strongest learned signals shaping forecast behavior.”</td>
+                </tr>
+                <tr>
+                  <td>SHAP analysis</td>
+                  <td>Directional effect view of model drivers.</td>
+                  <td>“This shows how higher or lower values tend to push outcomes.”</td>
+                </tr>
+                <tr>
+                  <td>Completion probability / survival</td>
+                  <td>Kaplan-Meier and Cox-derived views.</td>
+                  <td>“This is the completion-speed perspective rather than the raw risk score.”</td>
+                </tr>
+                <tr>
+                  <td>Completion drivers</td>
+                  <td>Hazard-ratio chart from the survival block.</td>
+                  <td>“Signals to the right of 1 are associated with faster completion.”</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-grid section">
+          <div class="panel">
+            <h3>How the risk score is calculated</h3>
+            <p>
+              At a high level, the score comes from an ensemble miss-target
+              model. The model is trained on historical outcome labels,
+              calibrated, and then mapped into human-usable risk tiers. The live
+              screen presents:
+            </p>
+            <ul>
+              <li><strong>Risk probability</strong>: calibrated model probability of pressure / miss-target behavior.</li>
+              <li><strong>Risk score</strong>: scaled decision score presented in the UI.</li>
+              <li><strong>Risk tier</strong>: tier assignment using learned thresholds.</li>
+            </ul>
+            <div class="formula">
+              <pre>historical features -> ensemble risk model -> calibrated probability -> risk score -> tier thresholds</pre>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>How to speak about Decision Studio honestly</h3>
+            <p>
+              Decision Studio is strongest when presented as a model-backed
+              portfolio control tower. It is appropriate to say it provides:
+            </p>
+            <ul>
+              <li>validated portfolio risk ranking</li>
+              <li>predicted completion windows</li>
+              <li>driver explanation</li>
+              <li>survival-style completion insights</li>
+            </ul>
+            <p>
+              It is not appropriate to say it decides operational actions by
+              itself. That handoff belongs to Causal Command.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="predictive-studio" class="section">
+        <h2>3. Predictive Studio</h2>
+
+        <div class="studio-card predictive">
+          <div class="panel">
+            <h3>Purpose</h3>
+            <p>
+              Predictive Studio is the well-by-well operational drill-down. It
+              takes the portfolio picture and lets the user investigate a single
+              well in depth. This is where the team sees the well’s history,
+              current phase state, progress forecast, milestones, risk
+              components, and the first causal-style intervention simulator.
+            </p>
+          </div>
+        </div>
+
+        <div class="summary-grid section">
+          <div class="metric">
+            <div class="label">Engine</div>
+            <div class="value">Forecast Engine</div>
+            <div class="note">CPU-oriented inference engine with historical, latest, and job-progress data.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Main Inputs</div>
+            <div class="value">History + latest + job progress</div>
+            <div class="note">Uses historical WMR, live latest snapshot, and job-progress context with live SQL refresh when available.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Primary Question</div>
+            <div class="value">What is happening on this well?</div>
+            <div class="note">It is the detailed operational explanation layer.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Outputs</div>
+            <div class="value">History, forecast, milestones, risk, causal</div>
+            <div class="note">A single well narrative assembled from live or cached operational data.</div>
+          </div>
+        </div>
+
+        <div class="card-grid section">
+          <div class="panel">
+            <h3>What the Forecast Engine does</h3>
+            <p>
+              The Forecast Engine loads:
+            </p>
+            <ul>
+              <li><code>wmr_full_history.csv</code> or live historical SQL for weekly progress history.</li>
+              <li><code>wmr_latest.csv</code> or live latest SQL for current-state wells.</li>
+              <li><code>job_progress_gb.csv</code> or live SQL for category plan-vs-actual context.</li>
+            </ul>
+            <p>
+              It normalizes dates and progress fields, builds per-well history,
+              maps well lifecycle phases, and returns a well detail payload
+              containing:
+            </p>
+            <ul>
+              <li>current-state summary</li>
+              <li>history points</li>
+              <li>forecast points with confidence bands</li>
+              <li>phase Gantt rows</li>
+              <li>milestone ledger</li>
+              <li>risk breakdown</li>
+              <li>causal intelligence block</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>How the screen is structured</h3>
+            <p>
+              Predictive Studio has two levels:
+            </p>
+            <ol>
+              <li>A portfolio registry that lists wells with risk tier and summary context.</li>
+              <li>A well-detail workspace that opens one well and shows its complete operational narrative.</li>
+            </ol>
+            <p>
+              The well-detail workspace is the key part. It contains risk
+              assessment, phase progress cards, predictive trajectory, phase
+              execution, milestone ledger, risk model explanation, and a causal
+              simulator.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h3>Major Predictive Studio sections and what they mean</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Section</th>
+                  <th>What it shows</th>
+                  <th>Operational use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Risk assessment</td>
+                  <td>Tier and score for the selected well.</td>
+                  <td>Quick view of whether the well deserves attention now.</td>
+                </tr>
+                <tr>
+                  <td>Phase progress cards</td>
+                  <td>Engineering, location prep, construction, OHL, commissioning progress.</td>
+                  <td>Shows which phases are advanced and which are lagging.</td>
+                </tr>
+                <tr>
+                  <td>Predictive trajectory</td>
+                  <td>Historical actual line, forecast line, and confidence band.</td>
+                  <td>Shows where the well has been and where the engine expects it to go.</td>
+                </tr>
+                <tr>
+                  <td>Phase execution</td>
+                  <td>Gantt-like lifecycle representation of work phases.</td>
+                  <td>Helps the team interpret current phase status and duration.</td>
+                </tr>
+                <tr>
+                  <td>Milestone ledger</td>
+                  <td>Recorded and future milestone events.</td>
+                  <td>Turns the well into a time-sequenced operational ledger.</td>
+                </tr>
+                <tr>
+                  <td>Risk model</td>
+                  <td>Risk components, drivers, and impact bars.</td>
+                  <td>Explains why the risk score is elevated or moderate.</td>
+                </tr>
+                <tr>
+                  <td>Causal root cause vector</td>
+                  <td>Delay-attributable root causes on the selected well.</td>
+                  <td>Shows which modeled issues are costing the most time.</td>
+                </tr>
+                <tr>
+                  <td>Counterfactual simulator</td>
+                  <td>Governed actions such as peer pace, rig, or material scenarios.</td>
+                  <td>Lets the user see how the baseline would change under a selected action.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-grid section">
+          <div class="panel">
+            <h3>How the forecast is formed</h3>
+            <p>
+              Predictive Studio’s forecast layer is designed to be CPU-friendly
+              and operational. It uses historical progress series and current
+              state to build a short-horizon progression forecast. The key point
+              is not just the next number; it is the combination of:
+            </p>
+            <ul>
+              <li>historical actual line</li>
+              <li>forecast extension</li>
+              <li>confidence interval</li>
+              <li>lineage showing which source fed the chart</li>
+            </ul>
+            <div class="callout green">
+              <strong>Why clients like this screen</strong>
+              It converts abstract portfolio modeling into a concrete well story.
+              Teams can inspect a specific well and see how the forecast relates
+              to real milestones and phase execution.
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>How the risk and causal blocks fit together</h3>
+            <p>
+              Predictive Studio already contains a well-level causal simulator,
+              but this is not meant to replace Causal Command. It acts as a
+              bridge:
+            </p>
+            <ul>
+              <li>Decision Studio says the well is risky.</li>
+              <li>Predictive Studio shows the operational state and baseline path.</li>
+              <li>The embedded simulator previews possible action impact on that well.</li>
+              <li>Causal Command generalizes this into a portfolio intervention deck.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="causal-command" class="section">
+        <h2>4. Causal Command</h2>
+
+        <div class="studio-card causal">
+          <div class="panel">
+            <h3>Purpose</h3>
+            <p>
+              Causal Command is the intervention workspace. It is designed to
+              answer the management question that follows prediction: if these
+              wells are under pressure, which ones should be acted on first, why
+              are they delayed, which governed actions are available, and how
+              much recovery might those actions produce?
+            </p>
+          </div>
+        </div>
+
+        <div class="summary-grid section">
+          <div class="metric">
+            <div class="label">Core mode</div>
+            <div class="value">CPU + Bayesian</div>
+            <div class="note">Fast decision layer first, deeper Bayesian analysis alongside it.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Live current-state anchor</div>
+            <div class="value">WellMonitoringReport_Latest</div>
+            <div class="note">The day-one current-state operating surface for the causal workspace.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Main question</div>
+            <div class="value">What should we do now?</div>
+            <div class="note">This is the prioritization and intervention deck, not just another forecast page.</div>
+          </div>
+          <div class="metric">
+            <div class="label">Screen modes</div>
+            <div class="value">Command / Evidence / Model</div>
+            <div class="note">Operations view, data traceability view, and model-basis view.</div>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h3>How Causal Command is built</h3>
+          <p>
+            The causal service assembles a real cross-system feature matrix. It
+            joins the live current-state surface with historical and operational
+            support tables, including:
+          </p>
+          <ul>
+            <li><code>WellMonitoringReport_Latest</code> as the current-state anchor.</li>
+            <li><code>WMR_Full</code> for progression history and stall/regression features.</li>
+            <li><code>Job_Progress_Report_GB</code> for plan-vs-actual execution pressure.</li>
+            <li><code>Job_Progress_PlanSnapshot</code> for near-term plan curve concentration.</li>
+            <li><code>SAP_DRILLING_SEQUENCE</code> for rig movement and drilling field context.</li>
+            <li><code>task_daily</code> for overdue work and crew/execution pressure.</li>
+            <li><code>ActivityTaskPlan</code> for remaining planned duration and task progress signals.</li>
+            <li><code>PH_PRODUCTIVITY_WEEKLY_REPORT</code> and <code>Employee</code> for supervisor-linked productivity context.</li>
+          </ul>
+          <p>
+            Once that unified feature space exists, the service builds a CPU
+            decision layer, scenario rows, support counts, portfolio brief,
+            feature lineage, audit questions, intervention ladder, and a
+            Bayesian deep-analysis block.
+          </p>
+        </div>
+
+        <div class="card-grid section">
+          <div class="panel">
+            <h3>What the command view is doing</h3>
+            <p>
+              The command view is the main operating desk. Its structure is:
+            </p>
+            <ul>
+              <li><strong>Portfolio brief</strong>: top-line management summary cards.</li>
+              <li><strong>Command bar</strong>: lets the user search and steer the deck.</li>
+              <li><strong>Priority book</strong>: ranked intervention ladder for the highest-value wells.</li>
+              <li><strong>Selected well stage</strong>: metrics, lead action, issue, and signal ribbon.</li>
+              <li><strong>3D pressure surface</strong>: portfolio pressure view.</li>
+              <li><strong>3D scenario frontier</strong>: action frontier for the selected well.</li>
+              <li><strong>3D driver geometry</strong>: top signals shaping the call.</li>
+            </ul>
+            <p>
+              This is why the screen should be presented as a decision deck, not
+              a report. It is ranked, interactive, and action-oriented.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>What the evidence and model views do</h3>
+            <p>
+              Causal Command also carries two governance views:
+            </p>
+            <ul>
+              <li><strong>Evidence view</strong> shows join coverage, audit questions, and source-backed proof of what is and is not available.</li>
+              <li><strong>Model view</strong> explains engine, row counts, feature counts, RMSE-style basis values, and Bayesian/runtime status.</li>
+            </ul>
+            <div class="callout">
+              <strong>Why this matters</strong>
+              These two views keep the intervention deck defensible. The client
+              can see not just the recommendation, but the evidence surface and
+              model basis behind it.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h3>How the intervention ladder is formed</h3>
+          <p>
+            Each decision object in the ladder is a ranked well-action pair. The
+            service combines current delay, recoverable days, decision score,
+            support strength, signal quality, and scenario availability. The
+            output is a priority book rather than a raw well list.
+          </p>
+          <div class="formula">
+            <pre>live current-state + joined execution signals + scenario support + modeled recovery -> decision score -> ranked intervention ladder</pre>
+          </div>
+          <p>
+            This is why the left rail in Causal Command is operationally
+            stronger than a simple risk list. It is already sorted by actionable
+            recovery value, not just by predicted pressure.
+          </p>
+        </div>
+
+        <div class="card-grid section">
+          <div class="panel">
+            <h3>What root causes mean here</h3>
+            <p>
+              Root causes in Causal Command are not generic text labels. They
+              are modeled delay contributors sourced from the causal feature
+              space and linked back to a source table through feature lineage.
+              When the UI shows the top three causes on a selected well, it is
+              presenting the strongest modeled contributors to the intervention
+              call.
+            </p>
+            <p>
+              This is why the signal ribbon and driver geometry matter. They are
+              the bridge between a ranked action and the underlying operational
+              evidence.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>What scenario simulation means</h3>
+            <p>
+              Scenario simulation in Causal Command and Predictive Studio is
+              governed. The system does not allow arbitrary fantasy edits. It
+              works through defined action types and comparable support cases,
+              such as peer execution pace, rig uplift, material readiness
+              improvement, or workfront decongestion.
+            </p>
+            <p>
+              The output is not “guaranteed causality.” It is a
+              model-backed counterfactual estimate: if the selected action were
+              achieved, what would the new delay path and recovery look like?
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-they-connect" class="section">
+        <h2>5. How the Three Studios Connect</h2>
+
+        <div class="compare-grid">
+          <div class="panel">
+            <h3>Decision Studio</h3>
+            <p><strong>Job:</strong> portfolio forecasting and ranking.</p>
+            <p><strong>Best question:</strong> “Where is the portfolio under pressure?”</p>
+            <p><strong>Main output:</strong> risk tiers, forecast windows, model drivers.</p>
+          </div>
+          <div class="panel">
+            <h3>Predictive Studio</h3>
+            <p><strong>Job:</strong> well-level operational diagnosis.</p>
+            <p><strong>Best question:</strong> “Show me exactly what is happening on this well.”</p>
+            <p><strong>Main output:</strong> history, forecast, milestones, risk breakdown, local simulator.</p>
+          </div>
+          <div class="panel">
+            <h3>Causal Command</h3>
+            <p><strong>Job:</strong> portfolio intervention prioritization.</p>
+            <p><strong>Best question:</strong> “What should we act on first, and why?”</p>
+            <p><strong>Main output:</strong> intervention ladder, recovery scenarios, root causes, evidence and model basis.</p>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h3>Recommended operating flow for the client team</h3>
+          <ol>
+            <li>Use Decision Studio to identify the wells and clusters carrying the highest current portfolio pressure.</li>
+            <li>Open the relevant wells in Predictive Studio to validate the operational state, phase progression, and milestone picture.</li>
+            <li>Move to Causal Command to decide whether the well should be on the intervention deck and which action should be prioritized.</li>
+            <li>Use Data Integrity in parallel when the client challenges whether the source transaction itself is valid.</li>
+          </ol>
+          <div class="callout green">
+            <strong>Why this sequencing matters</strong>
+            It prevents the team from jumping straight from risk visualization to
+            action without first validating operational context.
+          </div>
+        </div>
+      </section>
+
+      <section id="client-guidance" class="section">
+        <h2>6. How to Guide the Client Team</h2>
+
+        <div class="card-grid">
+          <div class="panel">
+            <h3>How to explain the platform in one minute</h3>
+            <p>
+              “Decision Studio shows the scored portfolio view and where risk is
+              concentrated. Predictive Studio lets us open one well and inspect
+              its real operational history, forecast path, milestones, and risk
+              logic. Causal Command then takes the portfolio from visibility to
+              action by ranking which wells deserve intervention first, why they
+              are delayed, and what recovery may be possible under governed
+              scenarios.”
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>What not to say</h3>
+            <ul>
+              <li>Do not say all three studios do the same thing.</li>
+              <li>Do not present Decision Studio as a direct action engine.</li>
+              <li>Do not present Causal Command as proven causal truth in the scientific sense.</li>
+              <li>Do not skip the evidence and model-basis views when trust or data quality is questioned.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel section">
+          <h3>Client-facing wording by studio</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Studio</th>
+                  <th>Safe wording</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Decision Studio</td>
+                  <td>“This is the portfolio forecasting and risk-ranking layer, backed by the latest validated model package.”</td>
+                </tr>
+                <tr>
+                  <td>Predictive Studio</td>
+                  <td>“This is the well-level investigation workspace, where forecast, phase progress, milestones, and risk are reconciled on one operational narrative.”</td>
+                </tr>
+                <tr>
+                  <td>Causal Command</td>
+                  <td>“This is the intervention deck. It ranks which wells are worth acting on first and estimates recovery under governed scenarios using live operational signals.”</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="footnote">
+          This manual is intentionally detailed so it can be used for internal
+          client enablement, not only for a short demo. If the client team wants
+          even deeper documentation later, the platform already has separate
+          detailed methodology documents for Decision Studio’s ML package and
+          risk-score construction.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

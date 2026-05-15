@@ -1,0 +1,37 @@
+
+============================================================
+  BASHIRA INTELLIGENCE - API Server v2.0
+  Bloomberg-level Decision Engine
+============================================================
+
+  Endpoints:
+    POST /api/query        — Ask any question
+    POST /api/drill-down   — Drill into chart data
+    GET  /api/knowledge-graph — Neo4j graph data
+    GET  /api/schema       — Database schema
+    GET  /api/health       — System health
+
+  Predictive Analytics (ML):
+    POST /predict/single   — Real-time well forecast
+    POST /predict/refresh  — Nightly batch evaluation
+    POST /predict/full     — GPU retrain trigger
+    GET  /predict/anomalies — Anomaly feed
+    GET  /predict/portfolio — Portfolio risk summary
+    GET  /predict/model-info — Model health status
+
+  Swagger: http://localhost:8005/docs
+============================================================
+
+INFO:     127.0.0.1:56429 - "GET /api/command-center/field-atlas HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64254 - "GET /api/command-center/field-atlas HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64255 - "GET /api/command-center/field-atlas HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50808 - "GET /api/command-center/field-atlas HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54159 - "GET /api/knowledge-graph?limit=2000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54159 - "GET /api/knowledge-graph?limit=2000 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50458 - "GET /predict/anomalies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50458 - "GET /predict/anomalies HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50457 - "GET /predict/model-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50457 - "GET /predict/model-info HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54158 - "GET /api/forecast/wells HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54158 - "GET /api/forecast/wells HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62787 - "GET /predict/anomalies HTTP/1.1" 200 OK

@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Predictive Studio Risk Logic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #5f6368;
+      --line: #e8eaed;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #ffd54f;
+      --soft-blue: #eef4ff;
+      --soft-green: #effcf2;
+      --soft-yellow: #fff9db;
+      --soft-red: #fff1f1;
+      --red: #d32f2f;
+      --orange: #ed6c02;
+      --card-shadow: 0 10px 30px rgba(17, 17, 17, 0.06);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --max: 1240px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+      color: var(--text);
+      font-family: "Figtree", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 28px 80px;
+    }
+
+    .hero {
+      padding: 36px 40px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(15, 98, 254, 0.08), transparent 28%),
+        radial-gradient(circle at left bottom, rgba(0, 200, 5, 0.07), transparent 22%),
+        #ffffff;
+      box-shadow: var(--card-shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--soft-yellow);
+      border: 1px solid #f0c93d;
+      color: #7a5a00;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 12px;
+      font-size: 42px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .subhead {
+      max-width: 880px;
+      font-size: 18px;
+      color: #2f3437;
+    }
+
+    .meta-grid,
+    .principles,
+    .formula-grid,
+    .lineage-grid,
+    .two-col,
+    .audit-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 26px;
+    }
+
+    .principles {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .formula-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .lineage-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 20px;
+    }
+
+    .two-col {
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: start;
+      margin-top: 24px;
+    }
+
+    .audit-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 20px;
+    }
+
+    .card,
+    .mini,
+    .metric,
+    .risk-card,
+    .side-note {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--card-shadow);
+    }
+
+    .card {
+      padding: 26px 28px;
+      margin-top: 24px;
+    }
+
+    .mini {
+      padding: 18px 18px 16px;
+    }
+
+    .metric {
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fcfdff 100%);
+    }
+
+    .risk-card {
+      padding: 18px 20px;
+    }
+
+    .side-note {
+      padding: 22px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+      position: sticky;
+      top: 24px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .big {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul,
+    ol {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .pill.blue {
+      border-color: rgba(15, 98, 254, 0.18);
+      background: var(--soft-blue);
+      color: #0d46b3;
+    }
+
+    .pill.green {
+      border-color: rgba(0, 200, 5, 0.2);
+      background: var(--soft-green);
+      color: #087b19;
+    }
+
+    .pill.yellow {
+      border-color: rgba(255, 213, 79, 0.8);
+      background: var(--soft-yellow);
+      color: #7a5a00;
+    }
+
+    .callout {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--blue);
+      border-radius: 12px;
+      background: var(--soft-blue);
+    }
+
+    .warning {
+      border-left-color: #f0c93d;
+      background: var(--soft-yellow);
+    }
+
+    .danger {
+      border-left-color: var(--red);
+      background: var(--soft-red);
+    }
+
+    .section-lead {
+      max-width: 880px;
+      color: #2f3437;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    code,
+    pre {
+      font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+    }
+
+    code {
+      padding: 2px 6px;
+      border-radius: 6px;
+      background: #f5f7fa;
+      border: 1px solid #eceff3;
+      font-size: 0.95em;
+    }
+
+    pre {
+      margin: 0;
+      padding: 18px;
+      overflow: auto;
+      border-radius: 14px;
+      background: #0b1220;
+      color: #f7f9fc;
+      font-size: 13px;
+      line-height: 1.6;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sql-wrap {
+      margin-top: 18px;
+    }
+
+    .sql-title {
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .toc a:hover {
+      text-decoration: none;
+      border-color: rgba(15, 98, 254, 0.25);
+      background: var(--soft-blue);
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #ffffff;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details-body {
+      padding: 0 20px 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .tag.official {
+      background: var(--soft-green);
+      color: #087b19;
+      border: 1px solid rgba(0, 200, 5, 0.25);
+    }
+
+    .tag.secondary {
+      background: var(--soft-blue);
+      color: #0d46b3;
+      border: 1px solid rgba(15, 98, 254, 0.18);
+    }
+
+    .tag.caution {
+      background: var(--soft-yellow);
+      color: #7a5a00;
+      border: 1px solid rgba(255, 213, 79, 0.8);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #ffffff;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1080px) {
+      .meta-grid,
+      .principles,
+      .formula-grid,
+      .lineage-grid,
+      .audit-grid,
+      .toc,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .side-note {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Predictive Studio Governance Note</div>
+      <h1>How Predictive Studio Calculates Risk, Uses Live SSMS Data, and Handles Forecast Logic</h1>
+      <p class="subhead">
+        This document explains the current Predictive Studio implementation in plain business language and
+        code-accurate detail. It is designed so management, product, engineering, and client stakeholders
+        can all understand what is live fact, what is derived logic, what is secondary ML evidence, and
+        why certain fields such as commissioning are deliberately filtered instead of shown blindly.
+      </p>
+
+      <div class="meta-grid">
+        <div class="metric">
+          <div class="label">Official Risk Method</div>
+          <div class="big">Deterministic</div>
+          <p class="muted">Headline risk is now built from live operational rules, not from an opaque model score.</p>
+        </div>
+        <div class="metric">
+          <div class="label">Current Facts Source</div>
+          <div class="big">Live SSMS</div>
+          <p class="muted">Current-state cards are read from the latest <code>WellMonitoringReport</code> row.</p>
+        </div>
+        <div class="metric">
+          <div class="label">History Source</div>
+          <div class="big">Live WMR_Full</div>
+          <p class="muted">Trajectory uses cleaned weekly history from <code>WMR_Full</code>, not stale UI-only cache.</p>
+        </div>
+        <div class="metric">
+          <div class="label">Forecast Source</div>
+          <div class="big">CPU ML or Fallback</div>
+          <p class="muted">If backend 2 is available, forecast comes from the CPU ML service. Otherwise a transparent trend fallback is used.</p>
+        </div>
+      </div>
+
+      <div class="pill-row">
+        <span class="pill green">Official headline score = deterministic live score</span>
+        <span class="pill blue">ML early warning = advisory only</span>
+        <span class="pill yellow">Commissioning 100% placeholder is suppressed when source evidence conflicts</span>
+      </div>
+
+      <nav class="toc">
+        <a href="#operating-principles">Operating Principles</a>
+        <a href="#lineage">Data Lineage</a>
+        <a href="#risk-formula">Risk Formula</a>
+        <a href="#commissioning">Commissioning Placeholder Rule</a>
+        <a href="#forecast">Forecast Logic</a>
+        <a href="#sql-proof">SQL Proof for Client</a>
+      </nav>
+    </section>
+
+    <section class="card" id="operating-principles">
+      <h2>Operating Principles</h2>
+      <p class="section-lead">
+        Predictive Studio now follows a governed hierarchy: live fact first, cleaned historical evidence second,
+        deterministic score third, and machine learning only as secondary signal. This is the core design change
+        that makes the screen explainable and auditable.
+      </p>
+
+      <div class="principles">
+        <div class="mini">
+          <div class="label">Principle 1</div>
+          <h3>Facts must come from live SSMS</h3>
+          <p>Header cards, phase cards, and milestone dates should reflect the latest operational row, not an old CSV export if live SQL is available.</p>
+        </div>
+        <div class="mini">
+          <div class="label">Principle 2</div>
+          <h3>Risk must be explainable</h3>
+          <p>The official risk score is the sum of named, auditable components with fixed caps and clear business meaning.</p>
+        </div>
+        <div class="mini">
+          <div class="label">Principle 3</div>
+          <h3>Untrustworthy fields must be filtered</h3>
+          <p>If a source field is clearly defaulted or contradictory, the UI should show <code>N/A</code> or a placeholder state instead of pretending certainty.</p>
+        </div>
+        <div class="mini">
+          <div class="label">Principle 4</div>
+          <h3>ML is supporting evidence only</h3>
+          <p>The CPU ML signal is preserved as an early-warning indicator, but it does not currently control the official headline risk score.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Management reading:</strong> the number in the Risk Assessment card is intended to be a governed operational score. It is not a hidden model output.
+      </div>
+    </section>
+
+    <section class="card" id="lineage">
+      <h2>Data Lineage in Predictive Studio</h2>
+      <p class="section-lead">
+        Each well detail page now carries source lineage. That means the UI can explicitly say where the current facts,
+        historical series, forecast line, and risk logic came from.
+      </p>
+
+      <div class="lineage-grid">
+        <div class="mini">
+          <h3>Current State</h3>
+          <p><span class="tag official">Official</span></p>
+          <p>
+            Current-state data comes from the latest <code>WellMonitoringReport</code> row for the selected well,
+            ordered by <code>Week_Number</code> descending.
+          </p>
+          <p class="muted">
+            If live SQL is unavailable, the engine falls back to the cached latest snapshot file. Live SQL is always preferred.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>History</h3>
+          <p><span class="tag official">Official</span></p>
+          <p>
+            Historical progress comes from <code>WMR_Full</code>, not from the latest snapshot table. The history
+            is cleaned before plotting to remove duplicate same-day rows and inconsistent backward movement.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>Forecast</h3>
+          <p><span class="tag secondary">Secondary</span></p>
+          <p>
+            If the CPU ML service on port <code>8050</code> is available, the forecast line is returned from
+            <code>/ml/forecast/{well_id}</code>. If it is not available, the engine uses a transparent 4-week
+            trend fallback computed from the cleaned live history.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>Risk</h3>
+          <p><span class="tag official">Official</span></p>
+          <p>
+            The headline risk score is labeled internally as <code>institutional_live_score</code>. It is
+            deterministic and built from live schedule, readiness, stagnation, drilling, and governance signals.
+          </p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>
+          <span>History cleaning steps used before plotting the trajectory</span>
+          <span class="tag official">Current implementation</span>
+        </summary>
+        <div class="details-body">
+          <ol>
+            <li>Normalize all date fields and progress fields into consistent types.</li>
+            <li>Drop rows where <code>Week_Number</code> is null.</li>
+            <li>Normalize <code>Week_Number</code> to date only, so duplicate timestamps on the same day collapse cleanly.</li>
+            <li>Group by week and take <code>max</code> for numeric progress fields on that date.</li>
+            <li>Apply <code>cummax()</code> across the ordered history so cumulative progress does not move backward from data noise.</li>
+            <li>Replace old or inconsistent historical well names with the latest canonical well name from the current-state row.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="risk-formula">
+      <h2>Official Risk Score Formula</h2>
+      <p class="section-lead">
+        The official risk score is a deterministic composite from six operational components. Each component is capped,
+        added to a total score, and then mapped to a risk tier. Machine learning does not currently change this official score.
+      </p>
+
+      <div class="callout warning">
+        <strong>Important:</strong> the older <code>stall_probability</code> model is still computed in the CPU ML service,
+        but it is now shown only as an advisory early-warning signal. It is not the official management risk score.
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Purpose</th>
+            <th>Formula</th>
+            <th>Cap</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Schedule Variance</strong></td>
+            <td>Measures how far live progress is behind the expected schedule curve between actual start and expected rig-off.</td>
+            <td><code>min(35, max(0, expected_progress_pct - actual_progress_pct) * 0.6)</code></td>
+            <td>35</td>
+          </tr>
+          <tr>
+            <td><strong>Overdue Deadline</strong></td>
+            <td>Measures deadline breach or near-term rig-off pressure when no actual rig-off is recorded.</td>
+            <td>
+              Overdue: <code>min(40, 18 + overdue_days * 1.4)</code><br />
+              Near-term: <code>min(20, (14 - days_to_target) * 0.9 + max(0, 85 - progress_pct) * 0.08)</code>
+            </td>
+            <td>40</td>
+          </tr>
+          <tr>
+            <td><strong>Execution Stagnation</strong></td>
+            <td>Measures whether recent history shows almost no movement despite work having started.</td>
+            <td>
+              If last 4 history points move by less than 1 point:<br />
+              <code>20</code> when progress &lt; 95, else <code>10</code><br />
+              Fallback if no usable history and velocity flat/negative: <code>15</code>
+            </td>
+            <td>20</td>
+          </tr>
+          <tr>
+            <td><strong>Readiness</strong></td>
+            <td>Measures risk when the well shows 0% measurable progress.</td>
+            <td>
+              If expected rig-off exists:<br />
+              <code>24</code> if within 30 days<br />
+              <code>14</code> if within 90 days<br />
+              <code>6</code> if beyond 90 days<br />
+              Else <code>18</code> if started, otherwise <code>8</code>
+            </td>
+            <td>24</td>
+          </tr>
+          <tr>
+            <td><strong>Drilling Execution</strong></td>
+            <td>Measures execution pressure for wells already rig-on-location but still low in total completion.</td>
+            <td><code>18</code> if <code>buffer_status = 'ROL'</code> and progress &lt; 60%</td>
+            <td>18</td>
+          </tr>
+          <tr>
+            <td><strong>Governance</strong></td>
+            <td>Measures unresolved management-of-change governance.</td>
+            <td><code>10</code> if MOC is raised and not approved</td>
+            <td>10</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="formula-grid">
+        <div class="risk-card">
+          <div class="label">Tier Mapping</div>
+          <h3>How the final score becomes a tier</h3>
+          <ul>
+            <li><strong>CRITICAL</strong>: score &gt;= 70</li>
+            <li><strong>HIGH_RISK</strong>: score &gt;= 40 and &lt; 70</li>
+            <li><strong>WATCH</strong>: score &gt;= 20 and &lt; 40</li>
+            <li><strong>HEALTHY</strong>: score &lt; 20</li>
+          </ul>
+        </div>
+
+        <div class="risk-card">
+          <div class="label">Official composite</div>
+          <h3>Final score equation</h3>
+          <p>
+            <code>
+              official_risk_score = min(100, schedule_variance_risk + overdue_deadline_risk +
+              stagnation_risk + readiness_risk + drilling_execution_risk + governance_risk)
+            </code>
+          </p>
+          <p class="muted">
+            The value is capped between 0 and 100, rounded to one decimal place, then mapped to a tier.
+          </p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>
+          <span>Detailed interpretation of each component</span>
+          <span class="tag official">Drill down</span>
+        </summary>
+        <div class="details-body">
+          <h3>1. Schedule Variance</h3>
+          <p>
+            This component only applies when the system knows both an actual start and an expected rig-off date,
+            and no actual rig-off has been recorded yet. It converts elapsed time into an expected progress curve,
+            then measures how far the live progress is behind that curve.
+          </p>
+
+          <h3>2. Overdue Deadline</h3>
+          <p>
+            This component activates when the expected rig-off date has passed with no actual rig-off, or when the
+            rig-off date is close and the well still has low completion. It is the main deadline-pressure component.
+          </p>
+
+          <h3>3. Execution Stagnation</h3>
+          <p>
+            This component requires usable history. If the last four cleaned history points have moved by less than
+            one progress point, the well is treated as stalled operationally even if it is not yet formally overdue.
+          </p>
+
+          <h3>4. Readiness</h3>
+          <p>
+            This is the controlled treatment for 0% progress wells. A not-started well is not automatically critical.
+            Its score depends on whether it has already started in some form and how near the target deadline is.
+          </p>
+
+          <h3>5. Drilling Execution</h3>
+          <p>
+            If the well is already marked <code>ROL</code> and overall completion is still below 60%, the score adds
+            execution pressure because the well is in an active drilling state without enough total progress.
+          </p>
+
+          <h3>6. Governance</h3>
+          <p>
+            If the latest row shows an MOC has been raised but not approved, the score adds a governance penalty.
+            This is intentionally small but visible because it signals control risk rather than pure schedule risk.
+          </p>
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>Why the CPU ML stall probability is not the headline score</span>
+          <span class="tag secondary">Secondary evidence only</span>
+        </summary>
+        <div class="details-body">
+          <p>
+            The CPU ML service trains a LightGBM model on a target called <code>is_stalled</code>. That target is defined as:
+          </p>
+          <ul>
+            <li>progress &gt; 0</li>
+            <li>progress &lt; 0.95</li>
+            <li>latest history point older than 14 days</li>
+          </ul>
+          <p>The model currently uses these features:</p>
+          <ul>
+            <li><code>progress</code></li>
+            <li><code>rig_efficiency</code></li>
+            <li><code>cluster_density</code></li>
+            <li><code>momentum</code></li>
+          </ul>
+          <p>
+            Its output is <code>stall_probability_pct</code>. That output is now treated as an advisory early-warning
+            signal only. It is preserved in risk attribution, but it does not change the official headline score.
+          </p>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="commissioning">
+      <h2>Commissioning Logic and the 100% Placeholder Problem</h2>
+      <p class="section-lead">
+        The current SSMS snapshot shows a structural anomaly: the field <code>overall_comm_progress_100</code> is 1.0 for all latest rows.
+        That cannot be trusted as proof that commissioning really happened for every well, because the supporting commissioning dates are often null.
+      </p>
+
+      <div class="two-col">
+        <div>
+          <div class="callout danger">
+            <strong>What changed in the UI:</strong> Predictive Studio no longer blindly renders commissioning as completed
+            just because <code>overall_comm_progress_100 = 1.0</code>. If commissioning start and finish are both null
+            and the well is not fully complete overall, the screen now treats commissioning as a placeholder and renders it as <code>N/A</code> in the cards.
+          </div>
+
+          <details open>
+            <summary>
+              <span>Exact placeholder rule</span>
+              <span class="tag caution">Current safeguard</span>
+            </summary>
+            <div class="details-body">
+              <p>Commissioning is treated as a placeholder when all of the below are true:</p>
+              <ul>
+                <li><code>overall_comm_progress_100 &gt;= 100%</code></li>
+                <li><code>actual_comm._start_date IS NULL</code></li>
+                <li><code>actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date IS NULL</code></li>
+                <li><code>over_all_progress_percentages &lt; 100%</code> or null</li>
+              </ul>
+              <p>
+                If that rule is triggered:
+              </p>
+              <ul>
+                <li>the top commissioning card shows <code>N/A</code> instead of 100%</li>
+                <li>the phase execution panel treats commissioning as <code>NOT_STARTED</code> unless real dates exist</li>
+                <li>the raw source value is still preserved internally as <code>comm_progress_raw</code> for audit</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+
+        <aside class="side-note">
+          <div class="label">Why this matters</div>
+          <h3>Client-safe explanation</h3>
+          <p>
+            The UI is not inventing 100% commissioning. The source field itself is populated as 1.0 across the latest
+            snapshot. The UI now protects against showing that value blindly when the supporting commissioning dates
+            do not exist.
+          </p>
+          <p class="muted">
+            In other words: the raw source value is real, but its business meaning is not reliable enough to expose directly.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="card" id="forecast">
+      <h2>Forecast and Trajectory Logic</h2>
+      <p class="section-lead">
+        The trajectory chart on the well detail page is built from cleaned live history. The forecast overlay is supplied by the CPU ML service if available,
+        otherwise the engine falls back to a transparent short-horizon trend model.
+      </p>
+
+      <div class="audit-grid">
+        <div class="mini">
+          <div class="label">Actual line</div>
+          <h3>Cleaned live history</h3>
+          <p>The plotted actual line uses the cleaned <code>WMR_Full</code> weekly history described earlier.</p>
+        </div>
+        <div class="mini">
+          <div class="label">Forecast line</div>
+          <h3>CPU ML first</h3>
+          <p>If backend 2 responds on <code>127.0.0.1:8050</code>, the screen uses the CPU ML forecast response for the selected well.</p>
+        </div>
+        <div class="mini">
+          <div class="label">Fallback</div>
+          <h3>Heuristic but explicit</h3>
+          <p>If the CPU ML service is unavailable, the engine uses a slope-based 4-week forecast on cleaned recent history and labels the lineage accordingly.</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>
+          <span>Fallback forecast formula</span>
+          <span class="tag caution">Used only when CPU ML is unavailable</span>
+        </summary>
+        <div class="details-body">
+          <ol>
+            <li>Take the last up to 14 cleaned history points.</li>
+            <li>Fit a linear trend on progress percentage over day index using <code>numpy.polyfit</code>.</li>
+            <li>Clamp negative slope to zero, because negative completion is not meaningful.</li>
+            <li>Project 4 weekly points forward.</li>
+            <li>Build a confidence band using <code>1.96 * residual_std * sqrt(horizon)</code>.</li>
+            <li>If the slope is materially positive, estimate completion date and weeks remaining.</li>
+          </ol>
+        </div>
+      </details>
+    </section>
+
+    <section class="card" id="sql-proof">
+      <h2>SQL Proof You Can Show the Client</h2>
+      <p class="section-lead">
+        All SQL below is read-only and safe to run against the current environment. These queries prove that the
+        commissioning anomaly comes from live SSMS data, not from the UI layer.
+      </p>
+
+      <div class="sql-wrap">
+        <div class="sql-title">1. Single well proof for 25115 / RASW_GH_WI_LOC5</div>
+        <pre>SELECT TOP 1
+    well_name_after_spud,
+    pdo_well_id,
+    TRY_CONVERT(date, Week_Number) AS snapshot_date,
+    TRY_CAST([over_all_progress_percentages] AS float) AS overall_progress,
+    TRY_CAST([overall_comm_progress_100] AS float) AS commissioning_progress,
+    [actual_comm._start_date] AS commissioning_start,
+    [actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date] AS commissioning_finish
+FROM WellMonitoringReport
+WHERE TRY_CONVERT(nvarchar(50), pdo_well_id) = '25115'
+ORDER BY TRY_CONVERT(date, Week_Number) DESC;</pre>
+      </div>
+
+      <div class="sql-wrap">
+        <div class="sql-title">2. Portfolio-wide proof that latest commissioning progress is defaulted to 1.0</div>
+        <pre>SELECT
+    COUNT(*) AS total_wells,
+    SUM(CASE WHEN TRY_CAST([overall_comm_progress_100] AS float) = 1 THEN 1 ELSE 0 END) AS commissioning_100,
+    SUM(CASE WHEN TRY_CAST([overall_comm_progress_100] AS float) = 0 THEN 1 ELSE 0 END) AS commissioning_0,
+    SUM(CASE WHEN [actual_comm._start_date] IS NOT NULL THEN 1 ELSE 0 END) AS commissioning_started_rows,
+    SUM(CASE WHEN [actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date] IS NOT NULL THEN 1 ELSE 0 END) AS commissioning_finished_rows
+FROM WellMonitoringReport;</pre>
+      </div>
+
+      <div class="sql-wrap">
+        <div class="sql-title">3. Show live risk-input fields used by the institutional score for a sample well</div>
+        <pre>SELECT TOP 1
+    well_name_after_spud,
+    pdo_well_id,
+    TRY_CONVERT(date, Week_Number) AS snapshot_date,
+    TRY_CAST([over_all_progress_percentages] AS float) AS overall_progress,
+    TRY_CONVERT(date, [actual_start_date]) AS loc_prep_start,
+    TRY_CONVERT(date, [engineering_actual_start_date]) AS engineering_start,
+    TRY_CONVERT(date, [const._actual_start_date]) AS construction_start,
+    TRY_CONVERT(date, [actual_rig_on_date]) AS rig_on,
+    TRY_CONVERT(date, [actual_rig_off_date]) AS rig_off,
+    TRY_CONVERT(date, [exp.rig_off_location_sap_data]) AS expected_rig_off,
+    [buffer_status],
+    [moc_raised],
+    [moc_approved]
+FROM WellMonitoringReport
+WHERE TRY_CONVERT(nvarchar(50), pdo_well_id) = '25115'
+ORDER BY TRY_CONVERT(date, Week_Number) DESC;</pre>
+      </div>
+
+      <div class="sql-wrap">
+        <div class="sql-title">4. Show the history used for stagnation logic</div>
+        <pre>SELECT
+    TRY_CONVERT(date, Week_Number) AS snapshot_date,
+    TRY_CAST([over_all_progress_percentages] AS float) AS overall_progress
+FROM WMR_Full
+WHERE TRY_CONVERT(nvarchar(50), pdo_well_id) = '25115'
+ORDER BY TRY_CONVERT(date, Week_Number) ASC;</pre>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>What the Screen Now Means</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>UI element</th>
+            <th>What it means now</th>
+            <th>What it does not mean</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Risk ring beside Risk Assessment</td>
+            <td>The official deterministic risk score for the selected well.</td>
+            <td>It is no longer a disguised progress ring.</td>
+          </tr>
+          <tr>
+            <td>Commissioning phase card</td>
+            <td>Commissioning progress only when source evidence is credible.</td>
+            <td>It does not blindly trust <code>overall_comm_progress_100</code>.</td>
+          </tr>
+          <tr>
+            <td>Risk Attribution panel</td>
+            <td>The named score components that actually contributed to the official score.</td>
+            <td>It is not a generic AI explanation panel.</td>
+          </tr>
+          <tr>
+            <td>Forecast lineage label</td>
+            <td>Whether the chart is showing CPU ML forecast or fallback forecast.</td>
+            <td>It does not imply that every line is model-generated all the time.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Current Limitations</h2>
+      <ul>
+        <li>The official score is now auditable, but it is still a rules-based operational score. It is not yet a formally client-approved enterprise KPI.</li>
+        <li>Well list and portfolio summary use current-state risk only. The detailed well page is richer because it also has cleaned history for stagnation analysis.</li>
+        <li>If backend 2 is down, the forecast source correctly drops to heuristic fallback. The lineage now makes that visible.</li>
+        <li>The commissioning source issue is still in the client data. The UI is only preventing bad display logic on top of that anomaly.</li>
+      </ul>
+    </section>
+
+    <div class="footer">
+      This document reflects the current Predictive Studio implementation in the Bashira codebase as of 29 March 2026.
+      It is intended to be a readable operating note for management, client review, and engineering audit.
+    </div>
+  </div>
+</body>
+</html>

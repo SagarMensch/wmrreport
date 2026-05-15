@@ -1,0 +1,74 @@
+direction: right
+classes: {
+  db: {
+    shape: cylinder
+    style.fill: "#1e293b"
+    style.font-color: white
+  }
+  python_service: {
+    shape: component
+    style.fill: "#facc15"
+    style.shadow: true
+  }
+  julia_native: {
+    shape: component
+    style.fill: "#9558b2"
+    style.font-color: white
+    style.shadow: true
+  }
+  shared_ram: {
+    shape: package
+    style.fill: "#0f172a"
+    style.font-color: white
+    style.stroke-dash: 5
+  }
+  sysimage: {
+    shape: package
+    style.fill: "#ef4444"
+    style.font-color: white
+  }
+  output: {
+    shape: note
+    style.fill: "#22c55e"
+    style.font-color: white
+  }
+}
+
+title: Deep Architectural Pipeline: Bashira Intelligence
+
+Live SQL Database: Production State { class: db }
+
+Orchestrator: Python Predict & Route \n(`orchestrator.py` & `forecast_engine.py`) {
+  class: python_service
+  description: XGBoost / AutoARIMA \nfor baseline Series
+}
+
+CausalCommandService: Python Feature Synthesizer \n(`causal_command_service.py`) {
+  class: python_service
+  description: Fuses Task Daily, PH \nProductivity & SAP data
+}
+
+AlienSysimage: `bashira_alien_sysimage.dll` {
+  class: sysimage
+  description: AOT Compiled \nNative Machine Code
+}
+
+JuliaEngine: Exact Causal Engine \n(`causal_command.jl`) {
+  class: julia_native
+  description: S-Learner, \nJuMP & HiGHS
+}
+
+SharedMemSwap: Ephemeral Memory Transfer / TSV {
+  class: shared_ram
+}
+
+Results: Drivers, Counterfactuals \n& Root Causes { class: output }
+
+Live SQL Database -> Orchestrator: Raw Tables (WMR, Logs)
+Live SQL Database -> CausalCommandService: Domain specific relational rows
+Orchestrator -> SharedMemSwap: Extracted features
+CausalCommandService -> SharedMemSwap: Contextualized Feature Matrix
+AlienSysimage -> JuliaEngine: Zero JIT Overhead Payload
+SharedMemSwap -> JuliaEngine: Memory Ingestion
+JuliaEngine -> Results: Output Graph Constraints
+Results -> CausalCommandService: Formats into UI Response

@@ -1,0 +1,18 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[New_Daily_Plan]    Script Date: 25-03-2026 16:21:37 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE   VIEW [dbo].[New_Daily_Plan]
+AS
+SELECT *
+FROM dbo.vw_New_Daily_Plan;
+GO
+

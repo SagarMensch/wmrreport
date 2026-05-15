@@ -1,0 +1,656 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Advanced Risk Terms and Simulation Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #101114;
+      --muted: #5c6672;
+      --line: #d6dbe3;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+      --slate: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", Arial, sans-serif;
+      line-height: 1.58;
+    }
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+    .hero {
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+    .card {
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    h1 {
+      margin: 10px 0 12px;
+      font-size: 36px;
+      line-height: 1.14;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.28;
+    }
+    p { margin: 0 0 12px; }
+    .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    .kpi {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .metric {
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slate);
+      background: #fff;
+    }
+    .chip.blue { color: var(--blue); border-color: rgba(15,98,254,.28); background: rgba(15,98,254,.05); }
+    .chip.green { color: #0b6b0d; border-color: rgba(0,200,5,.28); background: rgba(0,200,5,.06); }
+    .chip.yellow { color: #896700; border-color: rgba(241,194,27,.42); background: rgba(241,194,27,.12); }
+    .chip.red { color: var(--red); border-color: rgba(142,27,27,.28); background: rgba(142,27,27,.06); }
+    .term {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+    .term:first-of-type {
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .callout {
+      border-left: 4px solid var(--blue);
+      background: rgba(15,98,254,.05);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 12px;
+    }
+    .warning {
+      border-left-color: var(--yellow);
+      background: rgba(241,194,27,.11);
+    }
+    pre {
+      margin: 12px 0;
+      background: #f3f4f6;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px 14px;
+      overflow: auto;
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 10px;
+      border-top: 1px solid var(--line);
+    }
+    th {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      background: #fbfcfd;
+    }
+    tr:first-child th, tr:first-child td { border-top: none; }
+    ul, ol { margin: 8px 0 12px 20px; padding: 0; }
+    li { margin-bottom: 6px; }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px 0 24px;
+    }
+    @media (max-width: 980px) {
+      .span-8, .span-6, .span-4, .span-3 { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Advanced Concepts</div>
+      <h1>3D Risk Topography, Tail Risk, Simulation, Graph Intelligence, and Advanced Decision Terms</h1>
+      <p class="subtitle">
+        This document explains the advanced quantitative and AI terms that appear in an institutional-grade execution-risk
+        dashboard: 3D risk surfaces, EVT, ST-GNN, MARL, NHPP, Monte Carlo delay simulation, heavy-risk pricing,
+        dependency clusters, lead rigs, and snapshot-based inference. It is written as a detailed working note for demo,
+        architecture explanation, and executive walkthroughs.
+      </p>
+      <div class="chips">
+        <span class="chip blue">risk surface modeling</span>
+        <span class="chip yellow">tail risk and simulation</span>
+        <span class="chip green">graph and intervention AI</span>
+        <span class="chip red">financial exposure translation</span>
+      </div>
+      <div class="callout">
+        <strong>Interpretation principle.</strong> Most of these terms are not isolated widgets. A serious execution-risk
+        system combines predictive modeling, graph structure, stochastic event simulation, tail-loss statistics,
+        intervention planning, and financial translation into one layered stack.
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Lens</div>
+        <div class="metric">Risk as Terrain</div>
+        <p>The dashboard treats execution risk as a landscape, not just a number.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Probabilistic Core</div>
+        <div class="metric">Simulation</div>
+        <p>Monte Carlo and event-intensity logic create distributions, not just point estimates.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Dependency Core</div>
+        <div class="metric">Graph</div>
+        <p>Rigs, wells, tasks, clusters, and crews are modeled as interacting nodes.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Executive Output</div>
+        <div class="metric">Financial Exposure</div>
+        <p>Operational risk is translated into delay cost and tail-loss pricing.</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>1. 3D Risk Topography</h2>
+      <p>
+        The center surface chart is a three-dimensional risk field. It is best understood as a visualization of a risk
+        function over the operational state space. Instead of listing isolated well scores, the system constructs a
+        continuous surface showing how risk rises or falls across combinations of execution conditions.
+      </p>
+      <pre>X axis  -> execution dimension: stage, workfront, cluster, rig lane, or dependency corridor
+Y axis  -> operational condition: progress %, velocity, backlog, variance, quality of execution
+Z axis  -> risk intensity: modeled instability or expected disruption severity</pre>
+      <p>
+        Green zones represent relatively stable operating regions. Yellow zones represent rising instability. Red peaks
+        represent concentrated stress, typically where several bad conditions coincide. The surface is therefore a risk
+        landscape or terrain map of execution instability.
+      </p>
+      <p>
+        A mathematically clean abstraction is:
+      </p>
+      <pre>Risk = f(progress_velocity, schedule_variance, stage_stall, queue_exposure,
+         dependency_breaks, anomaly_pressure, resource_conflict)</pre>
+      <p>
+        In practice, the surface is generated by first computing risk values at many actual asset states, then embedding
+        those states into a common coordinate system, then interpolating or smoothing across the observed grid so the user
+        can see concentration rather than only raw points.
+      </p>
+      <div class="callout warning">
+        <strong>Why this matters.</strong> A table only tells the viewer that seven wells are delayed. A risk surface shows
+        where instability is accumulating, how it changes across execution conditions, and whether the portfolio is moving
+        toward a localized hotspot or a broader systemic ridge of risk.
+      </div>
+    </section>
+    <section class="grid">
+      <article class="card span-8">
+        <h2>2. Synthetic Officer Panel</h2>
+        <p>
+          The right-side officer panel is a reasoning layer built on top of the predictive and simulation stack. It is not
+          the core model itself. It is a synthesis engine that reads risk metrics, tail-loss outputs, dependency analysis,
+          intervention scenarios, and confidence measures, then converts them into executive statements.
+        </p>
+        <p>
+          A serious version of this panel consumes:
+        </p>
+        <ul>
+          <li>portfolio- or well-level predictive scores</li>
+          <li>delay and cost simulation outputs</li>
+          <li>dependency-graph findings</li>
+          <li>tail-risk triggers</li>
+          <li>recommended intervention strategies</li>
+          <li>confidence and support statistics</li>
+        </ul>
+        <p>
+          Then it emits decision-language observations such as tail exposure breached, sequence failure propagating,
+          autonomous intervention found, or recoverable delay window detected. So this panel is effectively an executive
+          briefing engine sitting on top of the quantitative core.
+        </p>
+
+        <div class="term">
+          <h3>P99 EVT Risk Breached</h3>
+          <div class="meta"><span class="chip yellow">Tail Risk</span></div>
+          <p>
+            EVT means <strong>Extreme Value Theory</strong>. EVT is used when we care about rare but severe outcomes rather than
+            only average outcomes. The central question is not “what usually happens?” but “what happens in the outer tail
+            when the system experiences highly adverse conditions?”
+          </p>
+          <p>
+            P99 means the 99th percentile. If a dashboard says <code>P99 EVT risk = $92.2M</code>, it means that only 1% of
+            modeled scenarios are worse than that number. In other words, the estimated exposure under extreme-but-plausible
+            downside conditions reaches about $92.2M.
+          </p>
+          <pre>P99 tail exposure = loss threshold exceeded by only 1% of scenarios</pre>
+          <p>
+            EVT matters because operational programs often have fat-tail behavior. Average delay cost may look acceptable,
+            while a rare sequence of rig conflicts, critical-path failures, and dependency spillovers produces extremely
+            large exposure. EVT isolates that tail.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Spatial Counterfactual</h3>
+          <div class="meta"><span class="chip blue">Causal-Graph View</span></div>
+          <p>
+            A counterfactual asks: what would happen if some condition were different? A spatial counterfactual asks that
+            question across a geographic or dependency-connected field. Example: if one rig in Cluster 1 recovered five
+            days earlier, how would that affect nearby wells, shared corridors, downstream stages, and regional pressure?
+          </p>
+          <p>
+            This is not the same thing as correlation. It is alternate-world reasoning over a structured system.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>ST-GNN</h3>
+          <div class="meta"><span class="chip green">Graph Intelligence</span></div>
+          <p>
+            ST-GNN stands for <strong>Spatio-Temporal Graph Neural Network</strong>. It is designed for systems that are both graph-shaped
+            and time-varying. In this domain, nodes can be wells, rigs, crews, tasks, workfronts, clusters, or locations.
+            Edges can represent shared rigs, shared crews, sequence dependencies, spatial adjacency, or infrastructure linkage.
+          </p>
+          <pre>Node state at time t+1 = g(own state at t, neighbors' states at t, edge relations, temporal history)</pre>
+          <p>
+            “Spatio-temporal” means the model captures both location/dependency structure and how conditions evolve over time.
+            If the system says sequence failure is propagating through Cluster 1, the intended meaning is that one node’s
+            stress is likely spreading through dependent nodes, rather than remaining isolated.
+          </p>
+          <p>
+            This is useful for execution systems because failures often propagate: one rig-on miss delays drilling,
+            which delays construction handoff, which delays commissioning, which reshapes queue pressure in neighboring wells.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>MARL Scenario</h3>
+          <div class="meta"><span class="chip green">Intervention Optimization</span></div>
+          <p>
+            MARL means <strong>Multi-Agent Reinforcement Learning</strong>. It is used when many interacting actors make decisions inside one
+            environment. In an execution system, the agents can represent rigs, crews, dispatchers, clusters, resource managers,
+            or policy controllers. Each agent takes actions and receives rewards or penalties from the environment.
+          </p>
+          <p>
+            Example actions include rerouting a rig, resequencing a task package, moving a crew, accelerating one corridor,
+            or deferring a lower-priority job. The reward function would likely penalize delay growth, critical spillover,
+            idle cost, and tail exposure while rewarding recovered throughput and improved completion probability.
+          </p>
+          <pre>Policy objective = minimize(delay + tail_cost + contagion + idle_resources)
+                   while maximizing(flow_throughput + recovery_probability)</pre>
+          <p>
+            When the panel says an autonomous MARL scenario generated a reroute for a lead rig, the intended interpretation
+            is that the system explored many coordinated action sequences and found one that improves outcome under the model.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Confidence of Salvaging 14 Days</h3>
+          <div class="meta"><span class="chip blue">Decision Confidence</span></div>
+          <p>
+            This is a probability-like success estimate tied to an intervention. If the panel says 92% confidence of
+            salvaging 14 days, the natural meaning is that across model runs, posterior draws, simulations, or accepted
+            scenario paths, the recommended intervention achieved at least a 14-day improvement in roughly 92% of cases.
+          </p>
+          <p>
+            This confidence can come from simulation frequency, Bayesian posterior probability, ensemble agreement, or
+            historical analogue support. It should be interpreted as confidence under model assumptions, not certainty.
+          </p>
+        </div>
+      </article>
+
+      <article class="card span-4">
+        <h2>3. Officer Panel Utility</h2>
+        <p>
+          The officer panel exists because executives do not want to read raw tensors, adjacency matrices, or posterior tables.
+          They want decision-grade statements.
+        </p>
+        <p>
+          A proper panel converts quantitative outputs into these classes of action intelligence:
+        </p>
+        <ul>
+          <li>tail loss warning</li>
+          <li>dependency contagion warning</li>
+          <li>resource resequencing recommendation</li>
+          <li>best recovery action</li>
+          <li>expected gain and confidence</li>
+        </ul>
+        <div class="callout">
+          <strong>Key design point.</strong> This panel is a synthesis layer. It does not replace the quantitative stack. It makes the stack legible.
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4. NHPP Monte Carlo Statistics</h2>
+        <div class="term">
+          <h3>NHPP</h3>
+          <div class="meta"><span class="chip yellow">Event Process Modeling</span></div>
+          <p>
+            NHPP stands for <strong>Non-Homogeneous Poisson Process</strong>. A standard Poisson process assumes a constant event-arrival rate.
+            NHPP allows that rate to vary over time.
+          </p>
+          <pre>Homogeneous Poisson:   lambda(t) = constant
+Non-homogeneous:       lambda(t) = function of time</pre>
+          <p>
+            In an execution setting, that matters because disruption intensity is usually not constant. Early-stage operations
+            may be relatively calm; mid-stage coordination may increase event pressure; late-stage recovery attempts may create
+            compressed-risk behavior.
+          </p>
+          <p>
+            The “events” in this context can be delay arrivals, dependency breaks, schedule misses, resource conflicts,
+            or critical risk transitions.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Poisson Intensity lambda</h3>
+          <div class="meta"><span class="chip yellow">Hazard Rate</span></div>
+          <p>
+            If the dashboard shows <code>lambda = 2.248</code>, that is the event-arrival intensity. It means that on average,
+            about 2.248 modeled disruption events occur per chosen time unit. Under NHPP, this intensity can change over time.
+          </p>
+          <pre>lambda early stage = 1.1
+lambda mid stage   = 2.2
+lambda late stage  = 3.4</pre>
+          <p>
+            Higher lambda means more frequent disruption arrivals, more instability, and a higher probability that simulated
+            execution paths accumulate severe delay.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Monte Carlo Simulation</h3>
+          <div class="meta"><span class="chip yellow">Probabilistic Engine</span></div>
+          <p>
+            Monte Carlo simulation means generating many possible futures instead of relying on one deterministic projection.
+            Each run samples uncertainty: event arrivals, duration overruns, dependency failures, recovery speed, resource
+            conflicts, or intervention effects.
+          </p>
+          <ol>
+            <li>Start from the current operational snapshot.</li>
+            <li>Sample disruption events using NHPP or related stochastic rules.</li>
+            <li>Propagate their effect through execution dependencies.</li>
+            <li>Accumulate resulting delay and cost.</li>
+            <li>Repeat thousands of times.</li>
+            <li>Estimate delay and cost distributions from all simulated paths.</li>
+          </ol>
+          <p>
+            This produces mean delay, P95 and P99 outcomes, expected cost, worst-case windows, and intervention success rates.
+          </p>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>5. Delay and Cost Statistics</h2>
+        <div class="term">
+          <h3>Expected Delay (Mean)</h3>
+          <div class="meta"><span class="chip blue">Central Tendency</span></div>
+          <p>
+            The expected delay is the average delay across all simulated futures. If thousands of Monte Carlo runs produce
+            thousands of possible completion slippages, the mean is the arithmetic average across that distribution.
+          </p>
+          <pre>Expected Delay = average(simulated_delay_1 ... simulated_delay_N)</pre>
+          <p>
+            This is useful for baseline planning, portfolio comparisons, and expected financial costing. But it is not enough by itself,
+            because the average hides downside tails.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>P95 Worst-Case Delay</h3>
+          <div class="meta"><span class="chip red">Stress Scenario</span></div>
+          <p>
+            P95 means the 95th percentile of the simulated delay distribution. If P95 delay is 745 days, then 95% of simulated
+            scenarios are at or below 745 days, while 5% are worse. This is a severe-but-plausible downside planning metric.
+          </p>
+          <p>
+            It is useful for contingency reserves, stress testing, and executive scenario review. Mean tells you what is expected;
+            P95 tells you what becomes possible under substantial stress.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Execution Price / Risk Cost</h3>
+          <div class="meta"><span class="chip red">Financial Translation</span></div>
+          <p>
+            The execution price is the monetized cost of operational disruption. The simplest model is:
+          </p>
+          <pre>Execution Risk Cost = Expected Delay x Daily Cost of Delay</pre>
+          <p>
+            A more realistic enterprise version adds rig standby, crew idle cost, resequencing penalties, infrastructure delay,
+            lost throughput, and critical multipliers.
+          </p>
+          <pre>Total Risk Cost = (delay_days x burn_rate)
+                + rig_idle_cost
+                + crew_idle_cost
+                + dependency_penalty
+                + resequencing_cost
+                + tail_risk_surcharge</pre>
+          <p>
+            This is essential for capital planning because it translates operations into money, which is the language required
+            for portfolio prioritization and executive action.
+          </p>
+        </div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>6. State Classification and Pricing Layers</h2>
+        <div class="term">
+          <h3>Execution Signals: Done, Delayed, Critical</h3>
+          <div class="meta"><span class="chip blue">State Layer</span></div>
+          <p>
+            This is a classification layer on top of the continuous risk engine. Each well, task, or workfront is mapped into
+            a decision state such as done, delayed, or critical.
+          </p>
+          <table>
+            <tr><th>Signal</th><th>Meaning</th></tr>
+            <tr><td>Done</td><td>Finished or no material residual risk.</td></tr>
+            <tr><td>Delayed</td><td>Behind expected path but still potentially recoverable.</td></tr>
+            <tr><td>Critical</td><td>Severe instability, likely contagion, high intervention urgency.</td></tr>
+          </table>
+          <p>
+            These states are typically derived from thresholds over modeled risk, schedule slip, anomaly pressure,
+            dependency burden, and recovery confidence.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Heavy Risk Pricing</h3>
+          <div class="meta"><span class="chip red">Nonlinear Cost Logic</span></div>
+          <p>
+            Heavy risk pricing means cost increases faster once assets cross into critical territory. A delayed well is costly.
+            A critical well is not just more delayed; it often triggers secondary damage such as crew idle time, queue spillover,
+            resequencing penalties, and contract or infrastructure losses.
+          </p>
+          <pre>Adjusted Cost = Base Cost x Critical Multiplier</pre>
+          <p>
+            If there are zero critical wells, that multiplier is not applied. If the dashboard says heavy-risk pricing applied
+            for zero critical wells, it means the system checked the nonlinear penalty layer and found no assets requiring escalation.
+          </p>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>7. Workfront Matrix, Lead Rig, Clusters, Snapshot</h2>
+        <div class="term">
+          <h3>Workfront Matrix</h3>
+          <div class="meta"><span class="chip blue">Portfolio Grid</span></div>
+          <p>
+            A workfront matrix is typically a portfolio grid where wells, tasks, rigs, or work packages are positioned according to
+            modeled properties such as delay probability, severity, queue exposure, cost, or recovery confidence.
+          </p>
+          <p>
+            If the matrix reports a maximum delay probability of 54.4%, it means the most exposed item currently has an estimated
+            54.4% chance of entering or remaining in a delayed state under the modeled execution dynamics.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Lead Rig</h3>
+          <div class="meta"><span class="chip green">Critical Resource Node</span></div>
+          <p>
+            The lead rig is the most operationally influential resource node in the dependency network. It is typically the rig whose
+            failure or resequencing has the greatest downstream effect on multiple wells, workfronts, or stages.
+          </p>
+          <p>
+            In graph terms, this could be the node with the highest centrality, propagated-risk contribution, or dependency load.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Clusters</h3>
+          <div class="meta"><span class="chip green">Dependency Groups</span></div>
+          <p>
+            Clusters are groups of assets tied by shared rigs, crews, sequence dependencies, logistics, geography, or infrastructure.
+            A cluster is important because local risk may not stay local. If one node degrades inside a tightly connected cluster,
+            spillover becomes much more plausible.
+          </p>
+        </div>
+
+        <div class="term">
+          <h3>Snapshot</h3>
+          <div class="meta"><span class="chip blue">Inference Versioning</span></div>
+          <p>
+            A snapshot is the exact data version used for prediction. It can represent a week number, batch ID, extracted feature frame,
+            or dataset revision. Prediction without snapshot discipline is not auditable. Snapshot tagging is what makes outputs
+            reproducible, comparable, and reviewable later.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>8. End-to-End Architecture of a Serious Execution-Risk System</h2>
+      <p>
+        When all these terms are combined properly, the stack works like this:
+      </p>
+      <ol>
+        <li>Load the latest operational snapshot with wells, rigs, stages, dependencies, and history.</li>
+        <li>Construct a dependency graph over wells, rigs, workfronts, crews, and clusters.</li>
+        <li>Estimate current risk, progress divergence, and delay probability using predictive models.</li>
+        <li>Estimate event-arrival intensity with NHPP-style logic so disruption pressure can change over time.</li>
+        <li>Run Monte Carlo simulations to generate many possible future execution paths.</li>
+        <li>Use EVT to measure tail exposure in the severe-loss region of the distribution.</li>
+        <li>Use ST-GNN or graph inference to estimate how failure propagates through dependencies.</li>
+        <li>Use MARL or scenario optimization to test intervention strategies such as rig rerouting or resequencing.</li>
+        <li>Translate expected and tail delay into financial exposure for executive action.</li>
+        <li>Summarize everything in the officer panel as decision-grade narrative.</li>
+      </ol>
+      <div class="callout">
+        <strong>Executive takeaway.</strong> This type of system is not one algorithm. It is a layered decision engine combining
+        predictive ML, graph intelligence, stochastic simulation, tail-risk statistics, intervention optimization, and financial translation.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>9. Why These Terms Matter in a Demo</h2>
+      <p>
+        These concepts create value because they answer different executive questions:
+      </p>
+      <table>
+        <tr><th>Question</th><th>Best Term / Engine</th><th>What It Answers</th></tr>
+        <tr><td>Where is risk accumulating?</td><td>3D Risk Topography</td><td>Shows concentration and terrain of instability.</td></tr>
+        <tr><td>How bad can things get in extreme conditions?</td><td>EVT / P99</td><td>Measures tail exposure rather than average risk.</td></tr>
+        <tr><td>How often are disruptions expected to arrive?</td><td>NHPP / lambda</td><td>Models event intensity and acceleration.</td></tr>
+        <tr><td>What is the expected delay and downside envelope?</td><td>Monte Carlo, Mean, P95</td><td>Creates full delay distribution.</td></tr>
+        <tr><td>How does failure spread across assets?</td><td>ST-GNN / graph analysis</td><td>Estimates propagation through dependencies.</td></tr>
+        <tr><td>What action should we take?</td><td>MARL / scenario optimization</td><td>Searches for better execution strategies.</td></tr>
+        <tr><td>What is the business impact?</td><td>Execution Price / risk cost</td><td>Converts delay into money.</td></tr>
+      </table>
+      <p>
+        In other words, each concept fills a separate gap. Together they create a full decision surface from signal to action.
+      </p>
+    </section>
+
+    <div class="footer">
+      Bashira Intelligence • Advanced Risk Terms and Simulation Working • Detailed technical preparation document
+    </div>
+  </div>
+</body>
+</html>

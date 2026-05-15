@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al Tasnim Well Lifecycle & Critical Path</title>
+    
+    <!-- Figtree Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Styling */
+        body {
+            font-family: 'Figtree', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 0;
+            padding: 40px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            color: #000000;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 4px solid #0f62fe; /* IBM Blue */
+            padding-bottom: 15px;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #444;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+
+        /* Diagram Container */
+        .diagram-container {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        /* Step Cards */
+        .section-title {
+            margin-top: 60px;
+            font-size: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background-color: #ffffff;
+            border-left: 6px solid #0f62fe; /* IBM Blue default */
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 0 8px 8px 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateX(5px);
+        }
+
+        .step-card h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Color Variations for precise semantics requested */
+        .step-card.ibm-blue { border-left-color: #0f62fe; }
+        .step-card.ibm-blue h3 { color: #0f62fe; }
+        
+        .step-card.robinhood-green { border-left-color: #00c805; }
+        .step-card.robinhood-green h3 { color: #00a004; }
+        
+        .step-card.solid-yellow { border-left-color: #ffd700; }
+        .step-card.solid-yellow h3 { color: #d4b400; } /* Darker yellow for text legibility */
+
+        .metric-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 15px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .metric-list li {
+            margin-bottom: 8px;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+        
+        .metric-list li::before {
+            content: "•";
+            color: #0f62fe;
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Al Tasnim Well Construction Lifecycle</h1>
+    <p class="subtitle">A complete chronological map of operations from administrative authorizations to physical drill completions.</p>
+
+    <!-- Diagram Section -->
+    <div class="diagram-container">
+        <pre class="mermaid">
+        flowchart TD
+            %% Styling Classes
+            classDef default fill:#f4f8ff,stroke:#0f62fe,stroke-width:2px,color:#000000,font-family:Figtree;
+            classDef green fill:#eaffea,stroke:#00c805,stroke-width:2px,color:#000000,font-family:Figtree;
+            classDef yellow fill:#fffceb,stroke:#ffd700,stroke-width:3px,color:#000000,font-family:Figtree;
+
+            %% Phase 1
+            subgraph P1[Phase 1: Approvals]
+                A(SAP Master Target Generated) --> B{Materials Arrive?}
+                B -- Yes --> C[Site Survey Processed]
+                B -- No --> B_Del[NPT: Material Wait]
+                C --> D{Authorizations?}
+                D -- Yes --> E[LPO & Flowline PO Received]
+                D -- Delay --> D_Del[NPT: Awaiting Budget]
+                E --> F[FLAF Issued]
+            end
+
+            %% Phase 2 & 3
+            subgraph P2_3[Phase 2 & 3: Civil Works & Flowlines]
+                F --> G1(Location Prep Begins)
+                F --> G2(Flowline Construction Begins)
+                
+                G1 --> G1_End[Location Preparation Finalized]
+                G2 --> G2_End[Flowline Built]
+                
+                G2_End --> G2_Test{Flowline Hydro-Test Pass?}
+                G2_Test -- Fail --> G2_Fail[Delay: Rework Pipeline]
+                G2_Fail --> G2_End
+                G2_Test -- Pass --> H{Hydro Test >= 1 Day\nBefore Rig Arrival?}
+            end
+
+            %% Phase 4
+            subgraph P4[Phase 4: Mechanized Drilling]
+                H -- Yes --> I[Rig Arrives Onsite]
+                H -- No --> H_Fail[SCENARIO: Operations Blocked / Fatal Clash]
+                
+                I --> J{Rig Timing Check}
+                J -- On Time --> K[Well Spudded]
+                J -- Late Arrival --> J_Del[Mechanical NPT: Missing Target]
+                
+                K --> L(Drill to Total Depth)
+                L --> M[Actual Rig Off Date]
+            end
+
+            %% Phase 5 & 6
+            subgraph P5_6[Phase 5 & 6: Commissioning & Handover]
+                M --> N(Rig Demobilized)
+                N --> O(Hoist / RSR Crews Tie-In)
+                O --> S(Start Commissioning)
+                
+                S --> T{Done within 2 Days?}
+                T -- Yes --> U[Commissioning Complete]
+                T -- No --> T_Fail[KPI Missed]
+                
+                U --> V(Z6 Data Submitted)
+                V --> W{RLMU Submitted\nin 7 Days?}
+                W -- Yes --> X(((100% Progress / Revenue Cleared)))
+                W -- No --> W_Fail[SCENARIO: Revenue Blocked]
+            end
+
+            %% Application of Custom Colors
+            class B_Del,D_Del,G2_Fail,J_Del,T_Fail,W_Fail yellow;
+            class H_Fail yellow;
+            class F,I,U,X green;
+            class H,J,T,W default;
+        </pre>
+    </div>
+
+    <h2 class="section-title">Meaning & Definition of Each Step</h2>
+    <p>A comprehensive breakdown of every operational phase executed by Al Tasnim and how they are electronically tracked in the central database.</p>
+
+    <div class="step-grid">
+
+        <!-- Phase 1 -->
+        <div class="step-card ibm-blue">
+            <h3>Phase 1: SAP Target Generation & Administrative Approvals</h3>
+            <p>Before Al Tasnim can deploy mechanical equipment into the desert, immense bureaucratic structures must be cleared. This phase ensures the project holds legitimate SAP authorization, necessary materials, and financial backing from PDO.</p>
+            <ul class="metric-list">
+                <li><code>EarliestEndDate</code>: Master target schedule generated via SAP_DRILLING_SEQUENCE.</li>
+                <li><code>location_po_recvd_date</code>: Location Purchase Order from PDO. Financial authorization.</li>
+                <li><code>date_-_material_available_at_site</code>: Confirmation that physical inventory exists onsite.</li>
+                <li><code>flaf_issue_date</code>: Final regulatory clearance granting permission to work.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="step-card ibm-blue">
+            <h3>Phase 2: Location Preparation & Civil Works</h3>
+            <p>Phase 2 marks the beginning of physical footprint modification. Civil construction crews arrive to flatten the desert plot, stabilize the ground, and build the physical "pad" that is capable of safely supporting a million-pound drilling rig.</p>
+            <ul class="metric-list">
+                <li><code>const._actual_start_date</code>: The real world start-date of all physical labor.</li>
+                <li><code>location_preparation_status_in_progress_completed</code>: Confirms pad readiness.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="step-card solid-yellow">
+            <h3>Phase 3: Flowline Construction & The Critical Hydro-Test</h3>
+            <p>Running concurrently with Location Prep, crews lay miles of "Flowline" pipeline to connect the future wellhead to a centralized gathering manifold. <strong>This phase holds the greatest risk to operations.</strong></p>
+            <ul class="metric-list">
+                <li><code>flowline_construction_progress</code>: Measured week-over-week.</li>
+                <li><code>actual_date_pcp_esp_vendor_delivered_the_skid</code>: Pumping machinery is staged.</li>
+                <li><strong>Bottleneck Rule</strong>: <code>const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date</code>. The flowline's hydrostatic pressure test MUST pass precisely one day prior to Phase 4. Failure here blocks the massive Rig from deploying.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="step-card robinhood-green">
+            <h3>Phase 4: Mechanized Rig Operations & Drilling (Spudding)</h3>
+            <p>The highest cost phase. The enormous Rig apparatus is hauled to the site and erected. The drilling bit impacts the earth (an event called "Spudding") and aggressively digs to the geological Target Depth (TD).</p>
+            <ul class="metric-list">
+                <li><code>actual_rig_on_date</code>: Exact date the Rig reaches location.</li>
+                <li><code>well_name_after_spud</code>: The administrative naming convention shifts.</li>
+                <li><code>progress</code>: Daily and weekly footage metrics tracked in WellMonitoringReport.</li>
+                <li><strong>NPT Scenarios</strong>: If <code>actual_rig_on_date</code> misses the SAP target dates, the OS flags Non-Productive Time (NPT) causing dramatic drops in Cum Progress.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="step-card ibm-blue">
+            <h3>Phase 5: Rig Demobilization & Tie-Ins</h3>
+            <p>Immediately upon hitting total depth, the expensive primary Rig is dismantled and shipped to the next scheduled well. In its place, specialized Hoist or RSR units deploy to install downhole completion equipment and physically connect the well piping.</p>
+            <ul class="metric-list">
+                <li><code>actual_rig_off_date</code>: Marks the official end of primary drilling.</li>
+                <li><code>actual_hoist_fbu_rsr_on_date</code>: Specialized mechanical completion crew arrives.</li>
+                <li><code>date_of_tie_in_port_readiness</code>: Connecting the flowlines to the actual wellbore.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 6 -->
+        <div class="step-card robinhood-green">
+            <h3>Phase 6: Commissioning & Bureaucratic Handover</h3>
+            <p>The steel is buried, and the machinery is ready. Al Tasnim systematically pressures up the well and verifies production yields. Following the mechanical success, a race against paperwork deadlines begins to secure financial settlement.</p>
+            <ul class="metric-list">
+                <li><code>actual_comm._start_date</code>: Starts the startup procedure stream.</li>
+                <li><code>actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date</code>: Speed KPI indicating operational efficiency.</li>
+                <li><code>rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.</code>: <strong>Critical Administrative Rule:</strong> Paperwork must reach head-office in 7 days or it triggers an NPT delay against revenue.</li>
+                <li><code>over_all_progress_percentages</code>: Finalizes to 100%, completing the well.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<!-- Mermaid JS CDN -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+        startOnLoad: true,
+        securityLevel: 'loose'
+    });
+</script>
+
+</body>
+</html>

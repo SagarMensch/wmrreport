@@ -1,0 +1,464 @@
+columnName,tableName,description
+row_id,ActivityTaskPlan,Row Id field in ActivityTaskPlan
+source_id,ActivityTaskPlan,Source Id field in ActivityTaskPlan
+Data,ActivityTaskPlan,Data field in ActivityTaskPlan
+ancestor,ActivityTaskPlan,Ancestor field in ActivityTaskPlan
+duration,ActivityTaskPlan,Planned duration for task completion
+progress,ActivityTaskPlan,Task completion progress percentage
+crew_uid,ActivityTaskPlan,Unique identifier of crew assigned to task
+crew_type,ActivityTaskPlan,Type of crew discipline civil electrical mechanical
+qty,ActivityTaskPlan,Qty field in ActivityTaskPlan
+manhours,ActivityTaskPlan,Manhours field in ActivityTaskPlan
+weightage,ActivityTaskPlan,Weightage field in ActivityTaskPlan
+parent,ActivityTaskPlan,Parent field in ActivityTaskPlan
+start_date,ActivityTaskPlan,Start Date field in ActivityTaskPlan
+end_date,ActivityTaskPlan,End Date field in ActivityTaskPlan
+target_start,ActivityTaskPlan,Target Start field in ActivityTaskPlan
+target_end,ActivityTaskPlan,Target End field in ActivityTaskPlan
+actual_start,ActivityTaskPlan,Actual start date of task execution
+actual_end,ActivityTaskPlan,Actual end date of task completion
+qtyactual,ActivityTaskPlan,Qtyactual field in ActivityTaskPlan
+qtyforacst,ActivityTaskPlan,Qtyforacst field in ActivityTaskPlan
+manhoursactual,ActivityTaskPlan,Manhoursactual field in ActivityTaskPlan
+manhourforacst,ActivityTaskPlan,Manhourforacst field in ActivityTaskPlan
+code,ActivityTaskPlan,Task activity code from work breakdown structure
+text,ActivityTaskPlan,Task description or name
+type,ActivityTaskPlan,Type field in ActivityTaskPlan
+schedule_id,ActivityTaskPlan,Schedule Id field in ActivityTaskPlan
+project_id,ActivityTaskPlan,Project identifier for task grouping
+task_assignee,ActivityTaskPlan,Employee ID or name assigned to complete task
+supervisor_email,ActivityTaskPlan,Supervisor Email field in ActivityTaskPlan
+attributes,ActivityTaskPlan,Attributes field in ActivityTaskPlan
+remaining_duration,ActivityTaskPlan,Remaining Duration field in ActivityTaskPlan
+Resume_Suspend,ActivityTaskPlan,Resume Suspend field in ActivityTaskPlan
+data_nonprod,ActivityTaskPlan,Data Nonprod field in ActivityTaskPlan
+created_at,ActivityTaskPlan,Created At field in ActivityTaskPlan
+updated_at,ActivityTaskPlan,Updated At field in ActivityTaskPlan
+Well_ID,ActivityTaskPlan,Well identifier linking task to specific well
+Parent_WBS,ActivityTaskPlan,Parent Wbs field in ActivityTaskPlan
+Time_Stamp,ActivityTaskPlan,Time Stamp field in ActivityTaskPlan
+id,Employee,Id field in Employee
+UId,Employee,Unique employee identifier for Al Tasnim staff
+Name,Employee,Employee full name
+Email,Employee,Employee email address
+Status,Employee,Employment status Active or Inactive
+Supervisor,Employee,ID of supervisor manager
+Account,Employee,Account field in Employee
+EmployeeType,Employee,Employeetype field in Employee
+Company,Employee,Company name Al Tasnim Enterprises
+Manager,Employee,Manager field in Employee
+Location,Employee,Work location code
+Sl.No,Job_Progress_Report_GB,Sl.No field in Job_Progress_Report_GB
+Category,Job_Progress_Report_GB,Category field in Job_Progress_Report_GB
+Well ID,Job_Progress_Report_GB,Unique well identifier for job progress tracking join key with WellMonitoringReport pdo_well_id
+Well Name / Project Name,Job_Progress_Report_GB,Name of well or project for reporting
+PO No,Job_Progress_Report_GB,Purchase Order number for contract
+WBS No,Job_Progress_Report_GB,Work Breakdown Structure code identifier
+Cum-Prior Month Actual %,Job_Progress_Report_GB,Cum-Prior Month Actual % field in Job_Progress_Report_GB
+Week-1 Plan %,Job_Progress_Report_GB,Week 1 planned progress percentage target
+Week-1 Actual %,Job_Progress_Report_GB,Week 1 actual progress achieved percentage
+Week-2 Plan %,Job_Progress_Report_GB,Week-2 Plan % field in Job_Progress_Report_GB
+Week-2 Actual %,Job_Progress_Report_GB,Week-2 Actual % field in Job_Progress_Report_GB
+Week-3 Plan %,Job_Progress_Report_GB,Week-3 Plan % field in Job_Progress_Report_GB
+Week-3 Actual %,Job_Progress_Report_GB,Week-3 Actual % field in Job_Progress_Report_GB
+Week-4 Plan %,Job_Progress_Report_GB,Week-4 Plan % field in Job_Progress_Report_GB
+Week-4 Actual %,Job_Progress_Report_GB,Week-4 Actual % field in Job_Progress_Report_GB
+Week-5 Plan %,Job_Progress_Report_GB,Week-5 Plan % field in Job_Progress_Report_GB
+Week-5 Actual %,Job_Progress_Report_GB,Week-5 Actual % field in Job_Progress_Report_GB
+Current Month Plan %,Job_Progress_Report_GB,Current month planned progress percentage
+Current Month Actual %,Job_Progress_Report_GB,Current month actual progress achieved percentage
+Cum-Current Month Plan %,Job_Progress_Report_GB,Cum-Current Month Plan % field in Job_Progress_Report_GB
+Cum-Current Month Actual %,Job_Progress_Report_GB,Cum-Current Month Actual % field in Job_Progress_Report_GB
+Target End,Job_Progress_Report_GB,Target end date for well completion
+Purpose Value,Job_Progress_Report_GB,Revenue purpose value in OMR currency for contract
+Cum-Prior Month Plan,Job_Progress_Report_GB,Cum-Prior Month Plan field in Job_Progress_Report_GB
+Cum-Prior Month Actual,Job_Progress_Report_GB,Cum-Prior Month Actual field in Job_Progress_Report_GB
+Current month Plan,Job_Progress_Report_GB,Current Month Plan field in Job_Progress_Report_GB
+Current Month Actual,Job_Progress_Report_GB,Current Month Actual field in Job_Progress_Report_GB
+Cum - Current Month Plan,Job_Progress_Report_GB,Cum - Current Month Plan field in Job_Progress_Report_GB
+Cum - Current Month Actual,Job_Progress_Report_GB,Cum - Current Month Actual field in Job_Progress_Report_GB
+Remarks,Job_Progress_Report_GB,Remarks field in Job_Progress_Report_GB
+S.No,PH_PRODUCTIVITY_WEEKLY_REPORT,S.No field in PH_PRODUCTIVITY_WEEKLY_REPORT
+Month,PH_PRODUCTIVITY_WEEKLY_REPORT,Month field in PH_PRODUCTIVITY_WEEKLY_REPORT
+Year,PH_PRODUCTIVITY_WEEKLY_REPORT,Year field in PH_PRODUCTIVITY_WEEKLY_REPORT
+MonthStart,PH_PRODUCTIVITY_WEEKLY_REPORT,Monthstart field in PH_PRODUCTIVITY_WEEKLY_REPORT
+PA Name,PH_PRODUCTIVITY_WEEKLY_REPORT,Pa Name field in PH_PRODUCTIVITY_WEEKLY_REPORT
+PH Emp ID,PH_PRODUCTIVITY_WEEKLY_REPORT,Project Holder employee ID for productivity tracking
+PH Name,PH_PRODUCTIVITY_WEEKLY_REPORT,Project Holder name supervisor
+ATNM/Sub Contractor,PH_PRODUCTIVITY_WEEKLY_REPORT,Atnm/Sub Contractor field in PH_PRODUCTIVITY_WEEKLY_REPORT
+Category,PH_PRODUCTIVITY_WEEKLY_REPORT,Category of work for productivity measurement
+Crew Type,PH_PRODUCTIVITY_WEEKLY_REPORT,Type of crew discipline
+Crew Discipline,PH_PRODUCTIVITY_WEEKLY_REPORT,Crew Discipline field in PH_PRODUCTIVITY_WEEKLY_REPORT
+Crew Name,PH_PRODUCTIVITY_WEEKLY_REPORT,Crew Name field in PH_PRODUCTIVITY_WEEKLY_REPORT
+Average Productivity (%),PH_PRODUCTIVITY_WEEKLY_REPORT,Average productivity percentage score
+W1_PI (CMR),PH_PRODUCTIVITY_WEEKLY_REPORT,W1 Pi (Cmr) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W1_PI (T-Wise),PH_PRODUCTIVITY_WEEKLY_REPORT,W1 Pi (T-Wise) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W2_PI (CMR),PH_PRODUCTIVITY_WEEKLY_REPORT,W2 Pi (Cmr) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W2_PI (T-Wise),PH_PRODUCTIVITY_WEEKLY_REPORT,W2 Pi (T-Wise) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W3_PI (CMR),PH_PRODUCTIVITY_WEEKLY_REPORT,W3 Pi (Cmr) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W3_PI (T-Wise),PH_PRODUCTIVITY_WEEKLY_REPORT,W3 Pi (T-Wise) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W4_PI (CMR),PH_PRODUCTIVITY_WEEKLY_REPORT,W4 Pi (Cmr) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W4_PI (T-Wise),PH_PRODUCTIVITY_WEEKLY_REPORT,W4 Pi (T-Wise) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W5_PI (CMR),PH_PRODUCTIVITY_WEEKLY_REPORT,W5 Pi (Cmr) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+W5_PI (T-Wise),PH_PRODUCTIVITY_WEEKLY_REPORT,W5 Pi (T-Wise) field in PH_PRODUCTIVITY_WEEKLY_REPORT
+Month PI (CMR),PH_PRODUCTIVITY_WEEKLY_REPORT,Monthly Productivity Index using CMR method
+Month PI (T-Wise),PH_PRODUCTIVITY_WEEKLY_REPORT,Monthly Productivity Index using T-Wise method
+Code,ProjectIDs,Project code identifier
+column2,ProjectIDs,Column2 field in ProjectIDs
+Number,ProjectIDs,Number field in ProjectIDs
+ID,ProjectIDs,Project identifier for joins
+id,Revenue,Id field in Revenue
+rigcode,Revenue,Rig code associated with revenue
+well_id,Revenue,Well identifier for revenue record
+code,Revenue,Activity code for revenue categorization
+pms,Revenue,Pms field in Revenue
+step_type,Revenue,Step Type field in Revenue
+planned_progress,Revenue,Planned Progress field in Revenue
+plan_percent,Revenue,Plan Percent field in Revenue
+acutal_progress,Revenue,Acutal Progress field in Revenue
+act_percent,Revenue,Act Percent field in Revenue
+total_purpose_value,Revenue,Total purpose value for well
+planned_purpose_value,Revenue,Planned revenue target in OMR
+actual_purpose_value,Revenue,Actual revenue earned in OMR
+planned_progress_next_week,Revenue,Planned Progress Next Week field in Revenue
+plan_percent_next_week,Revenue,Plan Percent Next Week field in Revenue
+planned_purpose_value_next_week,Revenue,Planned Purpose Value Next Week field in Revenue
+Title,Revenue,Title field in Revenue
+created_at,Revenue,Created At field in Revenue
+Work_Center,SAP_DRILLING_SEQUENCE,SAP work center for operations
+Operation_Short,SAP_DRILLING_SEQUENCE,Operation Short field in SAP_DRILLING_SEQUENCE
+Activity,SAP_DRILLING_SEQUENCE,Activity field in SAP_DRILLING_SEQUENCE
+Opr_System_status,SAP_DRILLING_SEQUENCE,Opr System Status field in SAP_DRILLING_SEQUENCE
+Earl_start_date,SAP_DRILLING_SEQUENCE,Earliest planned start date from SAP
+EarliestEndDate,SAP_DRILLING_SEQUENCE,Earliestenddate field in SAP_DRILLING_SEQUENCE
+Station_Code,SAP_DRILLING_SEQUENCE,Station Code field in SAP_DRILLING_SEQUENCE
+Normal_duration,SAP_DRILLING_SEQUENCE,Normal Duration field in SAP_DRILLING_SEQUENCE
+Norm_duratn_un,SAP_DRILLING_SEQUENCE,Norm Duratn Un field in SAP_DRILLING_SEQUENCE
+Well_Name,SAP_DRILLING_SEQUENCE,Well name in SAP
+Field,SAP_DRILLING_SEQUENCE,Oil field location name
+Responsible_asset,SAP_DRILLING_SEQUENCE,Responsible Asset field in SAP_DRILLING_SEQUENCE
+Well_ID,SAP_DRILLING_SEQUENCE,Well identifier from SAP system
+Well_Location,SAP_DRILLING_SEQUENCE,Well Location field in SAP_DRILLING_SEQUENCE
+Well_Function,SAP_DRILLING_SEQUENCE,Well Function field in SAP_DRILLING_SEQUENCE
+Well_Category,SAP_DRILLING_SEQUENCE,Well Category field in SAP_DRILLING_SEQUENCE
+PCAP_Category,SAP_DRILLING_SEQUENCE,Pcap Category field in SAP_DRILLING_SEQUENCE
+Move_days,SAP_DRILLING_SEQUENCE,Number of days required for rig move
+PDO_Well_Type,SAP_DRILLING_SEQUENCE,PDO classification of well type
+Sr_No,WBS_Master_Tracker_,Sr No field in WBS_Master_Tracker_
+WBS_Code,WBS_Master_Tracker_,Work Breakdown Structure code
+Project_Def,WBS_Master_Tracker_,Project definition identifier
+WD_PRJ,WBS_Master_Tracker_,Wd Prj field in WBS_Master_Tracker_
+Plant_Code,WBS_Master_Tracker_,Plant Code field in WBS_Master_Tracker_
+Plant_Name,WBS_Master_Tracker_,Plant Name field in WBS_Master_Tracker_
+Cluster,WBS_Master_Tracker_,Operational cluster
+Well_ID_Project_PO,WBS_Master_Tracker_,Composite well ID with project and PO information
+Activity_code,WBS_Master_Tracker_,Activity code for WBS
+Activity,WBS_Master_Tracker_,Activity description
+Category,WBS_Master_Tracker_,Category field in WBS_Master_Tracker_
+Sr_No_2,WBS_Master_Tracker_,Sr No 2 field in WBS_Master_Tracker_
+LMPS,WBS_Master_Tracker_,Lmps field in WBS_Master_Tracker_
+Duplicate_check,WBS_Master_Tracker_,Duplicate Check field in WBS_Master_Tracker_
+Last_Updated_on,WBS_Master_Tracker_,Last Updated On field in WBS_Master_Tracker_
+sl_no,WellMonitoringReport,Sl No field in WellMonitoringReport
+sl_no_raw,WellMonitoringReport,Sl No Raw field in WellMonitoringReport
+rig_no,WellMonitoringReport,Rig identifier assigned to well for example SWER102 SWER103
+well_location,WellMonitoringReport,Geographic location coordinates of well site
+well_name_after_spud,WellMonitoringReport,Official well name after spudding operation
+pdo_well_id,WellMonitoringReport,PDO unique well identifier primary key for all wells use for counting distinct wells
+well_type,WellMonitoringReport,Type of well ESP PCP Oil Gas completion method
+northing,WellMonitoringReport,Northing field in WellMonitoringReport
+easting,WellMonitoringReport,Easting field in WellMonitoringReport
+locationdd,WellMonitoringReport,Locationdd field in WellMonitoringReport
+flow_linedl,WellMonitoringReport,Flow Linedl field in WellMonitoringReport
+location_po_no,WellMonitoringReport,Location Po No field in WellMonitoringReport
+location_po_recvd_date,WellMonitoringReport,Location Po Recvd Date field in WellMonitoringReport
+location_-_purpose_value,WellMonitoringReport,Location - Purpose Value field in WellMonitoringReport
+last_week_exp.rig_on_location_sap_data,WellMonitoringReport,Last Week Exp.Rig On Location Sap Data field in WellMonitoringReport
+latest_exp.rig_on_location_sap_data,WellMonitoringReport,Latest Exp.Rig On Location Sap Data field in WellMonitoringReport
+exp.rig_off_location_sap_data,WellMonitoringReport,Exp.Rig Off Location Sap Data field in WellMonitoringReport
+date_-_material_po_placed,WellMonitoringReport,Date - Material Po Placed field in WellMonitoringReport
+date_-_material_available_at_site,WellMonitoringReport,Date - Material Available At Site field in WellMonitoringReport
+scr_no,WellMonitoringReport,Service Request Completion document number SCR for well handover
+scr_date,WellMonitoringReport,Scr Date field in WellMonitoringReport
+moc_raised,WellMonitoringReport,Moc Raised field in WellMonitoringReport
+moc_approved,WellMonitoringReport,Moc Approved field in WellMonitoringReport
+buffer_status,WellMonitoringReport,Buffer Status field in WellMonitoringReport
+actual_pegged_date,WellMonitoringReport,Actual Pegged Date field in WellMonitoringReport
+last_week_cum_progress,WellMonitoringReport,Last Week Cum Progress field in WellMonitoringReport
+cum_progress_for_this_week,WellMonitoringReport,Cum Progress For This Week field in WellMonitoringReport
+actual_start_date,WellMonitoringReport,Actual start date of well construction activity
+actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables,WellMonitoringReport,Actual Date Odc Requested Field Programmer Oso33X For Esp Pcp Surface Cables field in WellMonitoringReport
+date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor,WellMonitoringReport,Date Oso33X Call Out For Cable Installation To Pcp Esp Vendor field in WellMonitoringReport
+delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x,WellMonitoringReport,Delivery Of Esp Pcp Surface Cable By Field Programmer Oso33X field in WellMonitoringReport
+installation_of_esp_pcp_surface_cable_by_vendors,WellMonitoringReport,Installation Of Esp Pcp Surface Cable By Vendors field in WellMonitoringReport
+actual_finish_date,WellMonitoringReport,Actual finish completion date of well
+flaf_issue_date,WellMonitoringReport,Flaf Issue Date field in WellMonitoringReport
+ramz_id,WellMonitoringReport,Ramz Id field in WellMonitoringReport
+ramz_id_received_date_same_day_as_flaf_issue_date,WellMonitoringReport,Ramz Id Received Date Same Day As Flaf Issue Date field in WellMonitoringReport
+date_of_site_survey_report_issuance,WellMonitoringReport,Date Of Site Survey Report Issuance field in WellMonitoringReport
+well_engineer_to_add_location_name_in_edm,WellMonitoringReport,Well Engineer To Add Location Name In Edm field in WellMonitoringReport
+pt_to_request_for_esp_preliminary_design_through_ald,WellMonitoringReport,Pt To Request For Esp Preliminary Design Through Ald field in WellMonitoringReport
+actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid,WellMonitoringReport,Actual Date Odc Requested Field Programmer Oso33X To Install Esp Pcp Skid field in WellMonitoringReport
+actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid,WellMonitoringReport,Actual Date Field Programmer Oso33X Requested Esp Pcp Vendor To Install The Skid field in WellMonitoringReport
+actual_date_pcp_esp_vendor_delivered_the_skid,WellMonitoringReport,Actual Date Pcp Esp Vendor Delivered The Skid field in WellMonitoringReport
+actual_installation_date_by_vendor_of_esp/pcp_skid,WellMonitoringReport,Actual Installation Date By Vendor Of Esp/Pcp Skid field in WellMonitoringReport
+flow_line_po_no,WellMonitoringReport,Flow Line Po No field in WellMonitoringReport
+f_l_po_recd._date,WellMonitoringReport,F L Po Recd. Date field in WellMonitoringReport
+flowline_-_purpose_value,WellMonitoringReport,Flowline - Purpose Value field in WellMonitoringReport
+station_name_no,WellMonitoringReport,Station Name No field in WellMonitoringReport
+physical_tie_in_port_number,WellMonitoringReport,Physical Tie In Port Number field in WellMonitoringReport
+date_of_tie_in_port_readiness,WellMonitoringReport,Date Of Tie In Port Readiness field in WellMonitoringReport
+physical_tie_in_port_available_when_flaf_issued,WellMonitoringReport,Physical Tie In Port Available When Flaf Issued field in WellMonitoringReport
+engineering_actual_start_date,WellMonitoringReport,Engineering Actual Start Date field in WellMonitoringReport
+engineering_actual_finish_date,WellMonitoringReport,Engineering Actual Finish Date field in WellMonitoringReport
+progress,WellMonitoringReport,Physical progress percentage decimal representing completion status
+fl_dia,WellMonitoringReport,Fl Dia field in WellMonitoringReport
+fl_length_meter,WellMonitoringReport,Fl Length Meter field in WellMonitoringReport
+const._actual_start_date,WellMonitoringReport,Const. Actual Start Date field in WellMonitoringReport
+const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date,WellMonitoringReport,Const. Complete Date Including F L Final Hydro Test 1 Day Before Rig On Date field in WellMonitoringReport
+flowline_construction_progress,WellMonitoringReport,Flowline Construction Progress field in WellMonitoringReport
+ohl_length_meter,WellMonitoringReport,Ohl Length Meter field in WellMonitoringReport
+ohl_progress,WellMonitoringReport,Ohl Progress field in WellMonitoringReport
+ohl_completion_date,WellMonitoringReport,Ohl Completion Date field in WellMonitoringReport
+z6_data_submitted_date,WellMonitoringReport,Z6 Data Submitted Date field in WellMonitoringReport
+sap_notification_received_date_z6_2_days_before_eng._completion,WellMonitoringReport,Sap Notification Received Date Z6 2 Days Before Eng. Completion field in WellMonitoringReport
+actual_rig_on_date,WellMonitoringReport,Actual date when rig was moved onto well location
+actual_rig_off_date,WellMonitoringReport,Actual date when rig moved off well location completed
+wlctf_acceptanceapproval_from_production,WellMonitoringReport,Wlctf Acceptanceapproval From Production field in WellMonitoringReport
+actual_hoist_fbu_rsr_on_date,WellMonitoringReport,Actual Hoist Fbu Rsr On Date field in WellMonitoringReport
+actual_hoist_fbu_rsr_off_date,WellMonitoringReport,Actual Hoist Fbu Rsr Off Date field in WellMonitoringReport
+wellpad_handover-2_from_hoist_fbu_rsr_off_date,WellMonitoringReport,Wellpad Handover-2 From Hoist Fbu Rsr Off Date field in WellMonitoringReport
+completion_type_rig_fbu_or_rsr_hoist,WellMonitoringReport,Completion Type Rig Fbu Or Rsr Hoist field in WellMonitoringReport
+actual_eng._completion_date,WellMonitoringReport,Actual Eng. Completion Date field in WellMonitoringReport
+actual_comm._start_date,WellMonitoringReport,Actual Comm. Start Date field in WellMonitoringReport
+actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date,WellMonitoringReport,Actual Comm. Finish Date With In 2 Days From Actual Engg. Completion Date field in WellMonitoringReport
+engg_kpi_after_rig-off_days,WellMonitoringReport,Engineering KPI days after rig-off before completion target is less than 2 days
+data_error,WellMonitoringReport,Data Error field in WellMonitoringReport
+reason_if_kpi_not_met,WellMonitoringReport,Reason If Kpi Not Met field in WellMonitoringReport
+remark_status_area_of_attention_issues_,WellMonitoringReport,Remark Status Area Of Attention Issues  field in WellMonitoringReport
+rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.,WellMonitoringReport,Rlmu Submitted To Ho-Date With In 7 Days From Actual Comm. field in WellMonitoringReport
+flow_line_test_pack_completion_doc._submission_date_to_qs_dept.,WellMonitoringReport,Flow Line Test Pack Completion Doc. Submission Date To Qs Dept. field in WellMonitoringReport
+flow_line_test_pack_completion_progress,WellMonitoringReport,Flow Line Test Pack Completion Progress field in WellMonitoringReport
+over_all_progress_percentages,WellMonitoringReport,Overall well completion progress decimal between 0 and 1 multiply by 100 for percentage display
+ssfd_wells,WellMonitoringReport,Ssfd Wells field in WellMonitoringReport
+ipm,WellMonitoringReport,Ipm field in WellMonitoringReport
+access_road_5,WellMonitoringReport,Access Road 5 field in WellMonitoringReport
+earth_work_60,WellMonitoringReport,Earth Work 60 field in WellMonitoringReport
+cellar_20,WellMonitoringReport,Cellar 20 field in WellMonitoringReport
+beam_pump_base_esp_pcp_foundation_5,WellMonitoringReport,Beam Pump Base Esp Pcp Foundation 5 field in WellMonitoringReport
+earthing_1,WellMonitoringReport,Earthing 1 field in WellMonitoringReport
+septic_tank_1,WellMonitoringReport,Septic Tank 1 field in WellMonitoringReport
+water_2,WellMonitoringReport,Water 2 field in WellMonitoringReport
+waste_water_2,WellMonitoringReport,Waste Water 2 field in WellMonitoringReport
+hdpe_liner_instalat_4,WellMonitoringReport,Hdpe Liner Instalat 4 field in WellMonitoringReport
+overall_loc._preparation_10_100,WellMonitoringReport,Overall Loc. Preparation 10 100 field in WellMonitoringReport
+site_survey_5,WellMonitoringReport,Site Survey 5 field in WellMonitoringReport
+survey_report_issue_5,WellMonitoringReport,Survey Report Issue 5 field in WellMonitoringReport
+design_sta_5,WellMonitoringReport,Design Sta 5 field in WellMonitoringReport
+design_completed_issue_for_ta2_5_40,WellMonitoringReport,Design Completed Issue For Ta2 5 40 field in WellMonitoringReport
+approved_by_15,WellMonitoringReport,Approved By 15 field in WellMonitoringReport
+afc_3_30,WellMonitoringReport,Afc 3 30 field in WellMonitoringReport
+overall_engg._10_100,WellMonitoringReport,Overall Engg. 10 100 field in WellMonitoringReport
+piping_mech_50,WellMonitoringReport,Piping Mech 50 field in WellMonitoringReport
+elect_30,WellMonitoringReport,Elect 30 field in WellMonitoringReport
+instr_20,WellMonitoringReport,Instr 20 field in WellMonitoringReport
+overall_material_10_100,WellMonitoringReport,Overall Material 10 100 field in WellMonitoringReport
+cold_b_2,WellMonitoringReport,Cold B 2 field in WellMonitoringReport
+sleeper_pre_cast_ins_15,WellMonitoringReport,Sleeper Pre Cast Ins 15 field in WellMonitoringReport
+cs_pipe_welding_ndt_10_rt_for_op_100_for_60,WellMonitoringReport,Cs Pipe Welding Ndt 10 Rt For Op 100 For 60 field in WellMonitoringReport
+pe_fussion_pull_20,WellMonitoringReport,Pe Fussion Pull 20 field in WellMonitoringReport
+final_hydro_t_3,WellMonitoringReport,Final Hydro T 3 field in WellMonitoringReport
+overall_const._10_100,WellMonitoringReport,Overall Const. 10 100 field in WellMonitoringReport
+pole_hole_drill_40,WellMonitoringReport,Pole Hole Drill 40 field in WellMonitoringReport
+pole_erect_40,WellMonitoringReport,Pole Erect 40 field in WellMonitoringReport
+conductor_string_18,WellMonitoringReport,Conductor String 18 field in WellMonitoringReport
+ohl_ti_2,WellMonitoringReport,Ohl Ti 2 field in WellMonitoringReport
+overall_ohl_progr_100,WellMonitoringReport,Overall Ohl Progr 100 field in WellMonitoringReport
+mechani_60,WellMonitoringReport,Mechani 60 field in WellMonitoringReport
+electri_15,WellMonitoringReport,Electri 15 field in WellMonitoringReport
+instrumentat_20,WellMonitoringReport,Instrumentat 20 field in WellMonitoringReport
+overall_comm_mi_5,WellMonitoringReport,Overall Comm Mi 5 field in WellMonitoringReport
+overall_comm_progress_100,WellMonitoringReport,Overall Comm Progress 100 field in WellMonitoringReport
+location_preparation_status_in_progress_completed,WellMonitoringReport,Location Preparation Status In Progress Completed field in WellMonitoringReport
+flow_line_const._status_in_progress_completed,WellMonitoringReport,Flow Line Const. Status In Progress Completed field in WellMonitoringReport
+flow_line_commi._status_in_progress_completed,WellMonitoringReport,Flow Line Commi. Status In Progress Completed field in WellMonitoringReport
+well_year_white_space,WellMonitoringReport,Well Year White Space field in WellMonitoringReport
+reasons_for_year_2018,WellMonitoringReport,Reasons For Year 2018 field in WellMonitoringReport
+column7,WellMonitoringReport,Column7 field in WellMonitoringReport
+digital_wmr_import_remarks,WellMonitoringReport,Digital Wmr Import Remarks field in WellMonitoringReport
+project_id,WellMonitoringReport,Project Id field in WellMonitoringReport
+Week_Number,WellMonitoringReport,Week Number field in WellMonitoringReport
+Cluster,WellMonitoringReport,Operational cluster area Nimr or Marmul location grouping
+sl_no,WellMonitoringReport_Latest,Sl No field in WellMonitoringReport_Latest
+sl_no_raw,WellMonitoringReport_Latest,Sl No Raw field in WellMonitoringReport_Latest
+rig_no,WellMonitoringReport_Latest,Rig identifier assigned to well
+well_location,WellMonitoringReport_Latest,Well Location field in WellMonitoringReport_Latest
+well_name_after_spud,WellMonitoringReport_Latest,Official well name after spudding operation
+pdo_well_id,WellMonitoringReport_Latest,PDO unique well identifier primary key for latest week snapshot
+well_type,WellMonitoringReport_Latest,Well Type field in WellMonitoringReport_Latest
+northing,WellMonitoringReport_Latest,Northing field in WellMonitoringReport_Latest
+easting,WellMonitoringReport_Latest,Easting field in WellMonitoringReport_Latest
+locationdd,WellMonitoringReport_Latest,Locationdd field in WellMonitoringReport_Latest
+flow_linedl,WellMonitoringReport_Latest,Flow Linedl field in WellMonitoringReport_Latest
+location_po_no,WellMonitoringReport_Latest,Location Po No field in WellMonitoringReport_Latest
+location_po_recvd_date,WellMonitoringReport_Latest,Location Po Recvd Date field in WellMonitoringReport_Latest
+location_-_purpose_value,WellMonitoringReport_Latest,Location - Purpose Value field in WellMonitoringReport_Latest
+last_week_exp.rig_on_location_sap_data,WellMonitoringReport_Latest,Last Week Exp.Rig On Location Sap Data field in WellMonitoringReport_Latest
+latest_exp.rig_on_location_sap_data,WellMonitoringReport_Latest,Latest Exp.Rig On Location Sap Data field in WellMonitoringReport_Latest
+exp.rig_off_location_sap_data,WellMonitoringReport_Latest,Exp.Rig Off Location Sap Data field in WellMonitoringReport_Latest
+date_-_material_po_placed,WellMonitoringReport_Latest,Date - Material Po Placed field in WellMonitoringReport_Latest
+date_-_material_available_at_site,WellMonitoringReport_Latest,Date - Material Available At Site field in WellMonitoringReport_Latest
+scr_no,WellMonitoringReport_Latest,Scr No field in WellMonitoringReport_Latest
+scr_date,WellMonitoringReport_Latest,Scr Date field in WellMonitoringReport_Latest
+moc_raised,WellMonitoringReport_Latest,Moc Raised field in WellMonitoringReport_Latest
+moc_approved,WellMonitoringReport_Latest,Moc Approved field in WellMonitoringReport_Latest
+buffer_status,WellMonitoringReport_Latest,Buffer Status field in WellMonitoringReport_Latest
+actual_pegged_date,WellMonitoringReport_Latest,Actual Pegged Date field in WellMonitoringReport_Latest
+last_week_cum_progress,WellMonitoringReport_Latest,Last Week Cum Progress field in WellMonitoringReport_Latest
+cum_progress_for_this_week,WellMonitoringReport_Latest,Cum Progress For This Week field in WellMonitoringReport_Latest
+actual_start_date,WellMonitoringReport_Latest,Actual Start Date field in WellMonitoringReport_Latest
+actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables,WellMonitoringReport_Latest,Actual Date Odc Requested Field Programmer Oso33X For Esp Pcp Surface Cables field in WellMonitoringReport_Latest
+date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor,WellMonitoringReport_Latest,Date Oso33X Call Out For Cable Installation To Pcp Esp Vendor field in WellMonitoringReport_Latest
+delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x,WellMonitoringReport_Latest,Delivery Of Esp Pcp Surface Cable By Field Programmer Oso33X field in WellMonitoringReport_Latest
+installation_of_esp_pcp_surface_cable_by_vendors,WellMonitoringReport_Latest,Installation Of Esp Pcp Surface Cable By Vendors field in WellMonitoringReport_Latest
+actual_finish_date,WellMonitoringReport_Latest,Actual Finish Date field in WellMonitoringReport_Latest
+flaf_issue_date,WellMonitoringReport_Latest,Flaf Issue Date field in WellMonitoringReport_Latest
+ramz_id,WellMonitoringReport_Latest,Ramz Id field in WellMonitoringReport_Latest
+ramz_id_received_date_same_day_as_flaf_issue_date,WellMonitoringReport_Latest,Ramz Id Received Date Same Day As Flaf Issue Date field in WellMonitoringReport_Latest
+date_of_site_survey_report_issuance,WellMonitoringReport_Latest,Date Of Site Survey Report Issuance field in WellMonitoringReport_Latest
+well_engineer_to_add_location_name_in_edm,WellMonitoringReport_Latest,Well Engineer To Add Location Name In Edm field in WellMonitoringReport_Latest
+pt_to_request_for_esp_preliminary_design_through_ald,WellMonitoringReport_Latest,Pt To Request For Esp Preliminary Design Through Ald field in WellMonitoringReport_Latest
+actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid,WellMonitoringReport_Latest,Actual Date Odc Requested Field Programmer Oso33X To Install Esp Pcp Skid field in WellMonitoringReport_Latest
+actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid,WellMonitoringReport_Latest,Actual Date Field Programmer Oso33X Requested Esp Pcp Vendor To Install The Skid field in WellMonitoringReport_Latest
+actual_date_pcp_esp_vendor_delivered_the_skid,WellMonitoringReport_Latest,Actual Date Pcp Esp Vendor Delivered The Skid field in WellMonitoringReport_Latest
+actual_installation_date_by_vendor_of_esp/pcp_skid,WellMonitoringReport_Latest,Actual Installation Date By Vendor Of Esp/Pcp Skid field in WellMonitoringReport_Latest
+flow_line_po_no,WellMonitoringReport_Latest,Flow Line Po No field in WellMonitoringReport_Latest
+f_l_po_recd._date,WellMonitoringReport_Latest,F L Po Recd. Date field in WellMonitoringReport_Latest
+flowline_-_purpose_value,WellMonitoringReport_Latest,Flowline - Purpose Value field in WellMonitoringReport_Latest
+station_name_no,WellMonitoringReport_Latest,Station Name No field in WellMonitoringReport_Latest
+physical_tie_in_port_number,WellMonitoringReport_Latest,Physical Tie In Port Number field in WellMonitoringReport_Latest
+date_of_tie_in_port_readiness,WellMonitoringReport_Latest,Date Of Tie In Port Readiness field in WellMonitoringReport_Latest
+physical_tie_in_port_available_when_flaf_issued,WellMonitoringReport_Latest,Physical Tie In Port Available When Flaf Issued field in WellMonitoringReport_Latest
+engineering_actual_start_date,WellMonitoringReport_Latest,Engineering Actual Start Date field in WellMonitoringReport_Latest
+engineering_actual_finish_date,WellMonitoringReport_Latest,Engineering Actual Finish Date field in WellMonitoringReport_Latest
+progress,WellMonitoringReport_Latest,Progress field in WellMonitoringReport_Latest
+fl_dia,WellMonitoringReport_Latest,Fl Dia field in WellMonitoringReport_Latest
+fl_length_meter,WellMonitoringReport_Latest,Fl Length Meter field in WellMonitoringReport_Latest
+const._actual_start_date,WellMonitoringReport_Latest,Const. Actual Start Date field in WellMonitoringReport_Latest
+const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date,WellMonitoringReport_Latest,Const. Complete Date Including F L Final Hydro Test 1 Day Before Rig On Date field in WellMonitoringReport_Latest
+flowline_construction_progress,WellMonitoringReport_Latest,Flowline Construction Progress field in WellMonitoringReport_Latest
+ohl_length_meter,WellMonitoringReport_Latest,Ohl Length Meter field in WellMonitoringReport_Latest
+ohl_progress,WellMonitoringReport_Latest,Ohl Progress field in WellMonitoringReport_Latest
+ohl_completion_date,WellMonitoringReport_Latest,Ohl Completion Date field in WellMonitoringReport_Latest
+z6_data_submitted_date,WellMonitoringReport_Latest,Z6 Data Submitted Date field in WellMonitoringReport_Latest
+sap_notification_received_date_z6_2_days_before_eng._completion,WellMonitoringReport_Latest,Sap Notification Received Date Z6 2 Days Before Eng. Completion field in WellMonitoringReport_Latest
+actual_rig_on_date,WellMonitoringReport_Latest,Actual Rig On Date field in WellMonitoringReport_Latest
+actual_rig_off_date,WellMonitoringReport_Latest,Actual Rig Off Date field in WellMonitoringReport_Latest
+wlctf_acceptanceapproval_from_production,WellMonitoringReport_Latest,Wlctf Acceptanceapproval From Production field in WellMonitoringReport_Latest
+actual_hoist_fbu_rsr_on_date,WellMonitoringReport_Latest,Actual Hoist Fbu Rsr On Date field in WellMonitoringReport_Latest
+actual_hoist_fbu_rsr_off_date,WellMonitoringReport_Latest,Actual Hoist Fbu Rsr Off Date field in WellMonitoringReport_Latest
+wellpad_handover-2_from_hoist_fbu_rsr_off_date,WellMonitoringReport_Latest,Wellpad Handover-2 From Hoist Fbu Rsr Off Date field in WellMonitoringReport_Latest
+completion_type_rig_fbu_or_rsr_hoist,WellMonitoringReport_Latest,Completion Type Rig Fbu Or Rsr Hoist field in WellMonitoringReport_Latest
+actual_eng._completion_date,WellMonitoringReport_Latest,Actual Eng. Completion Date field in WellMonitoringReport_Latest
+actual_comm._start_date,WellMonitoringReport_Latest,Actual Comm. Start Date field in WellMonitoringReport_Latest
+actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date,WellMonitoringReport_Latest,Actual Comm. Finish Date With In 2 Days From Actual Engg. Completion Date field in WellMonitoringReport_Latest
+engg_kpi_after_rig-off_days,WellMonitoringReport_Latest,Engg Kpi After Rig-Off Days field in WellMonitoringReport_Latest
+data_error,WellMonitoringReport_Latest,Data Error field in WellMonitoringReport_Latest
+reason_if_kpi_not_met,WellMonitoringReport_Latest,Reason If Kpi Not Met field in WellMonitoringReport_Latest
+remark_status_area_of_attention_issues_,WellMonitoringReport_Latest,Remark Status Area Of Attention Issues  field in WellMonitoringReport_Latest
+rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.,WellMonitoringReport_Latest,Rlmu Submitted To Ho-Date With In 7 Days From Actual Comm. field in WellMonitoringReport_Latest
+flow_line_test_pack_completion_doc._submission_date_to_qs_dept.,WellMonitoringReport_Latest,Flow Line Test Pack Completion Doc. Submission Date To Qs Dept. field in WellMonitoringReport_Latest
+flow_line_test_pack_completion_progress,WellMonitoringReport_Latest,Flow Line Test Pack Completion Progress field in WellMonitoringReport_Latest
+over_all_progress_percentages,WellMonitoringReport_Latest,Overall completion percentage decimal 0 to 1
+ssfd_wells,WellMonitoringReport_Latest,Ssfd Wells field in WellMonitoringReport_Latest
+ipm,WellMonitoringReport_Latest,Ipm field in WellMonitoringReport_Latest
+access_road_5,WellMonitoringReport_Latest,Access Road 5 field in WellMonitoringReport_Latest
+earth_work_60,WellMonitoringReport_Latest,Earth Work 60 field in WellMonitoringReport_Latest
+cellar_20,WellMonitoringReport_Latest,Cellar 20 field in WellMonitoringReport_Latest
+beam_pump_base_esp_pcp_foundation_5,WellMonitoringReport_Latest,Beam Pump Base Esp Pcp Foundation 5 field in WellMonitoringReport_Latest
+earthing_1,WellMonitoringReport_Latest,Earthing 1 field in WellMonitoringReport_Latest
+septic_tank_1,WellMonitoringReport_Latest,Septic Tank 1 field in WellMonitoringReport_Latest
+water_2,WellMonitoringReport_Latest,Water 2 field in WellMonitoringReport_Latest
+waste_water_2,WellMonitoringReport_Latest,Waste Water 2 field in WellMonitoringReport_Latest
+hdpe_liner_instalat_4,WellMonitoringReport_Latest,Hdpe Liner Instalat 4 field in WellMonitoringReport_Latest
+overall_loc._preparation_10_100,WellMonitoringReport_Latest,Overall Loc. Preparation 10 100 field in WellMonitoringReport_Latest
+site_survey_5,WellMonitoringReport_Latest,Site Survey 5 field in WellMonitoringReport_Latest
+survey_report_issue_5,WellMonitoringReport_Latest,Survey Report Issue 5 field in WellMonitoringReport_Latest
+design_sta_5,WellMonitoringReport_Latest,Design Sta 5 field in WellMonitoringReport_Latest
+design_completed_issue_for_ta2_5_40,WellMonitoringReport_Latest,Design Completed Issue For Ta2 5 40 field in WellMonitoringReport_Latest
+approved_by_15,WellMonitoringReport_Latest,Approved By 15 field in WellMonitoringReport_Latest
+afc_3_30,WellMonitoringReport_Latest,Afc 3 30 field in WellMonitoringReport_Latest
+overall_engg._10_100,WellMonitoringReport_Latest,Overall Engg. 10 100 field in WellMonitoringReport_Latest
+piping_mech_50,WellMonitoringReport_Latest,Piping Mech 50 field in WellMonitoringReport_Latest
+elect_30,WellMonitoringReport_Latest,Elect 30 field in WellMonitoringReport_Latest
+instr_20,WellMonitoringReport_Latest,Instr 20 field in WellMonitoringReport_Latest
+overall_material_10_100,WellMonitoringReport_Latest,Overall Material 10 100 field in WellMonitoringReport_Latest
+cold_b_2,WellMonitoringReport_Latest,Cold B 2 field in WellMonitoringReport_Latest
+sleeper_pre_cast_ins_15,WellMonitoringReport_Latest,Sleeper Pre Cast Ins 15 field in WellMonitoringReport_Latest
+cs_pipe_welding_ndt_10_rt_for_op_100_for_60,WellMonitoringReport_Latest,Cs Pipe Welding Ndt 10 Rt For Op 100 For 60 field in WellMonitoringReport_Latest
+pe_fussion_pull_20,WellMonitoringReport_Latest,Pe Fussion Pull 20 field in WellMonitoringReport_Latest
+final_hydro_t_3,WellMonitoringReport_Latest,Final Hydro T 3 field in WellMonitoringReport_Latest
+overall_const._10_100,WellMonitoringReport_Latest,Overall Const. 10 100 field in WellMonitoringReport_Latest
+pole_hole_drill_40,WellMonitoringReport_Latest,Pole Hole Drill 40 field in WellMonitoringReport_Latest
+pole_erect_40,WellMonitoringReport_Latest,Pole Erect 40 field in WellMonitoringReport_Latest
+conductor_string_18,WellMonitoringReport_Latest,Conductor String 18 field in WellMonitoringReport_Latest
+ohl_ti_2,WellMonitoringReport_Latest,Ohl Ti 2 field in WellMonitoringReport_Latest
+overall_ohl_progr_100,WellMonitoringReport_Latest,Overall Ohl Progr 100 field in WellMonitoringReport_Latest
+mechani_60,WellMonitoringReport_Latest,Mechani 60 field in WellMonitoringReport_Latest
+electri_15,WellMonitoringReport_Latest,Electri 15 field in WellMonitoringReport_Latest
+instrumentat_20,WellMonitoringReport_Latest,Instrumentat 20 field in WellMonitoringReport_Latest
+overall_comm_mi_5,WellMonitoringReport_Latest,Overall Comm Mi 5 field in WellMonitoringReport_Latest
+overall_comm_progress_100,WellMonitoringReport_Latest,Overall Comm Progress 100 field in WellMonitoringReport_Latest
+location_preparation_status_in_progress_completed,WellMonitoringReport_Latest,Location Preparation Status In Progress Completed field in WellMonitoringReport_Latest
+flow_line_const._status_in_progress_completed,WellMonitoringReport_Latest,Flow Line Const. Status In Progress Completed field in WellMonitoringReport_Latest
+flow_line_commi._status_in_progress_completed,WellMonitoringReport_Latest,Flow Line Commi. Status In Progress Completed field in WellMonitoringReport_Latest
+well_year_white_space,WellMonitoringReport_Latest,Well Year White Space field in WellMonitoringReport_Latest
+reasons_for_year_2018,WellMonitoringReport_Latest,Reasons For Year 2018 field in WellMonitoringReport_Latest
+column7,WellMonitoringReport_Latest,Column7 field in WellMonitoringReport_Latest
+digital_wmr_import_remarks,WellMonitoringReport_Latest,Digital Wmr Import Remarks field in WellMonitoringReport_Latest
+project_id,WellMonitoringReport_Latest,Project Id field in WellMonitoringReport_Latest
+Week_Number,WellMonitoringReport_Latest,Week Number field in WellMonitoringReport_Latest
+Cluster,WellMonitoringReport_Latest,Operational cluster Nimr or Marmul
+id,task_daily,Id field in task_daily
+ActionOn,task_daily,Actionon field in task_daily
+task_code,task_daily,Task Code field in task_daily
+schedule_id,task_daily,Schedule Id field in task_daily
+project_id,task_daily,Project identifier
+required,task_daily,Required field in task_daily
+planned,task_daily,Planned field in task_daily
+duration,task_daily,Duration field in task_daily
+remaining_duration,task_daily,Remaining Duration field in task_daily
+progress,task_daily,Daily progress percentage completed
+ready,task_daily,Ready field in task_daily
+completed,task_daily,Completed field in task_daily
+plan,task_daily,Plan field in task_daily
+committed_start,task_daily,Committed Start field in task_daily
+committed_end,task_daily,Committed End field in task_daily
+target_start,task_daily,Target Start field in task_daily
+target_end,task_daily,Target End field in task_daily
+actual_start,task_daily,Actual start date
+actual_end,task_daily,Actual end date
+startDate,task_daily,Startdate field in task_daily
+endDate,task_daily,Enddate field in task_daily
+crew_type,task_daily,Crew discipline type
+crew_code,task_daily,Crew code assigned to daily task
+planned_crew,task_daily,Planned Crew field in task_daily
+well_id,task_daily,Well identifier for daily task record
+task_uom,task_daily,Task Uom field in task_daily
+data_hours,task_daily,Actual hours worked on task
+data_qty,task_daily,Actual quantity completed
+data_employees,task_daily,Data Employees field in task_daily
+task_assignee,task_daily,Person assigned to task
+supervisor_email,task_daily,Supervisor Email field in task_daily
+url,task_daily,Url field in task_daily
+task_data,task_daily,Task Data field in task_daily
+daily_data,task_daily,Daily Data field in task_daily
+created_at,task_daily,Created At field in task_daily
+updated_at,task_daily,Updated At field in task_daily
+daily_ph_name,task_daily,Daily Ph Name field in task_daily
+daily_equipment_ids,task_daily,Daily Equipment Ids field in task_daily
+daily_employee_ids,task_daily,Daily Employee Ids field in task_daily
+daily_actual_quantity,task_daily,Daily Actual Quantity field in task_daily
+daily_actual_hours,task_daily,Daily Actual Hours field in task_daily
+daily_completed,task_daily,Daily Completed field in task_daily
+time_stamp,task_daily,Time Stamp field in task_daily

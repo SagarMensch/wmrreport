@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Predictive Studio Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #111111;
+      --muted: #5f6670;
+      --line: #d7dbe1;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", "Figtree", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    h1 {
+      margin: 8px 0 6px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    .kpi {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    p { margin: 0 0 10px; }
+    ul, ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin-bottom: 6px; }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      background: #fbfcfd;
+    }
+    .pill.blue { border-color: #b7cdfd; color: #0a46b3; background: #eef3ff; }
+    .pill.green { border-color: #bdeec6; color: #06722f; background: #ecfcf0; }
+    .pill.yellow { border-color: #f2dfa0; color: #7d6308; background: #fff9e6; }
+    .pill.red { border-color: #ecc0c0; color: #8e1b1b; background: #fff1f1; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #fafbfd;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #404854;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.95em;
+      background: #f7f8fa;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .svg-wrap {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fdfdff;
+    }
+    .dark-box {
+      background: linear-gradient(180deg, #111720 0%, #0a0e14 100%);
+      color: #eef2f7;
+      border: 1px solid #1f2733;
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .footer {
+      color: #626a75;
+      font-size: 12px;
+      margin-top: 20px;
+      padding: 10px 4px 20px;
+    }
+    @media (max-width: 1080px) {
+      .span-8, .span-6, .span-4, .span-3 { grid-column: span 12; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Working Of Modules</div>
+      <h1>Predictive Studio - Technical Working Document</h1>
+      <p class="subtitle">
+        Detailed explanation of the <strong>Predictive Studio</strong> tab: live well forecasting, risk scoring, milestone and Gantt synthesis,
+        causal scenario modeling, portfolio summarization, and the deeper trained-ML services that support the predictive layer.
+      </p>
+      <div class="pill-row">
+        <span class="pill blue">Frontend: Next.js + React</span>
+        <span class="pill blue">Tab API: /api/forecast</span>
+        <span class="pill blue">Core Runtime: ForecastEngine</span>
+        <span class="pill blue">Data: SQL Server + CSV fallback</span>
+        <span class="pill green">CPU ML Orchestrator: 8050</span>
+        <span class="pill yellow">Advanced ML: AutoGluon + RSF + Ensemble</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Surface</div>
+        <p class="kpi-value">Portfolio + Well</p>
+        <p class="note">The tab opens at portfolio level, then drills into a single well forecast workspace.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Live Data Path</div>
+        <p class="kpi-value">SQL First</p>
+        <p class="note">Prefers live SQL snapshots and job progress, with CSV fallback when local SQL is unavailable.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Forecast Core</div>
+        <p class="kpi-value">Hybrid</p>
+        <p class="note">Heuristic time-series trend plus external CPU ML risk and optional ensemble stacking.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Decision Layer</div>
+        <p class="kpi-value">Scenario</p>
+        <p class="note">Root-cause and counterfactual scenario controls are embedded directly into the well deep-dive surface.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>1) End-to-End Runtime Flow</h2>
+        <p>
+          Predictive Studio is not a single model call. It is a multi-stage decision surface. The tab first loads a portfolio-wide well list and risk distribution,
+          then fetches deep detail for a selected well: current state, historical trajectory, Gantt phases, milestones, plan-vs-actual, forecast, ML risk, causal intelligence,
+          and ensemble prediction when available.
+        </p>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1180 390" width="100%" role="img" aria-label="Predictive Studio end-to-end flow">
+            <rect x="26" y="24" width="184" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="118" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">PredictiveStudio UI</text>
+            <rect x="244" y="24" width="174" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="331" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">/api/forecast Proxy</text>
+            <rect x="452" y="24" width="190" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="547" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">FastAPI Forecast API</text>
+            <rect x="676" y="24" width="188" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="770" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">ForecastEngine</text>
+            <rect x="898" y="24" width="246" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="1021" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Well Workspace Payload</text>
+
+            <line x1="210" y1="51" x2="244" y2="51" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="418" y1="51" x2="452" y2="51" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="642" y1="51" x2="676" y2="51" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="864" y1="51" x2="898" y2="51" stroke="#4f78d6" stroke-width="2"/>
+
+            <rect x="56" y="126" width="220" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="166" y="154" text-anchor="middle" font-size="12.5" fill="#222">/api/forecast?action=wells</text>
+            <rect x="56" y="182" width="220" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="166" y="210" text-anchor="middle" font-size="12.5" fill="#222">/api/forecast?action=well&amp;id=...</text>
+
+            <rect x="336" y="126" width="224" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="448" y="154" text-anchor="middle" font-size="12.5" fill="#222">/api/forecast/wells</text>
+            <rect x="336" y="182" width="224" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="448" y="210" text-anchor="middle" font-size="12.5" fill="#222">/api/forecast/well/{well_id}</text>
+
+            <rect x="616" y="110" width="236" height="44" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="734" y="138" text-anchor="middle" font-size="12.5" fill="#0a6a2b">WellMonitoringReport / live snapshot</text>
+            <rect x="616" y="164" width="236" height="44" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="734" y="192" text-anchor="middle" font-size="12.5" fill="#0a6a2b">WMR_Full / cleaned history</text>
+            <rect x="616" y="218" width="236" height="44" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="734" y="246" text-anchor="middle" font-size="12.5" fill="#0a6a2b">Job_Progress_Report_GB / plan-vs-actual</text>
+
+            <rect x="900" y="118" width="226" height="44" rx="8" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="1013" y="146" text-anchor="middle" font-size="12.5" fill="#7d6308">Current State + Gantt + Milestones</text>
+            <rect x="900" y="172" width="226" height="44" rx="8" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="1013" y="200" text-anchor="middle" font-size="12.5" fill="#7d6308">Forecast + Risk + Lineage</text>
+            <rect x="900" y="226" width="226" height="44" rx="8" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="1013" y="254" text-anchor="middle" font-size="12.5" fill="#7d6308">Causal + Ensemble + Scenario UI</text>
+
+            <rect x="428" y="308" width="340" height="52" rx="10" fill="#fff1f1" stroke="#e4b5b5"/>
+            <text x="598" y="340" text-anchor="middle" font-size="13" font-weight="700" fill="#8e1b1b">Optional CPU ML orchestrator on port 8050 enriches risk and forecast</text>
+          </svg>
+        </div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-8">
+        <h2>2) Predictive Studio UI Architecture</h2>
+        <p>
+          The UI has two operating modes. In portfolio mode it displays a searchable registry of wells plus portfolio KPIs and risk distribution.
+          Once the user clicks a well, the tab switches into a deep-dive workspace with historical progress, future forecast, milestone matrix,
+          Gantt phases, risk drivers, causal root causes, and scenario controls.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>UI Region</th>
+              <th>Data Dependency</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Portfolio KPI strip</td>
+              <td><code>wells</code> + <code>portfolio</code> payload</td>
+              <td>Instant executive view of total wells, active/completed, avg progress, critical count</td>
+            </tr>
+            <tr>
+              <td>Risk distribution bar</td>
+              <td><code>tier_distribution</code></td>
+              <td>Quick visual allocation of portfolio pressure</td>
+            </tr>
+            <tr>
+              <td>Well forecast registry</td>
+              <td>Per-well summary objects</td>
+              <td>Interactive drill-down selector sorted by risk priority</td>
+            </tr>
+            <tr>
+              <td>Well deep dive</td>
+              <td><code>/api/forecast/well/{id}</code></td>
+              <td>Combines all forecasting, risk, and operational evidence for one well</td>
+            </tr>
+            <tr>
+              <td>Counterfactual simulator</td>
+              <td>Causal intelligence payload + scenario call</td>
+              <td>Lets the user test governed operational interventions</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-4">
+        <h2>3) Tab API Routes</h2>
+        <ul>
+          <li><code>/api/forecast?action=wells</code>: loads well selector and portfolio snapshot.</li>
+          <li><code>/api/forecast?action=well&amp;id=...</code>: loads one-well deep dive.</li>
+          <li><code>/api/forecast?action=portfolio</code>: explicit portfolio summary endpoint.</li>
+          <li><code>/api/forecast/well/{id}/ensemble</code>: richer ensemble prediction endpoint available on backend.</li>
+          <li><code>/api/model/diagnostics</code>: model health, Stan diagnostics, ensemble status, CPU ML health.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>4) ForecastEngine: What the Tab Actually Uses</h2>
+        <p>
+          The tab's primary runtime is <code>ForecastEngine</code>. This engine is a live operational synthesis layer. It does not depend on one static model artifact alone.
+          It merges current SQL snapshot state, historical WMR progression, plan-vs-actual records, external ML enrichment, and optional ensemble stacking into one JSON payload.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Subsystem</th>
+              <th>Source</th>
+              <th>Role in ForecastEngine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Current state</td>
+              <td><code>WellMonitoringReport</code></td>
+              <td>Latest well snapshot, progress, dates, rig state, cluster, buffer state</td>
+            </tr>
+            <tr>
+              <td>History</td>
+              <td><code>WMR_Full</code></td>
+              <td>Weekly progression used for trend and velocity</td>
+            </tr>
+            <tr>
+              <td>Plan vs actual</td>
+              <td><code>Job_Progress_Report_GB</code></td>
+              <td>Current month execution tracking and gap context</td>
+            </tr>
+            <tr>
+              <td>External risk enrichment</td>
+              <td><code>http://127.0.0.1:8050</code></td>
+              <td>ML forecast, risk probabilities, causal intelligence, portfolio live-risk map</td>
+            </tr>
+            <tr>
+              <td>Fallback data</td>
+              <td><code>prediction_data/*.csv</code></td>
+              <td>Offline resilience when SQL is not reachable</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">
+          This design is deliberate: the tab stays operational even when one layer is unavailable, because data access and forecasting are built with fallback behavior instead of a single hard dependency.
+        </p>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>5) Time-Series Forecast Logic in ForecastEngine</h2>
+        <p>
+          The tab's native forecast path uses cleaned historical progress and a robust linear trend over recent points. It is intentionally conservative and explainable.
+        </p>
+        <ol>
+          <li><strong>Clean history:</strong> duplicate weekly rows are collapsed and cumulative progress is monotonicized with <code>cummax()</code>.</li>
+          <li><strong>Select recent window:</strong> up to the last 14 cleaned history points are used.</li>
+          <li><strong>Convert time to numeric axis:</strong> each week is transformed into <code>day_index</code>.</li>
+          <li><strong>Fit trend:</strong> <code>numpy.polyfit</code> estimates slope and intercept for progress vs time.</li>
+          <li><strong>Forecast 4 weeks:</strong> slope is converted to weekly pace and projected forward.</li>
+          <li><strong>Confidence band:</strong> residual standard deviation scales the interval with <code>1.96 * std * sqrt(i)</code>.</li>
+          <li><strong>Estimated completion:</strong> if the slope is positive enough, the engine estimates when progress reaches 100%.</li>
+        </ol>
+        <p>
+          This is not a black-box deep learning forecast. It is a transparent operational trend model suitable for environments where users must understand why the forecast moved.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>6) Gantt, Milestones, and Current State Synthesis</h2>
+        <p>
+          Predictive Studio does more than predict one number. It reconstructs a lifecycle model for each well from the latest snapshot.
+        </p>
+        <ul>
+          <li><strong>Current state:</strong> extracts well identity, rig, cluster, progress, rig dates, engineering and construction dates, commissioning dates, and snapshot timestamp.</li>
+          <li><strong>Gantt phases:</strong> maps engineering, location prep, construction, drilling, and commissioning into ordered phase objects.</li>
+          <li><strong>Milestone ledger:</strong> converts actual and planned dates into ordered status states: completed, scheduled, overdue, pending.</li>
+          <li><strong>Commissioning placeholder guard:</strong> 100% commissioning values without actual commissioning dates are treated as placeholders instead of trusted completion.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>7) Risk Logic: Two Different Risk Engines Exist</h2>
+        <p>
+          One of the most important technical distinctions in this product is that Predictive Studio uses two risk layers:
+          a native hybrid risk engine inside <code>ForecastEngine</code>, and a deeper trained-ML risk engine exposed through the CPU ML service and <code>/predict/*</code> APIs.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Risk Layer</th>
+              <th>Where It Runs</th>
+              <th>How It Works</th>
+              <th>Why It Exists</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ForecastEngine hybrid risk</td>
+              <td>Inside the tab runtime</td>
+              <td>Combines schedule variance, overdue target pressure, stagnation, readiness gaps, and execution drag</td>
+              <td>Fast, explainable, local, resilient even when richer ML is degraded</td>
+            </tr>
+            <tr>
+              <td>CPU ML risk model</td>
+              <td><code>127.0.0.1:8050</code></td>
+              <td>Returns calibrated risk probability, drivers, stats forecast, and causal payload</td>
+              <td>Provides richer probabilistic intelligence and driver attribution</td>
+            </tr>
+            <tr>
+              <td>FeatureEngine Kaggle formula risk</td>
+              <td><code>/predict/*</code> service</td>
+              <td>Uses exact weighted composite from the trained pipeline</td>
+              <td>Supports single-well prediction, nightly refresh, anomaly detection, and retrain workflow</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">
+          This layered design is strong engineering. It avoids a single point of failure and lets the product degrade gracefully without losing the predictive surface entirely.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>8) Hybrid Risk Composition in ForecastEngine</h2>
+        <p>
+          The tab-level hybrid risk model uses operational evidence directly. Its components include:
+        </p>
+        <ul>
+          <li><strong>Schedule variance risk:</strong> compares actual progress against where the well should be on the expected curve.</li>
+          <li><strong>Overdue deadline risk:</strong> boosts risk when expected rig-off is already missed or too close relative to low progress.</li>
+          <li><strong>Stagnation risk:</strong> adds pressure when recent weekly movement is flat.</li>
+          <li><strong>Readiness risk:</strong> detects zero-progress or low-preparation states.</li>
+          <li><strong>Execution drag:</strong> derived from late rig and phase patterns.</li>
+          <li><strong>Governance risk:</strong> absorbs process-control style issues when present.</li>
+        </ul>
+        <p>
+          This produces a hybrid score and tier even before more advanced model services are considered.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>9) Exact Kaggle Risk Formula in FeatureEngine</h2>
+        <p>
+          The heavier predictive service keeps a stricter formulaic risk score:
+          <code>Risk = 0.35*progress_risk + 0.25*velocity_risk + 0.20*schedule_risk + 0.20*gap_risk</code>.
+        </p>
+        <ul>
+          <li><strong>Progress risk:</strong> low completion increases risk.</li>
+          <li><strong>Velocity risk:</strong> slower weekly movement increases risk.</li>
+          <li><strong>Schedule risk:</strong> days-to-expected-rig-off are normalized into risk.</li>
+          <li><strong>Gap risk:</strong> compares expected schedule completion against actual completion.</li>
+        </ul>
+        <p>
+          The output is normalized to 0-100 and mapped into <code>CRITICAL</code>, <code>HIGH_RISK</code>, <code>WATCH</code>, or <code>HEALTHY</code>.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>10) Advanced ML Service Behind /predict/*</h2>
+        <p>
+          Separate from the tab's forecast API, the project also contains a deeper predictive service mounted at <code>/predict/*</code>.
+          This service loads trained model artifacts from <code>wmr_results (1)</code> and exposes single-well prediction, nightly refresh, retrain trigger,
+          anomalies, portfolio risk, and model metadata.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Model / Artifact</th>
+              <th>Role</th>
+              <th>Technical Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AutoGluon TabularPredictor</td>
+              <td>4-week progress prediction</td>
+              <td>Consumes 58 engineered features and predicts near-term progress trajectory</td>
+            </tr>
+            <tr>
+              <td>Random Survival Forest</td>
+              <td>Completion date estimation</td>
+              <td>Produces median, early, and late completion horizons from survival curves</td>
+            </tr>
+            <tr>
+              <td>Feature importance / SHAP artifacts</td>
+              <td>Driver visibility</td>
+              <td>Used to expose top risk drivers and explain why the model is concerned</td>
+            </tr>
+            <tr>
+              <td>Priority wells / risk CSVs</td>
+              <td>Offline serving fallback</td>
+              <td>Used when SQL is unavailable so the predictive layer can still return real precomputed outputs</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-8">
+        <h2>11) Feature Engineering in the Trained ML Stack</h2>
+        <p>
+          The trained ML service uses a structured 58-feature pipeline. This is not generic tabular inference without domain logic. The feature set includes:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature Family</th>
+              <th>Examples</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Geospatial</td>
+              <td><code>northing</code>, <code>easting</code>, <code>dist_from_centroid</code>, <code>geo_angle</code></td>
+              <td>Captures field position and geographic execution patterns</td>
+            </tr>
+            <tr>
+              <td>Calendar / schedule</td>
+              <td><code>days_since_start</code>, <code>start_month</code>, <code>days_to_rig_off_exp</code>, <code>week_index</code></td>
+              <td>Measures schedule maturity and temporal pressure</td>
+            </tr>
+            <tr>
+              <td>Lifecycle readiness</td>
+              <td>Location prep weighted composite, engineering KPI, OHL, earthwork, water, mechanical progress</td>
+              <td>Measures whether prerequisites are in place for downstream completion</td>
+            </tr>
+            <tr>
+              <td>Lag / velocity</td>
+              <td><code>progress_lag1</code>, <code>progress_lag2</code>, <code>progress_velocity_1w</code>, <code>progress_accel</code>, <code>momentum_score</code></td>
+              <td>Captures motion, not just position</td>
+            </tr>
+            <tr>
+              <td>Encoded categorical priors</td>
+              <td><code>rig_no_te</code>, <code>project_id_te</code>, <code>well_type_te</code>, label-encoded identity features</td>
+              <td>Injects historical performance priors for rigs, projects, and well classes</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-4">
+        <h2>12) Survival Modeling</h2>
+        <p>
+          The Random Survival Forest layer estimates time-to-completion rather than just future progress.
+        </p>
+        <ul>
+          <li><strong>Inputs:</strong> progress, velocity, remaining work, location prep, construction progress, engineering KPI.</li>
+          <li><strong>Output:</strong> median completion week plus early and late intervals.</li>
+          <li><strong>Interpretation:</strong> this is useful when the client wants a completion horizon rather than only a progress delta.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>13) Causal and Scenario Layer</h2>
+        <p>
+          Predictive Studio includes a causal intervention surface, not only passive monitoring. The deep-dive view receives
+          <code>ml_intelligence.causal_intelligence</code> with root causes, governed intervention actions, baseline assumptions, and methodology text.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario Capability</th>
+              <th>Technical Source</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Root-cause vector</td>
+              <td>CPU ML service causal payload</td>
+              <td>Ranks main drivers of delay with estimated day contribution and support cases</td>
+            </tr>
+            <tr>
+              <td>Governed interventions</td>
+              <td>Scenario catalog merged with model-emitted actions</td>
+              <td>Restricts UI actions to approved operational levers such as peer pace recovery or rig reassignment</td>
+            </tr>
+            <tr>
+              <td>Counterfactual result</td>
+              <td>Scenario execution response</td>
+              <td>Returns expected recovery days, counterfactual completion date, baseline comparison, and support count</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This matters commercially because it moves the tab from "forecast dashboard" to "decision lab": not just what will happen, but what can be changed and what recovery may be possible.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>14) Ensemble and Diagnostics Layer</h2>
+        <p>
+          The backend exposes an ensemble path that can stack multiple prediction sources:
+          LightGBM-style risk probability from the ML service, StatsForecast-style progress forecast, Stan posterior signals from the causal workspace,
+          and S-Learner CATE outputs when available.
+        </p>
+        <ul>
+          <li><strong>Ensemble endpoint:</strong> <code>/api/forecast/well/{well_id}/ensemble</code></li>
+          <li><strong>Diagnostics endpoint:</strong> <code>/api/model/diagnostics</code></li>
+          <li><strong>Purpose:</strong> surface model health, active ensemble members, and uncertainty stack status</li>
+        </ul>
+      </article>
+
+      <article class="card span-6">
+        <h2>15) Nightly Evaluation, Anomalies, and Retrain Workflow</h2>
+        <p>
+          The heavier predictive service includes production-style operational ML controls:
+        </p>
+        <ul>
+          <li><strong><code>POST /predict/refresh</code>:</strong> nightly batch evaluation across active wells, tier-change detection, anomaly tracker sync.</li>
+          <li><strong><code>GET /predict/anomalies</code>:</strong> returns wells whose risk tier changed relative to prior state.</li>
+          <li><strong><code>POST /predict/full</code>:</strong> queues a full retrain workflow, intended for GPU/cloud execution with Kaggle notebook refresh.</li>
+          <li><strong><code>GET /predict/model-info</code>:</strong> exposes artifact existence, timestamps, and training metrics.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>16) Technical Value Created by Predictive Studio</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Technical Mechanism</th>
+              <th>Business Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Portfolio prioritization</td>
+              <td>Cached risk map + well ranking + portfolio distribution</td>
+              <td>Execs can immediately identify the most at-risk wells</td>
+            </tr>
+            <tr>
+              <td>Single-well forecast</td>
+              <td>Cleaned history + trend + external ML forecast</td>
+              <td>Users can explain current trajectory and expected completion</td>
+            </tr>
+            <tr>
+              <td>Operational traceability</td>
+              <td>Gantt, milestones, plan-vs-actual, data lineage</td>
+              <td>The forecast is auditable and anchored in execution evidence</td>
+            </tr>
+            <tr>
+              <td>Risk explainability</td>
+              <td>Risk components + model drivers + SHAP-backed importance</td>
+              <td>Client can see why a well is risky, not just the score</td>
+            </tr>
+            <tr>
+              <td>Decision support</td>
+              <td>Causal intelligence + governed scenario actions</td>
+              <td>Moves the product from reporting into intervention planning</td>
+            </tr>
+            <tr>
+              <td>Operational resilience</td>
+              <td>SQL-first with CSV fallback, local cache TTLs, offline artifacts</td>
+              <td>Demo and delivery remain stable even outside client VPN</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="dark-box span-12">
+        <h2 style="color:#f8fafc;">17) Most Important Architectural Insight</h2>
+        <p style="color:#d6dde6;">
+          Predictive Studio is not one model. It is a layered predictive operating system. The tab-level <code>ForecastEngine</code> provides deterministic,
+          explainable, local well intelligence using live SQL and heuristic forecasting. The adjacent trained-ML service provides richer probabilistic modeling,
+          survival estimates, anomaly tracking, and retrainable artifacts. The UI fuses both into one surface.
+        </p>
+        <p style="color:#d6dde6;">
+          That split is a strength, not a weakness. It gives the product both executive reliability and ML depth. If the heavy model path is unavailable,
+          the tab still works. If the heavy path is available, the product gains richer risk, root-cause, and intervention intelligence.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>18) Why Forecasting This Domain Is Technically Difficult</h2>
+        <p>
+          Predictive Studio is solving a harder problem than normal business forecasting because oilfield completion delivery is not a clean,
+          stationary time series. Several technical difficulties exist at the same time:
+        </p>
+        <ul>
+          <li><strong>Lifecycle heterogeneity:</strong> a well passes through engineering, location prep, construction, drilling, and commissioning; each phase has different cadence, blockers, and evidence columns.</li>
+          <li><strong>Sparse and irregular history:</strong> weekly WMR snapshots do not always behave like evenly sampled sensor data, so naive forecasting can become unstable.</li>
+          <li><strong>Mixed signal types:</strong> progress percentages, overdue dates, categorical rig identity, project priors, and readiness signals all matter together.</li>
+          <li><strong>Censoring and incompleteness:</strong> some wells are still active, some stage fields remain blank, and some commissioning dates are placeholders rather than completed facts.</li>
+          <li><strong>Operational dependency chains:</strong> a delay is often not local to one field; it may come from rig queue spillover, material readiness drag, or parallel workfront congestion.</li>
+        </ul>
+        <p>
+          This is why the product does not rely on a single straight-line model. It combines direct execution evidence, trend inference, engineered features,
+          survival modeling, and governed causal actions.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>19) Why the Product Uses a Hybrid Engine</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>What It Does</th>
+              <th>Why It Exists</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ForecastEngine</td>
+              <td>Builds the live tab payload from SQL or CSV fallback, synthesizes milestones, Gantt phases, plan-vs-actual, and a robust local forecast.</td>
+              <td>Guarantees that the tab can still work in local demo conditions and remains auditable from operational records.</td>
+            </tr>
+            <tr>
+              <td>FeatureEngine</td>
+              <td>Runs trained ML inference over 58 engineered features and computes the exact Kaggle-derived risk stack.</td>
+              <td>Adds learned structure, historical priors, and non-linear relationships that pure heuristics would miss.</td>
+            </tr>
+            <tr>
+              <td>RSF Survival Model</td>
+              <td>Estimates time-to-completion instead of only next-progress movement.</td>
+              <td>Execs and planners often care more about completion horizon than point progress.</td>
+            </tr>
+            <tr>
+              <td>Causal / Scenario Layer</td>
+              <td>Converts risk into intervention choices, counterfactual completion dates, and recovery-day estimates.</td>
+              <td>Turns the tab into a decision system rather than a passive visual report.</td>
+            </tr>
+            <tr>
+              <td>Offline artifacts</td>
+              <td>Expose pre-computed portfolio summaries, feature importance, and priority well outputs when live SQL or model infrastructure is constrained.</td>
+              <td>Maintains resilience outside the client VPN and protects the demo path.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The design principle is simple: use deterministic logic where the client needs trust and traceability, and use trained ML where the client needs pattern recognition,
+          probabilistic timing, and hidden-risk exposure.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Generated for module-level technical understanding of Bashira Intelligence - Predictive Studio tab.
+    </div>
+  </div>
+</body>
+</html>

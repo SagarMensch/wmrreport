@@ -1,0 +1,214 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[vw_JobProgress]    Script Date: 25-03-2026 16:22:42 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+/* ============================================================
+   JOB PROGRESS (FEB ONLY) — UPDATED TO SPLIT BY PROJECT CATEGORY
+   New logic:
+   - Activity rows only: ActivityTaskPlan.type = 'A'
+   - Deduplicate pushes: keep latest Time_Stamp per (code, project_id)
+   - Derive Well_ID from code: everything AFTER '-'
+   - Rollup grain: (Well_ID, project_id)  ✅ (well can repeat across projects)
+   - Category: ProjectIDs.column2 (joined via ActivityTaskPlan.project_id = ProjectIDs.ID)
+   - Week buckets:
+       Week1 1-7, Week2 8-14, Week3 15-21, Week4 22-28, Week5 29+
+     Cum-Prior = before Feb 1
+   - Plan: SUM(weightage) (normalized to % if stored as fraction)
+   - Actual: SUM(weightage * progress_ratio)
+     progress_ratio:
+       * progress = 1 or 100 or '100%' => 1.0
+       * progress = 0.10 => 0.10
+       * progress = 10 or '10%' => 0.10
+   ============================================================ */
+
+CREATE   VIEW [dbo].[vw_JobProgress]
+AS
+WITH Params AS (
+    SELECT
+        CAST(DATEFROMPARTS(YEAR(GETDATE()), 2, 1) AS date) AS MonthStart,      -- Feb 1
+        CAST(DATEFROMPARTS(YEAR(GETDATE()), 3, 1) AS date) AS NextMonthStart   -- Mar 1
+),
+LatestPerCodeProject AS (
+    -- ✅ keep latest push per (code, project_id) to remove duplicates across multiple loads
+    SELECT *
+    FROM (
+        SELECT
+            atp.*,
+            ROW_NUMBER() OVER (
+                PARTITION BY LTRIM(RTRIM(atp.code)), atp.project_id
+                ORDER BY atp.Time_Stamp DESC
+            ) AS rn
+        FROM dbo.ActivityTaskPlan atp
+        WHERE atp.code IS NOT NULL
+          AND atp.Time_Stamp IS NOT NULL
+          AND atp.[type] = 'A'
+          AND atp.project_id IS NOT NULL
+    ) x
+    WHERE x.rn = 1
+),
+Activities AS (
+    SELECT
+        TRY_CONVERT(int,
+            LTRIM(RTRIM(
+                RIGHT(LTRIM(RTRIM(l.code)),
+                    LEN(LTRIM(RTRIM(l.code))) - CHARINDEX('-', LTRIM(RTRIM(l.code)) + '-')
+                )
+            ))
+        ) AS Well_ID,
+
+        l.project_id,
+
+        CAST(l.target_start AS date) AS target_start_date,
+
+        CASE
+            WHEN l.actual_start IS NULL THEN NULL
+            WHEN TRY_CONVERT(date, l.actual_start) = '1900-01-01' THEN NULL
+            ELSE TRY_CONVERT(date, l.actual_start)
+        END AS actual_start_date,
+
+        -- raw numeric fields
+        TRY_CONVERT(decimal(18,6),
+            REPLACE(REPLACE(CONVERT(nvarchar(100), l.weightage), '%', ''), ' ', '')
+        ) AS weightage_raw,
+
+        TRY_CONVERT(decimal(18,6),
+            REPLACE(REPLACE(CONVERT(nvarchar(100), l.progress), '%', ''), ' ', '')
+        ) AS progress_raw
+    FROM LatestPerCodeProject l
+    WHERE CHARINDEX('-', LTRIM(RTRIM(l.code))) > 0
+),
+Normalized AS (
+    SELECT
+        a.Well_ID,
+        a.project_id,
+        a.target_start_date,
+        a.actual_start_date,
+
+        -- weightage normalized to 0..100 (supports 0.48 => 48, 48 => 48)
+        CASE
+            WHEN a.weightage_raw IS NULL THEN 0
+            WHEN a.weightage_raw < 0 THEN 0
+            WHEN a.weightage_raw <= 1 THEN a.weightage_raw * 100.0
+            ELSE a.weightage_raw
+        END AS weightage_pct,
+
+        -- progress ratio 0..1
+        CASE
+            WHEN a.progress_raw IS NULL THEN 0.0
+            WHEN a.progress_raw < 0 THEN 0.0
+            WHEN a.progress_raw = 1 THEN 1.0
+            WHEN a.progress_raw > 1 THEN
+                CASE WHEN a.progress_raw >= 100 THEN 1.0 ELSE a.progress_raw / 100.0 END
+            ELSE a.progress_raw
+        END AS progress_ratio
+    FROM Activities a
+    WHERE a.Well_ID IS NOT NULL
+),
+Bucketed AS (
+    SELECT
+        n.Well_ID,
+        n.project_id,
+
+        -- PLAN (target_start)
+        SUM(CASE WHEN n.target_start_date <  p.MonthStart THEN n.weightage_pct ELSE 0 END) AS CumPrior_Plan,
+
+        SUM(CASE WHEN n.target_start_date >= p.MonthStart AND n.target_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.target_start_date) BETWEEN 1 AND 7 THEN n.weightage_pct ELSE 0 END) AS Wk1_Plan,
+        SUM(CASE WHEN n.target_start_date >= p.MonthStart AND n.target_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.target_start_date) BETWEEN 8 AND 14 THEN n.weightage_pct ELSE 0 END) AS Wk2_Plan,
+        SUM(CASE WHEN n.target_start_date >= p.MonthStart AND n.target_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.target_start_date) BETWEEN 15 AND 21 THEN n.weightage_pct ELSE 0 END) AS Wk3_Plan,
+        SUM(CASE WHEN n.target_start_date >= p.MonthStart AND n.target_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.target_start_date) BETWEEN 22 AND 28 THEN n.weightage_pct ELSE 0 END) AS Wk4_Plan,
+        SUM(CASE WHEN n.target_start_date >= p.MonthStart AND n.target_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.target_start_date) >= 29 THEN n.weightage_pct ELSE 0 END) AS Wk5_Plan,
+
+        -- ACTUAL (actual_start)
+        SUM(CASE WHEN n.actual_start_date IS NOT NULL AND n.actual_start_date < p.MonthStart
+                 THEN n.weightage_pct * n.progress_ratio ELSE 0 END) AS CumPrior_Actual,
+
+        SUM(CASE WHEN n.actual_start_date >= p.MonthStart AND n.actual_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.actual_start_date) BETWEEN 1 AND 7
+                 THEN n.weightage_pct * n.progress_ratio ELSE 0 END) AS Wk1_Actual,
+
+        SUM(CASE WHEN n.actual_start_date >= p.MonthStart AND n.actual_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.actual_start_date) BETWEEN 8 AND 14
+                 THEN n.weightage_pct * n.progress_ratio ELSE 0 END) AS Wk2_Actual,
+
+        SUM(CASE WHEN n.actual_start_date >= p.MonthStart AND n.actual_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.actual_start_date) BETWEEN 15 AND 21
+                 THEN n.weightage_pct * n.progress_ratio ELSE 0 END) AS Wk3_Actual,
+
+        SUM(CASE WHEN n.actual_start_date >= p.MonthStart AND n.actual_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.actual_start_date) BETWEEN 22 AND 28
+                 THEN n.weightage_pct * n.progress_ratio ELSE 0 END) AS Wk4_Actual,
+
+        SUM(CASE WHEN n.actual_start_date >= p.MonthStart AND n.actual_start_date < p.NextMonthStart
+                  AND DATEPART(DAY, n.actual_start_date) >= 29
+                 THEN n.weightage_pct * n.progress_ratio ELSE 0 END) AS Wk5_Actual
+    FROM Normalized n
+    CROSS JOIN Params p
+    GROUP BY n.Well_ID, n.project_id
+),
+WMR_OneRow AS (
+    SELECT
+        w.pdo_well_id,
+        MAX(w.well_name_after_spud) AS well_name_after_spud,
+        MAX(w.location_po_no) AS location_po_no,
+        MAX(w.flow_line_po_no) AS flow_line_po_no,
+        MAX(w.locationdd) AS locationdd,
+        MAX(w.flow_linedl) AS flow_linedl
+    FROM dbo.WMR w
+    GROUP BY w.pdo_well_id
+)
+SELECT
+    ROW_NUMBER() OVER (ORDER BY b.Well_ID, b.project_id) AS [Sl.No],
+
+    pid.column2 AS [Category],                -- ✅ category now from ProjectIDs.column2
+    b.Well_ID AS [Well ID / Project ID],
+    wmr.well_name_after_spud AS [Well Name / Project Name],
+
+    wmr.location_po_no AS [PO No - Location],
+    wmr.flow_line_po_no AS [PO No - FlowLine],
+
+    wmr.locationdd AS [WBS No - Location],
+    wmr.flow_linedl AS [WBS No - FlowLine],
+
+    CAST(ISNULL(b.CumPrior_Plan, 0)   AS decimal(10,2)) AS [Cum-Prior Month Plan %],
+    CAST(ISNULL(b.CumPrior_Actual, 0) AS decimal(10,2)) AS [Cum-Prior Month Actual %],
+
+    CAST(ISNULL(b.Wk1_Plan, 0)   AS decimal(10,2)) AS [Week-1 Plan %],
+    CAST(ISNULL(b.Wk1_Actual, 0) AS decimal(10,2)) AS [Week-1 Actual %],
+
+    CAST(ISNULL(b.Wk2_Plan, 0)   AS decimal(10,2)) AS [Week-2 Plan %],
+    CAST(ISNULL(b.Wk2_Actual, 0) AS decimal(10,2)) AS [Week-2 Actual %],
+
+    CAST(ISNULL(b.Wk3_Plan, 0)   AS decimal(10,2)) AS [Week-3 Plan %],
+    CAST(ISNULL(b.Wk3_Actual, 0) AS decimal(10,2)) AS [Week-3 Actual %],
+
+    CAST(ISNULL(b.Wk4_Plan, 0)   AS decimal(10,2)) AS [Week-4 Plan %],
+    CAST(ISNULL(b.Wk4_Actual, 0) AS decimal(10,2)) AS [Week-4 Actual %],
+
+    CAST(ISNULL(b.Wk5_Plan, 0)   AS decimal(10,2)) AS [Week-5 Plan %],
+    CAST(ISNULL(b.Wk5_Actual, 0) AS decimal(10,2)) AS [Week-5 Actual %],
+
+    CAST(ISNULL(b.Wk1_Plan+b.Wk2_Plan+b.Wk3_Plan+b.Wk4_Plan+b.Wk5_Plan, 0) AS decimal(10,2)) AS [Current Month Plan %],
+    CAST(ISNULL(b.Wk1_Actual+b.Wk2_Actual+b.Wk3_Actual+b.Wk4_Actual+b.Wk5_Actual, 0) AS decimal(10,2)) AS [Current Month Actual %],
+
+    CAST(ISNULL(b.CumPrior_Plan + (b.Wk1_Plan+b.Wk2_Plan+b.Wk3_Plan+b.Wk4_Plan+b.Wk5_Plan), 0) AS decimal(10,2)) AS [Cum-Current Month Plan %],
+    CAST(ISNULL(b.CumPrior_Actual + (b.Wk1_Actual+b.Wk2_Actual+b.Wk3_Actual+b.Wk4_Actual+b.Wk5_Actual), 0) AS decimal(10,2)) AS [Cum-Current Month Actual %]
+
+FROM Bucketed b
+LEFT JOIN dbo.ProjectIDs pid
+    ON pid.ID = b.project_id
+LEFT JOIN WMR_OneRow wmr
+    ON wmr.pdo_well_id = b.Well_ID;
+GO
+

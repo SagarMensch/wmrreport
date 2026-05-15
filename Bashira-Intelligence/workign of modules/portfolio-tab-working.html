@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Portfolio Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #111111;
+      --muted: #5f6670;
+      --line: #d7dbe1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", "Figtree", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .page { max-width: 1240px; margin: 0 auto; padding: 24px; }
+    .hero, .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+    .hero { padding: 24px; margin-bottom: 16px; }
+    .card { padding: 18px; }
+    .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    h1 { margin: 8px 0 6px; font-size: 34px; line-height: 1.2; }
+    h2 { margin: 0 0 10px; font-size: 20px; line-height: 1.25; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+    .span-12 { grid-column: span 12; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin-bottom: 6px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 600; background: #fbfcfd; }
+    .kpi { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+    .kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid var(--line); padding: 8px 9px; text-align: left; vertical-align: top; }
+    th { background: #fafbfd; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #404854; }
+    code { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-size: 0.95em; background: #f7f8fa; padding: 1px 4px; border-radius: 4px; }
+    .svg-wrap { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fdfdff; }
+    .dark-box { background: linear-gradient(180deg, #111720 0%, #0a0e14 100%); color: #eef2f7; border: 1px solid #1f2733; border-radius: 18px; padding: 18px; }
+    .footer { color: #626a75; font-size: 12px; margin-top: 20px; padding: 10px 4px 20px; }
+    @media (max-width: 1080px) {
+      .span-6, .span-4, .span-3 { grid-column: span 12; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Working Of Modules</div>
+      <h1>Portfolio - Technical Working Document</h1>
+      <p class="subtitle">
+        Detailed explanation of the <strong>Portfolio</strong> command surface: canonical operating frame generation from live wells, project-level
+        aggregation, optional CPU ML enrichment for project delay probability and tail exposure, 2D and 3D Plotly views, and the agentic project feed.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Frontend: Next.js + React</span>
+        <span class="pill">Command Surface: PortfolioCommand</span>
+        <span class="pill">Proxy: /api/command-center?action=portfolio</span>
+        <span class="pill">Backend: CommandCenterService</span>
+        <span class="pill">Base Data: ForecastEngine latest snapshot</span>
+        <span class="pill">Enrichment: CPU ML portfolio service on 8050</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Unit</div>
+        <p class="kpi-value">Project</p>
+        <p>The tab lifts well-level execution state into project-level portfolio lanes so leadership can reason at a capital-allocation level.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Base Model</div>
+        <p class="kpi-value">Hybrid</p>
+        <p>Uses live well progress and hybrid risk from ForecastEngine, then optionally augments projects with portfolio delay probability outputs.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">View Style</div>
+        <p class="kpi-value">2D + 3D</p>
+        <p>Treemap, scatter, composition donut, and topographic risk surface all render from the same filtered project-card set.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Decision Goal</div>
+        <p class="kpi-value">Capital Pressure</p>
+        <p>The surface asks which projects are under execution pressure, which wells dominate that pressure, and what tail-risk exposure is implied.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>1) Runtime Path</h2>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1180 390" width="100%" role="img" aria-label="Portfolio runtime flow">
+            <rect x="28" y="24" width="186" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="121" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">PortfolioCommand UI</text>
+            <rect x="248" y="24" width="286" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="391" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">/api/command-center?action=portfolio</text>
+            <rect x="568" y="24" width="214" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="675" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">CommandCenterService</text>
+            <rect x="816" y="24" width="334" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="983" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Portfolio payload: summary + project cards + wells + feed</text>
+
+            <rect x="70" y="134" width="236" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="188" y="162" text-anchor="middle" font-size="12.5" fill="#222">ForecastEngine.latest_df</text>
+            <rect x="70" y="188" width="236" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="188" y="216" text-anchor="middle" font-size="12.5" fill="#222">ForecastEngine risk map</text>
+            <rect x="70" y="242" width="236" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="188" y="270" text-anchor="middle" font-size="12.5" fill="#222">Job Progress category lookup</text>
+            <rect x="70" y="296" width="236" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="188" y="324" text-anchor="middle" font-size="12.5" fill="#222">Optional 8050 ML project rows</text>
+
+            <rect x="408" y="150" width="242" height="48" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="529" y="180" text-anchor="middle" font-size="12.5" fill="#0a6a2b">canonical operating frame</text>
+            <rect x="408" y="214" width="242" height="48" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="529" y="244" text-anchor="middle" font-size="12.5" fill="#0a6a2b">project aggregation</text>
+            <rect x="408" y="278" width="242" height="48" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="529" y="308" text-anchor="middle" font-size="12.5" fill="#0a6a2b">pressure ranking + feed</text>
+
+            <rect x="750" y="150" width="210" height="48" rx="8" fill="#fff9e6" stroke="#f2dfa0"/>
+            <text x="855" y="180" text-anchor="middle" font-size="12.5" fill="#7d6308">treemap / scatter / donut</text>
+            <rect x="750" y="214" width="210" height="48" rx="8" fill="#fff9e6" stroke="#f2dfa0"/>
+            <text x="855" y="244" text-anchor="middle" font-size="12.5" fill="#7d6308">3D risk surface / scatter3D</text>
+            <rect x="750" y="278" width="210" height="48" rx="8" fill="#fff9e6" stroke="#f2dfa0"/>
+            <text x="855" y="308" text-anchor="middle" font-size="12.5" fill="#7d6308">project cards and top wells</text>
+          </svg>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>2) Frontend Shell</h2>
+        <p>
+          The frontend component is <code>PortfolioCommand.tsx</code>. It loads its data through the shared hook <code>useCommandCenterData("portfolio")</code>,
+          which performs a fresh <code>fetch("/api/command-center?action=portfolio")</code> with <code>cache: "no-store"</code>.
+        </p>
+        <ul>
+          <li>Built-in filters: <code>all</code>, <code>active</code>, <code>inactive</code></li>
+          <li>Built-in chart tabs: <code>topology</code>, <code>scatter</code>, <code>treemap</code>, <code>composition</code></li>
+          <li>Refresh action: <code>Recalculate Risk</code> triggers a refetch of the portfolio payload</li>
+        </ul>
+      </article>
+
+      <article class="card span-6">
+        <h2>3) Shared Command-Center Data Contract</h2>
+        <p>
+          The web proxy maps <code>action=portfolio</code> to backend route <code>/api/command-center/portfolio</code>. The envelope format is standardized:
+        </p>
+        <ul>
+          <li><code>status</code></li>
+          <li><code>data</code></li>
+          <li>optional <code>error</code> and <code>detail</code> fields</li>
+        </ul>
+        <p>
+          This matters because the Portfolio surface is one member of a larger command-center family. The shared hook and shared envelope keep all command surfaces consistent.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>4) Canonical Operating Frame</h2>
+        <p>
+          The true backbone of the Portfolio surface is <code>CommandCenterService._operating_frame()</code>. This function materializes one well-level canonical table that every higher portfolio aggregate depends on.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Field Family</th>
+              <th>Examples</th>
+              <th>Source Logic</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Identity</td>
+              <td><code>project</code>, <code>well_id</code>, <code>well_name</code>, <code>cluster</code>, <code>rig_no</code>, <code>well_type</code></td>
+              <td>Mostly from ForecastEngine latest snapshot; project is resolved through Job Progress category lookup when available</td>
+            </tr>
+            <tr>
+              <td>Progress and risk</td>
+              <td><code>progress_pct</code>, <code>risk_score</code>, <code>risk_tier</code></td>
+              <td>Progress from latest well snapshot; risk from ForecastEngine portfolio risk map or fallback tiering logic</td>
+            </tr>
+            <tr>
+              <td>Schedule state</td>
+              <td><code>delay_days</code>, <code>rig_on_delay_days</code>, <code>rig_status</code></td>
+              <td>Computed from expected versus actual rig-on and rig-off dates relative to today</td>
+            </tr>
+            <tr>
+              <td>Lifecycle stage completion</td>
+              <td><code>loc_prep_pct</code>, <code>engineering_pct</code>, <code>construction_pct</code>, <code>commissioning_pct</code>, <code>flowline_pct</code>, <code>ohl_pct</code></td>
+              <td>Read from well snapshot progress fields and normalized into percentage space</td>
+            </tr>
+            <tr>
+              <td>Event dates</td>
+              <td><code>expected_rig_on</code>, <code>actual_rig_off</code>, <code>actual_start</code>, <code>flaf_issue</code>, <code>engineering_finish</code></td>
+              <td>Copied into the operating frame to support downstream command surfaces and drilldowns</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>5) Project Lookup and Risk Map Enrichment</h2>
+        <p>
+          Two enrichers make the operating frame materially more useful than a raw well snapshot. The first is
+          <code>_project_lookup(engine)</code>, which uses Job Progress data to map each <code>Well ID</code> into a project category.
+          Without this step, the portfolio would remain a flat list of wells with no rollup boundary.
+        </p>
+        <p>
+          The second is <code>_risk_map(engine)</code>, which imports the hybrid risk scores computed by the
+          forecasting layer. That means Portfolio is not inventing its own separate risk universe. It is consuming
+          the same risk backbone used elsewhere in the system and then re-aggregating it at project scale.
+        </p>
+        <ul>
+          <li><code>_project_lookup()</code>: converts wells into project groups</li>
+          <li><code>_risk_map()</code>: attaches hybrid well risk to each row</li>
+          <li>Together they turn a well registry into a portfolio model</li>
+        </ul>
+      </article>
+
+      <article class="card span-6">
+        <h2>6) Project-Level Aggregation Logic</h2>
+        <p>
+          <code>_build_portfolio_view()</code> groups the canonical operating frame by <code>project</code> and then computes
+          project cards. Each card is not a static record from SQL. It is a derived operating object built from
+          multiple wells.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>How It Is Built</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>total_wells</code></td>
+              <td>Count of wells in the grouped project</td>
+            </tr>
+            <tr>
+              <td><code>open_wells</code></td>
+              <td>Rows not yet marked complete by progress threshold</td>
+            </tr>
+            <tr>
+              <td><code>completed_wells</code></td>
+              <td>Rows with progress near 100 percent</td>
+            </tr>
+            <tr>
+              <td><code>delayed_wells</code></td>
+              <td>Count of wells whose derived delay is positive</td>
+            </tr>
+            <tr>
+              <td><code>critical_wells</code></td>
+              <td>Count of wells whose risk tier resolves to critical</td>
+            </tr>
+            <tr>
+              <td><code>avg_progress_pct</code></td>
+              <td>Mean progress across all wells in the project</td>
+            </tr>
+            <tr>
+              <td><code>avg_risk_score</code> / <code>max_risk_score</code></td>
+              <td>Mean and peak hybrid risk across wells</td>
+            </tr>
+            <tr>
+              <td><code>max_delay_days</code></td>
+              <td>Worst derived delay value among project wells</td>
+            </tr>
+            <tr>
+              <td><code>clusters</code> / <code>lead_rig</code></td>
+              <td>Distinct operational clustering metadata for the project</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>7) Optional CPU ML Enrichment from the Project Delay Service</h2>
+        <p>
+          Portfolio also supports a second layer of enrichment from <code>http://127.0.0.1:8050/ml/portfolio/project-delay-probability</code>.
+          This is consumed by <code>_project_delay_model_rows()</code>. If that service is alive, each project card receives
+          extra probabilistic fields. If it is down, Portfolio still works because these are additive, not foundational.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>ML Field</th>
+              <th>Meaning</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>avg_delay_probability_pct</code></td>
+              <td>Average model-estimated chance of project delay</td>
+              <td>Used in pressure ranking and portfolio summary cards</td>
+            </tr>
+            <tr>
+              <td><code>max_delay_probability_pct</code></td>
+              <td>Peak delay probability inside the project</td>
+              <td>Highlights the sharpest stress concentration</td>
+            </tr>
+            <tr>
+              <td><code>p95_delay_exposure_days</code></td>
+              <td>Tail-risk delay estimate</td>
+              <td>Useful for downside planning and escalation</td>
+            </tr>
+            <tr>
+              <td><code>expected_delay_days</code></td>
+              <td>Mean modeled delay expectation</td>
+              <td>Converts abstract risk into time exposure</td>
+            </tr>
+            <tr>
+              <td><code>risk_price</code></td>
+              <td>Economic pricing of project risk</td>
+              <td>Supports commercial or capital framing</td>
+            </tr>
+            <tr>
+              <td><code>nhpp_intensity</code></td>
+              <td>Additional model-side pressure indicator</td>
+              <td>Acts as a stress feature for comparison across projects</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Architecturally this is important: Portfolio is not just a reporting tab. It is a hybrid decision surface that can
+          combine deterministic well-state aggregation with optional probabilistic project-level inference.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>8) Health Band, Pressure Ranking, and Summary Metrics</h2>
+        <p>
+          Once the project cards are built, the service assigns a health band through
+          <code>_health_band(score, delayed_wells, critical_wells)</code>. The logic is intentionally simple and explainable.
+        </p>
+        <ul>
+          <li><strong>Critical</strong>: if there is at least one critical well, or at least three delayed wells, or score is at least 70</li>
+          <li><strong>Watch</strong>: if there is any delay pressure, or score is at least 45</li>
+          <li><strong>Stable</strong>: otherwise</li>
+        </ul>
+        <p>
+          The frontend then computes additional display metrics such as the overall pressure index. In
+          <code>PortfolioCommand.tsx</code>, that index is derived as:
+        </p>
+        <p><code>avg_delay_probability_pct * 0.62 + (projects_under_pressure / total_projects) * 38</code></p>
+        <p>
+          This is a presentational portfolio stress indicator. It is not a raw database field. It is an executive compression
+          of probability and breadth of pressure across the portfolio.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>9) Why the Portfolio Summary Is Useful</h2>
+        <p>
+          A large operating portfolio is hard because local well facts do not automatically reveal where capital, rigs, schedule,
+          and execution pressure are concentrating. Portfolio solves that by changing the level of abstraction.
+        </p>
+        <ul>
+          <li>It converts well-level operational telemetry into project-level capital and schedule objects</li>
+          <li>It ranks where intervention matters most instead of showing every well equally</li>
+          <li>It exposes concentration risk through delay, critical counts, and top-well extraction</li>
+          <li>It makes a large field readable for executive review in one surface</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>10) Plotly Views, 2D/3D Topology, and Visual Analytics</h2>
+        <p>
+          The Portfolio tab renders multiple visual forms through shared Plotly builders in <code>DesertPlotly.ts</code>.
+          The point is not to decorate the screen. The point is to let the same project-card payload be interrogated from different analytical geometries.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>View</th>
+              <th>Builder</th>
+              <th>What It Shows</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Treemap</td>
+              <td><code>buildTreemap()</code> / <code>buildTreemap3D()</code></td>
+              <td>Relative project mass by portfolio metric such as risk, delay, or exposure</td>
+            </tr>
+            <tr>
+              <td>Scatter</td>
+              <td><code>buildScatter()</code> / <code>buildScatter3D()</code></td>
+              <td>Relationship between progress, risk, delay, and pressure across projects</td>
+            </tr>
+            <tr>
+              <td>Composition</td>
+              <td><code>buildDonut()</code> / <code>buildDonut3D()</code></td>
+              <td>Status or risk composition of the portfolio</td>
+            </tr>
+            <tr>
+              <td>Topology</td>
+              <td><code>buildRiskSurface3D()</code></td>
+              <td>A volumetric pressure surface for executive reading of relative portfolio stress</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          One important technical note: the 3D topology view is a derived visual surface, not a literal simulation of subsurface physics.
+          It uses the project points as anchors and produces a readable stress landscape so the portfolio can be interpreted spatially.
+          This should be understood as an analytical topology layer.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>11) Agentic Feed: What It Really Is Today</h2>
+        <p>
+          The payload also returns an <code>agentic_feed</code>. In the current implementation this is generated by
+          <code>_generate_counterfactual_feed(project_cards)</code> inside <code>command_center_service.py</code>.
+        </p>
+        <p>
+          That means the feed is currently a synthetic strategy layer created from the ranked project cards. It references concepts
+          like P99 EVT risk, ST-GNN routing, or MARL coordination in the recommendation text, but it is not executing those models in
+          the normal Portfolio API path.
+        </p>
+        <p>
+          There is a separate <code>portfolio_agent.py</code> in the repository containing a richer LangGraph-based synthetic execution officer,
+          but the normal portfolio payload explored here is assembled directly inside the command-center service.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>12) Caching, Freshness, and Response Characteristics</h2>
+        <p>
+          Portfolio has two opposing goals: remain live enough for operations, but not recompute every expensive aggregate on every paint.
+          The design balances that with a backend cache and a frontend forced refresh strategy.
+        </p>
+        <ul>
+          <li>Frontend fetches with <code>cache: "no-store"</code></li>
+          <li>Backend caches <code>get_portfolio_view()</code> for roughly 45 seconds</li>
+          <li>Refresh actions invalidate the UI view by re-requesting the backend payload</li>
+          <li>The canonical operating frame itself depends on refreshed ForecastEngine state</li>
+        </ul>
+        <p>
+          The result is a command surface that behaves live to the user while protecting the system from unnecessary recomputation.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>13) Why This Tab Creates Real Value</h2>
+        <p>
+          Portfolio is where local execution data becomes executive operating intelligence. The tab does not merely show that some wells are late.
+          It tells leadership which projects are absorbing schedule pressure, which clusters are accumulating critical wells, where probabilistic delay
+          exposure is rising, and which individual wells are driving that portfolio stress.
+        </p>
+        <p>
+          Technically, its value comes from its layering:
+        </p>
+        <ul>
+          <li>well-level operational truth from the forecasting layer</li>
+          <li>project reconstruction through lookup and grouping</li>
+          <li>optional CPU ML enrichment for project delay probabilities</li>
+          <li>multi-geometry visual analytics through Plotly</li>
+          <li>executive synthesis via project cards, top wells, and strategy feed</li>
+        </ul>
+        <p>
+          In plain terms, this tab answers a hard management question: <em>where should we intervene first, and why?</em>
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Portfolio is not a static reporting page. It is a project-scale decision layer built on top of the same hybrid risk backbone used by the broader Bashira operating system.
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Causal Command Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #111111;
+      --muted: #5f6670;
+      --line: #d7dbe1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", "Figtree", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .page { max-width: 1240px; margin: 0 auto; padding: 24px; }
+    .hero, .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+    .hero { padding: 24px; margin-bottom: 16px; }
+    .card { padding: 18px; }
+    .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    h1 { margin: 8px 0 6px; font-size: 34px; line-height: 1.2; }
+    h2 { margin: 0 0 10px; font-size: 20px; line-height: 1.25; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+    .span-12 { grid-column: span 12; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin-bottom: 6px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 600; background: #fbfcfd; }
+    .kpi { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+    .kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid var(--line); padding: 8px 9px; text-align: left; vertical-align: top; }
+    th { background: #fafbfd; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #404854; }
+    code { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-size: 0.95em; background: #f7f8fa; padding: 1px 4px; border-radius: 4px; }
+    .svg-wrap { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fdfdff; }
+    .dark-box { background: linear-gradient(180deg, #111720 0%, #0a0e14 100%); color: #eef2f7; border: 1px solid #1f2733; border-radius: 18px; padding: 18px; }
+    .footer { color: #626a75; font-size: 12px; margin-top: 20px; padding: 10px 4px 20px; }
+    @media (max-width: 1080px) {
+      .span-6, .span-4, .span-3 { grid-column: span 12; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Working Of Modules</div>
+      <h1>Causal Command - Technical Working Document</h1>
+      <p class="subtitle">
+        Detailed explanation of the <strong>Causal Command</strong> tab: live SQL feature joins, fast CPU intervention ranking,
+        Bayesian counterfactual enrichment with Stan or Laplace approximation, evidence trace, support logic, confidence scoring,
+        and the command-oriented decision workspace shown to the user.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Frontend: Next.js + React + Plotly</span>
+        <span class="pill">Backend: FastAPI /api/causal/command</span>
+        <span class="pill">Core Service: CausalCommandService</span>
+        <span class="pill">Fast Layer: LightGBM / rule-based CPU deck</span>
+        <span class="pill">Deep Layer: Stan / Laplace posterior</span>
+        <span class="pill">Mode: SQL-first with governed fallback</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Product Mode</div>
+        <p class="kpi-value">Decision Deck</p>
+        <p>The tab is designed to answer: which well should be acted on now, why, and with what confidence.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Fast Availability</div>
+        <p class="kpi-value">CPU First</p>
+        <p>A fast operational layer returns immediately so the deck is usable even while Bayesian summaries are still refreshing.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Deep Analysis</div>
+        <p class="kpi-value">Posterior</p>
+        <p>Bayesian counterfactual summaries arrive through the Stan service and upgrade the same workspace when ready.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Evidence Model</div>
+        <p class="kpi-value">Traceable</p>
+        <p>Each recommendation is paired with feature lineage, source trace, support counts, and governed scenario labels.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>1) What Causal Command Is Architecturally</h2>
+        <p>
+          Causal Command is not a generic analytics tab. It is a decision-operations layer built to turn raw portfolio status into intervention-ready recommendations.
+          The service assembles a cross-system feature matrix from multiple SQL sources, computes a live fast decision layer, and then optionally enriches the result with
+          Bayesian posterior counterfactual summaries. The user-facing tab presents all of this through three modes: <strong>Command</strong>, <strong>Trace</strong>, and <strong>Engine</strong>.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Main File</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tab UI</td>
+              <td><code>web/src/components/CausalCommand.tsx</code></td>
+              <td>Fetches workspace, renders command bar, plots, evidence trace, model state, and selected-well recommendations</td>
+            </tr>
+            <tr>
+              <td>Frontend proxy</td>
+              <td><code>web/src/app/api/causal/route.ts</code></td>
+              <td>Forwards to backend <code>/api/causal/command</code> with a long timeout for deep analysis</td>
+            </tr>
+            <tr>
+              <td>Workspace builder</td>
+              <td><code>causal_command_service.py</code></td>
+              <td>Loads tables, joins features, computes CPU analysis, launches Bayesian refresh, and assembles the workspace contract</td>
+            </tr>
+            <tr>
+              <td>Posterior engine</td>
+              <td><code>causal_stan_service.py</code></td>
+              <td>Runs CmdStan MCMC when toolchain exists, otherwise falls back to Laplace approximation with diagnostics</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>2) End-to-End Runtime Flow</h2>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1180 430" width="100%" role="img" aria-label="Causal Command runtime flow">
+            <rect x="26" y="24" width="186" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="119" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">CausalCommand UI</text>
+            <rect x="246" y="24" width="180" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="336" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">/api/causal proxy</text>
+            <rect x="460" y="24" width="204" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="562" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">/api/causal/command</text>
+            <rect x="698" y="24" width="196" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="796" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">CausalCommandService</text>
+            <rect x="928" y="24" width="218" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="1037" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">WorkspaceResponse payload</text>
+
+            <rect x="60" y="128" width="226" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="173" y="156" text-anchor="middle" font-size="12.5" fill="#222">WellMonitoringReport_Latest</text>
+            <rect x="60" y="182" width="226" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="173" y="210" text-anchor="middle" font-size="12.5" fill="#222">WMR_Full</text>
+            <rect x="60" y="236" width="226" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="173" y="264" text-anchor="middle" font-size="12.5" fill="#222">Job_Progress_Report_GB / PlanSnapshot</text>
+            <rect x="60" y="290" width="226" height="44" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="173" y="318" text-anchor="middle" font-size="12.5" fill="#222">task_daily / ActivityTaskPlan / SAP / PH</text>
+
+            <rect x="376" y="146" width="234" height="48" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="493" y="176" text-anchor="middle" font-size="12.5" fill="#0a6a2b">cross-system feature dataset</text>
+            <rect x="376" y="208" width="234" height="48" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="493" y="238" text-anchor="middle" font-size="12.5" fill="#0a6a2b">fast CPU decision analysis</text>
+            <rect x="376" y="270" width="234" height="48" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="493" y="300" text-anchor="middle" font-size="12.5" fill="#0a6a2b">background Bayesian refresh</text>
+
+            <rect x="706" y="146" width="212" height="48" rx="8" fill="#fff9e6" stroke="#f2dfa0"/>
+            <text x="812" y="176" text-anchor="middle" font-size="12.5" fill="#7d6308">wells + scenarios + root causes</text>
+            <rect x="706" y="208" width="212" height="48" rx="8" fill="#fff9e6" stroke="#f2dfa0"/>
+            <text x="812" y="238" text-anchor="middle" font-size="12.5" fill="#7d6308">portfolio brief + intervention ladder</text>
+            <rect x="706" y="270" width="212" height="48" rx="8" fill="#fff9e6" stroke="#f2dfa0"/>
+            <text x="812" y="300" text-anchor="middle" font-size="12.5" fill="#7d6308">analysis status + audit + data health</text>
+
+            <rect x="952" y="146" width="182" height="48" rx="8" fill="#fff1f1" stroke="#ecc0c0"/>
+            <text x="1043" y="176" text-anchor="middle" font-size="12.5" fill="#8e1b1b">Command mode</text>
+            <rect x="952" y="208" width="182" height="48" rx="8" fill="#fff1f1" stroke="#ecc0c0"/>
+            <text x="1043" y="238" text-anchor="middle" font-size="12.5" fill="#8e1b1b">Trace mode</text>
+            <rect x="952" y="270" width="182" height="48" rx="8" fill="#fff1f1" stroke="#ecc0c0"/>
+            <text x="1043" y="300" text-anchor="middle" font-size="12.5" fill="#8e1b1b">Engine mode</text>
+          </svg>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>3) Frontend Surface and View Modes</h2>
+        <p>
+          The user-facing component keeps three distinct modes:
+        </p>
+        <ul>
+          <li><strong>Command:</strong> selected well workspace, scenario frontier, portfolio pressure map, top drivers, and management summary.</li>
+          <li><strong>Trace:</strong> source trace rows that show where facts and model signals came from.</li>
+          <li><strong>Engine:</strong> model basis, diagnostics state, coverage, and analysis-mode metadata.</li>
+        </ul>
+        <p>
+          The command bar is not just cosmetic. It interprets short commands like <code>highest delay well</code>, <code>best action</code>, <code>act now</code>, <code>weak support</code>, and <code>open support</code> to switch the currently selected object or mode.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>4) Frontend Connectivity Behavior</h2>
+        <p>
+          The component uses <code>getCausalEndpoint()</code> to decide how to reach the service:
+        </p>
+        <ul>
+          <li>On localhost it can call <code>http://127.0.0.1:8005/api/causal/command</code> directly.</li>
+          <li>In deployment it calls the web proxy route <code>/api/causal</code>.</li>
+        </ul>
+        <p>
+          The proxy itself uses a long timeout of 180 seconds because deep posterior refresh and large workspace builds can take materially longer than a normal CRUD call.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>5) SQL Sources Joined by CausalCommandService</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Logical Table</th>
+              <th>Physical Source</th>
+              <th>Role in Decision Deck</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>wmr_latest</code></td>
+              <td><code>WellMonitoringReport_Latest</code></td>
+              <td>Current well state, progress, cluster, rig, expected and actual rig-off, engineering lag</td>
+            </tr>
+            <tr>
+              <td><code>wmr_full</code></td>
+              <td><code>WMR_Full</code></td>
+              <td>Weekly history used to derive velocity, stalled flag, and regressed flag</td>
+            </tr>
+            <tr>
+              <td><code>job_progress</code></td>
+              <td><code>Job_Progress_Report_GB</code></td>
+              <td>Current-month and cumulative month actual-vs-plan gaps</td>
+            </tr>
+            <tr>
+              <td><code>plan_snapshot</code></td>
+              <td><code>Job_Progress_PlanSnapshot</code> or derived fallback from <code>Job_Progress_Report_GB</code></td>
+              <td>Five-week plan pressure and near-term planning concentration</td>
+            </tr>
+            <tr>
+              <td><code>task_daily</code></td>
+              <td><code>task_daily</code></td>
+              <td>Overdue daily tasks, remaining duration, daily completion rate</td>
+            </tr>
+            <tr>
+              <td><code>activity_task_plan</code></td>
+              <td><code>ActivityTaskPlan</code></td>
+              <td>Project-scoped overdue planned tasks, completion rate, remaining duration</td>
+            </tr>
+            <tr>
+              <td><code>sap_drilling</code></td>
+              <td><code>SAP_DRILLING_SEQUENCE</code></td>
+              <td>Rig move days and normal duration context</td>
+            </tr>
+            <tr>
+              <td><code>ph_productivity</code></td>
+              <td><code>PH_PRODUCTIVITY_WEEKLY_REPORT</code> via <code>Employee</code> and supervisor bridge</td>
+              <td>Linked supervisor productivity signal</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>6) How the Feature Dataset Is Built</h2>
+        <p>
+          <code>_build_feature_dataset()</code> creates the analytical matrix used by the decision engine. This is where the product turns separate operational systems into one causal-ready well table.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature Family</th>
+              <th>Examples</th>
+              <th>How It Is Derived</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Historical motion</td>
+              <td><code>weekly_velocity</code>, <code>stalled_flag</code>, <code>regressed_flag</code></td>
+              <td>Computed from the last two WMR weekly rows per well</td>
+            </tr>
+            <tr>
+              <td>Plan gaps</td>
+              <td><code>current_month_gap</code>, <code>cum_month_gap</code></td>
+              <td>Aggregated from Job Progress actual-vs-plan values</td>
+            </tr>
+            <tr>
+              <td>Near-term planning pressure</td>
+              <td><code>five_week_plan</code></td>
+              <td>Read from PlanSnapshot or derived from Job Progress if PlanSnapshot is missing locally</td>
+            </tr>
+            <tr>
+              <td>Execution backlog</td>
+              <td><code>overdue_daily_tasks</code>, <code>overdue_daily_remaining_duration</code>, <code>daily_task_completion_rate</code></td>
+              <td>Aggregated from overdue open daily tasks</td>
+            </tr>
+            <tr>
+              <td>Planned-task backlog</td>
+              <td><code>activity_overdue_tasks</code>, <code>activity_remaining_duration_days</code>, <code>activity_task_completion_rate</code></td>
+              <td>Grouped by project_id from ActivityTaskPlan rows</td>
+            </tr>
+            <tr>
+              <td>Linked productivity</td>
+              <td><code>ph_average_productivity_pct</code></td>
+              <td>Supervisor email on task_daily is bridged into Employee and then PH productivity rows</td>
+            </tr>
+            <tr>
+              <td>Rig sequence context</td>
+              <td><code>avg_move_days</code>, <code>avg_normal_duration_days</code></td>
+              <td>Grouped from SAP drilling sequence rows</td>
+            </tr>
+            <tr>
+              <td>Current completion state</td>
+              <td><code>current_progress</code>, <code>remaining_progress</code>, <code>engg_kpi_days</code>, <code>loc_prep_progress</code>, <code>const_progress</code>, <code>comm_progress</code></td>
+              <td>Read directly from live WMR latest snapshot</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          After joining, the service computes join coverage percentages so the UI can show how complete each linked surface really is.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>7) Target Variable Used by the Decision Engine</h2>
+        <p>
+          The core supervised target is <code>target_delay_days</code>. It is not an arbitrary label. It is computed from expected versus actual rig-off logic:
+        </p>
+        <ul>
+          <li>If expected rig-off and actual rig-off both exist, delay is <code>max(actual - expected, 0)</code>.</li>
+          <li>If actual rig-off is still missing but expected rig-off is already in the past, delay becomes <code>today - expected</code>.</li>
+          <li>Otherwise delay is zero.</li>
+        </ul>
+        <p>
+          That makes the entire tab operationally grounded. Recommendations are not about abstract risk only; they are tied to concrete schedule slippage pressure.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>8) Fast CPU Analysis Layer</h2>
+        <p>
+          <code>_run_fast_cpu_analysis()</code> is the first usable layer of the product. It attempts to train and score a LightGBM regressor over the current joined feature matrix.
+        </p>
+        <ul>
+          <li>If there is enough data and LightGBM is available, the service fits a supervised model on live joined features against delay days.</li>
+          <li>If SHAP can also be computed, the service uses SHAP values to produce top drivers and per-well root-cause stacks.</li>
+          <li>If the data is too small or dependencies are unavailable, it drops into a rule-based CPU analysis instead of failing the tab.</li>
+        </ul>
+        <p>
+          This is why the tab can still produce a governed recommendation deck even under constrained local conditions.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>9) Root Causes and Scenario Generation</h2>
+        <p>
+          Once the CPU layer has a baseline delay prediction for each well, the service builds action scenarios. This is not a generic "what-if" toy. It is a governed scenario generator built on peer comparisons and model re-scoring.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>What the Service Does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Selects peers for the well using cluster and well-type, widening to portfolio peers if support is too thin</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Chooses actionable features such as overdue backlog, daily completion rate, five-week plan pressure, rig move days, weekly velocity, or linked productivity</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Finds a better peer-median target value for that feature</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Applies that changed value to a copy of the well feature row</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Re-scores the modified row through the model and measures the resulting delta in delay days</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Builds a governed scenario object with label, description, support cases, baseline delay, new delay, and assumption note</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-4">
+        <h2>10) Why Peer Medians Matter</h2>
+        <p>
+          The intervention targets are not random slider values. They come from better-performing comparable peers, which makes the resulting action labels more believable operationally.
+        </p>
+        <ul>
+          <li>Cluster and well-type peers are preferred.</li>
+          <li>If support is too small, the scope widens gradually.</li>
+          <li>The selected target becomes the median of better-performing peers.</li>
+        </ul>
+      </article>
+
+      <article class="card span-4">
+        <h2>11) Confidence and Action Status</h2>
+        <p>
+          Confidence is not a pure posterior interval. The current product uses a first-pass hybrid heuristic:
+        </p>
+        <ul>
+          <li><strong>Support cases</strong> contribute to confidence.</li>
+          <li><strong>Signal quality</strong> depends on how many strong root causes were found.</li>
+          <li><strong>Delta size</strong> matters; positive or zero delta yields weak support.</li>
+        </ul>
+        <p>
+          Action status is then derived:
+        </p>
+        <ul>
+          <li><code>Act Now</code> if recovery is material and support is adequate</li>
+          <li><code>Candidate</code> for weaker but still useful scenarios</li>
+          <li><code>Observe</code> when evidence is too thin</li>
+        </ul>
+      </article>
+
+      <article class="card span-4">
+        <h2>12) Workspace Objects Built for the UI</h2>
+        <ul>
+          <li><strong>portfolio_brief:</strong> management message, attention-now counts, KPI cards, top opportunity</li>
+          <li><strong>wells:</strong> per-well baseline delay, best action, scenarios, root causes, support, confidence, decision score</li>
+          <li><strong>intervention_ladder:</strong> ranked opportunities for action</li>
+          <li><strong>analysis_basis:</strong> model name, mode, rows, features, R2, RMSE, posterior status</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>13) Bayesian Layer: StanCounterfactualService</h2>
+        <p>
+          The deeper analysis layer is handled by <code>StanCounterfactualService</code>. It is designed as an institutional-grade posterior service:
+        </p>
+        <ul>
+          <li>Preferred path: CmdStan MCMC with 4 chains, warmup, and posterior sampling.</li>
+          <li>Fallback path: Laplace approximation when CmdStan or build tools are unavailable.</li>
+          <li>Diagnostics: MCMC quality stats, toolchain readiness, and LOO-CV reporting where available.</li>
+          <li>Runtime label: surfaced back into the workspace as part of data health.</li>
+        </ul>
+        <p>
+          The important product idea is that the Bayesian layer does not block the deck. The fast CPU workspace is returned first, and the Bayesian worker updates the cached workspace in the background.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>14) CmdStan Versus Laplace Approximation</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Mode</th>
+              <th>Behavior</th>
+              <th>When Used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CmdStan MCMC</td>
+              <td>Compiles the Stan model, samples a full posterior, records diagnostics like R-hat and ESS, and can run LOO-CV</td>
+              <td>When CmdStan and Windows toolchain dependencies are available</td>
+            </tr>
+            <tr>
+              <td>Laplace approximation</td>
+              <td>Computes a MAP-centered uncertainty approximation and still returns posterior-style summaries</td>
+              <td>When MCMC compilation or toolchain visibility is not available locally</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This is why your logs showed the product continuing to work even when Stan compilation failed: the service was designed to preserve the causal deck through Laplace approximation.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>15) Background Refresh and Cache Strategy</h2>
+        <ul>
+          <li>The service caches the assembled workspace for 600 seconds.</li>
+          <li>The returned workspace always includes cache age and whether Bayesian refresh is currently in progress.</li>
+          <li>If a fresh Bayesian result already exists and is young enough, it is reused.</li>
+          <li>If not, the service starts a background thread and returns the CPU deck immediately.</li>
+        </ul>
+        <p>
+          This design balances responsiveness and sophistication. Executives do not wait for deep sampling just to get a ranked action deck.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>16) Audit and Data Health Layer</h2>
+        <p>
+          Causal Command does not hide data gaps. It produces explicit workspace metadata:
+        </p>
+        <ul>
+          <li><strong>coverage_cards:</strong> join coverage for job progress, plan snapshot, daily task, SAP drilling, ActivityTaskPlan, and PH productivity links</li>
+          <li><strong>data_health:</strong> live wells, historical wells, mean progress, delayed wells, Bayesian runtime, analysis mode, CPU model status</li>
+          <li><strong>audit_questions:</strong> a library of answered or gap-marked questions about portfolio state, backlog, stalled wells, rig performance, and productivity</li>
+          <li><strong>gaps:</strong> explicit notes on grain limitations, such as project-scoped ActivityTaskPlan linkage or supervisor-scoped PH productivity linkage</li>
+        </ul>
+        <p>
+          This makes the tab more credible in front of a client because it shows what the model knows, what it joined, and what limitations still remain.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>17) Why the Frontend Feels Like a Decision Product Instead of a Report</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>UI Surface</th>
+              <th>Backing Object</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Management summary cards</td>
+              <td><code>portfolio_brief.cards</code></td>
+              <td>Turn the deck into an executive summary rather than a row table</td>
+            </tr>
+            <tr>
+              <td>Portfolio pressure map</td>
+              <td>Plotly figure derived from well delay, progress, and decision score</td>
+              <td>Shows where operational pressure is concentrated</td>
+            </tr>
+            <tr>
+              <td>Scenario frontier</td>
+              <td>Selected well scenarios</td>
+              <td>Shows which intervention gives the best modeled recovery versus support</td>
+            </tr>
+            <tr>
+              <td>Driver geometry</td>
+              <td><code>top_drivers</code></td>
+              <td>Turns model influence into a spatial object rather than a flat list</td>
+            </tr>
+            <tr>
+              <td>Support trace</td>
+              <td><code>source_trace</code> + scenario trace</td>
+              <td>Explains where each fact or model lever came from</td>
+            </tr>
+            <tr>
+              <td>Engine panel</td>
+              <td><code>analysis_basis</code> + analysis status</td>
+              <td>Makes the model state and evidence quality visible to power users</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>18) Why Causal Command Creates Real Client Value</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Technical Mechanism</th>
+              <th>Business Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Action prioritization</td>
+              <td>Per-well decision scores, support counts, and ranked ladder</td>
+              <td>The client can see which wells deserve immediate intervention first</td>
+            </tr>
+            <tr>
+              <td>Root-cause reasoning</td>
+              <td>SHAP-like CPU driver stack and feature lineage</td>
+              <td>The recommendation is explainable, not black-box</td>
+            </tr>
+            <tr>
+              <td>Counterfactual planning</td>
+              <td>Peer-median scenario generation and posterior enrichment</td>
+              <td>The client can understand what operational lever could recover days</td>
+            </tr>
+            <tr>
+              <td>Trust under imperfect infrastructure</td>
+              <td>CPU-first return path, local SQL joins, PlanSnapshot fallback, Laplace fallback</td>
+              <td>The deck still works in local demo and degraded toolchain conditions</td>
+            </tr>
+            <tr>
+              <td>Auditability</td>
+              <td>Coverage cards, data health, audit questions, and trace rows</td>
+              <td>The product can be defended in front of technical and business stakeholders</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="dark-box span-12">
+        <h2 style="color:#f8fafc;">19) Most Important Architectural Insight</h2>
+        <p style="color:#d6dde6;">
+          Causal Command is a governed intervention engine. It does not try to answer everything through one monolithic model. Instead it separates the problem into:
+          live SQL feature assembly, a fast decision-grade CPU deck, and a slower posterior counterfactual layer that enriches the same workspace when ready.
+        </p>
+        <p style="color:#d6dde6;">
+          That split is exactly why the tab is practical. It can serve executives immediately, remain operational on a local offline clone, and still offer a deeper Bayesian story when the heavier statistical layer finishes refreshing.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Generated for module-level technical understanding of Bashira Intelligence - Causal Command tab.
+    </div>
+  </div>
+</body>
+</html>

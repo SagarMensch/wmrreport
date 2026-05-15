@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Decision Studio Risk Score Methodology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #0f1720;
+        --muted: #56606e;
+        --line: #dfe5ec;
+        --panel: #f7f9fc;
+        --blue: #0f62fe;
+        --green: #00c805;
+        --yellow: #f1c21b;
+        --red: #da1e28;
+      }
+
+      * {
+        box-sizing: border-box;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Figtree", sans-serif;
+        line-height: 1.68;
+      }
+
+      body {
+        padding: 40px 28px 80px;
+      }
+
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--blue);
+      }
+
+      .hero {
+        padding: 28px 30px 26px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background:
+          linear-gradient(135deg, rgba(15, 98, 254, 0.08), rgba(255, 255, 255, 0) 34%),
+          linear-gradient(180deg, #ffffff, #fbfcfe);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        line-height: 1.12;
+      }
+
+      h1 {
+        margin-top: 10px;
+        font-size: 42px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        margin-top: 42px;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        margin-top: 28px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      p,
+      li {
+        font-size: 15px;
+        color: var(--ink);
+      }
+
+      .hero p {
+        max-width: 940px;
+        margin: 14px 0 0;
+        font-size: 17px;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 24px;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 22px 22px 20px;
+      }
+
+      .panel h3 {
+        margin-top: 0;
+      }
+
+      .metric-kicker {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--muted);
+      }
+
+      .metric-value {
+        margin-top: 10px;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .metric-note {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .accent-blue {
+        color: var(--blue);
+      }
+
+      .accent-green {
+        color: var(--green);
+      }
+
+      .accent-yellow {
+        color: #7b5f00;
+      }
+
+      .section {
+        margin-top: 26px;
+      }
+
+      .callout {
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+      }
+
+      .callout.blue {
+        border-left: 5px solid var(--blue);
+      }
+
+      .callout.green {
+        border-left: 5px solid var(--green);
+      }
+
+      .callout.yellow {
+        border-left: 5px solid var(--yellow);
+      }
+
+      .callout.red {
+        border-left: 5px solid var(--red);
+      }
+
+      .callout strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        letter-spacing: 0.02em;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      pre {
+        margin: 16px 0 0;
+        padding: 16px 18px;
+        overflow-x: auto;
+        border-radius: 18px;
+        background: #0f1720;
+        color: #f8fafc;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .equation {
+        display: block;
+        margin: 12px 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #f8fbff;
+        border: 1px solid #d8e5ff;
+        font-size: 14px;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+        gap: 18px;
+      }
+
+      .three-col {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 18px;
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+        font-size: 14px;
+      }
+
+      th {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        background: #fbfcfe;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+
+      .footer {
+        margin-top: 56px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 980px) {
+        .summary-grid,
+        .two-col,
+        .three-col {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <div class="eyebrow">Decision Studio | Risk Score Methodology</div>
+        <h1>How the Decision Studio Risk Scores Are Calculated</h1>
+        <p>
+          This document explains the exact end-to-end path used to produce the live
+          <span class="mono">risk_probability</span>, <span class="mono">risk_score</span>,
+          and <span class="mono">risk_tier</span> values in the Decision Studio tab. It is not a generic
+          machine learning note. It is a product-level methodology guide tied directly to the
+          current Kaggle-trained package, the current exported artifacts, and the current live
+          rules used by the application.
+        </p>
+
+        <div class="grid summary-grid">
+          <div class="panel">
+            <div class="metric-kicker">Current Model</div>
+            <div class="metric-value accent-blue">Ensemble</div>
+            <div class="metric-note">Best model package: DecisionStudio_Ensemble_CatBoost_XGBoost</div>
+          </div>
+          <div class="panel">
+            <div class="metric-kicker">Risk Validation</div>
+            <div class="metric-value accent-green">AUC 0.9990</div>
+            <div class="metric-note">Calibrated validation Brier score: 0.0029</div>
+          </div>
+          <div class="panel">
+            <div class="metric-kicker">Current Thresholds</div>
+            <div class="metric-value accent-yellow">27.43 / 65.20 / 88.71</div>
+            <div class="metric-note">Watch / High Risk / Critical thresholds on the 0-100 score scale</div>
+          </div>
+          <div class="panel">
+            <div class="metric-kicker">Current Portfolio</div>
+            <div class="metric-value">268 Wells</div>
+            <div class="metric-note">Risk tier counts: 133 Critical, 37 High Risk, 63 Watch, 35 Healthy</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>1. The Short Answer</h2>
+        <p>
+          The current Decision Studio risk score is a calibrated machine-learned probability that a well will
+          miss its target completion date, converted to a 0-100 scale and then bucketed into four tiers.
+        </p>
+        <div class="equation mono">
+          raw model probability -&gt; Platt-calibrated probability -&gt; multiply by 100 -&gt; round to 1 decimal -&gt; classify tier
+        </div>
+        <p>
+          In the current package, <span class="mono">risk_score</span> is numerically identical to
+          <span class="mono">risk_probability</span>. The difference is semantic:
+        </p>
+        <div class="three-col">
+          <div class="panel">
+            <h3>risk_probability</h3>
+            <p>
+              The calibrated model probability, expressed as a percentage from 0.0 to 100.0.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>risk_score</h3>
+            <p>
+              The same percentage value, exposed as the operational score shown in the UI.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>risk_tier</h3>
+            <p>
+              The score bucket derived from learned thresholds: <span class="mono">HEALTHY</span>,
+              <span class="mono">WATCH</span>, <span class="mono">HIGH_RISK</span>, or
+              <span class="mono">CRITICAL</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>2. What the Risk Score Is Predicting</h2>
+        <p>
+          The score does <strong>not</strong> directly predict future progress. It predicts whether a historical well
+          snapshot eventually missed its target date. The binary training label is
+          <span class="mono">miss_target_observed</span>.
+        </p>
+        <div class="callout blue">
+          <strong>Business meaning</strong>
+          A score of 92.7 means the model believes the well belongs in a historically very high miss-target-risk
+          pattern, after calibration against real observed historical outcomes.
+        </div>
+        <div class="callout yellow">
+          <strong>Important distinction</strong>
+          Decision Studio also trains a 4-week future progress model and a weeks-to-completion model. Those are adjacent
+          model products. The risk score comes from the binary miss-target classifier, not from those two regression heads.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>3. Source Data Used to Build the Score</h2>
+        <p>The risk model is trained from the same governed Kaggle input pack that powers the rest of Decision Studio.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Role in Risk Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">wmr_full.csv</td>
+              <td>Historical well snapshots. This is the main training history.</td>
+            </tr>
+            <tr>
+              <td class="mono">wmr_latest.csv</td>
+              <td>Current well snapshots. This is what gets scored after training.</td>
+            </tr>
+            <tr>
+              <td class="mono">plan_snapshot.csv</td>
+              <td>Plan fractions, plan curve state, and fallback target-end information.</td>
+            </tr>
+            <tr>
+              <td class="mono">job_progress_report_gb.csv</td>
+              <td>Project metadata used in joins and fallback context fields like project naming.</td>
+            </tr>
+            <tr>
+              <td class="mono">sap_drilling_sequence.csv</td>
+              <td>SAP movement and rig-load context used as additional operational features.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout green">
+          <strong>Canonical identity</strong>
+          All history is anchored on <span class="mono">pdo_well_id</span>. This is the key correction that replaced the older
+          wrong-identifier logic and removed prior well-count distortion.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>4. How the Historical Training Frame Is Built</h2>
+        <p>
+          The trainer first constructs a single historical well frame by normalizing WMR, then joining the latest plan,
+          report, and SAP aggregates onto each historical snapshot row. It then deduplicates to one row per
+          <span class="mono">pdo_well_id + snapshot_date</span>, keeping the most complete row.
+        </p>
+        <div class="equation mono">
+          history = normalize_wmr(wmr_full)
+          + latest plan join
+          + report join
+          + SAP aggregate join
+          - duplicate well-date rows
+        </div>
+        <p>Current live training manifest:</p>
+        <div class="chip-row">
+          <div class="chip">training_rows: 14,626</div>
+          <div class="chip">deduped_well_week_rows: 14,626</div>
+          <div class="chip">unique_wells: 381</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>5. Feature Engineering Used by the Risk Model</h2>
+        <p>
+          The risk model uses the same engineered feature universe as the progress and completion models. That means the score
+          is grounded in a broad operational state description, not just one or two headline fields.
+        </p>
+
+        <h3>5.1 Core lag and momentum features</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>How it is built</th>
+              <th>Why it matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">progress_lag1 / lag2 / lag4</td>
+              <td>Prior overall progress values by well.</td>
+              <td>Captures recent state and direction.</td>
+            </tr>
+            <tr>
+              <td class="mono">progress_rolling3w</td>
+              <td>Rolling mean of the last 3 snapshot progress values.</td>
+              <td>Stabilizes noisy weekly movement.</td>
+            </tr>
+            <tr>
+              <td class="mono">progress_velocity</td>
+              <td>Current progress minus prior progress.</td>
+              <td>Measures weekly pace.</td>
+            </tr>
+            <tr>
+              <td class="mono">progress_accel</td>
+              <td>Current velocity minus prior velocity.</td>
+              <td>Detects acceleration or deceleration.</td>
+            </tr>
+            <tr>
+              <td class="mono">remaining_to_complete</td>
+              <td><span class="mono">1 - over_all_progress_percentages</span></td>
+              <td>Measures unfinished share of the well.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5.2 Plan and deadline features</h3>
+        <div class="chip-row">
+          <div class="chip mono">plan_w1_plan_frac</div>
+          <div class="chip mono">plan_w2_plan_frac</div>
+          <div class="chip mono">plan_w3_plan_frac</div>
+          <div class="chip mono">plan_w4_plan_frac</div>
+          <div class="chip mono">plan_w5_plan_frac</div>
+          <div class="chip mono">plan_5w_total</div>
+          <div class="chip mono">plan_cumcurrentmonthplanfrac</div>
+          <div class="chip mono">plan_curve_gap</div>
+          <div class="chip mono">days_to_target</div>
+          <div class="chip mono">overdue_target_days</div>
+          <div class="chip mono">is_overdue_target</div>
+        </div>
+        <p>
+          These encode how far the well is from target, whether it is overdue already, and whether actual progress is aligned
+          or misaligned with the current plan curve.
+        </p>
+
+        <h3>5.3 Phase-level execution features</h3>
+        <div class="chip-row">
+          <div class="chip mono">overall_loc_preparation_10_100</div>
+          <div class="chip mono">overall_engg_10_100</div>
+          <div class="chip mono">overall_const_10_100</div>
+          <div class="chip mono">overall_comm_progress_100</div>
+          <div class="chip mono">flowline_construction_progress</div>
+          <div class="chip mono">ohl_progress</div>
+          <div class="chip mono">overall_ohl_progr_100</div>
+          <div class="chip mono">phase_mean_progress</div>
+          <div class="chip mono">phase_min_progress</div>
+          <div class="chip mono">phase_max_progress</div>
+          <div class="chip mono">phase_std_progress</div>
+          <div class="chip mono">phase_alignment_gap</div>
+        </div>
+        <p>
+          These features tell the model whether the top-line overall progress is coherent with the detailed phase profile.
+        </p>
+
+        <h3>5.4 Other operational features</h3>
+        <div class="chip-row">
+          <div class="chip mono">access_road_5</div>
+          <div class="chip mono">earth_work_60</div>
+          <div class="chip mono">cellar_20</div>
+          <div class="chip mono">beam_pump_base_esp_pcp_foundation_5</div>
+          <div class="chip mono">water_2</div>
+          <div class="chip mono">pe_fussion_pull_20</div>
+          <div class="chip mono">engg_kpi_after_rig_off_days</div>
+          <div class="chip mono">report_current_month_gap</div>
+          <div class="chip mono">sap_move_days_max</div>
+          <div class="chip mono">sap_move_days_mean</div>
+          <div class="chip mono">sap_rig_load</div>
+          <div class="chip mono">stall_1w_flag</div>
+          <div class="chip mono">stall_4w_flag</div>
+        </div>
+
+        <h3>5.5 Categorical features</h3>
+        <div class="chip-row">
+          <div class="chip mono">rig_no</div>
+          <div class="chip mono">well_type</div>
+          <div class="chip mono">buffer_status</div>
+          <div class="chip mono">sap_field</div>
+          <div class="chip mono">sap_work_center</div>
+          <div class="chip mono">sap_pdo_well_type</div>
+          <div class="chip mono">project_name</div>
+        </div>
+
+        <div class="callout blue">
+          <strong>Important</strong>
+          The model does not hard-code business weights like "40% deadline, 30% rig, 30% progress." It learns its score from
+          the full joint feature pattern above.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>6. How the Binary Risk Label Is Created</h2>
+        <p>
+          The label used for the risk classifier is not typed manually. It is built from historical target dates and observed
+          completion behavior.
+        </p>
+
+        <h3>6.1 Target date construction</h3>
+        <p>The trainer first creates <span class="mono">expected_target_date</span> using this priority:</p>
+        <div class="equation mono">
+          expected_target_date = exp_rig_off_location_sap_data
+          else plan_latest_target_end
+        </div>
+
+        <h3>6.2 Completion state construction</h3>
+        <p>A snapshot is treated as complete if either of these is true:</p>
+        <div class="equation mono">
+          is_complete = (over_all_progress_percentages &gt;= 0.95) OR (actual_finish_date is not null)
+        </div>
+        <p>
+          For each historical snapshot, the trainer finds the first future snapshot where the well becomes complete and stores it
+          as <span class="mono">observed_completion_date</span>.
+        </p>
+
+        <h3>6.3 Eligibility for risk labeling</h3>
+        <p>
+          A historical snapshot only gets a risk label if the target date is already observable inside the available history window.
+        </p>
+        <div class="equation mono">
+          eligible = expected_target_date is not null
+          AND expected_target_date &lt;= max_snapshot_date_in_history
+        </div>
+
+        <h3>6.4 Final binary label</h3>
+        <p>
+          If a well completed after target, or had still not completed by the end of the history window after the target had already
+          passed, it is labeled as a miss.
+        </p>
+        <pre>completion_or_censor = observed_completion_date if present else max_snapshot_date
+
+miss_target_observed =
+    1 if eligible and completion_or_censor &gt; expected_target_date
+    0 if eligible and completion_or_censor &lt;= expected_target_date
+    NaN if not eligible</pre>
+
+        <div class="callout yellow">
+          <strong>Why this matters</strong>
+          The model is not trained on guesses. It is trained on historical snapshots where there is enough later history to know
+          whether the well did or did not miss the target.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>7. Time-Based Validation Split</h2>
+        <p>
+          The trainer does not randomly split rows. It uses a time-based validation split on distinct
+          <span class="mono">snapshot_date</span> values. This matters because random splits can leak future structure into training.
+        </p>
+        <div class="equation mono">
+          sort unique snapshot dates
+          cutoff = 80th percentile date boundary
+          train = rows before cutoff
+          valid = rows on or after cutoff
+        </div>
+        <p>
+          This means the risk score is validated out-of-time, which is much closer to the real operational use case:
+          score current wells based on what earlier historical wells taught the system.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>8. The Three Base Risk Models</h2>
+        <p>
+          The risk score is not from a single classifier. It is produced by a three-member ensemble.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Member</th>
+              <th>Family</th>
+              <th>Current Weight</th>
+              <th>Validation AUC</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">CatBoostClassifier_seed42</td>
+              <td>CatBoost binary classifier</td>
+              <td>0.5029009552</td>
+              <td>0.9992092010</td>
+              <td>Main risk member</td>
+            </tr>
+            <tr>
+              <td class="mono">CatBoostClassifier_seed84</td>
+              <td>CatBoost binary classifier</td>
+              <td>0.4970835146</td>
+              <td>0.9988346120</td>
+              <td>Second risk member</td>
+            </tr>
+            <tr>
+              <td class="mono">XGBoostClassifier</td>
+              <td>XGBoost binary classifier</td>
+              <td>0.0000155302</td>
+              <td>0.9668280637</td>
+              <td>Very weak member in this run</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>8.1 CatBoost settings</h3>
+        <pre>{
+  "loss_function": "Logloss",
+  "eval_metric": "AUC",
+  "iterations": 2600,
+  "learning_rate": 0.025,
+  "depth": 8,
+  "l2_leaf_reg": 5.0,
+  "od_type": "Iter",
+  "od_wait": 250,
+  "task_type": "GPU"
+}</pre>
+
+        <h3>8.2 XGBoost settings</h3>
+        <pre>{
+  "objective": "binary:logistic",
+  "eval_metric": "auc",
+  "n_estimators": 2200,
+  "learning_rate": 0.025,
+  "max_depth": 8,
+  "subsample": 0.85,
+  "colsample_bytree": 0.85,
+  "reg_lambda": 1.5,
+  "reg_alpha": 0.05,
+  "min_child_weight": 2.0,
+  "tree_method": "hist",
+  "device": "cuda"
+}</pre>
+      </section>
+
+      <section class="section">
+        <h2>9. Missing-Value and Category Handling</h2>
+        <div class="two-col">
+          <div class="panel">
+            <h3>CatBoost path</h3>
+            <p>
+              Numeric features are converted to numbers and filled with each column median. Categorical features are filled as
+              <span class="mono">"Unknown"</span>. CatBoost then learns directly on the mixed-type frame.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>XGBoost path</h3>
+            <p>
+              Categorical values are label-encoded from the training frame. Unknown categories map to <span class="mono">-1</span>.
+              Numeric features are filled with the training median for that column.
+            </p>
+          </div>
+        </div>
+        <div class="callout blue">
+          <strong>Why this matters</strong>
+          The production score can still be generated when some current fields are missing. Missingness does not break the score path.
+          It becomes part of the learned pattern through encoding and fill rules.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>10. How the Ensemble Probability Is Formed</h2>
+        <p>
+          Each base risk model produces a probability on the validation fold. The trainer then computes one weighted average.
+        </p>
+        <pre>risk_weights = normalize_weights(validation_auc_scores, higher_is_better=True)
+raw_ensemble_probability = weighted_average(member_probabilities, risk_weights)</pre>
+
+        <p>The current weight formula is:</p>
+        <pre>shifted = clip(auc_i - min_auc + 1e-6, 1e-6, None)
+weight_i = shifted / shifted.sum()</pre>
+
+        <p>
+          This means the better the validation AUC, the more that member influences the final raw probability. In the current run, the
+          two CatBoost members dominate the risk score because they materially outperform the XGBoost classifier on the validation split.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>11. Platt Calibration</h2>
+        <p>
+          The raw ensemble probability is not used directly. It is first calibrated with a logistic model trained on validation data.
+          This is important because raw classifier probabilities are often overconfident or poorly scaled.
+        </p>
+
+        <h3>11.1 Calibration input</h3>
+        <p>
+          The trainer takes the raw weighted ensemble validation probabilities, clips them into a safe range, converts them into logits,
+          and fits a one-dimensional logistic regression:
+        </p>
+        <pre>clipped = clip(raw_probability, 1e-6, 1 - 1e-6)
+logit = log(clipped / (1 - clipped))
+platt_model = LogisticRegression(max_iter=1000)
+platt_model.fit(logit, observed_labels)</pre>
+
+        <h3>11.2 Calibration output</h3>
+        <p>
+          For both validation and current wells, the same transform is applied:
+        </p>
+        <pre>risk_prob = clip(platt_model.predict_proba(logit(raw_ensemble_probability))[:, 1], 0, 1)</pre>
+
+        <div class="callout green">
+          <strong>Meaning</strong>
+          Calibration is what turns a strong classifier into a more defensible operational probability scale.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>12. How the Tier Thresholds Are Learned</h2>
+        <p>
+          The system does not use manually typed thresholds like 25, 50, and 75. It learns thresholds from the calibrated validation
+          score distribution.
+        </p>
+
+        <h3>12.1 KMeans thresholding</h3>
+        <p>If there are at least 4 distinct calibrated values, the trainer clusters the 0-100 validation scores into 4 groups:</p>
+        <pre>values = calibrated_validation_probability * 100
+kmeans = KMeans(n_clusters=4, n_init=10, random_state=42)
+kmeans.fit(values.reshape(-1, 1))
+centers = sort(cluster_centers)
+threshold_1 = midpoint(center_1, center_2)
+threshold_2 = midpoint(center_2, center_3)
+threshold_3 = midpoint(center_3, center_4)</pre>
+
+        <h3>12.2 Current live thresholds</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tier Boundary</th>
+              <th>Current Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Watch starts at</td>
+              <td class="mono">27.425921944579542</td>
+            </tr>
+            <tr>
+              <td>High Risk starts at</td>
+              <td class="mono">65.20468637017349</td>
+            </tr>
+            <tr>
+              <td>Critical starts at</td>
+              <td class="mono">88.7142146072132</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>12.3 Tier assignment logic</h3>
+        <pre>if risk_score &gt;= critical: CRITICAL
+else if risk_score &gt;= high_risk: HIGH_RISK
+else if risk_score &gt;= watch: WATCH
+else: HEALTHY</pre>
+      </section>
+
+      <section class="section">
+        <h2>13. How Current Wells Are Scored</h2>
+        <p>
+          After training, the model constructs a current well frame from <span class="mono">wmr_latest.csv</span>, merged with the latest
+          lag features, plan fields, report fields, and SAP fields. That current frame is then passed through the three trained model families.
+        </p>
+        <pre>progress_4w_pred = progress ensemble(current features)
+weeks_remaining_predicted = weeks ensemble(current features)
+risk_raw = risk ensemble(current features, proba=True)
+risk_prob = calibrator.transform(risk_raw)
+
+risk_probability = round(risk_prob * 100, 1)
+risk_score = risk_probability
+risk_tier = classify_tier(risk_score, thresholds)</pre>
+
+        <div class="callout red">
+          <strong>Critical point</strong>
+          There is no extra hidden formula after calibration. The current live score is exactly the calibrated probability percentage.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>14. What the Score Looks Like in the Live Output</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Output Column</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">risk_probability</td>
+              <td>Calibrated probability of missing target, scaled to 0-100 and rounded to 1 decimal.</td>
+            </tr>
+            <tr>
+              <td class="mono">risk_score</td>
+              <td>Same value as <span class="mono">risk_probability</span> in the current package.</td>
+            </tr>
+            <tr>
+              <td class="mono">risk_tier</td>
+              <td>Tier bucket assigned from learned thresholds.</td>
+            </tr>
+            <tr>
+              <td class="mono">predicted_completion_date</td>
+              <td>Completion date from the separate weeks-remaining model.</td>
+            </tr>
+            <tr>
+              <td class="mono">completion_date_early / late</td>
+              <td>Window built from residual quantiles of the weeks model.</td>
+            </tr>
+            <tr>
+              <td class="mono">days_to_target</td>
+              <td>How many days remain to target, or how overdue the well already is.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>14.1 Current portfolio distribution</h3>
+        <div class="chip-row">
+          <div class="chip">Score range: 0.5 to 99.7</div>
+          <div class="chip">Critical: 133</div>
+          <div class="chip">High Risk: 37</div>
+          <div class="chip">Watch: 63</div>
+          <div class="chip">Healthy: 35</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>15. How to Read a High-Score Example</h2>
+        <div class="two-col">
+          <div class="panel">
+            <h3>Example: AMIN-571</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td>days_to_target</td>
+                  <td class="mono">-64</td>
+                </tr>
+                <tr>
+                  <td>overall progress</td>
+                  <td class="mono">0.84</td>
+                </tr>
+                <tr>
+                  <td>risk_score</td>
+                  <td class="mono">99.7</td>
+                </tr>
+                <tr>
+                  <td>risk_tier</td>
+                  <td class="mono">CRITICAL</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="small">
+              Interpretation: this well matches a historical pattern that almost always missed target under similar conditions.
+            </p>
+          </div>
+          <div class="panel">
+            <h3>Example: SAQR WEST-17</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td>days_to_target</td>
+                  <td class="mono">1</td>
+                </tr>
+                <tr>
+                  <td>overall progress</td>
+                  <td class="mono">0.85</td>
+                </tr>
+                <tr>
+                  <td>risk_score</td>
+                  <td class="mono">0.5</td>
+                </tr>
+                <tr>
+                  <td>risk_tier</td>
+                  <td class="mono">HEALTHY</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="small">
+              Interpretation: this well aligns with a historical pattern that usually met target or stayed within acceptable timing.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>16. What This Score Is Not</h2>
+        <ul>
+          <li>It is not a manually weighted KPI index.</li>
+          <li>It is not just a function of <span class="mono">days_to_target</span>.</li>
+          <li>It is not the same thing as predicted progress.</li>
+          <li>It is not a causal proof that one variable mechanically caused the miss.</li>
+          <li>It is not based on static business thresholds typed by hand.</li>
+        </ul>
+        <div class="callout yellow">
+          <strong>The safest sentence to use</strong>
+          The Decision Studio risk score is a calibrated, out-of-time validated probability that the current well snapshot belongs
+          to a historical pattern that missed target completion.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>17. How the Supporting Metrics Relate to the Risk Score</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Current Value</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AUC</td>
+              <td class="mono">0.9990288433524327</td>
+              <td>How well the calibrated risk model separates misses from non-misses on validation.</td>
+            </tr>
+            <tr>
+              <td>Brier</td>
+              <td class="mono">0.0029059004598988862</td>
+              <td>How well calibrated the risk probabilities are in squared-error terms.</td>
+            </tr>
+            <tr>
+              <td>C-Index</td>
+              <td class="mono">0.8664754972243668</td>
+              <td>From the survival model, not the risk classifier. Useful for completion-order discrimination, not for the risk score formula itself.</td>
+            </tr>
+            <tr>
+              <td>RMSE / MAE / R2 / MAPE</td>
+              <td class="mono">0.0835 / 0.0389 / 0.9476 / 20.21</td>
+              <td>These belong to the 4-week progress model, not to the binary risk classifier.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>18. How to Audit the Score from the Artifact Files</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Artifact</th>
+              <th>What to look at</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">training_manifest.json</td>
+              <td>Risk thresholds, AUC, Brier, ensemble members, and current weights.</td>
+            </tr>
+            <tr>
+              <td class="mono">ag_leaderboard.csv</td>
+              <td>Per-model validation performance. This explains why CatBoost dominates the risk ensemble.</td>
+            </tr>
+            <tr>
+              <td class="mono">risk_scores.csv</td>
+              <td>Final scored current wells. This is what the UI reads for the portfolio grid and risk tiers.</td>
+            </tr>
+            <tr>
+              <td class="mono">shap_risk_drivers.png</td>
+              <td>Directional explanation view for the risk model. This helps explain the score, but it does not compute the score.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <h2>19. Final Plain-English Summary</h2>
+        <p>
+          The Decision Studio risk score is built by training three historical classifiers to recognize whether a well snapshot eventually
+          missed its target date. Those classifiers read a rich operational feature set covering progress history, plan alignment, phase
+          readiness, rig context, SAP load, and target pressure. Their validation probabilities are blended, then calibrated using Platt
+          scaling so the probability scale is more trustworthy. That calibrated probability is converted into a 0-100 score, and the score
+          is then assigned to a learned tier using thresholds discovered from the validation distribution itself. In the current live
+          package, the final risk score is therefore a calibrated miss-target probability percentage, not a hand-built weighted KPI.
+        </p>
+      </section>
+
+      <div class="footer">
+        Generated from the current local Decision Studio package and the live Kaggle trainer logic. Relevant artifacts:
+        <span class="mono">wemr/training_manifest.json</span>,
+        <span class="mono">wemr/ag_leaderboard.csv</span>,
+        <span class="mono">wemr/risk_scores.csv</span>,
+        and <span class="mono">kaggle_decision_studio/train_decision_studio_kaggle.py</span>.
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Operations Tab Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #111111;
+      --muted: #5f6670;
+      --line: #d7dbe1;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", "Figtree", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    h1 {
+      margin: 8px 0 6px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      margin-bottom: 16px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    .kpi {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    p { margin: 0 0 10px; }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    li { margin-bottom: 6px; }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      background: #fbfcfd;
+    }
+    .pill.blue { border-color: #b7cdfd; color: #0a46b3; background: #eef3ff; }
+    .pill.green { border-color: #bdeec6; color: #06722f; background: #ecfcf0; }
+    .pill.yellow { border-color: #f2dfa0; color: #7d6308; background: #fff9e6; }
+    .pill.red { border-color: #ecc0c0; color: #8e1b1b; background: #fff1f1; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #fafbfd;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #404854;
+    }
+    .note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .svg-wrap {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fdfdff;
+    }
+    .footer {
+      color: #626a75;
+      font-size: 12px;
+      margin-top: 20px;
+      padding: 10px 4px 20px;
+    }
+    @media (max-width: 1080px) {
+      .span-8, .span-6, .span-4, .span-3 { grid-column: span 12; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Working Of Modules</div>
+      <h1>Operations Tab - Technical Working Document</h1>
+      <p class="subtitle">
+        Detailed architecture, flow, technology stack, ML logic, reliability controls, and business value for the core <strong>Operations</strong> tab.
+      </p>
+      <div class="pill-row">
+        <span class="pill blue">Frontend: Next.js App Router</span>
+        <span class="pill blue">API: FastAPI (Python)</span>
+        <span class="pill blue">Orchestration: LangGraph + DSPy</span>
+        <span class="pill blue">Retrieval: Neo4j + BM25 + RRF</span>
+        <span class="pill green">SQL: SQL Server (read-only)</span>
+        <span class="pill yellow">Predictive: ForecastEngine + CPU ML (8050)</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Mode</div>
+        <p class="kpi-value">SQL + Chart</p>
+        <p class="note">Default path for deterministic analytics questions.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Secondary Mode</div>
+        <p class="kpi-value">Predictive</p>
+        <p class="note">Activated only when classifier detects forecasting/root-cause/intervention intent.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Safety Pattern</div>
+        <p class="kpi-value">Validate + Heal</p>
+        <p class="note">Security, schema checks, runtime validation, auto-correction retries.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Continuity</div>
+        <p class="kpi-value">Session State</p>
+        <p class="note">History and checkpointer-aware context resolution for follow-up queries.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>1) End-to-End Runtime Flow</h2>
+        <p>
+          User submits natural-language query from Operations tab. Frontend sends request to web proxy, proxy forwards to backend orchestrator.
+          Orchestrator runs a stateful LangGraph workflow: context resolution, intent, retrieval, SQL generation, validation/execution, analysis, and either chart output or predictive briefing.
+        </p>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1180 360" width="100%" role="img" aria-label="Operations tab request flow diagram">
+            <rect x="18" y="22" width="164" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="100" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Operations UI</text>
+            <rect x="212" y="22" width="188" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="306" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">/api/query Proxy</text>
+            <rect x="430" y="22" width="208" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="534" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">FastAPI /api/query</text>
+            <rect x="668" y="22" width="226" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="781" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">PipelineOrchestrator</text>
+            <rect x="924" y="22" width="238" height="54" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="1043" y="54" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Response to UI</text>
+
+            <line x1="182" y1="49" x2="212" y2="49" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="400" y1="49" x2="430" y2="49" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="638" y1="49" x2="668" y2="49" stroke="#4f78d6" stroke-width="2"/>
+            <line x1="894" y1="49" x2="924" y2="49" stroke="#4f78d6" stroke-width="2"/>
+
+            <rect x="40" y="118" width="222" height="48" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="151" y="148" text-anchor="middle" font-size="12.5" fill="#222">Resolve Context</text>
+            <rect x="286" y="118" width="222" height="48" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="397" y="148" text-anchor="middle" font-size="12.5" fill="#222">Extract Intent + Route</text>
+            <rect x="532" y="118" width="222" height="48" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="643" y="148" text-anchor="middle" font-size="12.5" fill="#222">Schema Retrieval (Hybrid)</text>
+            <rect x="778" y="118" width="172" height="48" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="864" y="148" text-anchor="middle" font-size="12.5" fill="#222">Generate SQL</text>
+            <rect x="974" y="118" width="172" height="48" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="1060" y="148" text-anchor="middle" font-size="12.5" fill="#222">Validate + Execute</text>
+
+            <line x1="262" y1="142" x2="286" y2="142" stroke="#6e7580" stroke-width="2"/>
+            <line x1="508" y1="142" x2="532" y2="142" stroke="#6e7580" stroke-width="2"/>
+            <line x1="754" y1="142" x2="778" y2="142" stroke="#6e7580" stroke-width="2"/>
+            <line x1="950" y1="142" x2="974" y2="142" stroke="#6e7580" stroke-width="2"/>
+
+            <rect x="210" y="216" width="236" height="54" rx="10" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="328" y="247" text-anchor="middle" font-size="13" font-weight="700" fill="#0a6a2b">SQL-Only Branch</text>
+            <rect x="488" y="216" width="236" height="54" rx="10" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="606" y="247" text-anchor="middle" font-size="13" font-weight="700" fill="#7d6308">Predictive Branch</text>
+            <rect x="766" y="216" width="330" height="54" rx="10" fill="#fff1f1" stroke="#e4b5b5"/>
+            <text x="931" y="247" text-anchor="middle" font-size="13" font-weight="700" fill="#8e1b1b">Error/Clarification Handling</text>
+
+            <line x1="1060" y1="166" x2="1060" y2="192" stroke="#6e7580" stroke-width="2"/>
+            <line x1="1060" y1="192" x2="328" y2="192" stroke="#6e7580" stroke-width="2"/>
+            <line x1="328" y1="192" x2="328" y2="216" stroke="#6e7580" stroke-width="2"/>
+
+            <line x1="1060" y1="192" x2="606" y2="192" stroke="#6e7580" stroke-width="2"/>
+            <line x1="606" y1="192" x2="606" y2="216" stroke="#6e7580" stroke-width="2"/>
+
+            <line x1="1060" y1="192" x2="931" y2="192" stroke="#6e7580" stroke-width="2"/>
+            <line x1="931" y1="192" x2="931" y2="216" stroke="#6e7580" stroke-width="2"/>
+          </svg>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>2) LangGraph Node Pipeline (Operations Core)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Node</th>
+              <th>Purpose</th>
+              <th>Key Technology</th>
+              <th>Why It Helps</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>resolve_context</strong></td>
+              <td>Rewrites vague follow-up prompts into complete questions</td>
+              <td>DSPy context resolver + session history</td>
+              <td>Avoids wrong SQL when user says short replies like "yes", "show details"</td>
+            </tr>
+            <tr>
+              <td><strong>extract_intent</strong></td>
+              <td>Classifies query and extracts entities + hints</td>
+              <td>IntentAgent + abbreviation expansion</td>
+              <td>Improves retrieval precision and route selection</td>
+            </tr>
+            <tr>
+              <td><strong>retrieve_schema</strong></td>
+              <td>Builds schema context for SQL generation</td>
+              <td>Neo4j vector + Neo4j fulltext + BM25 + RRF</td>
+              <td>Greatly reduces hallucinated columns/tables</td>
+            </tr>
+            <tr>
+              <td><strong>generate_sql</strong></td>
+              <td>Creates SQL under strict schema constraints</td>
+              <td>DSPy SQLAgent with few-shot training examples</td>
+              <td>Deterministic SQL structure with domain examples</td>
+            </tr>
+            <tr>
+              <td><strong>execute_sql</strong></td>
+              <td>Security/schema validation, then execution</td>
+              <td>ValidatorAgent + SQLClient + self-heal loop</td>
+              <td>Auto-corrects many invalid SQL attempts safely</td>
+            </tr>
+            <tr>
+              <td><strong>analyze_data</strong></td>
+              <td>Detects list-only output and asks for follow-up</td>
+              <td>Shape heuristic</td>
+              <td>Prevents meaningless charts on pure string lists</td>
+            </tr>
+            <tr>
+              <td><strong>generate_chart</strong></td>
+              <td>Produces chart type, axes, series, and drill-down config</td>
+              <td>ChartAgent (2D/3D recommendation logic)</td>
+              <td>Turns query results into decision-ready visuals</td>
+            </tr>
+            <tr>
+              <td><strong>predictive_scan</strong></td>
+              <td>Runs predictive context when classifier says predictive mode</td>
+              <td>ForecastEngine + CPU ML service (8050)</td>
+              <td>Adds risk/causal/intervention context to plain SQL results</td>
+            </tr>
+            <tr>
+              <td><strong>compose_public_answer</strong></td>
+              <td>Builds executive-safe answer card</td>
+              <td>PublicResponseAgent</td>
+              <td>Clean narrative, no internal debugging leakage</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card span-4">
+        <h2>3) Technology Stack Used</h2>
+        <h3>Frontend</h3>
+        <ul>
+          <li>Next.js App Router</li>
+          <li>React stateful split-view chat + chart experience</li>
+          <li>Voice input component for multilingual query capture</li>
+        </ul>
+        <h3>Backend</h3>
+        <ul>
+          <li>FastAPI query endpoint</li>
+          <li>LangGraph state machine orchestration</li>
+          <li>DSPy modules for intent, SQL, charts, response composition</li>
+        </ul>
+        <h3>Data + Retrieval</h3>
+        <ul>
+          <li>SQL Server for operational facts</li>
+          <li>Neo4j for schema graph and relationships</li>
+          <li>BM25 in-memory statistical retrieval</li>
+          <li>RRF (Reciprocal Rank Fusion) for final context set</li>
+        </ul>
+        <h3>ML/Predictive</h3>
+        <ul>
+          <li>ForecastEngine in process</li>
+          <li>CPU ML microservice on port 8050</li>
+          <li>Risk labels + intervention recommendations</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4) Retrieval/Reasoning Diagram</h2>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 560 290" width="100%" role="img" aria-label="Retrieval fusion diagram">
+            <rect x="16" y="18" width="160" height="46" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="96" y="46" text-anchor="middle" font-size="12.5" fill="#222">User Question</text>
+
+            <rect x="16" y="92" width="160" height="46" rx="8" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="96" y="120" text-anchor="middle" font-size="12.5" fill="#1b4dbf">Intent + Expansion</text>
+
+            <rect x="210" y="72" width="140" height="38" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="280" y="96" text-anchor="middle" font-size="11.5">Neo4j Vector</text>
+            <rect x="210" y="118" width="140" height="38" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="280" y="142" text-anchor="middle" font-size="11.5">Neo4j Fulltext</text>
+            <rect x="210" y="164" width="140" height="38" rx="8" fill="#fff" stroke="#d7dbe1"/>
+            <text x="280" y="188" text-anchor="middle" font-size="11.5">BM25 Search</text>
+
+            <rect x="380" y="108" width="160" height="46" rx="8" fill="#fff9e6" stroke="#e5d08f"/>
+            <text x="460" y="136" text-anchor="middle" font-size="12.5" fill="#7d6308">RRF Fusion</text>
+
+            <rect x="380" y="176" width="160" height="46" rx="8" fill="#ecfcf0" stroke="#9ad7a9"/>
+            <text x="460" y="204" text-anchor="middle" font-size="12.5" fill="#0a6a2b">JOIN Path Enrichment</text>
+
+            <line x1="96" y1="64" x2="96" y2="92" stroke="#6e7580" stroke-width="2"/>
+            <line x1="176" y1="115" x2="210" y2="91" stroke="#6e7580" stroke-width="2"/>
+            <line x1="176" y1="115" x2="210" y2="137" stroke="#6e7580" stroke-width="2"/>
+            <line x1="176" y1="115" x2="210" y2="183" stroke="#6e7580" stroke-width="2"/>
+            <line x1="350" y1="91" x2="380" y2="121" stroke="#6e7580" stroke-width="2"/>
+            <line x1="350" y1="137" x2="380" y2="131" stroke="#6e7580" stroke-width="2"/>
+            <line x1="350" y1="183" x2="380" y2="141" stroke="#6e7580" stroke-width="2"/>
+            <line x1="460" y1="154" x2="460" y2="176" stroke="#6e7580" stroke-width="2"/>
+          </svg>
+        </div>
+        <p class="note">
+          Why this matters: one retrieval source alone misses context. Hybrid retrieval with RRF improves recall + precision for SQL generation.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>5) SQL Safety + Self-Heal Loop</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Check</th>
+              <th>Fallback Behavior</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Security</td>
+              <td>Forbidden keywords/patterns, SELECT/WITH constraints</td>
+              <td>Reject and regenerate SQL</td>
+            </tr>
+            <tr>
+              <td>Schema</td>
+              <td>Table/column validation against INFORMATION_SCHEMA + BM25 schema</td>
+              <td>Regenerate with explicit error context</td>
+            </tr>
+            <tr>
+              <td>Execution</td>
+              <td>Runtime SQL Server execution check</td>
+              <td>Regenerate SQL with previous error message</td>
+            </tr>
+            <tr>
+              <td>Auto-fix</td>
+              <td>Numeric cast fixes + well counting normalization</td>
+              <td>Patch query before execution</td>
+            </tr>
+            <tr>
+              <td>Retries</td>
+              <td>Config-driven (`MAX_HEAL_RETRIES`)</td>
+              <td>Controlled stop with readable error</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>6) SQL-Only vs Predictive Route Logic</h2>
+        <p>
+          Operations tab uses a conservative classifier so deterministic KPI questions stay SQL-only, while explicitly predictive
+          questions are routed to Forecast + CPU ML + public answer composition.
+        </p>
+        <div class="pill-row">
+          <span class="pill blue">SQL-Only Examples: revenue this quarter, annual target status, standard KPI summaries</span>
+          <span class="pill yellow">Predictive Examples: delay probability, key drivers, intervention actions, what-if scenarios</span>
+        </div>
+        <table style="margin-top:10px;">
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Output Type</th>
+              <th>Artifacts Returned</th>
+              <th>User Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>SQL-only</td>
+              <td>Chart/Text</td>
+              <td>SQL query, rows/columns, chart config, reasoning steps</td>
+              <td>Fast deterministic reporting and drill-down</td>
+            </tr>
+            <tr>
+              <td>Predictive</td>
+              <td>Predictive card</td>
+              <td>Risk label, answer text, predictive summary, context pack</td>
+              <td>Actionable prioritization and intervention guidance</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>7) BM25 in This System (Detailed)</h2>
+        <p>
+          BM25 is a lexical retrieval model used here to score how strongly schema documents match query words.
+          In Bashira, each schema document is generally a column-level record (table, column, description, data type).
+          This gives strong exact-match behavior for domain terms such as rig identifiers, milestone names, and business abbreviations.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>BM25 Component</th>
+              <th>How It Works</th>
+              <th>Why It Helps NL2SQL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Term frequency (TF)</td>
+              <td>Higher score when query terms appear in a schema doc multiple times</td>
+              <td>Boosts strongly relevant columns for repeated domain terms</td>
+            </tr>
+            <tr>
+              <td>Inverse document frequency (IDF)</td>
+              <td>Rare terms get higher weight than common terms</td>
+              <td>Prioritizes uncommon operational terms over generic words</td>
+            </tr>
+            <tr>
+              <td>Length normalization</td>
+              <td>Prevents long descriptions from winning only by size</td>
+              <td>Keeps concise, precise schema docs competitive</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">
+          Operationally: BM25 catches exact wording and nomenclature better than pure embeddings when users ask with enterprise-specific terms.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>8) What MiniLM Means Here</h2>
+        <p>
+          The embedding model is <code>all-MiniLM-L6-v2</code> (384-dimensional vectors). It converts both the user query and schema text into vectors,
+          then Neo4j vector search returns semantically close columns/tables even if the wording is different.
+        </p>
+        <ul>
+          <li><strong>L6:</strong> compact transformer depth for low latency.</li>
+          <li><strong>384 dimensions:</strong> smaller vector size than larger models, good speed-memory tradeoff.</li>
+          <li><strong>Sentence-level semantics:</strong> catches intent similarity, not only exact token overlap.</li>
+          <li><strong>Production relevance:</strong> useful for synonyms, paraphrases, and noisy manager language.</li>
+        </ul>
+        <p class="note">
+          MiniLM does not replace BM25. It complements it. Semantic recall comes from embeddings; lexical precision comes from BM25/fulltext.
+        </p>
+      </article>
+      <article class="card span-6">
+        <h2>9) Why Hybrid Retrieval Is Necessary</h2>
+        <p>
+          Pure vector retrieval misses exact IDs and hard tokens. Pure lexical retrieval misses paraphrase intent.
+          Bashira combines three independent retrieval channels, then fuses them using RRF (Reciprocal Rank Fusion).
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Channel</th>
+              <th>Strength</th>
+              <th>Weakness</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Neo4j Vector</td>
+              <td>Semantic similarity</td>
+              <td>Can miss exact enterprise tokens</td>
+            </tr>
+            <tr>
+              <td>Neo4j Fulltext</td>
+              <td>Lucene keyword matching</td>
+              <td>Sensitive to wording form</td>
+            </tr>
+            <tr>
+              <td>BM25</td>
+              <td>Strong lexical ranking</td>
+              <td>Limited semantic generalization</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>10) NLP to SQL: Why It Is Difficult in Real Systems</h2>
+        <p>
+          NL2SQL is hard because user language is ambiguous, schema is imperfect, and business meaning often depends on hidden assumptions.
+          In industrial operations datasets, this is amplified by mixed naming styles, sparse fields, legacy aliases, and proxy-only metrics.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Difficulty</th>
+              <th>Example Pattern</th>
+              <th>Bashira Control</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ambiguous intent</td>
+              <td>"show risk this week" without scope or metric definition</td>
+              <td>Intent classification + clarification prompts + context resolution</td>
+            </tr>
+            <tr>
+              <td>Schema mismatch</td>
+              <td>User asks for a fact not present in local clone</td>
+              <td><code>INSUFFICIENT_SCHEMA</code> path and explicit proxy questions</td>
+            </tr>
+            <tr>
+              <td>Hallucinated columns</td>
+              <td>LLM invents non-existent fields</td>
+              <td>INFORMATION_SCHEMA validation + BM25 schema check + self-heal retries</td>
+            </tr>
+            <tr>
+              <td>Unsafe SQL risk</td>
+              <td>Destructive or malformed query generation</td>
+              <td>Forbidden keyword/pattern checks + read-oriented enforcement</td>
+            </tr>
+            <tr>
+              <td>Follow-up ambiguity</td>
+              <td>"yes show details" after previous answer</td>
+              <td>Context rewrite node before intent routing</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>11) How Bashira Converts Natural Language Into Reliable Analytics</h2>
+        <ol>
+          <li><strong>Normalize language:</strong> abbreviations are expanded, query intent is classified, and question scope is stabilized.</li>
+          <li><strong>Retrieve grounded schema:</strong> vector + fulltext + BM25 candidates are fused with RRF and enriched with join paths.</li>
+          <li><strong>Generate constrained SQL:</strong> SQL agent writes query only from retrieved schema context, with domain few-shot guidance.</li>
+          <li><strong>Validate before trust:</strong> security validation, schema validation, and runtime execution checks are enforced.</li>
+          <li><strong>Self-heal on failure:</strong> SQL is regenerated with explicit error context up to configured retry limits.</li>
+          <li><strong>Render decision output:</strong> chart engine selects best format and creates drill-down actions.</li>
+          <li><strong>Predictive augmentation (if required):</strong> Forecast + CPU ML stack adds risk, drivers, and intervention summary.</li>
+        </ol>
+      </article>
+      <article class="card span-4">
+        <h2>12) Business Value Created by Operations Tab</h2>
+        <ul>
+          <li><strong>Speed to insight:</strong> natural language to decision-ready output in one flow.</li>
+          <li><strong>Trust and control:</strong> grounded retrieval + validator loop lowers hallucination risk.</li>
+          <li><strong>Explainability:</strong> reasoning steps, SQL trace, and drill-down path remain visible.</li>
+          <li><strong>Actionability:</strong> predictive branch adds intervention guidance, not only reporting.</li>
+          <li><strong>Continuity:</strong> stateful context enables coherent multi-turn analysis.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>13) LangGraph in This Product (Deep Internal Working)</h2>
+        <p>
+          LangGraph is not just a router here. It is the runtime control system for Operations tab queries. Each query runs as a
+          state machine with explicit node transitions and conditional edges, so the system can branch into SQL analytics, predictive scanning,
+          or clarification flow without losing context.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>State Object Field</th>
+              <th>Produced By</th>
+              <th>Consumed By</th>
+              <th>Operational Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>user_query</code></td>
+              <td>Frontend request payload</td>
+              <td>Context resolver, intent node</td>
+              <td>Raw natural-language input from Operations chat</td>
+            </tr>
+            <tr>
+              <td><code>resolved_query</code></td>
+              <td>Context resolver node</td>
+              <td>Intent and retrieval nodes</td>
+              <td>Turns follow-ups into complete standalone question</td>
+            </tr>
+            <tr>
+              <td><code>query_intent</code> + <code>entities</code></td>
+              <td>Intent extraction node</td>
+              <td>Route selector + SQL generation</td>
+              <td>Determines whether to enter SQL branch or predictive branch</td>
+            </tr>
+            <tr>
+              <td><code>retrieved_schema_context</code></td>
+              <td>Hybrid retrieval node</td>
+              <td>SQL generation node</td>
+              <td>Grounding pack to prevent hallucinated columns/tables</td>
+            </tr>
+            <tr>
+              <td><code>sql_candidate</code></td>
+              <td>SQL generation node</td>
+              <td>Validator/Execution node</td>
+              <td>First SQL draft generated from context + few-shot demos</td>
+            </tr>
+            <tr>
+              <td><code>validation_report</code></td>
+              <td>Validator node</td>
+              <td>Self-heal policy + compose response</td>
+              <td>Security/schema/runtime status and retry hints</td>
+            </tr>
+            <tr>
+              <td><code>rows</code>, <code>columns</code></td>
+              <td>SQL execution node</td>
+              <td>Analyzer + chart node</td>
+              <td>Structured result used for visualization and narration</td>
+            </tr>
+            <tr>
+              <td><code>predictive_context</code></td>
+              <td>Predictive scan node</td>
+              <td>Public response node</td>
+              <td>Forecast/risk/intervention signals for decision mode</td>
+            </tr>
+            <tr>
+              <td><code>chart_config</code></td>
+              <td>Chart recommendation node</td>
+              <td>Frontend renderer</td>
+              <td>2D/3D chart payload with drill-down actions</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">
+          Why LangGraph matters: deterministic transitions plus mutable shared state gives much better reliability than a single monolithic prompt,
+          especially when SQL retries and clarification branches are needed.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>14) Algorithm-Level Mechanics (BM25, MiniLM, RRF, Risk Scoring)</h2>
+        <h3>14.1 BM25 lexical relevance</h3>
+        <p>
+          BM25 ranks schema documents by lexical importance. For query term <code>q_i</code> and schema document <code>D</code>, the score used in principle is:
+          <code>score(D,Q)=sum(IDF(q_i) * (f(q_i,D)*(k1+1)) / (f(q_i,D)+k1*(1-b+b*|D|/avgdl)))</code>.
+          This helps Operations when users mention exact enterprise tokens (rig IDs, task codes, milestone names).
+        </p>
+        <h3>14.2 MiniLM semantic retrieval</h3>
+        <p>
+          <code>all-MiniLM-L6-v2</code> embeds query and schema text into 384-dim vectors. Neo4j vector index compares embeddings with cosine similarity:
+          <code>cos(u,v)= (u.v) / (||u|| ||v||)</code>. This recovers relevant columns even when user wording is paraphrased.
+        </p>
+        <h3>14.3 Reciprocal Rank Fusion (RRF)</h3>
+        <p>
+          The system merges ranked outputs from vector, fulltext, and BM25 using:
+          <code>RRF(d)=sum(1/(k + rank_j(d)))</code>.
+          This avoids dependence on one retrieval channel and improves robustness across wording styles.
+        </p>
+        <h3>14.4 Predictive pressure score composition</h3>
+        <p>
+          In predictive mode, a composite risk/pressure signal is formed from multiple drivers:
+          schedule slip, plan gap, stage stall, queue contagion, anomaly signal, and confidence gap.
+          A practical expression is:
+          <code>Risk = w1*slip + w2*plan_gap + w3*stage_stall + w4*queue + w5*anomaly + w6*(1-confidence)</code>,
+          where weights are calibrated from domain behavior and bounded for stable ranking.
+        </p>
+        <h3>14.5 Confidence scoring logic</h3>
+        <p>
+          Confidence is lowered when schema coverage is weak, retries are high, or data completeness is poor. It is increased when retrieval sources agree,
+          SQL validates on first pass, and returned rows have healthy non-null coverage. This confidence is then fed back into response language and intervention priority.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>15) NL2SQL Generation and Self-Heal (Detailed Execution)</h2>
+        <ol>
+          <li><strong>Question normalization:</strong> abbreviation expansion and context completion create a stable query form.</li>
+          <li><strong>Schema grounding:</strong> hybrid retrieval builds a candidate set of tables, columns, and join hints.</li>
+          <li><strong>Constrained generation:</strong> SQL agent produces query from grounded context and client few-shot templates.</li>
+          <li><strong>Static validation:</strong> reject unsafe verbs and non-read patterns before SQL ever runs.</li>
+          <li><strong>Schema validation:</strong> table/column checks against local SQL metadata and retrieval context.</li>
+          <li><strong>Runtime execution:</strong> execute on SQL Server clone; capture runtime failures.</li>
+          <li><strong>Error-aware regeneration:</strong> feed failure signature back to SQL agent and retry under bounded attempts.</li>
+          <li><strong>Result shaping:</strong> detect if chartable; if not chartable, provide numeric/text answer with follow-up prompts.</li>
+        </ol>
+        <p class="note">
+          This loop is why the system can recover from invalid object names, missing columns, and malformed grouping clauses while staying explainable.
+        </p>
+      </article>
+      <article class="card span-4">
+        <h2>16) Tech-to-Value Mapping (What Each Layer Adds)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Technology</th>
+              <th>Core Function</th>
+              <th>Business Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>LangGraph</td>
+              <td>Stateful workflow and branch control</td>
+              <td>Reliable multi-step behavior under ambiguity</td>
+            </tr>
+            <tr>
+              <td>DSPy</td>
+              <td>Prompt modules + programmatic composition</td>
+              <td>Repeatable query quality with lower drift</td>
+            </tr>
+            <tr>
+              <td>Neo4j</td>
+              <td>Vector/fulltext schema retrieval + graph links</td>
+              <td>Higher SQL grounding accuracy</td>
+            </tr>
+            <tr>
+              <td>BM25</td>
+              <td>Exact lexical ranking</td>
+              <td>Better handling of enterprise naming conventions</td>
+            </tr>
+            <tr>
+              <td>RRF</td>
+              <td>Ranking fusion across retrieval channels</td>
+              <td>Stable retrieval precision across query styles</td>
+            </tr>
+            <tr>
+              <td>Validator + Self-heal</td>
+              <td>Safety, schema checks, retry corrections</td>
+              <td>Lower failure rate and safer operations usage</td>
+            </tr>
+            <tr>
+              <td>Forecast + CPU ML</td>
+              <td>Risk and intervention context enrichment</td>
+              <td>Moves from reporting to decision support</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <div class="footer">
+      Generated for module-level technical understanding of Bashira Intelligence - Operations tab.
+    </div>
+  </div>
+</body>
+</html>

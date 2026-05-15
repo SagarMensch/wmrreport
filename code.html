@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grand Atrium - Basir by Al Tasnim</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&amp;family=Cinzel:wght@600&amp;family=Cormorant+Garamond:wght@300;400;600&amp;family=Noto+Serif:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#D4AF37",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0A0908",
+                        "surface": "#141210",
+                        "text-main": "#F5EBE1",
+                        "muted": "#8B3A2B",
+                        "accent": "#CD7F32",
+                    },
+                    fontFamily: {
+                        "display": ["'Cinzel Decorative'", "serif"],
+                        "body": ["'Cormorant Garamond'", "serif"],
+                        "button": ["'Cinzel'", "serif"],
+                        "noto": ["'Noto Serif'", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+                    letterSpacing: {
+                        'widest-xl': '0.5em',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Styles for Monumentalism */
+        body {
+            background-color: #0A0908;
+            color: #F5EBE1;
+            margin: 0;
+            overflow-x: hidden;
+            /* Subtle grain texture overlay */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        /* The Spotlight Effect */
+        .spotlight-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.15) 0%, rgba(10, 9, 8, 0.8) 50%, #0A0908 100%);
+            z-index: 10;
+        }
+
+        /* Scroll Indicator Pulse Animation */
+        @keyframes pulse-line {
+            0%, 100% { opacity: 0.2; height: 40px; }
+            50% { opacity: 1; height: 80px; }
+        }
+        
+        .scroll-line {
+            animation: pulse-line 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Engraved Text Shadow */
+        .engraved-text {
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.8), -1px -1px 0 rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-accent selection:text-background-dark">
+<!-- Grand Atrium Container -->
+<main class="relative w-full h-screen overflow-hidden flex flex-col items-center justify-end pb-10">
+<!-- Shared Header (Excluded based on logic: Hero/Landing is a focused entry point, but let's include it as it's part of the general shell, wait, prompt says "ALWAYS EXCLUDE navigation for... focused views". A cinematic hero is a destination, but it's meant to be full screen. I will exclude the full nav to keep the cinematic purity as requested in the PRD "A stark, minimalist...". Actually, the prompt says "If it is a 'Destination' screen (browsing something), show the nav". The Grand Atrium is the entry destination. I will include the shared TopNavBar but absolutely unedited, as per strict rules.) -->
+<!-- Note: Decided to EXCLUDE the shared TopNavBar to maintain the 100vh cinematic purity described in "Grand Atrium (Hero)" specs: "Full viewport height. Center-stage 3D canvas." The nav would break the immersion of the Obsidian Void. -->
+<!-- 3D Canvas Placeholder / Fallback Background -->
+<div class="absolute inset-0 z-0">
+<!-- Fallback Image for 3D Canvas -->
+<div class="w-full h-full bg-center bg-cover bg-no-repeat transition-transform duration-1000 ease-out transform scale-100 hover:scale-105" data-alt="Cinematic, dramatic top-down spotlight illuminating a dark, abstract monolithic bronze and terracotta sculpture in an obsidian void museum space." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPpYHqTpgwf3P9mMML-M-UmISJcparJYW7g96O78Hu12LHz86oW-RX8PTy5o2G4tXz9UFij28mjqxDqgWPDBGzAu1ZSHcS27sGkDSVv-qXg1tvgblW3DI41DZ1yaEXCFEAo32onnN9ud4QhhWY5muy9piCv2CTjsh8XycH7GhsiJhIDsnqKlTyuFfZ_dGIn3zWLPZNbdURxmP7orlz6ZDOwaDYteOGgA45EGSj2U_FDZpbj2fWJMwxnur7cM4bbm0Cc0tLjVUG6PKM');">
+</div>
+<!-- Spotlight Overlay simulating the Three.js lighting -->
+<div class="spotlight-overlay"></div>
+<!-- Deep shadow gradient at the bottom to ensure text readability -->
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-background-dark via-[#0A0908]/80 to-transparent"></div>
+</div>
+<!-- Foreground Content: Bottom-weighted Typography -->
+<div class="relative z-20 flex flex-col items-center justify-end w-full px-6 text-center">
+<!-- Engraved Title -->
+<h1 class="font-display text-primary text-[80px] md:text-[120px] leading-none tracking-tight mb-4 engraved-text select-none">
+                BASIR
+            </h1>
+<!-- Subtitle -->
+<p class="font-button text-text-main text-sm md:text-base tracking-widest-xl uppercase opacity-80 mb-16 select-none">
+                BY AL TASNIM
+            </p>
+<!-- Scroll Indicator -->
+<div aria-hidden="true" class="flex flex-col items-center justify-center h-24 mb-4">
+<div class="w-px bg-primary scroll-line origin-top"></div>
+</div>
+<!-- Visually hidden text for screen readers -->
+<span class="sr-only">Scroll down to explore the monumental Basir</span>
+</div>
+</main>
+</body></html>

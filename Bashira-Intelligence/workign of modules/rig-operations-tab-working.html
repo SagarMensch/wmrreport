@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rig Operations Tab Working</title>
+  <style>
+    :root {
+      --bg: #f6f3ec;
+      --paper: #ffffff;
+      --ink: #111111;
+      --muted: #60656f;
+      --line: #d8dce3;
+      --soft: #eef1f5;
+      --blue: #0f62fe;
+      --green: #00c805;
+      --yellow: #f1c21b;
+      --red: #8e1b1b;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 1340px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+
+    .hero, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: 0 14px 38px rgba(17, 17, 17, 0.05);
+    }
+
+    .hero {
+      padding: 34px 34px 28px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #697386;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 13px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 44px;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+
+    p { margin: 0 0 14px; color: #2d3239; }
+    ul { margin: 10px 0 0 0; padding-left: 18px; }
+    li { margin: 8px 0; }
+    code {
+      background: #f3f5f8;
+      border: 1px solid #e5e8ee;
+      border-radius: 8px;
+      padding: 1px 6px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-8 { grid-column: span 8; }
+    .span-7 { grid-column: span 7; }
+    .span-6 { grid-column: span 6; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+
+    .card { padding: 26px 26px 24px; }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      background: #fcfcfd;
+      border-radius: 18px;
+      padding: 16px 16px 14px;
+    }
+
+    .kpi .label {
+      color: #68707d;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .kpi .value {
+      margin-top: 10px;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 10px;
+      border-bottom: 1px solid #eceff3;
+    }
+
+    th {
+      color: #68707d;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .diagram {
+      width: 100%;
+      background: linear-gradient(180deg, #fdfdfd 0%, #f7f8fb 100%);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #111827;
+      color: #f8fafc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .span-8, .span-7, .span-6, .span-5, .span-4, .span-12 { grid-column: span 12; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Bashira Intelligence / Rig Operations</p>
+      <h1>How the Rig Operations Tab Works</h1>
+      <p style="margin-top:16px; max-width: 1020px;">
+        Rig Operations is the fleet-pressure control tower of the product. It does not just show rigs and wells.
+        It computes a well-level operational risk score, injects queue contagion and CPU outlier detection, rolls
+        those signals upward into rig-level pressure scores, and then exposes that stack through a multi-surface
+        frontend built for drill-down, chart focus, and quantitative explanation.
+      </p>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Backend Route</div>
+          <div class="value" style="color:var(--blue)">/rig-operations</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Scoring Unit</div>
+          <div class="value" style="color:var(--red)">Well + Rig</div>
+        </div>
+        <div class="kpi">
+          <div class="label">ML Layer</div>
+          <div class="value" style="color:var(--yellow)">CPU IForest</div>
+        </div>
+        <div class="kpi">
+          <div class="label">View Style</div>
+          <div class="value" style="color:var(--green)">Control Tower</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-7">
+        <h2>1) Runtime Path</h2>
+        <p>
+          The React surface is <code>RigOperations.tsx</code>. It loads its payload through
+          <code>useCommandCenterData("rig_operations")</code>, which calls the shared Next.js proxy route
+          <code>/api/command-center?action=rig_operations</code>. That proxy forwards to the backend route
+          <code>/api/command-center/rig-operations</code>, which returns
+          <code>CommandCenterService.get_rig_operations_view()</code>.
+        </p>
+        <p>
+          The architectural consequence is that Rig Operations is part of the same command-center family as Portfolio
+          and Smart Alerts. It shares the same operating frame but applies a different scoring and aggregation philosophy.
+        </p>
+      </article>
+
+      <article class="card span-5">
+        <h2>2) Why This Tab Exists</h2>
+        <p>
+          A portfolio view tells leadership which projects are under pressure. A rig view answers a different question:
+          <em>which rig queue is about to propagate delay through multiple wells, and how recoverable is it?</em>
+        </p>
+        <ul>
+          <li>Portfolio aggregates by project</li>
+          <li>Rig Operations aggregates by rig queue</li>
+          <li>The rig becomes the operative contagion channel</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>3) Shared Inputs Feeding the Rig Model</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Input</th>
+              <th>Source</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Operating frame</td>
+              <td><code>_operating_frame()</code></td>
+              <td>Canonical well state: rig, progress, delays, dates, stage percentages, risk prior</td>
+            </tr>
+            <tr>
+              <td>Job progress signal map</td>
+              <td><code>_build_job_progress_signal_map()</code></td>
+              <td>Plan divergence, monthly gap, short-horizon velocity, weekly schedule history</td>
+            </tr>
+            <tr>
+              <td>Anomaly memory</td>
+              <td><code>AnomalyTracker</code></td>
+              <td>Recent risk transitions and change memory used for outlier corroboration</td>
+            </tr>
+            <tr>
+              <td>Queue map</td>
+              <td>Derived from active wells per rig</td>
+              <td>Measures downstream queue spillover risk</td>
+            </tr>
+            <tr>
+              <td>Scikit-learn</td>
+              <td><code>IsolationForest</code></td>
+              <td>Detects execution outliers relative to current fleet pattern</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4) Well-Level Feature Preparation</h2>
+        <p>
+          For every well in the operating frame, the service constructs a prepared record. This is not the final score yet.
+          It is a feature object containing schedule, trend, stage, governance, and queue information.
+        </p>
+        <ul>
+          <li><code>delay_days</code> and <code>rig_on_delay_days</code></li>
+          <li><code>current_month_gap_pct</code> and <code>avg_gap_pct</code></li>
+          <li><code>velocity_pct</code></li>
+          <li>stage metrics and execution-stage subset</li>
+          <li><code>queue_exposure</code></li>
+          <li><code>missing_fields</code> and <code>moc_pending</code></li>
+          <li>existing well risk prior from the upstream forecast layer</li>
+        </ul>
+        <p>
+          The service also determines the dominant bottleneck by taking the slowest stage within the active execution subset.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>5) Stage Logic and Bottleneck Selection</h2>
+        <p>
+          The stage system is intentionally phase-aware. The service first computes completion for:
+          <code>Location Prep</code>, <code>Engineering</code>, <code>Construction</code>,
+          <code>Commissioning</code>, <code>Flowline</code>, and <code>OHL</code>.
+        </p>
+        <p>
+          Then <code>_select_execution_stage_metrics()</code> narrows attention depending on overall progress:
+        </p>
+        <ul>
+          <li>Very early wells focus on Location Prep and Engineering</li>
+          <li>Mid-stage wells focus on Engineering and Construction</li>
+          <li>Later wells focus on Construction and Flowline</li>
+          <li>Near-end wells focus on Flowline and Commissioning</li>
+        </ul>
+        <p>
+          This prevents irrelevant late-stage metrics from dominating an early-stage well, and vice versa.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>6) Base Score Formula</h2>
+        <p>
+          Rig Operations first computes a <code>base_score</code> for each well. This is a weighted operational-pressure score
+          before queue contagion and anomaly detection are injected.
+        </p>
+        <p><code>base_score = 0.30 * schedule_component + 0.22 * trend_component + 0.20 * stage_component + 0.18 * prior_component + 0.10 * data_component</code></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>How It Is Computed</th>
+              <th>What It Means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>schedule_component</code></td>
+              <td>Rig-off delay, arrival delay, and a penalty if the rig is already delayed or overdue</td>
+              <td>Direct schedule pain</td>
+            </tr>
+            <tr>
+              <td><code>trend_component</code></td>
+              <td>Current month gap, average weekly gap, and negative velocity</td>
+              <td>Execution deterioration against plan</td>
+            </tr>
+            <tr>
+              <td><code>stage_component</code></td>
+              <td>Average stage gap, stage imbalance, and penalty for immature bottleneck stage</td>
+              <td>Workflow stall intensity</td>
+            </tr>
+            <tr>
+              <td><code>prior_component</code></td>
+              <td>Upstream forecast risk score, clipped to 0-100</td>
+              <td>Known portfolio-level prior risk</td>
+            </tr>
+            <tr>
+              <td><code>data_component</code></td>
+              <td>Missing required fields and pending MOC penalties</td>
+              <td>Operational confidence and governance drag</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          This is the deterministic analytical core of the tab. It answers: how much pressure would this well generate
+          even before considering fleet contagion and outlier behavior?
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>7) Queue Exposure and Rig Base Map</h2>
+        <p>
+          The model then adds a rig-level contagion channel. First it builds an <code>active_queue_map</code> that lists active wells
+          under each rig. For each well:
+        </p>
+        <p><code>queue_exposure = max(0, queue_size - 1)</code> for active wells.</p>
+        <p>
+          Then it computes a rig-level background pressure called <code>rig_base_map</code> using the top three well base scores,
+          the rig-wide mean base score, and the rig’s maximum schedule component. That means a well is not judged only on its own row.
+          It is judged partly in the context of the rig carrying it.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>8) CPU Isolation Forest Layer</h2>
+        <p>
+          Rig Operations contains a real CPU machine-learning layer through scikit-learn’s
+          <code>IsolationForest</code>. It is used only when there are enough feature rows and enough variation to make anomaly detection meaningful.
+        </p>
+        <ul>
+          <li><code>n_estimators = 240</code></li>
+          <li><code>random_state = 42</code></li>
+          <li><code>contamination</code> adapts to sample count and is clipped between roughly <code>0.08</code> and <code>0.18</code></li>
+        </ul>
+        <p>
+          Features include progress, delays, plan gap, negative velocity, stage gap, stage imbalance, risk score, queue exposure, and missing fields.
+          Raw scores are normalized to 0-100. Wells are flagged when the model predicts outlier behavior or when the normalized anomaly score is high enough.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>9) Final Operational Risk Score</h2>
+        <p>
+          After the deterministic base score, queue contagion, and anomaly layer are available, the service computes the final
+          <code>ops_risk_score</code>.
+        </p>
+        <p><code>ops_risk_score = min(99, 0.78 * base_score + 0.14 * queue_component + 0.08 * anomaly_score)</code></p>
+        <p>
+          Completed wells are treated differently and receive only a low residual score from their prior component. Active wells, however,
+          are evaluated in full. This is why the tab can distinguish between a risky isolated well and a risky well embedded in a stressed rig queue.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Term</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>base_score</code></td>
+              <td>Intrinsic schedule and execution pressure of the well</td>
+            </tr>
+            <tr>
+              <td><code>queue_component</code></td>
+              <td>How much extra pressure comes from sharing a stressed rig queue</td>
+            </tr>
+            <tr>
+              <td><code>anomaly_score</code></td>
+              <td>How unusual the well looks relative to fleet execution pattern</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>10) Recovery Confidence Formula</h2>
+        <p>
+          The tab does not stop at risk. It also computes <code>recovery_confidence_pct</code>, which estimates how recoverable the current situation is.
+        </p>
+        <p><code>recovery_confidence_pct = clamp(92 - 0.62 * ops_risk_score + 1.6 * positive_velocity + 0.08 * progress_pct - min(16, 1.4 * queue_exposure), 8, 96)</code></p>
+        <p>
+          So recovery confidence improves when:
+        </p>
+        <ul>
+          <li>velocity is positive</li>
+          <li>progress is already materially advanced</li>
+        </ul>
+        <p>
+          And it falls when:
+        </p>
+        <ul>
+          <li>the operational risk score is high</li>
+          <li>queue exposure is large</li>
+        </ul>
+        <p>
+          This gives the tab a second axis: not just danger, but recoverability.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>11) Evidence and Action Generation</h2>
+        <p>
+          Rig Operations reuses the same deterministic action and evidence builders used by other command-center views, but applies them to rig-centered records.
+          That means each well carries:
+        </p>
+        <ul>
+          <li>structured evidence such as overdue rig-off, late rig-on, stage stall, queue overlap, anomaly flag, missing fields, and pending MOC</li>
+          <li>action rows such as re-sequencing rig commitment, recovering throughput, unblocking the dominant stage, or reviewing the operational outlier</li>
+        </ul>
+        <p>
+          The actions are not random assistant text. They are selected from the dominant score contributors.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>12) Rig-Level Aggregation</h2>
+        <p>
+          Once each well is enriched, the service groups by <code>rig_no</code> and builds rig cards.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Rig Metric</th>
+              <th>Construction Logic</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>pressure_score</code></td>
+              <td>Blend of top-three mean well risk and overall mean well risk for active wells on the rig</td>
+            </tr>
+            <tr>
+              <td><code>dominant_bottleneck</code></td>
+              <td>Stage label whose wells accumulate the most weighted operational pressure</td>
+            </tr>
+            <tr>
+              <td><code>top_actions</code></td>
+              <td>Deduplicated highest-value interventions harvested from top-risk wells</td>
+            </tr>
+            <tr>
+              <td><code>status</code></td>
+              <td>Tier derived from pressure score, critical count, delayed count, and anomaly count</td>
+            </tr>
+            <tr>
+              <td><code>wells</code></td>
+              <td>Detailed roster sorted by risk, delay, arrival delay, and prior risk</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          The rig is therefore treated as a decision object, not just a grouping key.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>13) Returned Payload</h2>
+        <p>
+          The backend returns a compact but information-rich payload:
+        </p>
+        <ul>
+          <li><code>summary</code>: total rigs, active wells, critical rigs, average pressure score, queue-exposed wells, anomaly wells</li>
+          <li><code>rigs</code>: rig cards with status, pressure, bottleneck, top actions, and full well roster</li>
+          <li><code>arrival_delay_by_well</code>: top well delay leaderboard</li>
+          <li><code>bottleneck_mix</code>: distribution of dominant bottlenecks across the fleet</li>
+          <li><code>engine_label</code> and <code>model_note</code>: model identity and human-readable explanation</li>
+        </ul>
+        <p>
+          This is why the frontend can drive many views without repeated backend calls. One payload contains both executive and detailed quant state.
+        </p>
+      </article>
+
+      <article class="card span-4">
+        <h2>14) Summary Logic</h2>
+        <p>
+          Fleet-level summary values are themselves aggregates:
+        </p>
+        <ul>
+          <li><code>critical_rigs</code> and <code>high_risk_rigs</code></li>
+          <li><code>avg_pressure_score</code></li>
+          <li><code>queue_exposed_wells</code> where queue exposure is materially large</li>
+          <li><code>anomaly_wells</code> flagged by Isolation Forest</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>15) Frontend Interaction Model</h2>
+        <p>
+          The React component is intentionally built as a control tower rather than a simple document page. Once the payload is loaded,
+          the client performs local slicing with:
+        </p>
+        <ul>
+          <li>rig search and severity filters</li>
+          <li>selected rig state</li>
+          <li>selected well state</li>
+          <li>workspace view state</li>
+          <li>dossier view state</li>
+          <li>focus overlays for chart, brief, roster, and wells</li>
+        </ul>
+        <p>
+          The search input uses <code>useDeferredValue</code> so the interface remains responsive while filtering large rig and well sets.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>16) Workspace Views</h2>
+        <p>
+          The center workspace is not one chart. It is a switchable quant surface.
+        </p>
+        <ul>
+          <li><code>pressure</code>: top wells ranked by operational pressure</li>
+          <li><code>drivers</code>: average model-driver decomposition</li>
+          <li><code>stages</code>: completion versus residual gap across the selected rig</li>
+          <li><code>queue</code>: rig-on delay and rig-off slip profile</li>
+          <li><code>playbook</code>: intervention ladder from top actions</li>
+        </ul>
+        <p>
+          This matters because the tab supports multiple operator questions without changing screens.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>17) 2D and 3D Chart Strategy</h2>
+        <p>
+          The tab supports both <code>2D</code> and <code>3D</code> modes, but they are implemented carefully:
+        </p>
+        <ul>
+          <li>2D views use Plotly for dense analytical reading</li>
+          <li>3D-style views use a custom SVG renderer called <code>ExtrudedBarsChart</code></li>
+        </ul>
+        <p>
+          The custom SVG path gives the product a volumetric chart language without requiring a heavyweight scene engine for every rig chart.
+          It also keeps the visuals deterministic and theme-controlled.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>18) Model Visibility on the Frontend</h2>
+        <p>
+          The frontend intentionally exposes the quant model instead of hiding it. It shows:
+        </p>
+        <ul>
+          <li><code>engine_label</code> as the active model family</li>
+          <li><code>CPU Isolation Forest</code> as the outlier layer</li>
+          <li>quant chips for slip, plan gap, stage stall, contagion, outliers, and velocity</li>
+          <li>rig-level and well-level pressure plus recovery metrics</li>
+        </ul>
+        <p>
+          That is why the tab can be used in a demo to communicate both premium UI and actual analytical substance.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>19) Why This Tab Creates Real Value</h2>
+        <p>
+          Rig Operations solves a practical operational problem: delays propagate through rigs, not just through projects.
+          If a rig queue is stressed, multiple wells inherit that stress. This tab makes that contagion visible, quantifies it,
+          and prioritizes where intervention is most likely to reduce downstream damage.
+        </p>
+        <ul>
+          <li>It separates intrinsic well pain from queue-induced pain</li>
+          <li>It introduces machine-detected execution outliers on CPU, locally</li>
+          <li>It measures both risk and recoverability</li>
+          <li>It elevates rigs into first-class decision objects for intervention planning</li>
+          <li>It exposes evidence and actions directly in the same surface</li>
+        </ul>
+        <p>
+          In effect, this tab is the fleet operating room of the product.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Rig Operations is a hybrid control-tower system: deterministic schedule math, phase-aware stage diagnostics, queue contagion modeling, CPU anomaly detection, and rig-level aggregation, all exposed through a drillable control-tower UI.
+    </div>
+  </div>
+</body>
+</html>

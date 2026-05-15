@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Decision Studio Working</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --card: #ffffff;
+      --ink: #111111;
+      --muted: #5f6670;
+      --line: #d7dbe1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "IBM Plex Sans", "Figtree", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    .page { max-width: 1240px; margin: 0 auto; padding: 24px; }
+    .hero, .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; }
+    .hero { padding: 24px; margin-bottom: 16px; }
+    .card { padding: 18px; }
+    .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+    h1 { margin: 8px 0 6px; font-size: 34px; line-height: 1.2; }
+    h2 { margin: 0 0 10px; font-size: 20px; line-height: 1.25; }
+    .subtitle { margin: 0; color: var(--muted); font-size: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; margin-bottom: 16px; }
+    .span-12 { grid-column: span 12; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+    .span-3 { grid-column: span 3; }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin-bottom: 6px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; font-size: 12px; font-weight: 600; background: #fbfcfd; }
+    .kpi { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+    .kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { border: 1px solid var(--line); padding: 8px 9px; text-align: left; vertical-align: top; }
+    th { background: #fafbfd; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #404854; }
+    code { font-family: Consolas, "SFMono-Regular", Menlo, monospace; font-size: 0.95em; background: #f7f8fa; padding: 1px 4px; border-radius: 4px; }
+    .svg-wrap { border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: #fdfdff; }
+    .dark-box { background: linear-gradient(180deg, #111720 0%, #0a0e14 100%); color: #eef2f7; border: 1px solid #1f2733; border-radius: 18px; padding: 18px; }
+    .footer { color: #626a75; font-size: 12px; margin-top: 20px; padding: 10px 4px 20px; }
+    @media (max-width: 1080px) {
+      .span-6, .span-4, .span-3 { grid-column: span 12; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Working Of Modules</div>
+      <h1>Decision Studio - Technical Working Document</h1>
+      <p class="subtitle">
+        Detailed explanation of the <strong>Decision Studio</strong> tab: artifact-backed institutional analytics, 2D and 3D model visualization,
+        SHAP and survival evidence surfaces, interactive explanatory tooltips, and the bridge into the live SequelForecast predictive engine.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Frontend: Next.js + React</span>
+        <span class="pill">Charts: Recharts + Plotly</span>
+        <span class="pill">Artifacts: /public/wmr_results</span>
+        <span class="pill">Tooltip Intelligence: /api/explain</span>
+        <span class="pill">Live Overlay: /api/predict proxy</span>
+        <span class="pill">Model Family: Ensemble + Survival + SHAP</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3">
+        <div class="kpi">Primary Mode</div>
+        <p class="kpi-value">Published ML</p>
+        <p>The main board renders from exported model artifacts rather than computing every chart live on page load.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Live Extension</div>
+        <p class="kpi-value">SequelForecast</p>
+        <p>The deeper forecast workspace opens a live proxy into backend <code>/predict/*</code> endpoints.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Visual Modes</div>
+        <p class="kpi-value">2D + 3D</p>
+        <p>Decision Studio supports standard 2D charts and Plotly 3D meshes from the same portfolio inputs.</p>
+      </article>
+      <article class="card span-3">
+        <div class="kpi">Core Use</div>
+        <p class="kpi-value">Model Governance</p>
+        <p>The tab is designed to show what the model package knows, how it performs, and why it ranks wells the way it does.</p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>1) What Decision Studio Is Architecturally</h2>
+        <p>
+          Decision Studio is not the same surface as Predictive Studio. Predictive Studio is a live well forecasting workspace built around
+          <code>ForecastEngine</code>. Decision Studio is an institutional model package viewer. It loads a published set of trained-model artifacts,
+          turns them into executive and analyst-facing charts, and lets the user inspect the evidence behind portfolio risk, predictive drivers,
+          completion probability, and rig performance. Only when the user opens the embedded <code>SequelForecastStudio</code> does the tab move into
+          live backend inference mode.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Main File</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tab shell</td>
+              <td><code>web/src/components/DecisionStudio.tsx</code></td>
+              <td>Loads artifact files, computes KPI counts client-side, renders 2D and 3D analytics board</td>
+            </tr>
+            <tr>
+              <td>Tooltip explainer</td>
+              <td><code>web/src/app/api/explain/route.ts</code></td>
+              <td>Builds context-aware explanations from current artifact snapshot, with optional Groq augmentation</td>
+            </tr>
+            <tr>
+              <td>Live forecast overlay</td>
+              <td><code>web/src/components/SequelForecastStudio.tsx</code></td>
+              <td>Calls <code>/api/predict?action=...</code> for real-time prediction, nightly refresh, anomalies, and portfolio summary</td>
+            </tr>
+            <tr>
+              <td>Backend predictive engine</td>
+              <td><code>predict_service.py</code> + <code>feature_engine.py</code></td>
+              <td>Runs trained ML inference, survival prediction, portfolio summary, and anomaly tracking</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>2) End-to-End Runtime Flow</h2>
+        <div class="svg-wrap">
+          <svg viewBox="0 0 1180 430" width="100%" role="img" aria-label="Decision Studio runtime flow">
+            <rect x="30" y="26" width="188" height="56" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="124" y="59" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">DecisionStudio UI</text>
+            <rect x="252" y="26" width="220" height="56" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="362" y="59" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">/public/wmr_results artifacts</text>
+            <rect x="506" y="26" width="204" height="56" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="608" y="59" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Client-side transforms</text>
+            <rect x="744" y="26" width="196" height="56" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="842" y="59" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">2D / 3D chart surfaces</text>
+            <rect x="974" y="26" width="176" height="56" rx="10" fill="#eef3ff" stroke="#9dbbfc"/>
+            <text x="1062" y="59" text-anchor="middle" font-size="13" font-weight="700" fill="#123f99">Executive board</text>
+          </svg>
+        </div>
+        <p>
+          The main Decision Studio path is artifact-first. It loads model outputs from static files, derives portfolio views in the browser, and renders them immediately.
+          The only always-live service call in the top board is the explanation route for hover help. The full online predictive path begins only when the user opens the live forecast overlay.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>3) Static Artifact Package Loaded by the Tab</h2>
+        <ul>
+          <li><code>/wmr_results/ag_metrics.json</code> for RMSE, MAE, R2, MAPE, AUC, Brier, and C-index summary.</li>
+          <li><code>/wmr_results/risk_scores.csv</code> for portfolio risk tier counts and rig aggregation.</li>
+          <li><code>/wmr_results/feature_importance.csv</code> for top predictive drivers.</li>
+          <li><code>/wmr_results/priority_wells_final.csv</code> for the main well table and predicted completion dates.</li>
+          <li><code>/wmr_results/training_manifest.json</code> for thresholds, ensemble members, and survival metadata.</li>
+        </ul>
+        <p>This means the tab can render fast without forcing a live model round-trip for every chart.</p>
+      </article>
+      <article class="card span-6">
+        <h2>4) Why the Artifact Strategy Exists</h2>
+        <ul>
+          <li><strong>Speed:</strong> heavy computation is already baked into CSV, JSON, and PNG outputs.</li>
+          <li><strong>Consistency:</strong> every viewer sees the same validated package, thresholds, and evidence.</li>
+          <li><strong>Demo resilience:</strong> the core board still works even if backend services or VPN-only sources are unavailable.</li>
+          <li><strong>Governance:</strong> published metrics and plots are tied to a training manifest rather than hidden runtime state.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>5) Client-Side Portfolio Computation Performed in DecisionStudio.tsx</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Derived View</th>
+              <th>Input Artifact</th>
+              <th>Transformation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>KPI row</td>
+              <td><code>risk_scores.csv</code></td>
+              <td>Counts wells by <code>risk_tier</code> into Critical, High Risk, Watch, Healthy, and total portfolio size</td>
+            </tr>
+            <tr>
+              <td>Risk distribution</td>
+              <td><code>risk_scores.csv</code></td>
+              <td>Builds a pie chart or 3D bar chart from tier counts, with click-to-filter behavior</td>
+            </tr>
+            <tr>
+              <td>Rig fleet performance</td>
+              <td><code>risk_scores.csv</code></td>
+              <td>Groups by <code>rig_no</code>, averages progress, counts wells, sorts and slices top rigs</td>
+            </tr>
+            <tr>
+              <td>Rig radar</td>
+              <td>Derived from rig aggregates</td>
+              <td>Builds progress, load, and efficiency dimensions for the leading rigs</td>
+            </tr>
+            <tr>
+              <td>Predictive drivers</td>
+              <td><code>feature_importance.csv</code></td>
+              <td>Takes top features and converts them into 2D horizontal bars or 3D extruded bars</td>
+            </tr>
+            <tr>
+              <td>Well register</td>
+              <td><code>priority_wells_final.csv</code></td>
+              <td>Parses well identity, project, rig, progress, risk score, tier, and predicted completion date</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>6) Visualization Stack: 2D and 3D</h2>
+        <p>
+          Decision Studio maintains two visualization modes driven by the same underlying arrays:
+        </p>
+        <ul>
+          <li><strong>Recharts 2D mode:</strong> PieChart, BarChart, RadarChart, AreaChart, and standard Cartesian views.</li>
+          <li><strong>Plotly 3D mode:</strong> mesh3d prisms, scatter3d rig positioning, and a portfolio density surface.</li>
+        </ul>
+        <p>
+          The code constructs custom 3D bars using Plotly <code>mesh3d</code> rather than using simple flat columns. This is why the 3D mode can encode depth and produce a more volumetric presentation of risk, rig performance, and feature importance.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>7) Visual Panels Actually Present in the Tab</h2>
+        <ul>
+          <li>Risk Distribution</li>
+          <li>Progress Distribution / portfolio density surface</li>
+          <li>Rig Profile / Rig Capability Radar / Rig 3D Scatter</li>
+          <li>Rig Fleet Performance</li>
+          <li>Predictive Drivers</li>
+          <li>Driver Distribution via SHAP beeswarm image</li>
+          <li>Completion Probability via survival plot</li>
+          <li>Timeline Forecast image</li>
+          <li>Model Accuracy panel</li>
+          <li>Completion Drivers hazard-ratio image</li>
+        </ul>
+        <p>
+          So the tab is not one chart surface. It is a curated model-evidence board composed of both live-rendered plots and pre-generated research-style visuals.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>8) Training Manifest: What It Reveals About the Model Package</h2>
+        <p>
+          <code>training_manifest.json</code> is the governance spine of Decision Studio. It records what was produced in the training run, the thresholds for risk tiers, survival covariates, and the ensemble members behind the published model package.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Manifest Field</th>
+              <th>Observed Meaning</th>
+              <th>Why It Matters</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>best_model</code></td>
+              <td><code>DecisionStudio_Ensemble_CatBoost_XGBoost</code></td>
+              <td>Shows the primary package is an ensemble, not a single regressor or classifier</td>
+            </tr>
+            <tr>
+              <td><code>tier_thresholds</code></td>
+              <td>Watch, High Risk, Critical cutoffs</td>
+              <td>Explains how wells are bucketed into the visible tier counts</td>
+            </tr>
+            <tr>
+              <td><code>risk_metrics</code></td>
+              <td>AUC and Brier score</td>
+              <td>Shows rank quality and calibration quality for the risk model</td>
+            </tr>
+            <tr>
+              <td><code>survival_metrics</code></td>
+              <td>C-index and Cox features used</td>
+              <td>Shows that completion timing is modeled as a survival problem, not just a regression problem</td>
+            </tr>
+            <tr>
+              <td><code>progress_ensemble_members</code>, <code>weeks_ensemble_members</code>, <code>risk_ensemble_members</code></td>
+              <td>CatBoost and XGBoost families with weights</td>
+              <td>Makes the model package inspectable at the ensemble composition level</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-4">
+        <h2>9) Published Validation Metrics</h2>
+        <ul>
+          <li><strong>RMSE:</strong> 0.0835</li>
+          <li><strong>MAE:</strong> 0.0389</li>
+          <li><strong>R2:</strong> 0.9476</li>
+          <li><strong>MAPE:</strong> 20.21%</li>
+          <li><strong>AUC:</strong> 0.9990</li>
+          <li><strong>Brier:</strong> 0.0029</li>
+          <li><strong>C-index:</strong> 0.8665</li>
+        </ul>
+        <p>
+          These are not invented UI numbers. They come from the packaged artifact files that the tab loads directly.
+        </p>
+      </article>
+
+      <article class="card span-4">
+        <h2>10) Why the Tab Shows SHAP and Survival Images</h2>
+        <ul>
+          <li><code>shap_beeswarm.png</code></li>
+          <li><code>shap_importance.png</code></li>
+          <li><code>shap_risk_drivers.png</code></li>
+          <li><code>survival_kaplan_meier.png</code></li>
+          <li><code>survival_cox_hazard.png</code></li>
+          <li><code>ag_diagnostics.png</code></li>
+        </ul>
+        <p>
+          Static evidence plots are useful because they preserve research-grade explanation visuals exactly as produced during model development.
+        </p>
+      </article>
+
+      <article class="card span-4">
+        <h2>11) Why This Is Different From a Usual Dashboard</h2>
+        <ul>
+          <li>It shows model package outputs, not just raw operational data.</li>
+          <li>It exposes validation metrics and driver evidence.</li>
+          <li>It allows 2D/3D toggling on the same analytical arrays.</li>
+          <li>It treats explanation as a first-class workflow via inline tooltip AI.</li>
+          <li>It can escalate into live predictive actions through SequelForecast.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>12) /api/explain: Interactive Explanation Layer</h2>
+        <p>
+          The small info controls inside Decision Studio are not hardcoded tooltip strings. They call <code>/api/explain</code>, which loads the same artifact package,
+          builds a current snapshot, and then returns grounded explanations for terms like Portfolio, Risk Distribution, Rig Profile, Predictive Drivers, RMSE, AUC, or Completion Drivers.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Step</th>
+              <th>What Happens</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Client posts a <code>term</code> and optional <code>context</code> to <code>/api/explain</code></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Route loads current artifact snapshot from <code>public/wmr_results</code> and caches it for 60 seconds</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Route computes facts: well count, tier counts, thresholds, top drivers, survival covariates, validation metrics</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Route either builds a deterministic fallback explanation or calls Groq if API keys are present</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Returned explanation is cached by term and context, so repeated hovers are fast</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>13) SequelForecastStudio: The Live Predictive Overlay</h2>
+        <p>
+          Inside Decision Studio there is a separate embedded product called <code>SequelForecastStudio</code>. This is the live action layer. When opened,
+          it switches from static artifact review to backend inference and operations:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Frontend Action</th>
+              <th>Proxy Route</th>
+              <th>Backend Route</th>
+              <th>Effect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Target well forecast</td>
+              <td><code>/api/predict?action=single</code></td>
+              <td><code>POST /predict/single</code></td>
+              <td>Runs real-time single well forecast using SQL or offline artifacts</td>
+            </tr>
+            <tr>
+              <td>Nightly evaluation</td>
+              <td><code>/api/predict?action=refresh</code></td>
+              <td><code>POST /predict/refresh</code></td>
+              <td>Batch evaluates active wells and updates anomaly state</td>
+            </tr>
+            <tr>
+              <td>Full recalibration</td>
+              <td><code>/api/predict?action=full</code></td>
+              <td><code>POST /predict/full</code></td>
+              <td>Queues full retrain workflow instructions</td>
+            </tr>
+            <tr>
+              <td>Anomaly feed</td>
+              <td><code>/api/predict?action=anomalies</code></td>
+              <td><code>GET /predict/anomalies</code></td>
+              <td>Returns tier changes detected in prior refresh cycles</td>
+            </tr>
+            <tr>
+              <td>Portfolio summary</td>
+              <td><code>/api/predict?action=portfolio</code></td>
+              <td><code>GET /predict/portfolio</code></td>
+              <td>Returns portfolio-level predictive summary from the ML service</td>
+            </tr>
+            <tr>
+              <td>Model info</td>
+              <td><code>/api/predict?action=model-info</code></td>
+              <td><code>GET /predict/model-info</code></td>
+              <td>Exposes model readiness and artifact health</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>14) What Predictive Tech the Live Overlay Uses</h2>
+        <ul>
+          <li><strong>FeatureEngine:</strong> engineers 58 features from well records and history</li>
+          <li><strong>AutoGluon:</strong> tabular progress prediction stack</li>
+          <li><strong>Random Survival Forest:</strong> estimates time-to-completion</li>
+          <li><strong>Exact risk formula:</strong> combines progress, velocity, schedule, and gap components</li>
+          <li><strong>AnomalyTracker:</strong> tracks changes in risk tier between refresh cycles</li>
+        </ul>
+        <p>
+          So Decision Studio is not disconnected from the product's real ML. It simply presents the published layer first, then lets the user cross into live inference when needed.
+        </p>
+      </article>
+
+      <article class="card span-6">
+        <h2>15) Why the Two-Layer Design Is Smart</h2>
+        <ul>
+          <li><strong>Board speed:</strong> top-level analytics open fast from published artifacts.</li>
+          <li><strong>Evidence quality:</strong> users see validated SHAP, survival, and diagnostic outputs.</li>
+          <li><strong>Operational escalation:</strong> when they want action, they can open the live forecast engine.</li>
+          <li><strong>Demo resilience:</strong> the board still works even if some live services are slow.</li>
+          <li><strong>Institutional feel:</strong> this is closer to a real investment or operations review pack than a noisy transactional dashboard.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>16) Decision Lab Wrapper Around Decision Studio</h2>
+        <p>
+          There is also a higher-level wrapper called <code>DecisionLab.tsx</code>. It provides three interchangeable views:
+        </p>
+        <ul>
+          <li><strong>Decision Studio</strong> - the institutional analytics board described in this document</li>
+          <li><strong>Predictive Forecast</strong> - the live Predictive Studio surface</li>
+          <li><strong>Causal Why</strong> - the Causal Command surface</li>
+        </ul>
+        <p>
+          This means the product is organized around three analytical modes: descriptive model package review, predictive forecast operations, and causal intervention reasoning.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-12">
+        <h2>17) Why Decision Studio Creates Real Client Value</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Capability</th>
+              <th>Technical Mechanism</th>
+              <th>Business Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Portfolio governance</td>
+              <td>Artifact-backed KPI and tier views</td>
+              <td>Leadership can quickly understand the risk package without waiting on live model execution</td>
+            </tr>
+            <tr>
+              <td>Model transparency</td>
+              <td>Validation metrics, SHAP distributions, hazard-ratio plots</td>
+              <td>Client can trust that the ranking is explainable and tested</td>
+            </tr>
+            <tr>
+              <td>Rig benchmarking</td>
+              <td>Rig aggregation, radar, and 3D scatter</td>
+              <td>Operations teams can see where execution capability is stronger or weaker</td>
+            </tr>
+            <tr>
+              <td>Executive communication</td>
+              <td>Published board plus tooltip intelligence</td>
+              <td>Complex metrics become easier to explain in demos and review meetings</td>
+            </tr>
+            <tr>
+              <td>Operational escalation</td>
+              <td>Open Forecast bridge to live predictive endpoints</td>
+              <td>User can go from board review into well-specific action and anomaly investigation</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="dark-box span-12">
+        <h2 style="color:#f8fafc;">18) Most Important Architectural Insight</h2>
+        <p style="color:#d6dde6;">
+          Decision Studio is a published intelligence package, not just another analytics tab. Its job is to turn model outputs into an institutional review surface:
+          tier thresholds, validation quality, rig comparison, driver ranking, SHAP evidence, survival evidence, and portfolio prioritization.
+        </p>
+        <p style="color:#d6dde6;">
+          The tab becomes especially powerful because it does not stop at passive viewing. Once the user needs deeper operational action, it can open the live
+          SequelForecast workspace and hand off into the backend predictive engine. That two-step design gives both presentation quality and operational depth.
+        </p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Generated for module-level technical understanding of Bashira Intelligence - Decision Studio tab.
+    </div>
+  </div>
+</body>
+</html>

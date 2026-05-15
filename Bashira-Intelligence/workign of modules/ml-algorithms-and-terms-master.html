@@ -1,0 +1,263 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - ML Algorithms and Terms Master</title>
+  <style>
+    :root { --bg:#f6f7f9; --card:#ffffff; --ink:#111111; --muted:#5f6670; --line:#d7dbe1; --blue:#0f62fe; --green:#00c805; --yellow:#f1c21b; --red:#8e1b1b; --slate:#1f2937; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI","IBM Plex Sans","Figtree",Arial,sans-serif; line-height:1.55; }
+    .page { max-width:1280px; margin:0 auto; padding:24px; }
+    .hero,.card { background:var(--card); border:1px solid var(--line); border-radius:22px; }
+    .hero { padding:26px; margin-bottom:16px; }
+    .eyebrow { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+    h1 { margin:8px 0 10px; font-size:36px; line-height:1.15; }
+    h2 { margin:0 0 14px; font-size:24px; line-height:1.2; }
+    h3 { margin:0 0 10px; font-size:18px; line-height:1.25; }
+    p { margin:0 0 12px; }
+    .subtitle { margin:0; color:var(--muted); font-size:15px; }
+    .grid { display:grid; gap:16px; grid-template-columns:repeat(12,minmax(0,1fr)); margin-bottom:16px; }
+    .card { padding:18px; }
+    .span-8 { grid-column:span 8; } .span-6 { grid-column:span 6; } .span-4 { grid-column:span 4; } .span-3 { grid-column:span 3; }
+    .kpi { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:700; margin-bottom:8px; }
+    .metric { font-size:30px; font-weight:700; line-height:1; margin-bottom:8px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .chip { display:inline-flex; align-items:center; border-radius:999px; border:1px solid var(--line); padding:6px 10px; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--slate); background:#fff; }
+    .chip.blue { color:var(--blue); border-color:rgba(15,98,254,.28); background:rgba(15,98,254,.05); }
+    .chip.green { color:#0b6b0d; border-color:rgba(0,200,5,.28); background:rgba(0,200,5,.06); }
+    .chip.yellow { color:#8a6a00; border-color:rgba(241,194,27,.42); background:rgba(241,194,27,.12); }
+    .chip.red { color:var(--red); border-color:rgba(142,27,27,.28); background:rgba(142,27,27,.06); }
+    .chip.gray { color:#475569; background:#f8fafc; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th,td { text-align:left; vertical-align:top; padding:12px 10px; border-top:1px solid var(--line); }
+    th { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; background:#fbfcfd; }
+    tr:first-child th,tr:first-child td { border-top:none; }
+    .term { border-top:1px solid var(--line); padding-top:16px; margin-top:16px; }
+    .term:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+    .meta { color:var(--muted); font-size:13px; margin-bottom:10px; }
+    .small { font-size:13px; color:var(--muted); }
+    ul,ol { margin:8px 0 12px 18px; padding:0; }
+    li { margin-bottom:6px; }
+    .legend { display:grid; gap:10px; grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:12px; }
+    .legend .card { padding:14px; border-radius:18px; }
+    .callout { border-left:4px solid var(--blue); padding:12px 14px; background:rgba(15,98,254,.04); border-radius:14px; margin-top:12px; }
+    .warning { border-left-color:var(--yellow); background:rgba(241,194,27,.10); }
+    code { font-family:Consolas,"SFMono-Regular",monospace; font-size:.95em; background:#f3f4f6; border:1px solid #e5e7eb; border-radius:6px; padding:1px 5px; }
+    .footer { color:var(--muted); font-size:12px; text-align:center; padding:10px 0 24px; }
+    @media (max-width:980px) { .span-8,.span-6,.span-4,.span-3 { grid-column:span 12; } .legend { grid-template-columns:1fr; } table { display:block; overflow-x:auto; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Master ML Glossary</div>
+      <h1>All ML Algorithms, ML Terms, and Decision Science Concepts Used in Bashira Intelligence</h1>
+      <p class="subtitle">This document is a product-wide technical glossary. It explains every major machine learning algorithm, statistical concept, retrieval method, causal term, uncertainty term, and explainability concept that appears in Bashira Intelligence, where it is used, why it matters, and how it contributes to operational value.</p>
+      <div class="chips">
+        <span class="chip blue">retrieval intelligence</span>
+        <span class="chip green">forecasting</span>
+        <span class="chip yellow">causal reasoning</span>
+        <span class="chip red">anomaly and risk detection</span>
+        <span class="chip gray">explainability</span>
+        <span class="chip gray">uncertainty and diagnostics</span>
+      </div>
+      <div class="callout"><strong>Important scope note.</strong> This is not a generic ML textbook. Every section below is written against the actual Bashira codebase and distinguishes between terms that are actively executed in the current product, terms that appear in optional or ensemble paths, and terms that are only referenced in diagnostics or narrative layers.</div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3"><div class="kpi">Core Families</div><div class="metric">7</div><p class="small">Retrieval, forecasting, survival modeling, causal inference, anomaly detection, spatial modeling, and explainability.</p></article>
+      <article class="card span-3"><div class="kpi">Primary Domains</div><div class="metric">Operations</div><p class="small">Used across Operations, Predictive Studio, Decision Studio, Causal Command, Portfolio, Smart Alerts, Rig Operations, and Field Atlas.</p></article>
+      <article class="card span-3"><div class="kpi">Execution Types</div><div class="metric">Live + Hybrid</div><p class="small">Some models run directly against live SQL-derived features, while others sit behind background refresh, offline artifacts, or ensemble endpoints.</p></article>
+      <article class="card span-3"><div class="kpi">Reading Mode</div><div class="metric">Technical</div><p class="small">Each item covers definition, mathematical intuition, Bashira usage, data inputs, output contribution, and product value.</p></article>
+    </section>
+
+    <section class="card" style="margin-bottom:16px;">
+      <h2>How to Read This Document</h2>
+      <div class="legend">
+        <div class="card"><div class="chips"><span class="chip green">Live Executed</span></div><p class="small">The term or model is actively used in the current product path.</p></div>
+        <div class="card"><div class="chips"><span class="chip blue">Conditional Path</span></div><p class="small">The term or model is real, but only appears in some endpoints, fallbacks, background refreshes, or advanced ensemble routes.</p></div>
+        <div class="card"><div class="chips"><span class="chip yellow">Diagnostic or Explainability</span></div><p class="small">The concept supports interpretation, validation, posterior quality, or confidence reporting more than direct frontline scoring.</p></div>
+        <div class="card"><div class="chips"><span class="chip red">Narrative or Strategic Reference</span></div><p class="small">The term may appear in product language or future-facing structure but is not a confirmed always-on model in the main local path.</p></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-bottom:16px;">
+      <h2>High-Level Index of ML Families</h2>
+      <table>
+        <tr><th>Family</th><th>Main Terms</th><th>Where Used</th><th>What It Solves</th></tr>
+        <tr><td><strong>Semantic Retrieval and NL2SQL</strong></td><td>BM25, embeddings, MiniLM, vector search, fulltext search, cosine similarity, RRF, DSPy, few-shot, LangGraph</td><td>Operations, SequelOntology, SQL generation stack</td><td>Turns ambiguous natural language into schema-grounded SQL with high recall and reduced hallucination.</td></tr>
+        <tr><td><strong>Tabular Forecasting</strong></td><td>AutoGluon, feature engineering, risk formula, forecast horizon, ensemble</td><td>Predictive Studio, Decision Studio, predictive API</td><td>Predicts well progress, risk, completion tendency, and portfolio pressure.</td></tr>
+        <tr><td><strong>Survival and Time-to-Event</strong></td><td>Random Survival Forest, survival analysis, completion date confidence</td><td>Predictive Studio, predictive API</td><td>Estimates when a well is likely to finish rather than only predicting a static score.</td></tr>
+        <tr><td><strong>Time-Series and Ensemble Extensions</strong></td><td>AutoARIMA, AutoETS, XGBoost, LightGBM, S-Learner CATE, conformal intervals</td><td>Forecast engine headers, ensemble endpoint, advanced diagnostics</td><td>Adds horizon forecasting, ensemble blending, treatment-effect estimation, and interval confidence.</td></tr>
+        <tr><td><strong>Causal and Bayesian Analysis</strong></td><td>Bayesian counterfactuals, Stan, CmdStan, MCMC, Laplace approximation, empirical Bayes, horseshoe prior, posterior, LOO-CV, R-hat, ESS</td><td>Causal Command</td><td>Moves from what is risky to what likely drives the delay and what intervention could reduce it.</td></tr>
+        <tr><td><strong>Anomaly and Operational Pressure</strong></td><td>IsolationForest, anomaly tracker, queue contagion, ops risk score</td><td>Smart Alerts, Rig Operations, Portfolio enrichment</td><td>Detects wells that behave unlike the fleet and identifies hidden pressure not visible from simple averages.</td></tr>
+        <tr><td><strong>Spatial Intelligence</strong></td><td>NearestNeighbors, neighborhood pressure, DBSCAN, spatial signal score</td><td>Field Atlas</td><td>Finds risky geographic clusters, corridor pressure, and local exposure patterns across wells and rigs.</td></tr>
+      </table>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>1. Retrieval, Semantic Search, and NL2SQL Terms</h2>
+        <div class="term"><h3>BM25</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>BM25 is a statistical ranking algorithm from information retrieval. It scores a document against a query by combining term frequency, inverse document frequency, and document length normalization. In plain language, it rewards terms that appear often in a relevant document, penalizes terms that are common everywhere, and avoids unfairly favoring very long descriptions.</p><p>In Bashira, BM25 is used over schema- and column-level descriptions so the system can recover exact database terms even when the user phrase is incomplete, informal, or partially mismatched. This matters because enterprise schema names are rarely written the way business users speak. BM25 helps bridge that gap on the keyword side, while vector search handles the semantic side.</p><p>BM25 appears in two critical places. First, it participates in hybrid retrieval before SQL generation. Second, it is reused in validation as an anti-hallucination guard: if the generated SQL references tables or structures that do not appear in the BM25 schema corpus, the validator can reject or self-heal the query.</p></div>
+        <div class="term"><h3>Embeddings</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>An embedding is a dense numeric vector representation of text. Instead of comparing words only at the token level, embeddings represent the meaning of a phrase in a geometry where semantically similar phrases land close together.</p><p>In Bashira, embeddings are used on schema descriptions, ontology descriptions, and retrieval documents. The system can therefore match a user asking for rig-off delay against a schema description that may use more formal terminology such as expected rig-off date, overdue rig-off, or schedule slippage. That semantic bridge is what makes NL2SQL practical on messy operational schemas.</p></div>
+        <div class="term"><h3>MiniLM</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>MiniLM is a compact sentence-transformer family optimized for efficient semantic embeddings. Bashira uses the <code>all-MiniLM-L6-v2</code> style embedding model to convert schema text into 384-dimensional vectors. It is light enough for local or CPU-oriented semantic retrieval while still producing strong sentence-level semantic similarity.</p></div>
+        <div class="term"><h3>Vector Search</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Vector search retrieves the nearest documents in embedding space rather than purely by exact keyword overlap. Bashira uses Neo4j vector retrieval on embedded schema and ontology items. This is central for enterprise NL2SQL because business questions rarely mirror physical column names exactly.</p></div>
+        <div class="term"><h3>Fulltext Search</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Fulltext search is a keyword-centric indexing strategy. In Bashira, Neo4j fulltext search complements vector search by catching high-signal exact business terms that may not be captured strongly enough by embeddings alone.</p></div>
+        <div class="term"><h3>Cosine Similarity</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Cosine similarity measures how aligned two vectors are, regardless of magnitude. In embedding systems, it is the standard way to measure semantic closeness between the user query and schema-description vectors.</p></div>
+        <div class="term"><h3>RRF: Reciprocal Rank Fusion</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Reciprocal Rank Fusion is a rank-merging algorithm. It rewards items that appear near the top of multiple ranked lists instead of trying to average incompatible raw scores from vector search, BM25, and fulltext search. That is why Bashira can combine heterogeneous retrieval channels without pretending they share one scoring scale.</p></div>
+        <div class="term"><h3>DSPy</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>DSPy is a framework for structured LLM programs. In Bashira, it is used to structure SQL generation and chart recommendation with typed signatures and predictable outputs instead of one giant uncontrolled prompt.</p></div>
+        <div class="term"><h3>Few-Shot Learning and Manual Few-Shot Demos</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Few-shot learning means guiding the model with a small set of high-quality examples. Bashira injects manually curated SQL examples so the agent learns local join patterns, aggregation style, and domain-specific naming.</p></div>
+        <div class="term"><h3>Chain-of-Thought</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Chain-of-thought is a structured reasoning pattern where the model decomposes the problem before producing the final output. Bashira uses DSPy ChainOfThought in the SQL path to improve schema-aware reasoning.</p></div>
+        <div class="term"><h3>LangGraph</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>LangGraph is a stateful graph-orchestration framework for multi-step LLM and tool workflows. In Bashira, it coordinates intent extraction, retrieval, SQL generation, validation, execution, chart recommendation, predictive branching, and response assembly. It is not itself an ML algorithm, but it is one of the key technical terms of the product.</p></div>
+      </article>
+
+      <article class="card span-4">
+        <h2>Why NL2SQL Is Difficult</h2>
+        <p>NL2SQL is hard because the model must map vague language to exact schema structures, discover join paths, avoid hallucinating columns, understand business synonyms, choose the right grain, and still produce executable SQL.</p>
+        <ul><li>Embeddings capture semantic similarity.</li><li>BM25 captures literal schema words.</li><li>RRF merges retrieval channels safely.</li><li>Few-shot examples teach domain SQL patterns.</li><li>Validator loops reject hallucinations and self-heal.</li><li>LangGraph coordinates the state machine.</li></ul>
+        <div class="callout warning"><strong>Key insight:</strong> in Bashira, retrieval itself is part of the ML story. Before forecasting or risk scoring, the product already applies machine intelligence to determine which fields and relations matter.</div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>2. Forecasting and Predictive Modeling Terms</h2>
+        <div class="term"><h3>AutoGluon TabularPredictor</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>AutoGluon is an automated machine learning framework specialized for tabular data. It tries multiple model families, tunes them, and can stack them internally to produce strong predictions with minimal hand-coding. In Bashira’s predictive service, AutoGluon is described as a real trained model used for single-well forecasting.</p><p>This matters because well progress and delivery risk live in tabular operational data: dates, progress percentages, queue counts, weekly actual-versus-plan deltas, rig metadata, and milestone history. AutoGluon is well-suited to this type of data because it can exploit nonlinear feature interactions without forcing the team to handcraft one brittle model family.</p></div>
+        <div class="term"><h3>Feature Engineering</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Feature engineering means converting raw operational data into model-ready signals. A raw milestone date is often less useful than a derived delay-from-plan metric, a lag feature, a weekly change rate, or a stage-specific gap. Bashira explicitly uses engineered features before prediction.</p></div>
+        <div class="term"><h3>Risk Score</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>A risk score is a composite numeric signal summarizing operational danger or delivery pressure. In Bashira, different tabs compute different governed risk scores by blending schedule slip, plan gap, stage bottlenecks, anomalies, queue pressure, and portfolio priors.</p></div>
+        <div class="term"><h3>Forecast Horizon</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Forecast horizon means how far into the future the model predicts. In Bashira’s forecasting engine, the main horizon is a short forward operational window, which is more actionable for weekly planning and intervention than a vague long-range estimate.</p></div>
+        <div class="term"><h3>Ensemble</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>An ensemble combines multiple models into one prediction system. Bashira exposes an ensemble endpoint and diagnostics path that describe a stack spanning LightGBM, AutoARIMA, Stan Bayesian outputs, and S-Learner CATE.</p></div>
+      </article>
+
+      <article class="card span-6">
+        <h2>3. Survival, Time-Series, and Advanced Forecast Extensions</h2>
+        <div class="term"><h3>Random Survival Forest</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>A Random Survival Forest is a tree ensemble designed for time-to-event prediction. Instead of only answering what class or what number, it estimates when an event is likely to happen. In Bashira, the event is operational completion or a related milestone.</p><p>This is especially valuable because delivery risk is fundamentally a time problem. The client needs estimated finish timing and uncertainty, not only a generic risk label.</p></div>
+        <div class="term"><h3>Survival Analysis</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Survival analysis is the broader field around time-to-event modeling. In Bashira, it supports completion-date reasoning and confidence windows for operational finish timing.</p></div>
+        <div class="term"><h3>StatsForecast</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>StatsForecast is a time-series forecasting toolkit oriented around efficient statistical forecasters. Bashira describes it in the forecast engine header as part of the CPU-oriented forecasting stack.</p></div>
+        <div class="term"><h3>AutoARIMA</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>AutoARIMA automatically searches ARIMA configurations for time-series forecasting. ARIMA models capture autocorrelation and momentum in temporal sequences. In Bashira, AutoARIMA appears in the advanced forecast and ensemble path.</p></div>
+        <div class="term"><h3>AutoETS</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>ETS stands for Error, Trend, and Seasonality. AutoETS selects among exponential smoothing state-space variants. Bashira references it as part of the advanced time-series toolkit.</p></div>
+        <div class="term"><h3>XGBoost</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>XGBoost is a gradient-boosted tree system known for strong performance on structured data. Bashira references an XGBoost ensemble in the forecast-engine description, so it belongs in the advanced forecast vocabulary even when not always exposed in every tab refresh.</p></div>
+        <div class="term"><h3>LightGBM</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>LightGBM is a gradient-boosted decision tree library optimized for speed and large feature spaces. Bashira uses <code>LGBMRegressor</code> directly in the Causal Command CPU scenario layer and also references LightGBM in the advanced forecast ensemble path.</p></div>
+        <div class="term"><h3>S-Learner CATE</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>S-Learner is one way to estimate treatment effects using a supervised learner. CATE means Conditional Average Treatment Effect: the estimated effect of an intervention for a particular context. In Bashira, it appears in the advanced ensemble stack and points toward action-specific lift estimation.</p></div>
+        <div class="term"><h3>Conformal Prediction Intervals</h3><div class="meta"><span class="chip yellow">Diagnostic or Explainability</span></div><p>Conformal prediction wraps predictive models with empirical uncertainty intervals. In Bashira, conformal intervals are referenced in the ensemble endpoint. This matters because point forecasts alone can look precise while hiding uncertainty.</p></div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-8">
+        <h2>4. Causal Inference and Bayesian Terms</h2>
+        <div class="term"><h3>Counterfactual</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>A counterfactual asks what would the outcome look like if a key condition changed. In Bashira’s Causal Command, counterfactuals estimate how delay changes if operational drivers or intervention choices are modified. Forecasting projects the current path; counterfactual analysis asks how the path would change under action.</p></div>
+        <div class="term"><h3>Bayesian Inference</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>Bayesian inference updates prior beliefs with observed data to produce a posterior distribution. In Bashira, the Bayesian counterfactual layer adds a deeper uncertainty-aware view of delay drivers and intervention scenarios.</p></div>
+        <div class="term"><h3>Posterior</h3><div class="meta"><span class="chip yellow">Diagnostic or Explainability</span></div><p>The posterior is the result of Bayesian updating. In Bashira, posterior status and posterior analysis appear in the deep causal layer and audit answers, showing that the system is reasoning over uncertainty rather than only emitting deterministic numbers.</p></div>
+        <div class="term"><h3>Stan and CmdStan</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>Stan is a probabilistic programming system for Bayesian modeling. CmdStan is its runtime and compilation toolchain. Bashira uses a <code>StanCounterfactualService</code> that tries to compile and run a Stan model for the deep causal layer.</p></div>
+        <div class="term"><h3>MCMC: Markov Chain Monte Carlo</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>MCMC is a class of algorithms for sampling from difficult posterior distributions. Bashira’s Stan service explicitly describes a multi-chain MCMC workflow with warmup and sampling iterations. This is real posterior sampling, not a cosmetic confidence number.</p></div>
+        <div class="term"><h3>Laplace Approximation</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>Laplace approximation is a faster analytic approximation to a posterior distribution using local curvature. Bashira uses it as a fallback when full Stan MCMC is unavailable or compilation fails.</p></div>
+        <div class="term"><h3>Empirical Bayes</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>Empirical Bayes estimates prior hyperparameters from the observed data before posterior inference. Bashira references empirical-Bayes style fallback behavior in the deeper causal stack.</p></div>
+        <div class="term"><h3>Hierarchical Model</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>A hierarchical model allows parameters to vary across groups while still sharing information across them. Bashira’s Stan service references a horseshoe hierarchical model, which suits wells, rigs, stages, and clusters that differ locally but belong to one portfolio.</p></div>
+        <div class="term"><h3>Horseshoe Prior</h3><div class="meta"><span class="chip blue">Conditional Path</span></div><p>The horseshoe prior is a Bayesian shrinkage prior useful when many candidate drivers exist but only a subset are expected to matter strongly. That aligns well with Bashira’s driver-ranking problem in the causal layer.</p></div>
+        <div class="term"><h3>Scenario Modeling</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Scenario modeling means estimating what happens under alternative intervention settings. In Bashira’s causal CPU layer, trained LightGBM-based scenarios estimate modeled delay deltas for operational actions. This is the bridge from analytics to decision support.</p></div>
+      </article>
+
+      <article class="card span-4">
+        <h2>5. Bayesian Diagnostics Terms</h2>
+        <div class="term"><h3>LOO-CV</h3><div class="meta"><span class="chip yellow">Diagnostic or Explainability</span></div><p>Leave-One-Out Cross-Validation compares predictive adequacy in the Bayesian setting. Bashira’s Stan service references LOO-CV diagnostics through ArviZ.</p></div>
+        <div class="term"><h3>R-hat</h3><div class="meta"><span class="chip yellow">Diagnostic or Explainability</span></div><p>R-hat is a convergence diagnostic for MCMC. Values near 1 suggest chains have mixed well; poor values suggest unreliable posterior inference.</p></div>
+        <div class="term"><h3>ESS: Effective Sample Size</h3><div class="meta"><span class="chip yellow">Diagnostic or Explainability</span></div><p>Effective Sample Size measures how much independent information the MCMC samples contain after accounting for autocorrelation.</p></div>
+        <div class="term"><h3>Divergences</h3><div class="meta"><span class="chip yellow">Diagnostic or Explainability</span></div><p>Divergences indicate problems in Hamiltonian Monte Carlo exploration. Bashira includes this concept in its diagnostic vocabulary so Bayesian claims can be audited instead of blindly trusted.</p></div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>6. Explainability and Attribution Terms</h2>
+        <div class="term"><h3>SHAP</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>SHAP stands for SHapley Additive exPlanations. It is a feature attribution method based on cooperative game theory. The central idea is to estimate how much each feature contributes to the model’s prediction relative to a baseline.</p><p>In Bashira, SHAP is used in the causal CPU layer with <code>shap.TreeExplainer</code> over a LightGBM model, and the predictive stack also references SHAP generation during retraining. This is one of the strongest evidence points that the system tries to expose why a model is making a call, not just what it predicts.</p><p>SHAP matters for executive trust because operations teams often reject black-box recommendations unless the product can say which features pushed risk higher, how strong those pushes were, and which drivers dominate across the fleet.</p></div>
+        <div class="term"><h3>Feature Importance</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Feature importance is a broader term meaning the relative contribution of inputs to a model’s output. In Bashira, feature importance appears through SHAP magnitudes, driver rankings, and scenario support logic.</p></div>
+        <div class="term"><h3>Driver Attribution</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Driver attribution means telling the user which conditions most strongly explain the current risk or delay state. Bashira uses driver attribution in alerts, predictive narratives, and causal panels. It is how raw model output becomes an operational story.</p></div>
+      </article>
+
+      <article class="card span-6">
+        <h2>7. Anomaly Detection and Operational Pressure Terms</h2>
+        <div class="term"><h3>IsolationForest</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>IsolationForest is an unsupervised anomaly-detection algorithm. It works by randomly partitioning the feature space; observations that become isolated quickly are considered unusual. It is a good fit when labeled anomaly data is sparse but the system still needs to flag wells that do not behave like the fleet.</p><p>Bashira uses IsolationForest in the command-center operational layer to generate anomaly scores for well execution patterns. Those anomaly scores feed into rig operations, smart alerts, and downstream pressure metrics.</p></div>
+        <div class="term"><h3>Anomaly Score</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>An anomaly score is the numeric output of an outlier detector. In Bashira, anomaly score is blended with other components rather than acting alone, which is good design because unusual behavior should not overwhelm stronger deterministic evidence such as major schedule slip or severe queue overlap.</p></div>
+        <div class="term"><h3>Anomaly Tracker</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>The anomaly tracker is not itself a learning algorithm, but it is part of the ML-supporting system. It stores and retrieves recent risk transitions and anomaly events so the product can reason about persistent change rather than only instant snapshots.</p></div>
+        <div class="term"><h3>Queue Contagion</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Queue contagion is a domain-specific risk concept in Bashira. It measures how delay or pressure on one well can spill into other wells that share a rig queue or adjacent dependency. This encodes second-order risk, which is why the product feels more operationally intelligent than a plain dashboard.</p></div>
+        <div class="term"><h3>Recovery Confidence</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Recovery confidence is the governed belief that the well or rig can recover from current pressure. In Bashira’s rig layer, it is computed from risk, data quality, queue exposure, and anomaly pressure. It is not a pure posterior probability but a decision-oriented confidence construct.</p></div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>8. Spatial Intelligence Terms</h2>
+        <div class="term"><h3>NearestNeighbors</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>NearestNeighbors is a geometric proximity algorithm that finds nearby points in a coordinate space. Bashira uses it in Field Atlas to estimate neighborhood pressure around wells and to support radius-based local influence calculations.</p></div>
+        <div class="term"><h3>DBSCAN</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>DBSCAN is a density-based clustering algorithm. It groups points that lie in dense neighborhoods and marks isolated points as noise or separate clusters. Bashira uses DBSCAN in the atlas layer to form operational zones from well coordinates. It is a good fit because field geography rarely arrives in neat fixed-count clusters.</p></div>
+        <div class="term"><h3>Neighborhood Pressure</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Neighborhood pressure is a product-specific spatial risk concept derived from nearby wells. It answers: how much operational pressure surrounds this location? Bashira computes this using nearby risk signals and distance-sensitive weighting.</p></div>
+        <div class="term"><h3>Spatial Signal Score</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>The spatial signal score is Field Atlas’s composite geographic risk metric. It blends local operational risk, neighborhood pressure, queue exposure, and anomaly flags. This turns geography into decision-grade topology rather than a passive map.</p></div>
+      </article>
+
+      <article class="card span-6">
+        <h2>9. Operational Decision Science Terms</h2>
+        <div class="term"><h3>Scenario Support Cases</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Support cases refer to comparable examples or local evidence backing a scenario recommendation. In Bashira’s causal layer, support counts are part of what makes a scenario more credible. A strong recommendation is not only one with good modeled delta; it is one that is also supported by comparable observed context.</p></div>
+        <div class="term"><h3>Confidence Gap</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Confidence gap is a product term describing uncertainty introduced by sparse data, schema incompleteness, weak evidence, or unstable model support. It shows up in alerts and executive panels as part of the pressure composition.</p></div>
+        <div class="term"><h3>Stage Stall</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Stage stall is a product-level operational term indicating that a lifecycle stage is progressing slowly or not progressing relative to expectation. It is not a standalone ML algorithm, but it is an engineered feature and explanatory concept used in alerting, rig operations, and causal narratives.</p></div>
+        <div class="term"><h3>Plan Gap</h3><div class="meta"><span class="chip green">Live Executed</span></div><p>Plan gap is the divergence between actual execution and planned execution. This is one of Bashira’s most important modeled concepts because many downstream risk, alert, and intervention decisions rely on actual-versus-plan deltas rather than raw progress alone.</p></div>
+      </article>
+    </section>
+
+    <section class="card" style="margin-bottom:16px;">
+      <h2>10. Terms That Are Real but Not Always Mainline in Every Local Path</h2>
+      <p>Some terms are important because they appear in the architecture, diagnostics, or advanced endpoints even if they do not execute in every ordinary local tab refresh. They are real, but they should not be overstated as always-on.</p>
+      <table>
+        <tr><th>Term</th><th>Status</th><th>Explanation</th></tr>
+        <tr><td><strong>AutoARIMA / AutoETS</strong></td><td>Conditional</td><td>Referenced in the forecast-engine architecture and useful for time-series forecasting, especially in ensemble or extended forecast paths.</td></tr>
+        <tr><td><strong>XGBoost</strong></td><td>Conditional</td><td>Referenced in the forecast-engine stack description as part of an ensemble. Treat as architectural or advanced-stack terminology unless the exact live path is being demonstrated.</td></tr>
+        <tr><td><strong>Stan MCMC</strong></td><td>Conditional</td><td>Real and implemented, but runtime may fall back to Laplace approximation if local toolchain or compilation is unavailable.</td></tr>
+        <tr><td><strong>Conformal Intervals</strong></td><td>Conditional</td><td>Referenced in ensemble output and diagnostics, most relevant when using the dedicated ensemble prediction endpoint.</td></tr>
+        <tr><td><strong>Bayesian Posterior Diagnostics</strong></td><td>Conditional</td><td>Meaningful in Causal Command and model diagnostics, but not needed in every frontline UI interaction.</td></tr>
+      </table>
+    </section>
+    <section class="card" style="margin-bottom:16px;">
+      <h2>11. How the ML Stack Works Together End to End</h2>
+      <p>Bashira is not one model. It is a layered intelligence system where different families solve different parts of the problem.</p>
+      <ol>
+        <li><strong>User understanding layer:</strong> embeddings, BM25, vector search, fulltext search, and RRF figure out what data the user is really asking for.</li>
+        <li><strong>Generation layer:</strong> DSPy, few-shot examples, and LangGraph organize SQL generation and validation.</li>
+        <li><strong>Forecast layer:</strong> AutoGluon, survival models, and advanced ensemble components estimate progress, timing, and risk.</li>
+        <li><strong>Operational pressure layer:</strong> anomaly detection, queue contagion, plan-gap logic, and stage-stall logic build actionable intervention pressure.</li>
+        <li><strong>Causal layer:</strong> LightGBM scenario modeling plus Bayesian counterfactuals estimate which drivers matter and how interventions might shift delay.</li>
+        <li><strong>Spatial layer:</strong> NearestNeighbors and DBSCAN translate risk into geographic topology and corridor exposure.</li>
+        <li><strong>Explainability layer:</strong> SHAP, driver attribution, support counts, and diagnostics make the outputs defensible for a client demo and operator trust.</li>
+      </ol>
+      <div class="callout"><strong>Bottom line:</strong> the product’s intelligence comes from composition. Retrieval intelligence, predictive ML, anomaly scoring, spatial clustering, and causal modeling all contribute different types of value.</div>
+    </section>
+
+    <section class="card" style="margin-bottom:16px;">
+      <h2>12. Practical Business Value of Each ML Family</h2>
+      <table>
+        <tr><th>ML Family</th><th>Business Value</th></tr>
+        <tr><td>BM25 + embeddings + RRF</td><td>Lets executives query operational data in natural language without needing to memorize the database.</td></tr>
+        <tr><td>AutoGluon + survival modeling</td><td>Turns raw operational history into forward-looking delivery visibility.</td></tr>
+        <tr><td>IsolationForest + anomaly tracking</td><td>Flags hidden risk early even when simple KPI dashboards still look stable.</td></tr>
+        <tr><td>LightGBM + SHAP scenarios</td><td>Moves from descriptive analytics into action-ranking and intervention support.</td></tr>
+        <tr><td>Stan Bayesian layer</td><td>Adds deeper uncertainty-aware counterfactual reasoning for institutional-grade decisions.</td></tr>
+        <tr><td>DBSCAN + spatial pressure</td><td>Shows where operational pressure is clustering in the field, not just which individual wells are risky.</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>13. Summary</h2>
+      <p>The most important point is that Bashira does not use ML as a single vague marketing word. It uses different algorithm families for different jobs:</p>
+      <ul>
+        <li><strong>Retrieval ML</strong> to understand data and schema.</li>
+        <li><strong>Predictive ML</strong> to forecast progress and risk.</li>
+        <li><strong>Survival ML</strong> to estimate time to completion.</li>
+        <li><strong>Anomaly ML</strong> to detect fleet outliers.</li>
+        <li><strong>Causal ML and Bayesian modeling</strong> to rank interventions and explain likely drivers.</li>
+        <li><strong>Spatial ML</strong> to expose geographic pressure and corridor risk.</li>
+        <li><strong>Explainability layers</strong> to make outputs interpretable and defensible.</li>
+      </ul>
+      <p>That combination is what gives the product its intelligence density. The platform is not just drawing charts over SQL. It is using machine learning, statistical inference, and structured retrieval to convert operational data into decisions.</p>
+    </section>
+
+    <div class="footer">Bashira Intelligence • Master ML Algorithms and Terms Reference • Generated for demo and technical preparation</div>
+  </div>
+</body>
+</html>

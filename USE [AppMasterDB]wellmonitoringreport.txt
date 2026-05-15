@@ -1,0 +1,758 @@
+USE [AppMasterDB]
+GO
+
+/****** Object:  View [dbo].[WellMonitoringReport]    Script Date: 25-03-2026 16:19:15 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE   VIEW [dbo].[WellMonitoringReport]
+AS
+WITH wk AS (
+    SELECT DISTINCT Week_Number
+    FROM dbo.WMR
+),
+target_week AS (
+    SELECT Week_Number
+    FROM wk
+    ORDER BY Week_Number DESC
+    OFFSET 1 ROW FETCH NEXT 1 ROW ONLY
+),
+latest AS (
+    SELECT w.*
+    FROM dbo.WMR w
+    INNER JOIN target_week tw
+        ON w.Week_Number = tw.Week_Number
+),
+
+/* ---------- TaskPlan: parse + aggregate per well ---------- */
+taskplan_parsed AS (
+    SELECT
+        tp.New_Well_ID,
+        LTRIM(RTRIM(tp.[text])) AS tp_text,
+        UPPER(LTRIM(RTRIM(tp.[text]))) AS tp_text_u,
+        LTRIM(RTRIM(tp.[code])) AS tp_code,
+        dbo.fn_WMR_ParseProgress(CAST(tp.[progress] AS NVARCHAR(510))) AS tp_prog,
+        dbo.fn_WMR_ParseDate(CAST(tp.[actual_start] AS NVARCHAR(510))) AS tp_start_d,
+        dbo.fn_WMR_ParseDate(CAST(tp.[actual_end] AS NVARCHAR(510))) AS tp_end_d,
+        CASE
+            WHEN tp.[code] IS NOT NULL AND LTRIM(RTRIM(tp.[code])) LIKE 'FLME%'
+                THEN TRY_CONVERT(INT, SUBSTRING(LTRIM(RTRIM(tp.[code])), 5, 4))
+            ELSE NULL
+        END AS flme_no
+    FROM dbo.WMR_TaskPlan_csv_imported tp
+),
+taskplan_agg AS (
+    SELECT
+        p.New_Well_ID,
+        MAX(CASE WHEN p.tp_text = 'Location' THEN p.tp_prog END) AS tp_location_progress,
+        MAX(CASE WHEN p.tp_text = 'Location Start' THEN p.tp_start_d END) AS tp_location_start_date,
+        MAX(CASE WHEN p.tp_text_u = 'LOCATION FINISH' THEN p.tp_end_d END) AS tp_location_finish_date,
+        MAX(CASE WHEN p.flme_no BETWEEN 1360 AND 1430 THEN p.tp_end_d END) AS tp_flme_const_complete_date,
+        MAX(CASE WHEN p.tp_text = 'Flowline Completion' THEN p.tp_prog END) AS tp_flowline_completion_progress,
+        MAX(CASE WHEN p.tp_code LIKE '%LCPC1005%' THEN p.tp_prog END) AS tp_access_road_5,
+        MAX(CASE WHEN p.tp_code LIKE '%LCPC1040%' THEN p.tp_prog END) AS tp_earth_work_60,
+        MAX(CASE WHEN p.tp_code LIKE '%LCCC1040%' THEN p.tp_prog END) AS tp_cellar_20,
+        MAX(CASE WHEN p.tp_code LIKE '%LCCC1070%' THEN p.tp_prog END) AS tp_beam_pump_base_5,
+        MAX(CASE WHEN p.tp_code LIKE '%LCCC1080%' OR p.tp_code LIKE '%LCCC1090%' THEN p.tp_prog END) AS tp_earthing_septic_max,
+        MAX(CASE WHEN p.tp_code LIKE '%LCPC1030%' THEN p.tp_prog END) AS tp_water_waste_2,
+        MAX(CASE WHEN p.tp_code LIKE '%LCPC1050%' THEN p.tp_prog END) AS tp_hdpe_liner_4
+    FROM taskplan_parsed p
+    GROUP BY p.New_Well_ID
+),
+taskplan_lcpc1050 AS (
+    SELECT
+        p.New_Well_ID,
+        MAX(p.tp_prog) AS lcpc1050_prog
+    FROM taskplan_parsed p
+    WHERE p.tp_code LIKE '%LCPC1050%'
+    GROUP BY p.New_Well_ID
+),
+
+/* ---------- Design Tracker ----------
+   E_I_AFC_Completion_Date may contain multiple dates in one cell.
+   Pick the latest valid parsed date for each well.
+*/
+designtracker_tokens AS (
+    SELECT
+        LTRIM(RTRIM(d.Well_ID)) AS Well_ID,
+        dbo.fn_WMR_ParseDate(
+            LTRIM(RTRIM(
+                CASE
+                    WHEN CHARINDEX('(', s.value) > 0
+                        THEN LEFT(s.value, CHARINDEX('(', s.value) - 1)
+                    ELSE s.value
+                END
+            ))
+        ) AS afc_date_piece,
+        dbo.fn_WMR_ParseDate(CAST(d.Survey_Received_Date AS NVARCHAR(510))) AS survey_received_date_piece
+    FROM dbo.DesignTrackerCSVImport d
+    OUTER APPLY STRING_SPLIT(
+        REPLACE(REPLACE(REPLACE(CAST(d.E_I_AFC_Completion_Date AS NVARCHAR(MAX)), CHAR(13), CHAR(10)), CHAR(10) + CHAR(10), CHAR(10)), ';', CHAR(10)),
+        CHAR(10)
+    ) s
+),
+designtracker_flag AS (
+    SELECT
+        t.Well_ID,
+        MAX(t.afc_date_piece) AS engg_finish_date_d,
+        MAX(t.survey_received_date_piece) AS survey_received_date_d,
+        CASE
+            WHEN MAX(t.afc_date_piece) IS NOT NULL THEN CAST(1.0 AS DECIMAL(10,4))
+            ELSE CAST(0.0 AS DECIMAL(10,4))
+        END AS engg_done_flag
+    FROM designtracker_tokens t
+    GROUP BY t.Well_ID
+),
+
+/* ---------- Well Type override ---------- */
+welltype_lookup AS (
+    SELECT
+        LTRIM(RTRIM(wt.Well_ID)) AS Well_ID,
+        NULLIF(LTRIM(RTRIM(wt.Lift_type)), '') AS Lift_type
+    FROM dbo.[2026_Well_Delivery_Scope_Well_Type] wt
+),
+
+/* ---------- Bulk Update join ---------- */
+joined AS (
+    SELECT
+        w.*,
+        bu.z6_data_submitted_date AS bu_z6_data_submitted_date,
+        bu.sap_notification_received_date_z6_2_days_before_eng_completion AS bu_sap_notification_received_date_z6_2_days_before_eng_completion,
+        bu.actual_rig_on_date AS bu_actual_rig_on_date,
+        bu.actual_rig_off_date AS bu_actual_rig_off_date,
+        bu.wlctf_acceptanceapproval_from_production AS bu_wlctf_acceptanceapproval_from_production,
+        bu.actual_hoist_fbu_rsr_on_date AS bu_actual_hoist_fbu_rsr_on_date,
+        bu.actual_hoist_fbu_rsr_off_date AS bu_actual_hoist_fbu_rsr_off_date,
+        bu.wellpad_handover_2_from_hoist_fbu_rsr_off_date AS bu_wellpad_handover_2_from_hoist_fbu_rsr_off_date,
+        bu.actual_eng_completion_date AS bu_actual_eng_completion_date,
+        bu.actual_comm_start_date AS bu_actual_comm_start_date,
+        bu.actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date AS bu_actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date,
+        bu.actual_start_date AS bu_actual_start_date,
+        bu.actual_finish_date AS bu_actual_finish_date,
+        bu.const_actual_start_date AS bu_const_actual_start_date,
+        bu.const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date AS bu_const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date
+    FROM latest w
+    LEFT JOIN dbo.WMR_SQL_Bulk_Update bu
+        ON bu.rig_no = w.rig_no
+       AND bu.pdo_well_id = w.pdo_well_id
+),
+
+typed AS (
+    SELECT
+        j.*,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_z6_data_submitted_date), dbo.fn_WMR_ParseDate(j.z6_data_submitted_date)) AS z6_eff_d,
+        COALESCE(
+            dbo.fn_WMR_ParseDate(j.bu_sap_notification_received_date_z6_2_days_before_eng_completion),
+            dbo.fn_WMR_ParseDate(j.[sap_notification_received_date_z6_2_days_before_eng._completion])
+        ) AS sap_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_rig_on_date), dbo.fn_WMR_ParseDate(j.actual_rig_on_date)) AS rig_on_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_rig_off_date), dbo.fn_WMR_ParseDate(j.actual_rig_off_date)) AS rig_off_eff_d,
+        COALESCE(
+            dbo.fn_WMR_ParseDate(j.bu_wlctf_acceptanceapproval_from_production),
+            dbo.fn_WMR_ParseDate(j.wlctf_acceptanceapproval_from_production)
+        ) AS wlctf_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_hoist_fbu_rsr_on_date), dbo.fn_WMR_ParseDate(j.actual_hoist_fbu_rsr_on_date)) AS hoist_on_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_hoist_fbu_rsr_off_date), dbo.fn_WMR_ParseDate(j.actual_hoist_fbu_rsr_off_date)) AS hoist_off_eff_d,
+        COALESCE(
+            dbo.fn_WMR_ParseDate(j.bu_wellpad_handover_2_from_hoist_fbu_rsr_off_date),
+            dbo.fn_WMR_ParseDate(j.[wellpad_handover-2_from_hoist_fbu_rsr_off_date])
+        ) AS handover2_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_eng_completion_date), dbo.fn_WMR_ParseDate(j.[actual_eng._completion_date])) AS eng_comp_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_comm_start_date), dbo.fn_WMR_ParseDate(j.[actual_comm._start_date])) AS comm_start_eff_d,
+        COALESCE(
+            dbo.fn_WMR_ParseDate(j.bu_actual_comm_finish_date_with_in_2_days_from_actual_engg_completion_date),
+            dbo.fn_WMR_ParseDate(j.[actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date])
+        ) AS comm_finish_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_start_date), dbo.fn_WMR_ParseDate(j.actual_start_date)) AS actual_start_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_actual_finish_date), dbo.fn_WMR_ParseDate(j.actual_finish_date)) AS actual_finish_eff_d,
+        COALESCE(dbo.fn_WMR_ParseDate(j.bu_const_actual_start_date), dbo.fn_WMR_ParseDate(j.[const._actual_start_date])) AS const_start_eff_d,
+        COALESCE(
+            dbo.fn_WMR_ParseDate(j.bu_const_complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date),
+            dbo.fn_WMR_ParseDate(j.[const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date])
+        ) AS const_finish_eff_d
+    FROM joined j
+),
+
+/* ---------- Score rows ---------- */
+scored AS (
+    SELECT
+        t.*,
+        (
+            SELECT COUNT(*)
+            FROM (VALUES
+                (t.sl_no),
+                (t.rig_no),
+                (t.well_location),
+                (t.well_name_after_spud),
+                (t.pdo_well_id),
+                (t.well_type),
+                (t.northing),
+                (t.easting),
+                (t.locationdd),
+                (t.flow_linedl),
+                (t.location_po_no),
+                (t.location_po_recvd_date),
+                (t.scr_no),
+                (t.scr_date),
+                (t.moc_raised),
+                (t.moc_approved),
+                (t.actual_pegged_date),
+                (t.last_week_cum_progress),
+                (t.cum_progress_for_this_week),
+                (t.actual_start_date),
+                (t.actual_finish_date),
+                (t.flaf_issue_date),
+                (t.ramz_id),
+                (t.flow_line_po_no),
+                (t.[f_l_po_recd._date]),
+                (t.station_name_no),
+                (t.physical_tie_in_port_number),
+                (t.physical_tie_in_port_available_when_flaf_issued),
+                (t.fl_dia),
+                (t.fl_length_meter),
+                (t.ohl_length_meter),
+                (t.ohl_progress),
+                (t.ohl_completion_date),
+                (t.actual_rig_on_date),
+                (t.actual_rig_off_date),
+                (t.wlctf_acceptanceapproval_from_production),
+                (t.[actual_comm._start_date]),
+                (t.[actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date]),
+                (t.project_id),
+                (t.Week_Number)
+            ) v(val)
+            WHERE v.val IS NOT NULL
+              AND LTRIM(RTRIM(CONVERT(NVARCHAR(4000), v.val))) <> ''
+              AND LOWER(LTRIM(RTRIM(CONVERT(NVARCHAR(4000), v.val)))) <> 'null'
+        ) AS non_empty_count
+    FROM typed t
+),
+
+ranked AS (
+    SELECT
+        s.*,
+        ROW_NUMBER() OVER(
+            PARTITION BY
+                UPPER(LTRIM(RTRIM(s.pdo_well_id))),
+                UPPER(LTRIM(RTRIM(s.well_location)))
+            ORDER BY s.non_empty_count DESC
+        ) AS rn_keep
+    FROM scored s
+    WHERE s.pdo_well_id IS NOT NULL
+      AND LTRIM(RTRIM(s.pdo_well_id)) <> ''
+      AND LOWER(LTRIM(RTRIM(s.pdo_well_id))) <> 'null'
+      AND s.well_location IS NOT NULL
+      AND LTRIM(RTRIM(s.well_location)) <> ''
+      AND LOWER(LTRIM(RTRIM(s.well_location))) <> 'null'
+),
+
+/* ---------- Merge duplicates ---------- */
+dedup AS (
+    SELECT
+        UPPER(LTRIM(RTRIM(pdo_well_id))) AS grp_pdo,
+        UPPER(LTRIM(RTRIM(well_location))) AS grp_loc,
+
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN sl_no END), MAX(sl_no)) AS sl_no,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN rig_no END), MAX(rig_no)) AS rig_no,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN well_location END), MAX(well_location)) AS well_location,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN well_name_after_spud END), MAX(well_name_after_spud)) AS well_name_after_spud,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN pdo_well_id END), MAX(pdo_well_id)) AS pdo_well_id,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN well_type END), MAX(well_type)) AS well_type,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN northing END), MAX(northing)) AS northing,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN easting END), MAX(easting)) AS easting,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN locationdd END), MAX(locationdd)) AS locationdd,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN flow_linedl END), MAX(flow_linedl)) AS flow_linedl,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN location_po_no END), MAX(location_po_no)) AS location_po_no,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN location_po_recvd_date END), MAX(location_po_recvd_date)) AS location_po_recvd_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [location_-_purpose_value] END), MAX([location_-_purpose_value])) AS [location_-_purpose_value],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [last_week_exp.rig_on_location_sap_data] END), MAX([last_week_exp.rig_on_location_sap_data])) AS [last_week_exp.rig_on_location_sap_data],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [latest_exp.rig_on_location_sap_data] END), MAX([latest_exp.rig_on_location_sap_data])) AS [latest_exp.rig_on_location_sap_data],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [exp.rig_off_location_sap_data] END), MAX([exp.rig_off_location_sap_data])) AS [exp.rig_off_location_sap_data],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [date_-_material_po_placed] END), MAX([date_-_material_po_placed])) AS [date_-_material_po_placed],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [date_-_material_available_at_site] END), MAX([date_-_material_available_at_site])) AS [date_-_material_available_at_site],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN scr_no END), MAX(scr_no)) AS scr_no,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN scr_date END), MAX(scr_date)) AS scr_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN moc_raised END), MAX(moc_raised)) AS moc_raised,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN moc_approved END), MAX(moc_approved)) AS moc_approved,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_pegged_date END), MAX(actual_pegged_date)) AS actual_pegged_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN last_week_cum_progress END), MAX(last_week_cum_progress)) AS last_week_cum_progress,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN cum_progress_for_this_week END), MAX(cum_progress_for_this_week)) AS cum_progress_for_this_week,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_start_date END), MAX(actual_start_date)) AS actual_start_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables END), MAX(actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables)) AS actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor END), MAX(date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor)) AS date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x END), MAX(delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x)) AS delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN installation_of_esp_pcp_surface_cable_by_vendors END), MAX(installation_of_esp_pcp_surface_cable_by_vendors)) AS installation_of_esp_pcp_surface_cable_by_vendors,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_finish_date END), MAX(actual_finish_date)) AS actual_finish_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN flaf_issue_date END), MAX(flaf_issue_date)) AS flaf_issue_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ramz_id END), MAX(ramz_id)) AS ramz_id,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ramz_id_received_date_same_day_as_flaf_issue_date END), MAX(ramz_id_received_date_same_day_as_flaf_issue_date)) AS ramz_id_received_date_same_day_as_flaf_issue_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN date_of_site_survey_report_issuance END), MAX(date_of_site_survey_report_issuance)) AS date_of_site_survey_report_issuance,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN well_engineer_to_add_location_name_in_edm END), MAX(well_engineer_to_add_location_name_in_edm)) AS well_engineer_to_add_location_name_in_edm,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN pt_to_request_for_esp_preliminary_design_through_ald END), MAX(pt_to_request_for_esp_preliminary_design_through_ald)) AS pt_to_request_for_esp_preliminary_design_through_ald,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid END), MAX(actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid)) AS actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid END), MAX(actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid)) AS actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_date_pcp_esp_vendor_delivered_the_skid END), MAX(actual_date_pcp_esp_vendor_delivered_the_skid)) AS actual_date_pcp_esp_vendor_delivered_the_skid,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [actual_installation_date_by_vendor_of_esp/pcp_skid] END), MAX([actual_installation_date_by_vendor_of_esp/pcp_skid])) AS [actual_installation_date_by_vendor_of_esp/pcp_skid],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN flow_line_po_no END), MAX(flow_line_po_no)) AS flow_line_po_no,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [f_l_po_recd._date] END), MAX([f_l_po_recd._date])) AS [f_l_po_recd._date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [flowline_-_purpose_value] END), MAX([flowline_-_purpose_value])) AS [flowline_-_purpose_value],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN station_name_no END), MAX(station_name_no)) AS station_name_no,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN physical_tie_in_port_number END), MAX(physical_tie_in_port_number)) AS physical_tie_in_port_number,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN date_of_tie_in_port_readiness END), MAX(date_of_tie_in_port_readiness)) AS date_of_tie_in_port_readiness,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN physical_tie_in_port_available_when_flaf_issued END), MAX(physical_tie_in_port_available_when_flaf_issued)) AS physical_tie_in_port_available_when_flaf_issued,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN engineering_actual_start_date END), MAX(engineering_actual_start_date)) AS engineering_actual_start_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN engineering_actual_finish_date END), MAX(engineering_actual_finish_date)) AS engineering_actual_finish_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN progress END), MAX(progress)) AS progress,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN fl_dia END), MAX(fl_dia)) AS fl_dia,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN fl_length_meter END), MAX(fl_length_meter)) AS fl_length_meter,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [const._actual_start_date] END), MAX([const._actual_start_date])) AS [const._actual_start_date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date] END), MAX([const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date])) AS [const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN flowline_construction_progress END), MAX(flowline_construction_progress)) AS flowline_construction_progress,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ohl_length_meter END), MAX(ohl_length_meter)) AS ohl_length_meter,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ohl_progress END), MAX(ohl_progress)) AS ohl_progress,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ohl_completion_date END), MAX(ohl_completion_date)) AS ohl_completion_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN z6_data_submitted_date END), MAX(z6_data_submitted_date)) AS z6_data_submitted_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [sap_notification_received_date_z6_2_days_before_eng._completion] END), MAX([sap_notification_received_date_z6_2_days_before_eng._completion])) AS [sap_notification_received_date_z6_2_days_before_eng._completion],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_rig_on_date END), MAX(actual_rig_on_date)) AS actual_rig_on_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_rig_off_date END), MAX(actual_rig_off_date)) AS actual_rig_off_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN wlctf_acceptanceapproval_from_production END), MAX(wlctf_acceptanceapproval_from_production)) AS wlctf_acceptanceapproval_from_production,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_hoist_fbu_rsr_on_date END), MAX(actual_hoist_fbu_rsr_on_date)) AS actual_hoist_fbu_rsr_on_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_hoist_fbu_rsr_off_date END), MAX(actual_hoist_fbu_rsr_off_date)) AS actual_hoist_fbu_rsr_off_date,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [wellpad_handover-2_from_hoist_fbu_rsr_off_date] END), MAX([wellpad_handover-2_from_hoist_fbu_rsr_off_date])) AS [wellpad_handover-2_from_hoist_fbu_rsr_off_date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN completion_type_rig_fbu_or_rsr_hoist END), MAX(completion_type_rig_fbu_or_rsr_hoist)) AS completion_type_rig_fbu_or_rsr_hoist,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [actual_eng._completion_date] END), MAX([actual_eng._completion_date])) AS [actual_eng._completion_date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [actual_comm._start_date] END), MAX([actual_comm._start_date])) AS [actual_comm._start_date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date] END), MAX([actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date])) AS [actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN reason_if_kpi_not_met END), MAX(reason_if_kpi_not_met)) AS reason_if_kpi_not_met,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN remark_status_area_of_attention_issues_ END), MAX(remark_status_area_of_attention_issues_)) AS remark_status_area_of_attention_issues_,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.] END), MAX([rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.])) AS [rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [flow_line_test_pack_completion_doc._submission_date_to_qs_dept.] END), MAX([flow_line_test_pack_completion_doc._submission_date_to_qs_dept.])) AS [flow_line_test_pack_completion_doc._submission_date_to_qs_dept.],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN flow_line_test_pack_completion_progress END), MAX(flow_line_test_pack_completion_progress)) AS flow_line_test_pack_completion_progress,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN over_all_progress_percentages END), MAX(over_all_progress_percentages)) AS over_all_progress_percentages,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ssfd_wells END), MAX(ssfd_wells)) AS ssfd_wells,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ipm END), MAX(ipm)) AS ipm,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN access_road_5 END), MAX(access_road_5)) AS access_road_5,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN earth_work_60 END), MAX(earth_work_60)) AS earth_work_60,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN cellar_20 END), MAX(cellar_20)) AS cellar_20,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN beam_pump_base_esp_pcp_foundation_5 END), MAX(beam_pump_base_esp_pcp_foundation_5)) AS beam_pump_base_esp_pcp_foundation_5,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN earthing_1 END), MAX(earthing_1)) AS earthing_1,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN septic_tank_1 END), MAX(septic_tank_1)) AS septic_tank_1,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN water_2 END), MAX(water_2)) AS water_2,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN waste_water_2 END), MAX(waste_water_2)) AS waste_water_2,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN hdpe_liner_instalat_4 END), MAX(hdpe_liner_instalat_4)) AS hdpe_liner_instalat_4,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [overall_loc._preparation_10_100] END), MAX([overall_loc._preparation_10_100])) AS [overall_loc._preparation_10_100],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN piping_mech_50 END), MAX(piping_mech_50)) AS piping_mech_50,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN elect_30 END), MAX(elect_30)) AS elect_30,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN instr_20 END), MAX(instr_20)) AS instr_20,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [overall_material_10_100] END), MAX([overall_material_10_100])) AS [overall_material_10_100],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN cold_b_2 END), MAX(cold_b_2)) AS cold_b_2,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN sleeper_pre_cast_ins_15 END), MAX(sleeper_pre_cast_ins_15)) AS sleeper_pre_cast_ins_15,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN cs_pipe_welding_ndt_10_rt_for_op_100_for_60 END), MAX(cs_pipe_welding_ndt_10_rt_for_op_100_for_60)) AS cs_pipe_welding_ndt_10_rt_for_op_100_for_60,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN pe_fussion_pull_20 END), MAX(pe_fussion_pull_20)) AS pe_fussion_pull_20,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN final_hydro_t_3 END), MAX(final_hydro_t_3)) AS final_hydro_t_3,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [overall_const._10_100] END), MAX([overall_const._10_100])) AS [overall_const._10_100],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN pole_hole_drill_40 END), MAX(pole_hole_drill_40)) AS pole_hole_drill_40,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN pole_erect_40 END), MAX(pole_erect_40)) AS pole_erect_40,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN conductor_string_18 END), MAX(conductor_string_18)) AS conductor_string_18,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN ohl_ti_2 END), MAX(ohl_ti_2)) AS ohl_ti_2,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [overall_ohl_progr_100] END), MAX([overall_ohl_progr_100])) AS [overall_ohl_progr_100],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN mechani_60 END), MAX(mechani_60)) AS mechani_60,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN electri_15 END), MAX(electri_15)) AS electri_15,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN instrumentat_20 END), MAX(instrumentat_20)) AS instrumentat_20,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN overall_comm_mi_5 END), MAX(overall_comm_mi_5)) AS overall_comm_mi_5,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN overall_comm_progress_100 END), MAX(overall_comm_progress_100)) AS overall_comm_progress_100,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN location_preparation_status_in_progress_completed END), MAX(location_preparation_status_in_progress_completed)) AS location_preparation_status_in_progress_completed,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [flow_line_const._status_in_progress_completed] END), MAX([flow_line_const._status_in_progress_completed])) AS [flow_line_const._status_in_progress_completed],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN [flow_line_commi._status_in_progress_completed] END), MAX([flow_line_commi._status_in_progress_completed])) AS [flow_line_commi._status_in_progress_completed],
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN well_year_white_space END), MAX(well_year_white_space)) AS well_year_white_space,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN reasons_for_year_2018 END), MAX(reasons_for_year_2018)) AS reasons_for_year_2018,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN column7 END), MAX(column7)) AS column7,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN digital_wmr_import_remarks END), MAX(digital_wmr_import_remarks)) AS digital_wmr_import_remarks,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN project_id END), MAX(project_id)) AS project_id,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN Week_Number END), MAX(Week_Number)) AS Week_Number,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN z6_eff_d END), MAX(z6_eff_d)) AS z6_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN sap_eff_d END), MAX(sap_eff_d)) AS sap_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN rig_on_eff_d END), MAX(rig_on_eff_d)) AS rig_on_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN rig_off_eff_d END), MAX(rig_off_eff_d)) AS rig_off_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN wlctf_eff_d END), MAX(wlctf_eff_d)) AS wlctf_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN hoist_on_eff_d END), MAX(hoist_on_eff_d)) AS hoist_on_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN hoist_off_eff_d END), MAX(hoist_off_eff_d)) AS hoist_off_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN handover2_eff_d END), MAX(handover2_eff_d)) AS handover2_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN eng_comp_eff_d END), MAX(eng_comp_eff_d)) AS eng_comp_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN comm_start_eff_d END), MAX(comm_start_eff_d)) AS comm_start_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN comm_finish_eff_d END), MAX(comm_finish_eff_d)) AS comm_finish_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_start_eff_d END), MAX(actual_start_eff_d)) AS actual_start_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN actual_finish_eff_d END), MAX(actual_finish_eff_d)) AS actual_finish_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN const_start_eff_d END), MAX(const_start_eff_d)) AS const_start_eff_d,
+        COALESCE(MAX(CASE WHEN rn_keep = 1 THEN const_finish_eff_d END), MAX(const_finish_eff_d)) AS const_finish_eff_d
+    FROM ranked
+    GROUP BY
+        UPPER(LTRIM(RTRIM(pdo_well_id))),
+        UPPER(LTRIM(RTRIM(well_location)))
+),
+
+/* ---------- Buffer logic ---------- */
+rol_per_rig AS (
+    SELECT
+        d.rig_no,
+        d.pdo_well_id,
+        d.rig_on_eff_d,
+        ROW_NUMBER() OVER (PARTITION BY d.rig_no ORDER BY d.rig_on_eff_d DESC, d.pdo_well_id) AS rn
+    FROM dedup d
+    WHERE d.rig_on_eff_d IS NOT NULL
+      AND d.rig_off_eff_d IS NULL
+),
+rol_one AS (
+    SELECT rig_no, pdo_well_id
+    FROM rol_per_rig
+    WHERE rn = 1
+),
+sap_seq AS (
+    SELECT
+        s.Work_Center,
+        s.Well_ID,
+        dbo.fn_WMR_ParseDate(CAST(s.Earl_start_date AS NVARCHAR(510))) AS earl_start_d,
+        ROW_NUMBER() OVER (
+            PARTITION BY s.Work_Center
+            ORDER BY dbo.fn_WMR_ParseDate(CAST(s.Earl_start_date AS NVARCHAR(510))) ASC, s.Well_ID
+        ) AS seq_no
+    FROM dbo.SAP_DRILLING_SEQUENCE_Staging s
+    WHERE s.Work_Center IS NOT NULL AND LTRIM(RTRIM(s.Work_Center)) <> ''
+      AND s.Well_ID IS NOT NULL AND LTRIM(RTRIM(s.Well_ID)) <> ''
+),
+rol_pos AS (
+    SELECT
+        r.rig_no,
+        r.pdo_well_id AS rol_well_id,
+        ss.seq_no AS rol_seq_no
+    FROM rol_one r
+    LEFT JOIN sap_seq ss
+        ON ss.Work_Center = r.rig_no
+       AND ss.Well_ID = r.pdo_well_id
+),
+ssfd_lookup AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(s.Well_ID)) AS Well_ID,
+        'SSFD' AS ssfd_value
+    FROM dbo.SAP_DRILLING_SEQUENCE_Staging s
+    WHERE UPPER(LTRIM(RTRIM(s.Station_Code))) IN ('SSFD', 'SSFDP')
+),
+buffer_candidates AS (
+    SELECT
+        ss.Work_Center AS rig_no,
+        ss.Well_ID AS pdo_well_id,
+        ss.seq_no
+    FROM sap_seq ss
+    INNER JOIN rol_pos rp
+        ON rp.rig_no = ss.Work_Center
+       AND rp.rol_seq_no IS NOT NULL
+       AND ss.seq_no > rp.rol_seq_no
+    INNER JOIN taskplan_lcpc1050 lc
+        ON lc.New_Well_ID = ss.Well_ID
+       AND lc.lcpc1050_prog >= 0.96
+    INNER JOIN dedup d
+        ON d.rig_no = ss.Work_Center
+       AND d.pdo_well_id = ss.Well_ID
+),
+buffer_ranked AS (
+    SELECT
+        bc.rig_no,
+        bc.pdo_well_id,
+        ROW_NUMBER() OVER (PARTITION BY bc.rig_no ORDER BY bc.seq_no) AS buffer_n
+    FROM buffer_candidates bc
+),
+
+computed AS (
+    SELECT
+        d.*,
+        tp.tp_location_progress,
+        tp.tp_location_start_date,
+        tp.tp_location_finish_date,
+        tp.tp_flme_const_complete_date,
+        tp.tp_flowline_completion_progress,
+        tp.tp_access_road_5,
+        tp.tp_earth_work_60,
+        tp.tp_cellar_20,
+        tp.tp_beam_pump_base_5,
+        tp.tp_earthing_septic_max,
+        tp.tp_water_waste_2,
+        tp.tp_hdpe_liner_4,
+
+        COALESCE(dt.engg_done_flag, CAST(0.0 AS DECIMAL(10,4))) AS engg_done_flag,
+        dt.survey_received_date_d,
+        dt.engg_finish_date_d,
+        br.buffer_n,
+
+        COALESCE(wt.Lift_type, d.well_type) AS well_type_override,
+        COALESCE(ss.ssfd_value, d.ssfd_wells) AS ssfd_override,
+
+        CASE
+            WHEN d.rig_off_eff_d IS NOT NULL THEN 'drilled'
+            WHEN d.rig_on_eff_d IS NOT NULL AND d.rig_off_eff_d IS NULL THEN 'ROL'
+            ELSE NULL
+        END AS buffer_status_base,
+
+        CASE
+            WHEN d.rig_off_eff_d IS NOT NULL AND d.rig_on_eff_d IS NOT NULL AND d.rig_off_eff_d < d.rig_on_eff_d THEN 'Error'
+            WHEN d.wlctf_eff_d IS NOT NULL AND d.rig_off_eff_d IS NOT NULL AND d.wlctf_eff_d < d.rig_off_eff_d THEN 'Error'
+            WHEN d.hoist_on_eff_d IS NOT NULL AND d.wlctf_eff_d IS NOT NULL AND d.hoist_on_eff_d < d.wlctf_eff_d THEN 'Error'
+            WHEN d.hoist_off_eff_d IS NOT NULL AND d.wlctf_eff_d IS NOT NULL AND d.hoist_off_eff_d < d.wlctf_eff_d THEN 'Error'
+            WHEN d.handover2_eff_d IS NOT NULL AND d.hoist_off_eff_d IS NOT NULL AND d.handover2_eff_d < d.hoist_off_eff_d THEN 'Error'
+            WHEN d.eng_comp_eff_d IS NOT NULL AND d.handover2_eff_d IS NOT NULL AND d.eng_comp_eff_d < d.handover2_eff_d THEN 'Error'
+            WHEN d.comm_finish_eff_d IS NOT NULL AND d.eng_comp_eff_d IS NOT NULL AND d.comm_finish_eff_d < d.eng_comp_eff_d THEN 'Error'
+            WHEN d.comm_finish_eff_d IS NOT NULL AND d.comm_start_eff_d IS NOT NULL AND d.comm_finish_eff_d < d.comm_start_eff_d THEN 'Error'
+            ELSE NULL
+        END AS data_error_calc,
+
+        CASE
+            WHEN d.rig_off_eff_d IS NULL THEN NULL
+            ELSE
+                CASE
+                    WHEN d.comm_start_eff_d IS NOT NULL THEN
+                        CASE
+                            WHEN d.comm_start_eff_d > DATEADD(DAY, 5, d.rig_off_eff_d)
+                                THEN DATEDIFF(DAY, DATEADD(DAY, 5, d.rig_off_eff_d), d.comm_start_eff_d)
+                            ELSE 0
+                        END
+                    ELSE
+                        CASE
+                            WHEN CAST(GETDATE() AS DATE) > DATEADD(DAY, 5, d.rig_off_eff_d)
+                                THEN DATEDIFF(DAY, DATEADD(DAY, 5, d.rig_off_eff_d), CAST(GETDATE() AS DATE))
+                            ELSE NULL
+                        END
+                END
+        END AS engg_kpi_calc
+    FROM dedup d
+    LEFT JOIN taskplan_agg tp
+        ON tp.New_Well_ID = d.pdo_well_id
+    LEFT JOIN designtracker_flag dt
+        ON dt.Well_ID = LTRIM(RTRIM(d.pdo_well_id))
+    LEFT JOIN buffer_ranked br
+        ON br.rig_no = d.rig_no
+       AND br.pdo_well_id = d.pdo_well_id
+    LEFT JOIN welltype_lookup wt
+        ON wt.Well_ID = LTRIM(RTRIM(d.pdo_well_id))
+    LEFT JOIN ssfd_lookup ss
+        ON ss.Well_ID = LTRIM(RTRIM(d.pdo_well_id))
+)
+
+SELECT
+    ROW_NUMBER() OVER (ORDER BY c.rig_no, c.well_location, c.pdo_well_id) AS sl_no,
+    c.sl_no AS sl_no_raw,
+
+    c.rig_no,
+    c.well_location,
+    c.well_name_after_spud,
+    c.pdo_well_id,
+    c.well_type_override AS well_type,
+
+    c.northing,
+    c.easting,
+    c.locationdd,
+    c.flow_linedl,
+    c.location_po_no,
+
+    dbo.fn_WMR_ParseDate(c.location_po_recvd_date) AS location_po_recvd_date,
+    c.[location_-_purpose_value],
+
+    dbo.fn_WMR_ParseDate(c.[last_week_exp.rig_on_location_sap_data]) AS [last_week_exp.rig_on_location_sap_data],
+    dbo.fn_WMR_ParseDate(c.[latest_exp.rig_on_location_sap_data]) AS [latest_exp.rig_on_location_sap_data],
+    dbo.fn_WMR_ParseDate(c.[exp.rig_off_location_sap_data]) AS [exp.rig_off_location_sap_data],
+    dbo.fn_WMR_ParseDate(c.[date_-_material_po_placed]) AS [date_-_material_po_placed],
+    dbo.fn_WMR_ParseDate(c.[date_-_material_available_at_site]) AS [date_-_material_available_at_site],
+
+    c.scr_no,
+    dbo.fn_WMR_ParseDate(c.scr_date) AS scr_date,
+    c.moc_raised,
+    c.moc_approved,
+
+    CASE
+        WHEN c.buffer_status_base IS NOT NULL THEN c.buffer_status_base
+        WHEN c.buffer_n IS NOT NULL THEN CONCAT('Buffer', CAST(c.buffer_n AS VARCHAR(10)))
+        ELSE NULL
+    END AS buffer_status,
+
+    dbo.fn_WMR_ParseDate(c.actual_pegged_date) AS actual_pegged_date,
+
+    dbo.fn_WMR_ParseProgress(c.last_week_cum_progress) AS last_week_cum_progress,
+
+    CASE
+        WHEN COALESCE(c.tp_location_start_date, c.actual_start_eff_d) IS NOT NULL
+         AND COALESCE(c.tp_location_finish_date, c.actual_finish_eff_d) IS NOT NULL
+            THEN CAST(1.0 AS DECIMAL(10,4))
+        ELSE COALESCE(c.tp_location_progress, dbo.fn_WMR_ParseProgress(c.cum_progress_for_this_week))
+    END AS cum_progress_for_this_week,
+
+    COALESCE(c.tp_location_start_date, c.actual_start_eff_d) AS actual_start_date,
+
+    dbo.fn_WMR_ParseDate(c.actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables)
+        AS actual_date_odc_requested_field_programmer_oso33x_for_esp_pcp_surface_cables,
+    dbo.fn_WMR_ParseDate(c.date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor)
+        AS date_oso33x_call_out_for_cable_installation_to_pcp_esp_vendor,
+    dbo.fn_WMR_ParseDate(c.delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x)
+        AS delivery_of_esp_pcp_surface_cable_by_field_programmer_oso33x,
+    dbo.fn_WMR_ParseDate(c.installation_of_esp_pcp_surface_cable_by_vendors)
+        AS installation_of_esp_pcp_surface_cable_by_vendors,
+
+    COALESCE(c.tp_location_finish_date, c.actual_finish_eff_d) AS actual_finish_date,
+
+    dbo.fn_WMR_ParseDate(c.flaf_issue_date) AS flaf_issue_date,
+
+    CASE
+        WHEN c.ramz_id IS NULL THEN NULL
+        WHEN UPPER(LTRIM(RTRIM(c.ramz_id))) = 'NO FLAF' THEN NULL
+        ELSE c.ramz_id
+    END AS ramz_id,
+
+    dbo.fn_WMR_ParseDate(c.ramz_id_received_date_same_day_as_flaf_issue_date) AS ramz_id_received_date_same_day_as_flaf_issue_date,
+
+    COALESCE(c.survey_received_date_d, dbo.fn_WMR_ParseDate(c.date_of_site_survey_report_issuance)) AS date_of_site_survey_report_issuance,
+
+    c.well_engineer_to_add_location_name_in_edm,
+    c.pt_to_request_for_esp_preliminary_design_through_ald,
+    dbo.fn_WMR_ParseDate(c.actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid)
+        AS actual_date_odc_requested_field_programmer_oso33x_to_install_esp_pcp_skid,
+    dbo.fn_WMR_ParseDate(c.actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid)
+        AS actual_date_field_programmer_oso33x_requested_esp_pcp_vendor_to_install_the_skid,
+    dbo.fn_WMR_ParseDate(c.actual_date_pcp_esp_vendor_delivered_the_skid)
+        AS actual_date_pcp_esp_vendor_delivered_the_skid,
+    dbo.fn_WMR_ParseDate(c.[actual_installation_date_by_vendor_of_esp/pcp_skid])
+        AS [actual_installation_date_by_vendor_of_esp/pcp_skid],
+
+    c.flow_line_po_no,
+    dbo.fn_WMR_ParseDate(c.[f_l_po_recd._date]) AS [f_l_po_recd._date],
+    c.[flowline_-_purpose_value],
+    c.station_name_no,
+    c.physical_tie_in_port_number,
+    dbo.fn_WMR_ParseDate(c.date_of_tie_in_port_readiness) AS date_of_tie_in_port_readiness,
+    c.physical_tie_in_port_available_when_flaf_issued,
+
+    dbo.fn_WMR_ParseDate(c.engineering_actual_start_date) AS engineering_actual_start_date,
+    COALESCE(c.engg_finish_date_d, dbo.fn_WMR_ParseDate(c.engineering_actual_finish_date)) AS engineering_actual_finish_date,
+
+    CASE
+        WHEN COALESCE(c.engg_finish_date_d, dbo.fn_WMR_ParseDate(c.engineering_actual_finish_date)) IS NOT NULL
+            THEN CAST(1.0 AS DECIMAL(10,4))
+        ELSE dbo.fn_WMR_ParseProgress(c.progress)
+    END AS progress,
+
+    c.fl_dia,
+    c.fl_length_meter,
+
+    c.const_start_eff_d AS [const._actual_start_date],
+    COALESCE(c.tp_flme_const_complete_date, c.const_finish_eff_d) AS [const._complete_date_including_f_l_final_hydro_test_1_day_before_rig_on_date],
+
+    CASE
+        WHEN c.const_start_eff_d IS NOT NULL
+         AND COALESCE(c.tp_flme_const_complete_date, c.const_finish_eff_d) IS NOT NULL
+            THEN CAST(1.0 AS DECIMAL(10,4))
+        ELSE COALESCE(c.tp_flowline_completion_progress, dbo.fn_WMR_ParseProgress(c.flowline_construction_progress))
+    END AS flowline_construction_progress,
+
+    c.ohl_length_meter,
+    dbo.fn_WMR_ParseProgress(c.ohl_progress) AS ohl_progress,
+    dbo.fn_WMR_ParseDate(c.ohl_completion_date) AS ohl_completion_date,
+
+    c.z6_eff_d AS z6_data_submitted_date,
+    c.sap_eff_d AS [sap_notification_received_date_z6_2_days_before_eng._completion],
+
+    c.rig_on_eff_d AS actual_rig_on_date,
+    c.rig_off_eff_d AS actual_rig_off_date,
+    c.wlctf_eff_d AS wlctf_acceptanceapproval_from_production,
+
+    c.hoist_on_eff_d AS actual_hoist_fbu_rsr_on_date,
+    c.hoist_off_eff_d AS actual_hoist_fbu_rsr_off_date,
+    c.handover2_eff_d AS [wellpad_handover-2_from_hoist_fbu_rsr_off_date],
+
+    CAST('FBU / RSR' AS NVARCHAR(510)) AS completion_type_rig_fbu_or_rsr_hoist,
+
+    c.eng_comp_eff_d AS [actual_eng._completion_date],
+    c.comm_start_eff_d AS [actual_comm._start_date],
+    c.comm_finish_eff_d AS [actual_comm._finish_date_with_in_2_days_from_actual_engg._completion_date],
+
+    c.engg_kpi_calc AS [engg_kpi_after_rig-off_days],
+    c.data_error_calc AS data_error,
+
+    c.reason_if_kpi_not_met,
+    c.remark_status_area_of_attention_issues_,
+
+    dbo.fn_WMR_ParseDate(c.[rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.])
+        AS [rlmu_submitted_to_ho-date_with_in_7_days_from_actual_comm.],
+    dbo.fn_WMR_ParseDate(c.[flow_line_test_pack_completion_doc._submission_date_to_qs_dept.])
+        AS [flow_line_test_pack_completion_doc._submission_date_to_qs_dept.],
+    dbo.fn_WMR_ParseProgress(c.flow_line_test_pack_completion_progress) AS flow_line_test_pack_completion_progress,
+
+    dbo.fn_WMR_ParseProgress(c.over_all_progress_percentages) AS over_all_progress_percentages,
+
+    c.ssfd_override AS ssfd_wells,
+    c.ipm,
+
+    COALESCE(c.tp_access_road_5, dbo.fn_WMR_ParseProgress(c.access_road_5)) AS access_road_5,
+    COALESCE(c.tp_earth_work_60, dbo.fn_WMR_ParseProgress(c.earth_work_60)) AS earth_work_60,
+    COALESCE(c.tp_cellar_20, dbo.fn_WMR_ParseProgress(c.cellar_20)) AS cellar_20,
+    COALESCE(c.tp_beam_pump_base_5, dbo.fn_WMR_ParseProgress(c.beam_pump_base_esp_pcp_foundation_5)) AS beam_pump_base_esp_pcp_foundation_5,
+    COALESCE(c.tp_earthing_septic_max, dbo.fn_WMR_ParseProgress(c.earthing_1)) AS earthing_1,
+    COALESCE(c.tp_earthing_septic_max, dbo.fn_WMR_ParseProgress(c.septic_tank_1)) AS septic_tank_1,
+    COALESCE(c.tp_water_waste_2, dbo.fn_WMR_ParseProgress(c.water_2)) AS water_2,
+    COALESCE(c.tp_water_waste_2, dbo.fn_WMR_ParseProgress(c.waste_water_2)) AS waste_water_2,
+    COALESCE(c.tp_hdpe_liner_4, dbo.fn_WMR_ParseProgress(c.hdpe_liner_instalat_4)) AS hdpe_liner_instalat_4,
+
+    dbo.fn_WMR_ParseProgress(c.[overall_loc._preparation_10_100]) AS [overall_loc._preparation_10_100],
+
+    c.engg_done_flag AS site_survey_5,
+    c.engg_done_flag AS survey_report_issue_5,
+    c.engg_done_flag AS design_sta_5,
+    c.engg_done_flag AS design_completed_issue_for_ta2_5_40,
+    c.engg_done_flag AS approved_by_15,
+    c.engg_done_flag AS afc_3_30,
+    c.engg_done_flag AS [overall_engg._10_100],
+
+    dbo.fn_WMR_ParseProgress(c.piping_mech_50) AS piping_mech_50,
+    dbo.fn_WMR_ParseProgress(c.elect_30) AS elect_30,
+    dbo.fn_WMR_ParseProgress(c.instr_20) AS instr_20,
+
+    dbo.fn_WMR_ParseProgress(c.[overall_material_10_100]) AS [overall_material_10_100],
+    dbo.fn_WMR_ParseProgress(c.cold_b_2) AS cold_b_2,
+    dbo.fn_WMR_ParseProgress(c.sleeper_pre_cast_ins_15) AS sleeper_pre_cast_ins_15,
+    dbo.fn_WMR_ParseProgress(c.cs_pipe_welding_ndt_10_rt_for_op_100_for_60) AS cs_pipe_welding_ndt_10_rt_for_op_100_for_60,
+    dbo.fn_WMR_ParseProgress(c.pe_fussion_pull_20) AS pe_fussion_pull_20,
+    dbo.fn_WMR_ParseProgress(c.final_hydro_t_3) AS final_hydro_t_3,
+
+    dbo.fn_WMR_ParseProgress(c.[overall_const._10_100]) AS [overall_const._10_100],
+    dbo.fn_WMR_ParseProgress(c.pole_hole_drill_40) AS pole_hole_drill_40,
+    dbo.fn_WMR_ParseProgress(c.pole_erect_40) AS pole_erect_40,
+    dbo.fn_WMR_ParseProgress(c.conductor_string_18) AS conductor_string_18,
+    dbo.fn_WMR_ParseProgress(c.ohl_ti_2) AS ohl_ti_2,
+
+    dbo.fn_WMR_ParseProgress(c.[overall_ohl_progr_100]) AS [overall_ohl_progr_100],
+    dbo.fn_WMR_ParseProgress(c.mechani_60) AS mechani_60,
+    dbo.fn_WMR_ParseProgress(c.electri_15) AS electri_15,
+    dbo.fn_WMR_ParseProgress(c.instrumentat_20) AS instrumentat_20,
+    dbo.fn_WMR_ParseProgress(c.overall_comm_mi_5) AS overall_comm_mi_5,
+    dbo.fn_WMR_ParseProgress(c.overall_comm_progress_100) AS overall_comm_progress_100,
+
+    c.location_preparation_status_in_progress_completed,
+    c.[flow_line_const._status_in_progress_completed],
+    c.[flow_line_commi._status_in_progress_completed],
+
+    c.well_year_white_space,
+    c.reasons_for_year_2018,
+    c.column7,
+    c.digital_wmr_import_remarks,
+    c.project_id,
+
+    dbo.fn_WMR_ParseDate(c.[Week_Number]) AS Week_Number,
+
+    CASE
+        WHEN p.[column2] IS NULL OR LTRIM(RTRIM(p.[column2])) = '' THEN NULL
+        ELSE LEFT(LTRIM(RTRIM(p.[column2])), CHARINDEX(' ', LTRIM(RTRIM(p.[column2])) + ' ') - 1)
+    END AS Cluster
+FROM computed c
+LEFT JOIN dbo.ProjectIDs p
+    ON p.ID = c.project_id;
+GO
+

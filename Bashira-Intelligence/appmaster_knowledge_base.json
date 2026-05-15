@@ -1,0 +1,115 @@
+{
+  "view_logic": {
+    "vw_JobProgress": {
+      "source": "AppMasterDB.dbo.vw_JobProgress",
+      "purpose": "Weekly job progress tracking with plan vs actual bucketed by week",
+      "business_logic": "\n        KEY LOGIC:\n        - Derives Well_ID from code: everything AFTER '-' (e.g., 'ABC-12345' \u2192 12345)\n        - Category comes from ProjectIDs.column2 (joined via project_id)\n        - Week buckets: Week1 (1-7), Week2 (8-14), Week3 (15-21), Week4 (22-28), Week5 (29+)\n        - Plan = SUM(weightage) normalized to %\n        - Actual = SUM(weightage * progress_ratio)\n        - progress_ratio: 1 or 100 \u2192 1.0, 0.10 \u2192 0.10, 10 \u2192 0.10\n        - Joins: ActivityTaskPlan \u2192 ProjectIDs \u2192 WMR\n        ",
+      "tables_used": [
+        "ActivityTaskPlan",
+        "ProjectIDs",
+        "WMR"
+      ],
+      "key_columns": {
+        "Well_ID": "Extracted from code - everything AFTER first '-'",
+        "Category": "ProjectIDs.column2 - project category (Marmul SNLP, Conversion etc)",
+        "Week-1 Plan %": "SUM(weightage) where target_start between day 1-7",
+        "Week-1 Actual %": "SUM(weightage * progress_ratio) where actual_start between day 1-7"
+      },
+      "sql_patterns": {
+        "extract_well_id": "TRY_CONVERT(int, LTRIM(RTRIM(RIGHT(LTRIM(RTRIM(l.code)), LEN(LTRIM(RTRIM(l.code))) - CHARINDEX('-', LTRIM(RTRIM(l.code)) + '-')))))",
+        "normalize_weightage": "CASE WHEN weightage < 1 THEN weightage * 100 ELSE weightage END",
+        "progress_ratio": "CASE WHEN progress = 1 OR progress = 100 THEN 1.0 WHEN progress > 1 AND progress >= 100 THEN 1.0 WHEN progress > 1 THEN progress / 100.0 ELSE progress END"
+      }
+    },
+    "vw_JOB_COST": {
+      "source": "AppMasterDB.dbo.vw_JOB_COST",
+      "purpose": "Job cost tracking - compares planned vs actual resources",
+      "business_logic": "\n        KEY LOGIC:\n        - LEFT JOINs Revenue to get rigcode (project)\n        - Extracts ActivityID: first 8 chars of task_code\n        - Crews JSON parsing: OPENJSON to explode employees and equipment\n        - Planned: from crews table (Employees JSON, Equipments JSON)\n        - Actual: from task_daily employee_ids_text and equipment_ids_text\n        - Full outer join Planned vs Actual on: well_id + ActionOn + ActivityID + resource_type + PGCode + rn\n        - Project derived: first letter of rigcode: M\u2192MML, N\u2192NIM\n        ",
+      "tables_used": [
+        "task_daily",
+        "Revenue",
+        "crews",
+        "Employee",
+        "company_employees",
+        "EmployeeType",
+        "Equipment",
+        "EquipmentType",
+        "ActivityMasterMapping"
+      ],
+      "key_columns": {
+        "Project": "Revenue.rigcode - the rig identifier (NL0010, NF0010 etc)",
+        "ActivityID": "LEFT(task_code, 8) - first 8 characters",
+        "crew_code": "Links to crews.Code",
+        "PlanName": "Employee.Name or Equipment.Description",
+        "Effective Work Hours": "JSON_VALUE(daily_data, '$.actual_hours')"
+      },
+      "joins": {
+        "Revenue": "task_daily.well_id = Revenue.well_id AND Revenue.ActivityID = task_daily.ActivityID",
+        "crews": "crews.Code = task_daily.crew_code",
+        "Employee": "Employee.id = company_employees.id (via company_employees)"
+      }
+    },
+    "PH_Productivity": {
+      "source": "AppMasterDB.dbo.PH_Productivity",
+      "purpose": "Productivity tracking per PH (QHSE Supervisor) and Crew",
+      "business_logic": "\n        KEY LOGIC:\n        - PH Name: supervisor_email \u2192 Employee.Email \u2192 Employee.Name\n        - PA Name: task_assignee trimmed at '.' (basil.971144@ \u2192 basil)\n        - Crew Name: crew_type compared with CrewType.Code after removing '-'\n        - Productivity = QtyPerHour / Norms * 100\n        - PI buckets: As per CMR & T-Wise slabs\n        ",
+      "tables_used": [
+        "task_daily",
+        "Employee",
+        "ActivityCodesNorms",
+        "CrewType",
+        "company_employees"
+      ],
+      "key_columns": {
+        "PH Name": "Employee.Name WHERE Employee.Email = task_daily.supervisor_email",
+        "PA Name": "LEFT(task_assignee, CHARINDEX('.', task_assignee) - 1)",
+        "Crew Name": "CrewType.Description WHERE CrewType.Code = REPLACE(crew_type, '-', '')",
+        "Productivity %": "(data_qty / data_hours) / ActivityCodesNorms.Norms * 100"
+      }
+    },
+    "WellMonitoringReport": {
+      "source": "AppMasterDB.dbo.WellMonitoringReport",
+      "purpose": "Comprehensive well monitoring with all progress, MOC, dates",
+      "business_logic": "\n        KEY LOGIC:\n        - Target week: Latest week minus 1 (second most recent)\n        - TaskPlan parsing: dbo.fn_WMR_ParseProgress, dbo.fn_WMR_ParseDate\n        - DesignTracker: E_I_AFC_Completion_Date parsed (multiple dates in one cell, pick latest)\n        - MOC: moc_raised, moc_approved columns\n        - Links to: SAP_DRILLING_SEQUENCE, Revenue, crews\n        ",
+      "tables_used": [
+        "WMR",
+        "WMR_TaskPlan_csv_imported",
+        "DesignTrackerCSVImport",
+        "SAP_DRILLING_SEQUENCE",
+        "Revenue",
+        "crews"
+      ],
+      "key_columns": {
+        "pdo_well_id": "Primary key - unique well identifier",
+        "Cluster": "Nimr or Marmul",
+        "moc_raised": "YES/Yes means MOC raised",
+        "moc_approved": "YES/Yes means MOC approved"
+      },
+      "joins": {
+        "SAP_DRILLING_SEQUENCE": "WMR.pdo_well_id = SAP_DRILLING_SEQUENCE.Well_ID",
+        "Revenue": "WMR.pdo_well_id = Revenue.Well_ID",
+        "crews": "WMR.rig_no = crews.Code"
+      }
+    },
+    "Daily_Plan_Report": {
+      "source": "AppMasterDB.dbo.Daily_Plan_Report",
+      "purpose": "Daily work plan with well, PA, PH, PO, location, activities",
+      "business_logic": "\n        KEY LOGIC:\n        - ROW_NUMBER() over Order by Location, Crew Code, Linking_code\n        - Fixed column mapping: Activity Description \u2192 Activities (not ACTIVITIES)\n        - Many CAST(NULL AS ...) columns for future expansion\n        ",
+      "tables_used": [
+        "vw_DailyWorkPlanC_TodayReport"
+      ]
+    }
+  },
+  "column_mappings": {
+    "Well_ID extraction": "Use RIGHT(code, LEN(code) - CHARINDEX('-', code)) to extract well ID from codes like 'ABC-12345'",
+    "progress_ratio": "1 or 100 \u2192 1.0, 0.10 \u2192 0.10, 10 \u2192 0.10",
+    "productivity_formula": "(data_qty / data_hours) / Norms * 100",
+    "PH from email": "Employee.Email = task_daily.supervisor_email \u2192 Employee.Name",
+    "PA from email": "LEFT(task_assignee, CHARINDEX('.', task_assignee) - 1)",
+    "MML": "Project starting with M \u2192 MML (Marmul)",
+    "NIM": "Project starting with N \u2192 NIM (Nimr)",
+    "rigcode values": "NL0010, NF0010, ML0010, MS0010, MF0010, MCOF10, MCWF10, MROP10, MRWF10, NCOF10, NNSW10, NS0010",
+    "MOC values": "Use IN ('YES', 'Yes', 'yes') - not 'Raised' or 'Approved'"
+  },
+  "training_hints": "\nDSPY should use these rules when generating SQL:\n\n1. WELL ID FROM CODE: When user asks about wells in a code like 'ABC-12345', extract: RIGHT(code, LEN(code) - CHARINDEX('-', code))\n\n2. JOB PROGRESS WEEK BUCKETS: \n   - Week1: target_start/actual_start BETWEEN day 1-7\n   - Week2: day 8-14, Week3: day 15-21, Week4: day 22-28\n\n3. PRODUCTIVITY: data_qty / data_hours / Norms * 100\n\n4. RIGCODE FILTER: Always use Revenue.rigcode for NL0010, NF0010 etc - NOT well_location\n\n5. PROJECT CLUSTER: LEFT(Project, 1) = 'M' \u2192 'MML', 'N' \u2192 'NIM'\n\n6. MOC STATUS: moc_raised IN ('YES', 'Yes', 'yes')\n"
+}

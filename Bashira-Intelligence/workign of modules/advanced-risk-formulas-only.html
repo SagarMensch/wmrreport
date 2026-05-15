@@ -1,0 +1,322 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bashira Intelligence - Advanced Risk Formulas Only</title>
+  <style>
+    :root {
+      --bg:#f6f7f9; --card:#ffffff; --ink:#101114; --muted:#5c6672; --line:#d6dbe3;
+      --blue:#0f62fe; --green:#00c805; --yellow:#f1c21b; --red:#8e1b1b;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI","IBM Plex Sans",Arial,sans-serif; line-height:1.55; }
+    .page { max-width:1240px; margin:0 auto; padding:24px; }
+    .hero,.card { background:var(--card); border:1px solid var(--line); border-radius:22px; }
+    .hero { padding:28px; margin-bottom:16px; }
+    .card { padding:20px; margin-bottom:16px; }
+    .eyebrow { font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+    h1 { margin:10px 0 12px; font-size:34px; line-height:1.14; }
+    h2 { margin:0 0 14px; font-size:24px; }
+    h3 { margin:0 0 10px; font-size:18px; }
+    p { margin:0 0 12px; }
+    .subtitle { color:var(--muted); font-size:15px; margin:0; }
+    .grid { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:16px; margin-bottom:16px; }
+    .span-12 { grid-column:span 12; } .span-6 { grid-column:span 6; } .span-4 { grid-column:span 4; } .span-3 { grid-column:span 3; }
+    .kpi { font-size:11px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); font-weight:700; margin-bottom:8px; }
+    .metric { font-size:28px; font-weight:700; line-height:1; margin-bottom:8px; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .chip { display:inline-flex; align-items:center; border-radius:999px; border:1px solid var(--line); padding:6px 10px; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; background:#fff; }
+    .term { border-top:1px solid var(--line); padding-top:16px; margin-top:16px; }
+    .term:first-of-type { border-top:none; padding-top:0; margin-top:0; }
+    .meta { color:var(--muted); font-size:13px; margin-bottom:10px; }
+    pre {
+      margin:12px 0; background:#f3f4f6; border:1px solid #e5e7eb; border-radius:12px;
+      padding:12px 14px; overflow:auto; white-space:pre-wrap; font-family:Consolas,monospace; font-size:13px;
+    }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    th,td { text-align:left; vertical-align:top; padding:12px 10px; border-top:1px solid var(--line); }
+    th { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; background:#fbfcfd; }
+    tr:first-child th,tr:first-child td { border-top:none; }
+    .footer { text-align:center; color:var(--muted); font-size:12px; padding:8px 0 24px; }
+    @media (max-width:980px) { .span-6,.span-4,.span-3 { grid-column:span 12; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="eyebrow">Formula Companion</div>
+      <h1>Advanced Risk Stack: Formula-First Reference</h1>
+      <p class="subtitle">This document removes most narrative and keeps the mathematical and optimization structure only: risk surface equations, EVT tail metrics, NHPP event intensity, Monte Carlo distribution outputs, graph propagation logic, financial pricing equations, and intervention objectives.</p>
+      <div class="chips">
+        <span class="chip">risk surface</span>
+        <span class="chip">tail risk</span>
+        <span class="chip">nhpp</span>
+        <span class="chip">monte carlo</span>
+        <span class="chip">graph propagation</span>
+        <span class="chip">marl objective</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card span-3"><div class="kpi">Mode</div><div class="metric">Formula First</div><p>Definitions are kept short. Equations are primary.</p></article>
+      <article class="card span-3"><div class="kpi">Scope</div><div class="metric">9 Blocks</div><p>Surface, EVT, graph, simulation, pricing, classification, and optimization.</p></article>
+      <article class="card span-3"><div class="kpi">Use Case</div><div class="metric">Demo Prep</div><p>Useful for technical client walkthroughs and internal prep.</p></article>
+      <article class="card span-3"><div class="kpi">Style</div><div class="metric">Quant</div><p>Minimal narrative, maximal mathematical structure.</p></article>
+    </section>
+
+    <section class="card">
+      <h2>1. 3D Risk Topography</h2>
+      <div class="term">
+        <h3>State-Space Risk Function</h3>
+        <pre>Let s = operational state vector
+s = [progress_gap, progress_velocity, schedule_variance,
+     queue_exposure, dependency_pressure, anomaly_score,
+     rig_delay, resource_conflict, stage_stall]</pre>
+        <pre>Risk(s) = f(s)</pre>
+        <pre>Example linearized approximation:
+Risk = w1*progress_gap
+     + w2*(-progress_velocity)
+     + w3*schedule_variance
+     + w4*queue_exposure
+     + w5*dependency_pressure
+     + w6*anomaly_score
+     + w7*rig_delay
+     + w8*resource_conflict
+     + w9*stage_stall</pre>
+        <pre>Bounded score form:
+Risk_surface = 100 * sigmoid(Risk)</pre>
+        <p class="meta">The surface chart visualizes Risk over a projected 2D state manifold with height = risk intensity.</p>
+      </div>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>2. EVT Tail Risk</h2>
+        <div class="term">
+          <h3>Tail Quantile</h3>
+          <pre>Let L be loss / exposure random variable</pre>
+          <pre>P99(L) = inf { x : F_L(x) >= 0.99 }</pre>
+          <pre>P95(L) = inf { x : F_L(x) >= 0.95 }</pre>
+        </div>
+        <div class="term">
+          <h3>Generalized Pareto Tail Approximation</h3>
+          <pre>For threshold u and exceedance y = L - u,  y > 0
+P(Y <= y | Y > 0) = 1 - (1 + xi*y/beta)^(-1/xi)</pre>
+          <pre>Tail exposure estimate:
+EVT_P99 = u + (beta/xi) * ((N/N_u * (1 - 0.99))^(-xi) - 1)</pre>
+        </div>
+        <div class="term">
+          <h3>Expected Shortfall</h3>
+          <pre>ES_q = E[L | L > VaR_q]</pre>
+          <p class="meta">Useful when average tail damage matters more than just the percentile cutoff.</p>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>3. NHPP Event Engine</h2>
+        <div class="term">
+          <h3>Intensity Function</h3>
+          <pre>lambda(t) = instantaneous event arrival rate</pre>
+          <pre>NHPP count process:
+N(t) ~ Poisson( Lambda(t) )
+Lambda(t) = integral from 0 to t of lambda(u) du</pre>
+        </div>
+        <div class="term">
+          <h3>Stage-Sensitive Intensity</h3>
+          <pre>lambda(t) = a0
+          + a1*complexity(t)
+          + a2*dependency_load(t)
+          + a3*resource_conflict(t)
+          + a4*queue_pressure(t)</pre>
+        </div>
+        <div class="term">
+          <h3>Event Sampling</h3>
+          <pre>delay_events_t ~ Poisson(lambda(t) * delta_t)</pre>
+          <p class="meta">If lambda rises through the program, disruption arrivals accelerate rather than remaining constant.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>4. Monte Carlo Delay Simulation</h2>
+        <div class="term">
+          <h3>Path Simulation</h3>
+          <pre>For simulation k = 1 ... K:
+  Initialize state s_0 from latest snapshot
+  For each step t:
+    Sample event arrivals from NHPP
+    Sample duration overruns
+    Sample dependency failures
+    Update graph states and schedule states
+    Accumulate delay D_k and cost C_k</pre>
+        </div>
+        <div class="term">
+          <h3>Distribution Outputs</h3>
+          <pre>Expected Delay = (1/K) * sum(D_k)</pre>
+          <pre>P95 Delay = empirical 95th percentile of {D_k}</pre>
+          <pre>P99 Delay = empirical 99th percentile of {D_k}</pre>
+          <pre>Expected Cost = (1/K) * sum(C_k)</pre>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>5. Execution Price / Financial Exposure</h2>
+        <div class="term">
+          <h3>Base Delay Cost</h3>
+          <pre>Execution_Risk_Cost = Expected_Delay * Daily_Cost_of_Delay</pre>
+        </div>
+        <div class="term">
+          <h3>Expanded Enterprise Pricing</h3>
+          <pre>Total_Cost = (Delay_Days * Burn_Rate)
+           + Rig_Standby_Cost
+           + Crew_Idle_Cost
+           + Resequencing_Penalty
+           + Dependency_Spillover_Cost
+           + Tail_Risk_Surcharge</pre>
+        </div>
+        <div class="term">
+          <h3>Heavy Risk Pricing</h3>
+          <pre>If state = critical:
+  Adjusted_Cost = Total_Cost * m_critical</pre>
+          <pre>Example:
+m_critical = 2.5</pre>
+        </div>
+      </article>
+    </section>
+    <section class="grid">
+      <article class="card span-6">
+        <h2>6. Classification Layer</h2>
+        <div class="term">
+          <h3>Risk State Mapping</h3>
+          <pre>signal(x) =
+  DONE      if progress >= 100 or residual_risk <= tau_done
+  DELAYED   if tau_done < risk < tau_critical
+  CRITICAL  if risk >= tau_critical or contagion >= tau_contagion</pre>
+        </div>
+        <div class="term">
+          <h3>Maximum Delay Probability</h3>
+          <pre>p_delay(i) = P( D_i > 0 | current_state_i )</pre>
+          <pre>Max_Delay_Prob = max_i p_delay(i)</pre>
+        </div>
+        <div class="term">
+          <h3>Recovery Confidence</h3>
+          <pre>Recovery_Confidence = 100 - g(risk, queue_exposure, anomaly_score,
+                              data_gap, rig_delay, dependency_pressure)</pre>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>7. Graph and Propagation Logic</h2>
+        <div class="term">
+          <h3>Execution Graph</h3>
+          <pre>G = (V, E)
+V = {wells, rigs, crews, tasks, clusters, corridors}
+E = dependency / adjacency / shared-resource links</pre>
+        </div>
+        <div class="term">
+          <h3>Node Update</h3>
+          <pre>h_i^(t+1) = phi( h_i^(t), aggregate_{j in N(i)}( e_ij, h_j^(t) ), x_i^(t) )</pre>
+          <p class="meta">Generic graph message-passing form.</p>
+        </div>
+        <div class="term">
+          <h3>Propagation Score</h3>
+          <pre>Propagation(i) = sum_{j in N(i)} w_ij * FailureSignal(j)</pre>
+          <pre>Cluster_Risk(c) = sum_{i in c} Risk(i) + alpha * Spillover(c)</pre>
+        </div>
+        <div class="term">
+          <h3>Lead Rig Centrality</h3>
+          <pre>Lead_Rig = argmax_r Centrality(r)</pre>
+          <pre>Centrality(r) may be:
+  degree(r)
+  betweenness(r)
+  propagated_loss_contribution(r)
+  downstream_delay_impact(r)</pre>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid">
+      <article class="card span-6">
+        <h2>8. ST-GNN Formulation</h2>
+        <div class="term">
+          <h3>Spatio-Temporal Update</h3>
+          <pre>H^(t+1) = F_graph( A, H^(t), X^(t) ) + F_time( H^(t-k:t) )</pre>
+          <pre>Node risk at horizon h:
+Risk_i^(t+h) = psi( H_i^(t+h) )</pre>
+        </div>
+        <div class="term">
+          <h3>Sequence Failure Propagation</h3>
+          <pre>FailureSpread_i = sum_{j in N(i)} A_ij * Delay_j * Sensitivity_ij</pre>
+          <pre>Updated_Risk_i = Base_Risk_i + beta * FailureSpread_i</pre>
+        </div>
+      </article>
+
+      <article class="card span-6">
+        <h2>9. MARL Objective</h2>
+        <div class="term">
+          <h3>Multi-Agent Policy</h3>
+          <pre>Agents = {rigs, crews, dispatchers, planners, clusters}</pre>
+          <pre>a_t^m = action of agent m at time t</pre>
+        </div>
+        <div class="term">
+          <h3>Reward Function</h3>
+          <pre>R_t = - c1*delay_growth
+      - c2*tail_exposure
+      - c3*queue_contagion
+      - c4*idle_resources
+      - c5*critical_wells
+      + c6*throughput
+      + c7*recovery_probability</pre>
+        </div>
+        <div class="term">
+          <h3>Optimal Policy</h3>
+          <pre>pi* = argmax_pi E_pi [ sum_t gamma^t R_t ]</pre>
+          <p class="meta">A suggested reroute is an action extracted from a policy that improves expected portfolio reward.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>10. Snapshot and Versioning</h2>
+      <div class="term">
+        <h3>Snapshot-Conditioned Inference</h3>
+        <pre>Prediction = M( X_snapshot_s )</pre>
+        <pre>s = snapshot identifier</pre>
+        <pre>Audit condition:
+Same snapshot + same model version + same assumptions => reproducible result</pre>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>11. Compact End-to-End Stack</h2>
+      <pre>1. Load snapshot X_s
+2. Build dependency graph G
+3. Estimate base risk R_i
+4. Estimate event intensity lambda(t)
+5. Simulate K futures via Monte Carlo
+6. Compute {mean, P95, P99, EVT tail exposure}
+7. Propagate graph failures via ST-GNN / graph model
+8. Optimize actions via MARL / scenario policy
+9. Translate delays into money via pricing engine
+10. Surface outputs via officer panel</pre>
+    </section>
+
+    <section class="card">
+      <h2>12. Summary Table</h2>
+      <table>
+        <tr><th>Block</th><th>Primary Equation</th><th>Main Output</th></tr>
+        <tr><td>Risk Surface</td><td><code>Risk = f(state)</code></td><td>3D execution instability terrain</td></tr>
+        <tr><td>NHPP</td><td><code>N(t) ~ Poisson(Lambda(t))</code></td><td>time-varying disruption arrivals</td></tr>
+        <tr><td>Monte Carlo</td><td><code>{D_k, C_k}</code> over many runs</td><td>delay and cost distribution</td></tr>
+        <tr><td>EVT</td><td><code>VaR_q, ES_q</code></td><td>tail exposure</td></tr>
+        <tr><td>Graph / ST-GNN</td><td><code>h_i^(t+1) = phi(...)</code></td><td>failure propagation</td></tr>
+        <tr><td>MARL</td><td><code>pi* = argmax E[sum gamma^t R_t]</code></td><td>recommended interventions</td></tr>
+        <tr><td>Pricing</td><td><code>Cost = Delay x Burn + penalties</code></td><td>financial risk exposure</td></tr>
+      </table>
+    </section>
+
+    <div class="footer">Bashira Intelligence • Advanced Risk Formulas Only • Quant companion reference</div>
+  </div>
+</body>
+</html>

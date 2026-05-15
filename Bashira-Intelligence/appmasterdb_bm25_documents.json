@@ -1,0 +1,494 @@
+[
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.Job_Progress_Report_GB\n                PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS\n                SOURCE TABLES: dbo.WMR, dbo.WMR_TaskPlan_csv_imported, dbo.Job_Progress_PlanSnapshot, dbo.task_daily, dbo.ProjectIDs, dbo.data_table_sched_jsons, dbo.WBS_Master_Tracker_\n                \n                KEY COLUMNS:\n                {\n  \"Well ID\": {\n    \"type\": \"nvarchar\",\n    \"derived_from\": \"WMR_TaskPlan_csv_imported.New_Well_ID\",\n    \"logic\": \"LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), tp.New_Well_ID)))\"\n  },\n  \"Well Name / Project Name\": {\n    \"type\": \"nvarchar\",\n    \"derived_from\": \"WMR.well_name_after_spud\",\n    \"logic\": \"MAX(well_name_after_spud) GROUP BY pdo_well_id\"\n  },\n  \"Category\": {\n    \"type\": \"nvarchar\",\n    \"derived_from\": \"ProjectIDs.column2\",\n    \"logic\": \"JOIN on project_id\"\n  },\n  \"PO No\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"IF category contains flowline/cwf/rwf THEN flow_line_po_no ELSE location_po_no\"\n  },\n  \"WBS No\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"OUTER APPLY WBS_Master_Tracker_ with category matching\"\n  },\n  \"Cum-Prior Month Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"prior actual fraction * 100\"\n  },\n  \"Week-1 Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W1_Plan_frac * 100, NULL if no plan\"\n  },\n  \"Week-1 Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W1_Act_frac * 100\"\n  },\n  \"Week-2 Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W2_Plan_frac * 100\"\n  },\n  \"Week-2 Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W2_Act_frac * 100\"\n  },\n  \"Week-3 Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W3_Plan_frac * 100\"\n  },\n  \"Week-3 Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W3_Act_frac * 100\"\n  },\n  \"Week-4 Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W4_Plan_frac * 100\"\n  },\n  \"Week-4 Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W4_Act_frac * 100\"\n  },\n  \"Week-5 Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W5_Plan_frac * 100\"\n  },\n  \"Week-5 Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"W5_Act_frac * 100\"\n  },\n  \"Current Month Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"SUM(W1-W5_Plan_frac) * 100, capped at 1.0\"\n  },\n  \"Current Month Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"SUM(W1-W5_Act_frac) * 100, capped at 1.0\"\n  },\n  \"Cum-Current Month Plan %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"CumCurrentMonthPlanFrac * 100\"\n  },\n  \"Cum-Current Month Actual %\": {\n    \"type\": \"decimal(18,2)\",\n    \"logic\": \"SUM(CumPrior + W1-W5) * 100, capped at 1.0\"\n  },\n  \"Purpose Value\": {\n    \"type\": \"decimal(28,2)\",\n    \"logic\": \"SUM(schedule purpose_value) from SchedAgg\"\n  },\n  \"Cum-Prior Month Plan\": {\n    \"type\": \"decimal(28,2)\",\n    \"logic\": \"PurposeValue * Cum_Prior_Plan_frac\"\n  },\n  \"Cum-Prior Month Actual\": {\n    \"type\": \"decimal(28,2)\",\n    \"logic\": \"PurposeValue * Cum_Prior_Act_frac\"\n  },\n  \"Current month Plan\": {\n    \"type\": \"decimal(28,2)\",\n    \"logic\": \"PurposeValue * CurrentMonthPlanFrac\"\n  },\n  \"Current Month Actual\": {\n    \"type\": \"decimal(28,2)\",\n    \"logic\": \"PurposeValue * SUM(W1-W5_Act_frac)\"\n  },\n  \"Target End\": {\n    \"type\": \"date\",\n    \"logic\": \"COALESCE(snapshot, max from Base)\"\n  }\n}\n                \n                BUSINESS LOGIC:\n                {\n  \"weightage_normalization\": \"If contains '%', remove and divide by 100. If > 1.0, divide by 100. If <= 1.0, use as-is\",\n  \"progress_normalization\": \"Same as weightage - normalize to 0-1 fraction\",\n  \"week_buckets\": \"W1=day1-7, W2=day8-14, W3=day15-21, W4=day22-28, W5=day29+\",\n  \"actual_calculation_part1\": \"If actual_start AND actual_end exist AND valid: daily_frac = (progress_frac * weight_frac) / days\",\n  \"actual_calculation_part2\": \"Fallback to task_daily when no valid date range: qty/qty_total * weight_frac\",\n  \"plan_source\": \"From Job_Progress_PlanSnapshot table - weekly fractions\",\n  \"cluster_derivation\": \"Source='NC-WD'\\u2192nimr, Source='MC-WD'\\u2192marmul from data_table_sched_jsons\",\n  \"project_code_parsing\": \"Extract from filename: SCHED-XXXX-RIG \\u2192 XXXX\"\n}\n                \n                SQL PATTERNS:\n                {\n  \"weight_frac\": \"CASE WHEN weightage LIKE '%' THEN REPLACE/100 WHEN weightage > 1 THEN weightage/100 ELSE weightage END\",\n  \"week_bucket\": \"CASE WHEN day BETWEEN 1 AND 7 THEN 'W1' WHEN 8-14 THEN 'W2' etc\",\n  \"cap_at_1\": \"CASE WHEN sum > 1 THEN 1.0 ELSE sum END\",\n  \"well_id_extract\": \"LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), New_Well_ID)))\"\n}",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Well ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Well ID\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: WMR_TaskPlan_csv_imported.New_Well_ID\n                    LOGIC: LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), tp.New_Well_ID)))\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "LTRIM(RTRIM(TRY_CONVERT(nvarchar(50), tp.New_Well_ID)))",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Well Name / Project Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Well Name / Project Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: WMR.well_name_after_spud\n                    LOGIC: MAX(well_name_after_spud) GROUP BY pdo_well_id\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "MAX(well_name_after_spud) GROUP BY pdo_well_id",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Category",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Category\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: ProjectIDs.column2\n                    LOGIC: JOIN on project_id\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "JOIN on project_id",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "PO No",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.PO No\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: IF category contains flowline/cwf/rwf THEN flow_line_po_no ELSE location_po_no\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "IF category contains flowline/cwf/rwf THEN flow_line_po_no ELSE location_po_no",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "WBS No",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.WBS No\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: OUTER APPLY WBS_Master_Tracker_ with category matching\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "OUTER APPLY WBS_Master_Tracker_ with category matching",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Cum-Prior Month Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Cum-Prior Month Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: prior actual fraction * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "prior actual fraction * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-1 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-1 Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W1_Plan_frac * 100, NULL if no plan\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W1_Plan_frac * 100, NULL if no plan",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-1 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-1 Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W1_Act_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W1_Act_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-2 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-2 Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W2_Plan_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W2_Plan_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-2 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-2 Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W2_Act_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W2_Act_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-3 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-3 Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W3_Plan_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W3_Plan_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-3 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-3 Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W3_Act_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W3_Act_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-4 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-4 Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W4_Plan_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W4_Plan_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-4 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-4 Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W4_Act_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W4_Act_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-5 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-5 Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W5_Plan_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W5_Plan_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Week-5 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Week-5 Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: W5_Act_frac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "W5_Act_frac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Current Month Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Current Month Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: SUM(W1-W5_Plan_frac) * 100, capped at 1.0\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "SUM(W1-W5_Plan_frac) * 100, capped at 1.0",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Current Month Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Current Month Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: SUM(W1-W5_Act_frac) * 100, capped at 1.0\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "SUM(W1-W5_Act_frac) * 100, capped at 1.0",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Cum-Current Month Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Cum-Current Month Plan %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: CumCurrentMonthPlanFrac * 100\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "CumCurrentMonthPlanFrac * 100",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Cum-Current Month Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Cum-Current Month Actual %\n                    DATA TYPE: decimal(18,2)\n                    DERIVED FROM: \n                    LOGIC: SUM(CumPrior + W1-W5) * 100, capped at 1.0\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "SUM(CumPrior + W1-W5) * 100, capped at 1.0",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Purpose Value",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Purpose Value\n                    DATA TYPE: decimal(28,2)\n                    DERIVED FROM: \n                    LOGIC: SUM(schedule purpose_value) from SchedAgg\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "SUM(schedule purpose_value) from SchedAgg",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Cum-Prior Month Plan",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Cum-Prior Month Plan\n                    DATA TYPE: decimal(28,2)\n                    DERIVED FROM: \n                    LOGIC: PurposeValue * Cum_Prior_Plan_frac\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "PurposeValue * Cum_Prior_Plan_frac",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Cum-Prior Month Actual",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Cum-Prior Month Actual\n                    DATA TYPE: decimal(28,2)\n                    DERIVED FROM: \n                    LOGIC: PurposeValue * Cum_Prior_Act_frac\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "PurposeValue * Cum_Prior_Act_frac",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Current month Plan",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Current month Plan\n                    DATA TYPE: decimal(28,2)\n                    DERIVED FROM: \n                    LOGIC: PurposeValue * CurrentMonthPlanFrac\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "PurposeValue * CurrentMonthPlanFrac",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Current Month Actual",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Current Month Actual\n                    DATA TYPE: decimal(28,2)\n                    DERIVED FROM: \n                    LOGIC: PurposeValue * SUM(W1-W5_Act_frac)\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "PurposeValue * SUM(W1-W5_Act_frac)",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.Job_Progress_Report_GB",
+    "column": "Target End",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Job_Progress_Report_GB.Target End\n                    DATA TYPE: date\n                    DERIVED FROM: \n                    LOGIC: COALESCE(snapshot, max from Base)\n                    \n                    VIEW PURPOSE: Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS",
+    "type": "VIEW_COLUMN",
+    "semantic": "COALESCE(snapshot, max from Base)",
+    "view_purpose": "Main job progress tracking - most comprehensive view with weekly buckets, purpose values, WBS"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.vw_JobProgress\n                PURPOSE: Alternative job progress - simpler, monthly focus with category from ProjectIDs\n                SOURCE TABLES: dbo.ActivityTaskPlan, dbo.ProjectIDs, dbo.WMR\n                \n                KEY COLUMNS:\n                {\n  \"Category\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"ProjectIDs.column2\"\n  },\n  \"Well ID / Project ID\": {\n    \"type\": \"int\",\n    \"logic\": \"Extract from code after '-'\"\n  },\n  \"Week-1 Plan %\": {\n    \"type\": \"decimal(10,2)\",\n    \"logic\": \"SUM(weightage) WHERE target_start day 1-7\"\n  },\n  \"Week-1 Actual %\": {\n    \"type\": \"decimal(10,2)\",\n    \"logic\": \"SUM(weightage * progress_ratio) WHERE actual_start day 1-7\"\n  }\n}\n                \n                BUSINESS LOGIC:\n                {\n  \"well_id_from_code\": \"RIGHT(code, LEN(code) - CHARINDEX('-', code))\",\n  \"week_definition\": \"Week1=1-7, Week2=8-14, Week3=15-21, Week4=22-28, Week5=29+\",\n  \"progress_ratio\": \"1 or 100\\u21921.0, 0.10\\u21920.10, 10\\u21920.10\"\n}\n                \n                SQL PATTERNS:\n                {}",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Category",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Category\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: ProjectIDs.column2\n                    \n                    VIEW PURPOSE: Alternative job progress - simpler, monthly focus with category from ProjectIDs",
+    "type": "VIEW_COLUMN",
+    "semantic": "ProjectIDs.column2",
+    "view_purpose": "Alternative job progress - simpler, monthly focus with category from ProjectIDs"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Well ID / Project ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Well ID / Project ID\n                    DATA TYPE: int\n                    DERIVED FROM: \n                    LOGIC: Extract from code after '-'\n                    \n                    VIEW PURPOSE: Alternative job progress - simpler, monthly focus with category from ProjectIDs",
+    "type": "VIEW_COLUMN",
+    "semantic": "Extract from code after '-'",
+    "view_purpose": "Alternative job progress - simpler, monthly focus with category from ProjectIDs"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-1 Plan %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-1 Plan %\n                    DATA TYPE: decimal(10,2)\n                    DERIVED FROM: \n                    LOGIC: SUM(weightage) WHERE target_start day 1-7\n                    \n                    VIEW PURPOSE: Alternative job progress - simpler, monthly focus with category from ProjectIDs",
+    "type": "VIEW_COLUMN",
+    "semantic": "SUM(weightage) WHERE target_start day 1-7",
+    "view_purpose": "Alternative job progress - simpler, monthly focus with category from ProjectIDs"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JobProgress",
+    "column": "Week-1 Actual %",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JobProgress.Week-1 Actual %\n                    DATA TYPE: decimal(10,2)\n                    DERIVED FROM: \n                    LOGIC: SUM(weightage * progress_ratio) WHERE actual_start day 1-7\n                    \n                    VIEW PURPOSE: Alternative job progress - simpler, monthly focus with category from ProjectIDs",
+    "type": "VIEW_COLUMN",
+    "semantic": "SUM(weightage * progress_ratio) WHERE actual_start day 1-7",
+    "view_purpose": "Alternative job progress - simpler, monthly focus with category from ProjectIDs"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.vw_JOB_COST\n                PURPOSE: Job cost - planned vs actual resources (employees, equipment)\n                SOURCE TABLES: dbo.task_daily, dbo.Revenue, dbo.crews, dbo.Employee, dbo.company_employees, dbo.EmployeeType, dbo.Equipment, dbo.EquipmentType, dbo.ActivityMasterMapping\n                \n                KEY COLUMNS:\n                {\n  \"Project\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"Revenue.rigcode - the rig identifier\"\n  },\n  \"Well ID\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"task_daily.well_id\"\n  },\n  \"Activity ID\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"LEFT(task_code, 8) - first 8 characters\"\n  },\n  \"crew code\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"task_daily.crew_code \\u2192 crews.Code\"\n  },\n  \"Plan Employee Name\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"FROM crews.Employees JSON \\u2192 Employee table\"\n  },\n  \"Actual Employee Name\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"FROM task_daily.employee_ids_text JSON \\u2192 Employee\"\n  },\n  \"Effective Work Hours\": {\n    \"type\": \"decimal\",\n    \"logic\": \"JSON_VALUE(daily_data, '$.actual_hours')\"\n  }\n}\n                \n                BUSINESS LOGIC:\n                {\n  \"activity_extraction\": \"LEFT(LTRIM(RTRIM(task_code)), 8)\",\n  \"crew_json_explode\": \"OPENJSON(c.Employees) to get employee IDs\",\n  \"resource_pairing\": \"Full outer join Planned vs Actual on: well_id + ActionOn + ActivityID + resource_type + PGCode + rn\",\n  \"project_prefix\": \"M\\u2192MML, N\\u2192NIM from first letter of rigcode\"\n}\n                \n                SQL PATTERNS:\n                {}",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Project",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Project\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: Revenue.rigcode - the rig identifier\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "Revenue.rigcode - the rig identifier",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Well ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Well ID\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: task_daily.well_id\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "task_daily.well_id",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Activity ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Activity ID\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: LEFT(task_code, 8) - first 8 characters\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "LEFT(task_code, 8) - first 8 characters",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "crew code",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.crew code\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: task_daily.crew_code \u2192 crews.Code\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "task_daily.crew_code \u2192 crews.Code",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Plan Employee Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Plan Employee Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: FROM crews.Employees JSON \u2192 Employee table\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "FROM crews.Employees JSON \u2192 Employee table",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Actual Employee Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Actual Employee Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: FROM task_daily.employee_ids_text JSON \u2192 Employee\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "FROM task_daily.employee_ids_text JSON \u2192 Employee",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.vw_JOB_COST",
+    "column": "Effective Work Hours",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.vw_JOB_COST.Effective Work Hours\n                    DATA TYPE: decimal\n                    DERIVED FROM: \n                    LOGIC: JSON_VALUE(daily_data, '$.actual_hours')\n                    \n                    VIEW PURPOSE: Job cost - planned vs actual resources (employees, equipment)",
+    "type": "VIEW_COLUMN",
+    "semantic": "JSON_VALUE(daily_data, '$.actual_hours')",
+    "view_purpose": "Job cost - planned vs actual resources (employees, equipment)"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.PH_Productivity\n                PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance\n                SOURCE TABLES: dbo.task_daily, dbo.Employee, dbo.ActivityCodesNorms, dbo.CrewType\n                \n                KEY COLUMNS:\n                {\n  \"Year\": {\n    \"type\": \"int\",\n    \"logic\": \"YEAR from ActionOn\"\n  },\n  \"Month\": {\n    \"type\": \"int\",\n    \"logic\": \"MONTH from ActionOn\"\n  },\n  \"PA Name\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"LEFT(task_assignee, CHARINDEX('.', task_assignee)-1)\"\n  },\n  \"PH Name\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"Employee.Email = supervisor_email \\u2192 Employee.Name\"\n  },\n  \"PH Emp ID\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"Employee.UId\"\n  },\n  \"Crew Name\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"CrewType.Description WHERE Code = REPLACE(crew_type, '-', '')\"\n  },\n  \"Avg_Productivity_Pct\": {\n    \"type\": \"decimal\",\n    \"logic\": \"(SUM(data_qty)/SUM(data_hours)) / Norms * 100\"\n  },\n  \"W1_PI_T_Wise\": {\n    \"type\": \"decimal\",\n    \"logic\": \"Week 1 Productivity Index T-Wise\"\n  },\n  \"W1_PI_CMR\": {\n    \"type\": \"decimal\",\n    \"logic\": \"Week 1 Productivity Index CMR\"\n  }\n}\n                \n                BUSINESS LOGIC:\n                {\n  \"productivity_formula\": \"Productivity% = (QtyPerHour / Norms) * 100\",\n  \"ph_lookup\": \"supervisor_email \\u2192 Employee.Email \\u2192 Employee.Name\",\n  \"pa_lookup\": \"task_assignee email before @\",\n  \"crew_lookup\": \"crew_type compared with CrewType.Code\"\n}\n                \n                SQL PATTERNS:\n                {}",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Year",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Year\n                    DATA TYPE: int\n                    DERIVED FROM: \n                    LOGIC: YEAR from ActionOn\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "YEAR from ActionOn",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Month",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Month\n                    DATA TYPE: int\n                    DERIVED FROM: \n                    LOGIC: MONTH from ActionOn\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "MONTH from ActionOn",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "PA Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.PA Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: LEFT(task_assignee, CHARINDEX('.', task_assignee)-1)\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "LEFT(task_assignee, CHARINDEX('.', task_assignee)-1)",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "PH Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.PH Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: Employee.Email = supervisor_email \u2192 Employee.Name\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "Employee.Email = supervisor_email \u2192 Employee.Name",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "PH Emp ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.PH Emp ID\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: Employee.UId\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "Employee.UId",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Crew Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Crew Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: CrewType.Description WHERE Code = REPLACE(crew_type, '-', '')\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "CrewType.Description WHERE Code = REPLACE(crew_type, '-', '')",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "Avg_Productivity_Pct",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.Avg_Productivity_Pct\n                    DATA TYPE: decimal\n                    DERIVED FROM: \n                    LOGIC: (SUM(data_qty)/SUM(data_hours)) / Norms * 100\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "(SUM(data_qty)/SUM(data_hours)) / Norms * 100",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "W1_PI_T_Wise",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.W1_PI_T_Wise\n                    DATA TYPE: decimal\n                    DERIVED FROM: \n                    LOGIC: Week 1 Productivity Index T-Wise\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 1 Productivity Index T-Wise",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.PH_Productivity",
+    "column": "W1_PI_CMR",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.PH_Productivity.W1_PI_CMR\n                    DATA TYPE: decimal\n                    DERIVED FROM: \n                    LOGIC: Week 1 Productivity Index CMR\n                    \n                    VIEW PURPOSE: Productivity tracking - QHSE Supervisor and Crew performance",
+    "type": "VIEW_COLUMN",
+    "semantic": "Week 1 Productivity Index CMR",
+    "view_purpose": "Productivity tracking - QHSE Supervisor and Crew performance"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.WellMonitoringReport\n                PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data\n                SOURCE TABLES: dbo.WMR, dbo.WMR_TaskPlan_csv_imported, dbo.DesignTrackerCSVImport, dbo.SAP_DRILLING_SEQUENCE, dbo.Revenue, dbo.crews\n                \n                KEY COLUMNS:\n                {\n  \"pdo_well_id\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"PRIMARY KEY - unique well identifier\"\n  },\n  \"Cluster\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"nimr or marmul\"\n  },\n  \"rig_no\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"Drilling rig \\u2192 crews.Code\"\n  },\n  \"moc_raised\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"YES or Yes\"\n  },\n  \"moc_approved\": {\n    \"type\": \"nvarchar\",\n    \"logic\": \"YES or Yes\"\n  },\n  \"over_all_progress_percentages\": {\n    \"type\": \"decimal\",\n    \"logic\": \"0-1 scale, multiply by 100 for %\"\n  }\n}\n                \n                BUSINESS LOGIC:\n                {\n  \"target_week\": \"Latest week minus 1 (second most recent)\",\n  \"taskplan_parsing\": \"fn_WMR_ParseProgress, fn_WMR_ParseDate\",\n  \"moc_values\": \"Use IN ('YES', 'Yes', 'yes') - NOT 'Raised'\"\n}\n                \n                SQL PATTERNS:\n                {}",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "pdo_well_id",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.pdo_well_id\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: PRIMARY KEY - unique well identifier\n                    \n                    VIEW PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data",
+    "type": "VIEW_COLUMN",
+    "semantic": "PRIMARY KEY - unique well identifier",
+    "view_purpose": "Complete well monitoring - MOC, dates, progress, SAP data"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "Cluster",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.Cluster\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: nimr or marmul\n                    \n                    VIEW PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data",
+    "type": "VIEW_COLUMN",
+    "semantic": "nimr or marmul",
+    "view_purpose": "Complete well monitoring - MOC, dates, progress, SAP data"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "rig_no",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.rig_no\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: Drilling rig \u2192 crews.Code\n                    \n                    VIEW PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data",
+    "type": "VIEW_COLUMN",
+    "semantic": "Drilling rig \u2192 crews.Code",
+    "view_purpose": "Complete well monitoring - MOC, dates, progress, SAP data"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "moc_raised",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.moc_raised\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: YES or Yes\n                    \n                    VIEW PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data",
+    "type": "VIEW_COLUMN",
+    "semantic": "YES or Yes",
+    "view_purpose": "Complete well monitoring - MOC, dates, progress, SAP data"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "moc_approved",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.moc_approved\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: \n                    LOGIC: YES or Yes\n                    \n                    VIEW PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data",
+    "type": "VIEW_COLUMN",
+    "semantic": "YES or Yes",
+    "view_purpose": "Complete well monitoring - MOC, dates, progress, SAP data"
+  },
+  {
+    "table": "AppMasterDB.dbo.WellMonitoringReport",
+    "column": "over_all_progress_percentages",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.WellMonitoringReport.over_all_progress_percentages\n                    DATA TYPE: decimal\n                    DERIVED FROM: \n                    LOGIC: 0-1 scale, multiply by 100 for %\n                    \n                    VIEW PURPOSE: Complete well monitoring - MOC, dates, progress, SAP data",
+    "type": "VIEW_COLUMN",
+    "semantic": "0-1 scale, multiply by 100 for %",
+    "view_purpose": "Complete well monitoring - MOC, dates, progress, SAP data"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "*",
+    "document": "VIEW: AppMasterDB.dbo.Daily_Plan_Report\n                PURPOSE: Daily work planning - well, PA, PH, PO, activities\n                SOURCE TABLES: \n                \n                KEY COLUMNS:\n                {\n  \"Well ID\": \"Well identifier\",\n  \"PA Name\": \"Permit Applicant name\",\n  \"PH Name\": \"QHSE Supervisor name\",\n  \"PO No\": \"Purchase Order\",\n  \"Activities\": \"Activity Description (fixed from original ACTIVITIES bug)\"\n}\n                \n                BUSINESS LOGIC:\n                {}\n                \n                SQL PATTERNS:\n                {}",
+    "type": "VIEW"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Well ID",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Well ID\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: direct\n                    LOGIC: Well identifier\n                    \n                    VIEW PURPOSE: Daily work planning - well, PA, PH, PO, activities",
+    "type": "VIEW_COLUMN",
+    "semantic": "Well identifier",
+    "view_purpose": "Daily work planning - well, PA, PH, PO, activities"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "PA Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.PA Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: direct\n                    LOGIC: Permit Applicant name\n                    \n                    VIEW PURPOSE: Daily work planning - well, PA, PH, PO, activities",
+    "type": "VIEW_COLUMN",
+    "semantic": "Permit Applicant name",
+    "view_purpose": "Daily work planning - well, PA, PH, PO, activities"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "PH Name",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.PH Name\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: direct\n                    LOGIC: QHSE Supervisor name\n                    \n                    VIEW PURPOSE: Daily work planning - well, PA, PH, PO, activities",
+    "type": "VIEW_COLUMN",
+    "semantic": "QHSE Supervisor name",
+    "view_purpose": "Daily work planning - well, PA, PH, PO, activities"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "PO No",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.PO No\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: direct\n                    LOGIC: Purchase Order\n                    \n                    VIEW PURPOSE: Daily work planning - well, PA, PH, PO, activities",
+    "type": "VIEW_COLUMN",
+    "semantic": "Purchase Order",
+    "view_purpose": "Daily work planning - well, PA, PH, PO, activities"
+  },
+  {
+    "table": "AppMasterDB.dbo.Daily_Plan_Report",
+    "column": "Activities",
+    "document": "VIEW COLUMN: AppMasterDB.dbo.Daily_Plan_Report.Activities\n                    DATA TYPE: nvarchar\n                    DERIVED FROM: direct\n                    LOGIC: Activity Description (fixed from original ACTIVITIES bug)\n                    \n                    VIEW PURPOSE: Daily work planning - well, PA, PH, PO, activities",
+    "type": "VIEW_COLUMN",
+    "semantic": "Activity Description (fixed from original ACTIVITIES bug)",
+    "view_purpose": "Daily work planning - well, PA, PH, PO, activities"
+  }
+]

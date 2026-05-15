@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --color-maroon: #7A1A20;
+  --color-maroon-deep: #5C1218;
+  --color-maroon-glow: rgba(122, 26, 32, 0.15);
+  --color-gold: #C9A96E;
+  --color-gold-dim: rgba(201, 169, 110, 0.08);
+  --color-sand: #E7CBA7;
+  --color-sand-dim: #8A7260;
+  --color-void: #0F0C0A;
+  --color-carbon: #1A1510;
+  --color-surface-1: rgba(26, 21, 16, 0.85);
+  --color-surface-2: #231C15;
+  --color-surface-3: #2D241B;
+  --color-border-accent: rgba(185, 150, 100, 0.12);
+  --color-border-hover: rgba(185, 150, 100, 0.22);
+  --color-border-strong: rgba(122, 26, 32, 0.30);
+  --color-text-primary: #EDE8DF;
+  --color-text-secondary: #9A8B78;
+  --color-text-dim: #6B6259;
+  --color-text-arabic: #F0EAE0;
+  --color-online: #5BA88C;
+  --color-critical: #D4636F;
+  --color-warning: #D4A04A;
+  --color-positive: #5BA88C;
+  --color-amber: #E87722;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-void);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .text-latin-body {
+    font-family: 'Source Serif 4', Lora, serif;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  
+  .text-arabic-body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .text-latin-heading {
+    font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+
+  .text-arabic-heading {
+    font-family: 'Noto Naskh Arabic', Amiri, serif;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  .text-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .text-data {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  
+  .border-hairline {
+    border-color: var(--color-border-accent);
+  }
+
+  .mashrabiya-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l20 20-20 20L0 20z' fill='%23B8962E' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+  }
+
+  /* Frosted warm glass surface */
+  .glass-warm {
+    background: rgba(26, 21, 16, 0.78);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid rgba(185, 150, 100, 0.10);
+  }
+
+  .glass-warm-elevated {
+    background: rgba(35, 28, 21, 0.82);
+    backdrop-filter: blur(20px) saturate(1.15);
+    -webkit-backdrop-filter: blur(20px) saturate(1.15);
+    border: 1px solid rgba(185, 150, 100, 0.14);
+  }
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(185, 150, 100, 0.18); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(185, 150, 100, 0.30); }
