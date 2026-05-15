@@ -16,10 +16,10 @@ import os
 from neo4j import GraphDatabase
 
 # ── Credentials ──────────────────────────────────────────────────────────────
-URI      = "neo4j+s://4ba6a45a.databases.neo4j.io"
-USERNAME = "4ba6a45a"
-PASSWORD = "M_191EiDn_UIQBWy1RN24A2yJSWnzyhJogUoiRqV69s"
-DATABASE = "4ba6a45a"
+URI      = "neo4j+s://89f767c1.databases.neo4j.io"
+USERNAME = "neo4j"
+PASSWORD = "CR4vk-VCs2FnukUfp8-oRvSh-yHeuW_mUgst8m18wK0"
+DATABASE = "neo4j"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
